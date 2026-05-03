@@ -1,0 +1,1049 @@
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+
+export type Language = 'lv' | 'ru' | 'en';
+
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: string) => string;
+}
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+export const translations: Record<Language, Record<string, any>> = {
+  lv: {
+    nav: {
+      home: 'Sākums',
+      about: 'Par mums',
+      services: 'Pakalpojumi',
+      faq: 'BUJ',
+      contact: 'Kontakti',
+    },
+    hero: {
+      title: 'Tavs ceļš uz',
+      subtitle: 'sakārtotu īpašumu',
+      description: 'Mēs specializējamies mazā un vidējā segmenta komercīpašumu un privātīpašumu apsaimniekošanā, nodrošinot pārskatāmu un juridiski korektu pārvaldību',
+      contactBtn: 'SAZINĀTIES AR MUMS',
+      servicesBtn: 'MŪSU PAKALPOJUMI',
+    },
+    footer: {
+      aboutTitle: 'Par Mums',
+      followTitle: 'Seko mums',
+      contactTitle: 'Kontakinformācija',
+      addressLabel: 'Juridiskā adrese:',
+      rights: 'Visas tiesības aizsargātas',
+      privacy: 'Privātuma politika',
+      cookies: 'Sīkdatņu politika',
+    },
+    about: {
+      backBtn: 'Atpakaļ uz sākumu',
+      title: 'Par',
+      subtitle: 'mums',
+      highlight: 'Mūsu uzņēmums sniedz nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumus mazā un vidējā segmenta komercīpašumos, kā arī Premium segmenta privātīpašumos. Vienlaikus mēs nodrošinām arī šo īpašumu juridisko pārvaldību, kas ļauj to īpašniekiem vienuviet saņemt gan praktisku īpašuma apsaimniekošanu, gan profesionālu juridisko atbalstu ar īpašumu saistītajos jautājumos. Un, protams - ietaupīt laiku, ko veltīt citām biznesa prioritātēm.',
+      p1: 'Mēs strādājam ar nekustamajiem īpašumiem, kuru īpašniekiem ir svarīga individuāla pieeja, konfidencialitāte un juridiski sakārtotas attiecības ar nomniekiem, sadarbības partneriem un valsts institūcijām.',
+      p2: 'Lai arī mūsu kompānija ir salīdzinoši jauna, mums ir vairāk nekā 12 gadu praktiskā pieredze nekustamo īpašumu pārvaldībā. Šajā laikā esam nodrošinājuši komercīpašumu ikdienas apsaimniekošanu, nomnieku piesaisti un līgumattiecību pārvaldību, kā arī koordinējuši remontdarbus un ar to saistītos attīstības projektus. Darbā ar Premium segmenta privātīpašumiem esam nodrošinājuši īpašumu pārvaldību, uzturēšanas darbu plānošanu un koordinēšanu atbilstoši klientu vēlmēm un vajadzībām.',
+      p3: 'Šī pieredze ļauj mums uz īpašumu raudzīties kā uz funkcionējošu sistēmu, kurā katrs pārdomāti un organizēti pieņemtais lēmums ietekmē tā rentabilitāti, vērtību un peļņu ilgtermiņā.',
+      p4: 'Mūsu darbības pamatā ir strukturēta pieeja un individuāla attieksme pret katru klientu, ar skaidri definētiem uzdevumiem un mērķiem jau sadarbības sākumā. Mēs rūpējamies, lai mūsu klientu īpašums būtu sakārtots, pārskatāmi pārvaldīts un finansiāli efektīvs, samazinot īpašnieka ikdienas iesaisti, vienlaikus nodrošinot pilnīgu caurspīdīgumu un kontroli pār visiem ar komercīpašumu vai privātīpašumu saistītajiem procesiem.',
+      p5: 'Mūsu darbs ir vērsts uz ilgtermiņa sadarbību un mūsu klientiem piederošo īpašumu sakārtošanu un attīstību, veicinot to vērtības saglabāšanu un palielinot to finansiālo atdevi.',
+      imageTaglineLine1: 'Jūsu uzticamais partneris',
+      imageTaglineLine2: 'komercīpašumu un privātīpašumu pārvaldībā',
+    },
+    benefits: {
+      q1: {
+        title: 'Kam mūsu pakalpojumi ir īpaši',
+        subtitle: 'piemēroti?',
+        items: [
+          { title: 'Biroja ēku, īres namu un citu komercobjektu (mazais un vidējais segments) īpašniekiem', desc: 'Komercīpašumu, tajā skaitā - biroju un jaukta tipa ēku, īres namu un citu īpašumu pārvaldība bieži ietver regulāru komunikāciju ar nomniekiem, tehnisko jautājumu risināšanu, pakalpojumu sniedzēju koordinēšanu, kā arī saziņu ar dažādām valsts un pašvaldību iestādēm. Mēs saviem klientiem palīdzam strukturēt visus šos procesus un nodrošināt stabilu un efektīvu īpašuma pārvaldību.' },
+          { title: 'Vietējiem un ārvalstu investoriem ar vairākiem īpašumiem', desc: 'Profesionāla pārvaldība ir īpaši svarīga investoriem un uzņēmējiem, kuriem Latvijā pieder vairāki nekustamie īpašumi vai investīciju objekti (komercobjekti, īres dzīvokļi). Visu īpašumu strukturēta pārvaldība vienuviet palīdz nodrošināt savlaicīgu administratīvo jautājumu risināšanu, koordinētu finanšu plūsmu, kā arī ilgtermiņā nodrošina to vērtības saglabāšanu un palielināšanu.' },
+          { title: 'Savrupmāju un citu privāto rezidenču īpašniekiem', desc: 'Savrupmāju, villu, vasarnīcu, viesu namu un viensētu īpašumu īpašniekiem bieži ir nepieciešams uzticams partneris, kas nodrošina regulāru īpašuma uzraudzību un administrēšanu viņu vietā, kā arī vajadzības gadījumā koordinē tajā nepieciešamos darbus. Tas ir īpaši aktuāli gadījumos, kad šo īpašumu īpašnieki dzīvo citā pilsētā vai ārpus Latvijas, un regulāra uzturēšanās savā īpašumā nav iespējama.' },
+          { title: 'Jebkuru īpašumu īpašniekiem ar juridiski risināmiem jautājumiem', desc: 'Viens no būtiskākajiem aspektiem, ar kuriem saskaras daudzi nekustamo īpašumu īpašnieki, ir ar nekustamo īpašumu saistītās dokumentācijas sakārtošana un pārvaldība. Praksē darbs ar nekustamā īpašuma dokumentiem bieži vien ir viens no sarežģītākajiem uzdevumiem, ar ko saskaras īpašnieki, jo nereti šie jautājumi nav risināti gadiem ilgi. Mēs saviem klientiem varam nodrošināt ne tikai komercīpašumu un privātīpašumu apsaimniekošanu, bet arī visu ar to saistīto juridisko jautājumu pārvaldību.' }
+        ]
+      },
+      q2: {
+        title: 'Kādas ',
+        subtitle: 'priekšrocības',
+        suffix: ' iegūst klienti,',
+        suffix2: 'uzsākot sadarbību ar mums?',
+        desc: 'Sadarbība ar mums nodrošina strukturētu, caurskatāmu un atbildīgu pieeju nekustamā īpašuma pārvaldībai, ar to saistītajiem juridiskajiem un administratīvajiem jautājumiem, un īpašuma attīstībai. Mūsu mērķis ir nodrošināt klientiem efektīvu pakalpojumu kopumu, no kā ir atkarīga ne vien īpašuma finansiālā atdeve, bet arī tā vērtības saglabāšana ilgtermiņā.',
+        listPrefix: 'Sadarbojoties ar mums, klienti iegūst vairākas būtiskas priekšrocības:',
+        items: [
+          { title: 'Kompleksa pieeja vienuviet', desc: 'Mēs nodrošinām gan nekustamā īpašuma pārvaldību un apsaimniekošanu, gan juridisko un korporatīvo atbalstu ar īpašumu saistītajos jautājumos, tādējādi klientam nav nepieciešams koordinēt jautājumus starp vairākiem pakalpojumu sniedzējiem.' },
+          { title: 'Efektīva izmaksu optimizācija', desc: 'Klientiem nav nepieciešams algot atsevišķu nekustamā īpašuma pārvaldnieku vai piesaistīt vairākus ārpakalpojumu sniedzējus juridiskajiem, administratīvajiem vai organizatoriskajiem jautājumiem. Šāda pieeja nodrošina labāku pārskatāmību, prognozējamas izmaksas un efektīvāku ar īpašumu saistīto procesu pārvaldību.' },
+          { title: 'Nekustamā īpašuma dokumentācijas sakārtošana un juridiska izvērtēšana', desc: 'Pēc nepieciešamības mēs veicam arī īpašuma dokumentācijas pārskatīšanu, juridisko analīzi un risku izvērtējumu, kas palīdz identificēt potenciālās problēmas un tās savlaicīgi novērst. Tas ļauj īpašuma īpašniekam pieņemt pārdomātus lēmumus un nodrošināt stabilu juridisko pamatu turpmākai īpašuma pārvaldībai un attīstībai.' },
+          { title: 'Viena atbildīgā kontaktpersona', desc: 'Klienti iegūst vienu kontaktpersonu, kura pārzina visus ar konkrēto īpašumu saistītos administratīvos, juridiskos un organizatoriskos jautājumus, un koordinē visus īpašumā nepieciešamos procesus.' },
+          { title: 'Individuāla pieeja un elastīgi risinājumi', desc: 'Atšķirībā no lielām nekustamo īpašumu kompānijām, mēs nodrošinām individuālu pieeju katram klientam, strādājam ar sarežģītākiem vai nestandarta jautājumiem, kas bieži vien netiek iekļauti klasiskajos apsaimniekošanas pakalpojumos.' },
+          { title: 'Augsti profesionālie un konfidencialitātes standarti', desc: 'Strādājot ar klientu īpašumiem, privāto un biznesa informāciju, kas nonāk mūsu rīcībā, mēs ievērojam visaugstākos profesionālās ētikas, konfidencialitātes un atbildīgas sadarbības principus.' }
+        ]
+      }
+    },
+    services: {
+      title: 'Mūsu',
+      subtitle: 'Pakalpojumi',
+      description: 'Mēs piedāvājam gan ikdienas nekustamo īpašumu apsaimniekošanu un pārvaldību, gan arī atsevišķu vai vienreizēju pakalpojumu sniegšanu, atbilstoši katra klienta vēlmēm un vajadzībām.',
+      learnMore: 'Uzzināt Vairāk',
+      items: [
+        {
+                id: 1,
+                title: 'Ikdienas administratīvā pārvaldība',
+                desc: 'Šis pakalpojums nodrošina strukturētu un nepārtrauktu nekustamā īpašuma pārvaldību, kas ļauj tā īpašniekam koncentrēties uz saviem galvenajiem biznesa attīstības vai investīciju mērķiem, saglabājot pārskatāmību pār īpašuma darbību.'
+        },
+        {
+                id: 2,
+                title: 'Uzturēšanas budžets tehniskajiem darbiem',
+                desc: 'Iepriekš izveidots finanšu fonds, kas paredzēts īpašuma tehnisko jautājumu un uzturēšanas darbu operatīvai risināšanai. Tas nodrošina iespēju ātri organizēt nepieciešamos darbus, neradot administratīvu kavēšanos.'
+        },
+        {
+                id: 3,
+                title: 'Papildus pakalpojumi',
+                desc: 'Specializēti administratīvie, juridiskie un projektu vadības pakalpojumi, kas palīdz risināt sarežģītākas situācijas vai īstenot īpašuma attīstības ieceres. Tie tiek sniegti kopā ar ikdienas pārvaldības pakalpojumiem, vai kā atsevišķi projekti atbilstoši klienta vajadzībām.'
+        },
+        {
+                id: 4,
+                title: 'Premium īpašumu pārvaldība',
+                desc: 'Individuāli pielāgota pārvaldība privātiem un augstas vērtības īpašumiem, kur nepieciešama īpaši rūpīga organizācija un uzturēšana. Pakalpojums nodrošina, ka īpašums tiek profesionāli pārvaldīts arī laikā, kad īpašnieks tajā neuzturas.'
+        }
+]
+    },
+    servicesPage: {
+      backBtn: 'Atpakaļ uz sākumu',
+      title: 'Mūsu pakalpojumu struktūra',
+      subtitle: 'un cenas',
+      description: 'Profesionāla pieeja nekustamā īpašuma pārvaldībai – no ikdienas apsaimniekošanas līdz juridiskajam atbalstam.',
+      descriptionLabel: 'Pakalpojuma apraksts:',
+      learnMore: 'Uzzināt Vairāk',
+      vatText: 'Visām iepriekš norādītajām pakalpojuma cenām, ja to paredz LR normatīvie akti, tiek piemērots PVN.',
+      items: [
+        {
+                id: 1,
+                title: '1. Ikdienas administratīvā pārvaldība',
+                intro: 'Šī ir fiksēta mēneša maksa par īpašuma nepārtrauktu vai regulāru administratīvo pārvaldību. Šis pakalpojums tiek sniegts mazā un vidējā segmenta īpašumiem, un tas ietver:',
+                points: [
+                        'nekustamā īpašuma ikdienas vai regulāru administratīvo pārvaldību',
+                        'komunikāciju ar īpašuma nomniekiem un sadarbības partneriem',
+                        'nomnieku vai īrnieku piesaisti, un ilgstspējīgas sadarbības veidošanu',
+                        'pārstāvību attiecībās ar valsts/pašvaldību iestādēm un trešajām personām',
+                        'nepieciešamo tehnisko jautājumu organizēšanu un izpildes uzraudzību',
+                        'īpašuma teritorijas vai iekštelpu uzturēšanas darbu koordinēšanu',
+                        'citu operatīvo situāciju koordinēšanu īpašumā pēc vienošanās'
+                ],
+                outro: 'Šis pakalpojums nodrošina strukturētu un nepārtrauktu nekustamā īpašuma pārvaldību, kas ļauj tā īpašniekam koncentrēties uz saviem galvenajiem biznesa attīstības vai investīciju mērķiem.',
+                costTitle: 'Administratīvās pārvaldības pakalpojuma izmaksas',
+                costText: 'Ikdienas administratīvās pārvaldības maksa tiek noteikta individuāli, ņemot vērā īpašuma veidu, izmēru un pārvaldības intensitāti. Praksē šāda pakalpojuma maksa mazā segmenta komercobjektiem parasti tiek noteikta, sākot no 250 € mēnesī, savukārt vidējā segmenta vai sarežģītākiem komercobjektiem tā tiek saskaņota individuāli.'
+        },
+        {
+                id: 2,
+                title: '2. Uzturēšanas budžets tehniskajiem darbiem (depozīts)',
+                intro: 'Lai nodrošinātu ātru un efektīvu tehnisko jautājumu risināšanu īpašumā, tiek izmantots uzturēšanas depozīts. Šis ir nekustamā īpašuma īpašnieka iepriekš iemaksāts uzturēšanas budžets, no kura tiek segtas īpašuma tehniskās uzturēšanas darbu izmaksas, nelieli remontdarbi un risināti citi ar īpašumu saistītie tehniskie jautājumiem.\n\nŠī sistēma ļauj nekavējoties reaģēt uz neparedzētiem tehniskiem jautājumiem īpašumā, uzturēšanas darbiem vai iekārtu apkopei īpašumā, neveidojot kavēšanos ar papildus pārskaitījumiem vai atsevišķu apstiprinājumu to risināšanai.\n\nUzturēšanas budžets var tikt izmantots:',
+                points: [
+                        'nelielu vai neplānotu remontdarbu izmaksu segšanai',
+                        'ārkārtas situācijās, lai nodrošinātu cilvēku vai īpašuma drošību',
+                        'speciālistu izsaukumiem neparedzētos vai avārijas gadījumos',
+                        'izmaksu segšanai tehnisko bojājumu vai sistēmu pārbaudēm',
+                        'teritorijas uzturēšanas darbu izmaksu segšanai',
+                        'nelielu neatliekamu materiālu iegādei',
+                        'citu operatīvo uzturēšanas darbu izmaksu segšanai'
+                ],
+                outro: '(šis uzskaitījums nav uzskatāms par izemeļošu un tiek saskaņots katrā gadījumā individuāli)\n\nVisas izmaksas tiek dokumentētas un atspoguļotas pārskatā, kas tiek izsniegts īpašniekam iepriekš norunātos laikos, nodrošinot pilnīgu finanšu caurspīdīgumu. Kad depozīta atlikums sasniedz noteikto minimālo līmeni, īpašnieks tiek informēts par nepieciešamību to papildināt.\n\nŠāda struktūra ļauj nodrošināt operatīvu jautājumu risināšanu, nepārtrauktu īpašuma uzturēšanu kārtībā, kā arī budžeta līdzekļu izlietojuma caurspīdīgumu.',
+                costTitle: 'Uzturēšanas budžeta apmērs',
+                costText: 'Uzturēšanas depozīta apmērs tiek noteikts individuāli, ņemot vērā īpašuma izmēru, tehnisko stāvokli un paredzamo uzturēšanas vai remontdarbu apjomu. Praksē depozīta summa parasti sākas no 800-1000 €, bet lielākiem īpašumiem ar intensīvāku tehnisko uzturēšanu tā var būt daudz lielāka. Par tehnisko darbu organizēšanu, koordinēšanu vai uzraudzību īpašumā var tikt piemērota projektu vadības vai administrēšanas maksa, kas katrā gadījumā tiek saskaņota individuāli.'
+        },
+        {
+                id: 3,
+                title: '3. Papildus pakalpojumi',
+                intro: 'Papildus ikdienas nekustamo īpašumu apsaimniekošanai un pārvaldībai, mēs klientiem piedāvājam arī specializētus pakalpojumus, kas nepieciešami sarežģītāku situāciju risināšanai vai īpašuma attīstībai. Šādi pakalpojumi tiek nodrošināti pēc nepieciešamības un tiek organizēti kopā ar ikdienas pakalpojumiem vai kā atsevišķi projekti vai pakalpojumi.\n\nPapildus pakalpojumi var ietvert:',
+                points: [
+                        'juridisko konsultāciju sniegšana nomas vai īres attiecību jautājumos',
+                        'juridisko un finanšu risku analīze, situāciju izvērtēšana un atzinumu sniegšana',
+                        'konsultācijas un kopīga investīciju iespēju meklēšana īpašuma attīstībai',
+                        'nomas, īres, remontdarbu un citu līgumu sagatavošana un administrēšana',
+                        'sadarbība ar grāmatvedības pakalpojumu sniedzēju, finanšu plūsmas uzraudzība',
+                        'pārstāvība attiecībās ar nomniekiem, īrniekiem, valsts un pašvaldību iestādēm',
+                        'pārstāvība uzturēšanās atļauju saņemšanai Latvijā, investējot īpašumā',
+                        'visa veida nekustamo īpašumu pārdošanas vai iegādes projektu vadība',
+                        'strīdu situāciju risināšana un parādu piedziņas lietu koordinēšana',
+                        'korporatīvais atbalsts ilgtspējīgu attiecību veidošanai ar partneriem',
+                        'remontdarbiem nepieciešamo speciālistu vai pakalpojumu sniedzēju piesaiste',
+                        'remontdarbu vai rekonstrukcijas darbu uzraudzība un kvalitātes kontrole',
+                        'citi juridiskie, organizatoriskie vai korporatīvie pakalpojumi pēc vienošanās'
+                ],
+                outro: '',
+                costTitle: 'Papildus pakalpojumu izmaksas',
+                costText: 'Papildus pakalpojumu maksa parasti tiek sniegti pēc stundas likmes vai kā atsevišķi projekti. Juridisko pakalpojumu un citu konsultāciju maksa parasti tiek noteikta, sākot no 70 €/stundā, bet lielāku un darba ziņā apjomīgāku projektu izmaksas katrā gadījumā tiek saskaņotas individuāli.'
+        },
+        {
+                id: 4,
+                title: '4. Premium īpašumu pārvaldība',
+                intro: 'Papildus klasiskajai īpašumu apsaimniekošanai un pārvaldībai, mēs klientiem piedāvājam arī Premium pakalpojumus privātajiem īpašumiem. Šis pakalpojums ir paredzēts īpašniekiem, kuriem pieder savrupmājas, villas, rezidences, vasarnīcas, lauku viensētas, brīvdienu mājas, viesu nami un līdzīgi nekustamie īpašumi.\n\nPremium īpašuma pārvaldības pakalpojumi var ietvert:',
+                points: [
+                        'regulāru īpašuma apskati un pārvaldību īpašnieka prombūtnes laikā',
+                        'īpašuma teritorijas vai iekštelpu uzturēšanas darbu koordinēšanu',
+                        'pārstāvību attiecībās ar valsts/pašvaldību iestādēm un trešajām personām',
+                        'elektroiekārtu, tehnisko un drošības sistēmu apkopi pēc nepieciešamības',
+                        'īrnieku piesaisti (ja nepieciešams) un ilgtspējīgas sadarbības veidošanu',
+                        'sadarbību ar apkopējiem, dārzniekiem vai tehniskajiem speciālistiem',
+                        'īpašuma uzturēšanu pirms viesu uzņemšanas vai pēc tās',
+                        'īpašuma sakārtošanu uz īpašnieka ierašanās laiku',
+                        'juridisko pakalpojumu un biznesa konsultāciju sniegšanu',
+                        'personīgā šofera un citus private household pakalpojumus',
+                        'citus privātīpašuma pārvaldības pakalpojumus pēc vienošanās'
+                ],
+                outro: 'Šāds pakalpojums ir īpaši aktuāls tiem privātīpašniekiem, kuri uzturas īpašumā periodiski vai pastāvīgi dzīvo ārpus Latvijas. Tas dod iespēju parūpēties par sakārtotu un estētisku vidi, kā arī privātīpašuma vērtības saglabāšanu un palielināšanu ilgermiņā.',
+                costTitle: 'Premium īpašumu pārvaldības izmaksas',
+                costText: 'Premium īpašumu pārvaldības pakalpojumu maksa tiek noteikta individuāli, ņemot vērā īpašuma izmēru, atrašanās vietu un nepieciešamo pārvaldības apjomu. Praksē šādu pakalpojumu izmaksas parasti sākas no 400 € mēnesī, kas katrā gadījumā tiek saskaņota individuāli.'
+        }
+]
+    },
+    pricingPage: {
+      backBtn: 'Atpakaļ uz sākumu',
+      title: 'Sadarbība un',
+      subtitle: 'izmaksas',
+      description: 'Mūsu pakalpojumu izmaksas tiek noteiktas katram klientam individuāli, ņemot vērā nekustamā īpašuma veidu, lielumu, atrašanās vietu, pakalpojumu apjomu, ilgumu un specifiku.',
+      stepsTitle: 'Kā notiek sadarbības uzsākšana?',
+      steps: [
+        'Sākotnējā konsultācija attālināti (telefoniski vai ZOOM platformā)',
+        'Tikšanās un nekustamā īpašuma apskate klātienē, situācijas novērtējums',
+        'Sadarbības formāta saskaņošana un individuāla piedāvājuma sagatavošana',
+        'Sadarbības līguma noslēgšana klātienē vai attālināti',
+        'Papildus pilnvarojuma izsniegšana noteiktu darbību veikšanai (ja nepieciešams)',
+        'Norēķinu veikšana par pirmo sadarbības mēnesi uz priekšu',
+        'Sadarbības uzsākšana'
+      ],
+      optionsTitle: 'Pakalpojumu',
+      optionsSubtitle: 'izvēles iespējas',
+      modelA: {
+        label: 'Modelis A',
+        badge: 'Izdevīgi',
+        title: 'Fiksēta ikmēneša pārvaldības maksa',
+        desc: 'Šis modelis ietver samaksu par regulāru vai ikdienas nekustamā īpašuma apsaimniekošanu un pārvaldību, ar skaidri noteiktu pakalpojumu apjomu un sadarbības ilgumu',
+        btn: 'Pieteikties'
+      },
+      modelB: {
+        label: 'Modelis B',
+        title: 'Projekta vai konkrēta uzdevuma maksa',
+        desc: 'Šis modelis ietver samaksu par atsevišķu vai vienreizēju pakalpojumu sniegšanu, vai projekta izpildi, ar skaidri noteiktu darba apjomu.',
+        btn: 'Pieteikties'
+      }
+    },
+    faq: {
+      backBtn: 'Atpakaļ uz sākumu',
+      title: 'Biežāk uzdotie',
+      subtitle: 'jautājumi',
+      viewAll: 'Skatīt visas atbildes',
+      items: [
+        {
+          q: "Ar kādiem īpašumiem Jūs strādājiet un kā Jūs variet palīdzēt saviem klientiem?",
+          a: [
+            "Komercīpašumu apsaimniekošanā viens no būtiskākajiem aspektiem ir ar īpašumu saistītās dokumentācijas sakārtošana un efektīva pārvaldība. Praksē darbs ar komercīpašuma dokumentiem bieži vien ir viens no sarežģītākajiem uzdevumiem, ar ko saskaras īpašnieki, un nereti tas prasa arī juridisko ārpakalpojumu piesaisti. Tāpēc mēs nodrošinām pilnu juridisko un korporatīvo atbalstu, kas nepieciešams komercīpašuma sakārtošanai, pārvaldībai un ilgtermiņa attīstībai.",
+            "Mūsu uzņēmums sniedz nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumus mazā un vidējā segmenta komercīpašumos, kā arī Premium segmenta privātīpašumos. Mēs strādājam ar dažāda veida īpašumiem, tostarp:",
+            "• komercobjektiem, biroju ēkām, jaukta tipa ēkām, saloniem, noliktavām un citiem īpašumiem",
+            "• īres namiem, īres dzīvokļiem un citiem investīciju objektiem",
+            "• lauku rezidencēm, brīvdienu mājām un viesu namiem",
+            "• savrupmājām, villām, vasarnīcām un viensētām",
+            "",
+            "Mēs specializējamies darbā ar mazā un vidējā segmenta komercīpašumiem, piedāvājot klientiem gan to profesionālu apsaimniekošanu, gan arī visaptverošu juridisko pārvaldību un korporatīvo atbalstu, tajā skaitā:",
+            "• Ar komercīpašumu saistītās dokumentācijas juridisko analīzi",
+            "• Nomas un citu līgumu sagatavošanu, grozīšanu un saskaņošanu ar darījuma dalībniekiem",
+            "• Ilgtspējīgu un profesionālu attiecību veidošanu ar nomniekiem un sadarbības partneriem",
+            "• Komercīpašnieku pārstāvību attiecībās ar valsts un pašvaldību iestādēm, bankām, apdrošinātājiem un citām iesaistītajām pusēm",
+            "• Komercīpašnieku pārstāvību strīdu situācijās ar nomniekiem vai īrniekiem",
+            "• Juridiskās konsultācijas nomas tiesību un komercīpašumu pārvaldības jautājumos"
+          ]
+        },
+        {
+          q: "Kādas priekšrocības iegūs klienti, uzsākot sadarbību ar Jums?",
+          a: [
+            "Sadarbojoties ar mums, klienti iegūst vairākas būtiskas priekšrocības:",
+            { title: "Kompleksa pieeja vienuviet", desc: "Mēs nodrošinām gan nekustamā īpašuma pārvaldību un apsaimniekošanu, gan juridisko un korporatīvo atbalstu ar īpašumu saistītajos jautājumos, tādējādi klientam nav nepieciešams koordinēt jautājumus starp vairākiem pakalpojumu sniedzējiem." },
+            { title: "Efektīva izmaksu optimizācija", desc: "Klientiem nav nepieciešams algot atsevišķu nekustamā īpašuma pārvaldnieku vai piesaistīt vairākus ārpakalpojumu sniedzējus juridiskajiem, administratīvajiem vai organizatoriskajiem jautājumiem. Šāda pieeja nodrošina labāku pārskatāmību, prognozējamas izmaksas un efektīvāku ar īpašumu saistīto procesu pārvaldību." },
+            { title: "Nekustamā īpašuma dokumentācijas sakārtošana un juridiska izvērtēšana", desc: "Pēc nepieciešamības mēs veicam arī īpašuma dokumentācijas pārskatīšanu, juridisko analīzi un risku izvērtējumu, kas palīdz identificēt potenciālās problēmas un tās savlaicīgi novērst. Tas ļauj īpašuma īpašniekam pieņemt pārdomātus lēmumus un nodrošināt stabilu juridisko pamatu turpmākai īpašuma pārvaldībai un attīstībai." },
+            { title: "Viena atbildīgā kontaktpersona", desc: "Klienti iegūst vienu kontaktpersonu, kura pārzina visus ar konkrēto īpašumu saistītos administratīvos, juridiskos un organizatoriskos jautājumus, un koordinē visus īpašumā nepieciešamos procesus." },
+            { title: "Individuāla pieeja un elastīgi risinājumi", desc: "Atšķirībā no lielām nekustamo īpašumu kompānijām, mēs nodrošinām individuālu pieeju katram klientam, strādājam ar sarežģītākiem vai nestandarta jautājumiem, kas bieži vien netiek iekļauti klasiskajos apsaimniekošanas pakalpojumos." },
+            { title: "Augsti profesionālie un konfidencialitātes standarti", desc: "Strādājot ar klientu īpašumiem, privāto un biznesa informāciju, kas nonāk mūsu rīcībā, mēs ievērojam visaugstākos profesionālās ētikas, konfidencialitātes un atbildīgas sadarbības principus." }
+          ]
+        },
+        {
+          q: "Kā tiek nodrošināta klientu datu apstrāde un konfidencialitāte?",
+          a: "Visa komerciālā un privātā informācija par īpašumu, tā īpašnieku un nomniekiem tiek apstrādāta, ievērojot augstus profesionālos standartus un konfidencialitāti. Mūsu klientu identificējošā informācija var tikt atklāta tikai LR normatīvajos aktos noteiktajos gadījumos, vai saņemot klientu piekrišanu."
+        },
+        {
+          q: "Kādos Latvijas reģionos Jūs strādājiet?",
+          a: "Mēs esam jauna kompānija un šobrīd galvenokārt strādājam Rīgā, Rīgas rajonā, Jūrmalā un Saulkrastos. Tuvākajā nākotnē plānojam arī Siguldu un Cēsis. Bet mēs esam atvērti izvērtēt sadarbības iespējas arī citos reģionos pēc individuālas vienošanās."
+        }
+      ]
+    },
+    process: {
+      title: "Sadarbības",
+      subtitle: "process",
+      desc: "Lai nodrošinātu efektīvu un pārskatāmu sadarbību, sagatavošanās tai notiek vairākos posmos:",
+      items: [
+        { title: "Sākotnējā bezmaksas konsultācija (attālināti)", desc: "Šajā posmā tiek pārrunāta nekustamā īpašuma situācija, identificēti risināmie jautājumi un uzklausītas īpašnieka vēlmes un ieceres" },
+        { title: "Sākotnējā iepazīšanās ar objektu", desc: "Šajā posmā notiek īpašuma apskate dabā un veikta sākotnējā tehnisko un juridisko jautājumu apspriešana, lai noskaidrotu to iespējamos risinājumus" },
+        { title: "Pakalpojumu plāna sagatavošana", desc: "Šajā posmā, pamatojoties uz sarunu rezultātiem, tiek sagatavots individuāls īpašuma pārvaldības plāns, un sadarbības modelis ar klienta izvēlētajiem pakalpojumiem" },
+        { title: "Pārvaldības uzsākšana", desc: "Pēc īpašuma pārvaldības plāna apstiprināšanas un sadarbības līguma noslēgšanas, tiek uzsākta īpašuma apsaimniekošana un pārvaldība" }
+      ]
+    },
+    cookieBanner: {
+      title: "Šī vietne izmanto sīkdatnes",
+      description: "Mēs izmantojam savas un trešo pušu sīkdatnes, lai nodrošinātu un uzlabotu tīmekļa vietnes darbību, pielāgotu informāciju par mūsu produktiem un pakalpojumiem, kā arī analizētu vietnes apmeklējumu. Spiežot «Apstiprināt visas», jūs piekrītat visu sīkdatņu izmantošanai. Sīkdatņu loga aizvēršana ar «X» neaktivizē sīkdatnes. Lapas apakšējā stūrī lasiet vairāk par Sīkdatņu politiku un Privātuma politiku.",
+      policyLink: "",
+      acceptBtn: "Apstiprināt visas",
+      rejectBtn: "Noraidīt",
+      settingsBtn: "Pielāgot izvēli"
+    },
+    contact: {
+      backBtn: 'Atpakaļ uz sākumu',
+      title: 'Jūsu uzticamais partneris',
+      subtitle: 'komercīpašumu un privātīpašumu pārvaldībā',
+      formTitle: 'Sazinieties ar mums,',
+      formSubtitle: 'lai pieteiktos uz konsultāciju',
+      formBoxTitle: 'Pieteikties konsultācijai',
+      labelName: 'Vārds, Uzvārds *',
+      labelCompany: 'Uzņēmums',
+      labelEmail: 'E-pasts *',
+      labelPhone: 'Tālrunis *',
+      labelMessage: 'Ziņojums / Objekta apraksts',
+      consentText: 'Es esmu iepazinies un piekrītu',
+      privacyLink: 'datu apstrādes noteikumiem',
+      submitBtn: 'Nosūtīt pieteikumu',
+      submitting: 'Sūta pieteikumu...',
+      successTitle: 'Paldies. Jūsu ziņojums ir saņemts',
+      successSubtitle: '',
+      successMessage: 'Mēs drīzumā ar Jums sazināsimies.',
+      newRequestBtn: 'Sūtīt jaunu pieteikumu',
+      infoTitle: 'Saziņas',
+      infoSubtitle: 'informācija',
+      callUs: 'Zvaniet mums',
+      writeUs: 'Rakstiet mums',
+      contactBtn: 'Sazināties',
+    },
+    useful: {
+      title: 'Noderīgi',
+      backBtn: 'Atpakaļ uz sākumu',
+      closeBtn: 'Aizvērt',
+    },
+    privacy: {
+      title: 'Privātuma',
+      subtitle: 'politika',
+      lastUpdated: 'Pēdējo reizi atjaunots: 2025. gada maijs',
+      sections: [
+        { title: '1. Ievads', content: 'SIA "Avenue Group" apņemas aizsargāt un respektēt Jūsu privātumu. Šī privātuma politika skaidro, kā mēs apkopojam, izmantojam, uzglabājam un aizsargājam Jūsu personas datus saskaņā ar Vispārīgo datu aizsardzības regulu (GDPR) un Latvijas Republikas tiesību aktiem.' },
+        { title: '2. Datu pārzinis', content: 'SIA "Avenue Group", Reģ. nr. 40203647938, Brīvības gatve 386 k-2-5A, Rīga, LV-1024. E-pasts: services@avenuegroup.lv' },
+        { title: '3. Kādus personas datus mēs vācam', content: 'Mēs varam apkopot kontaktinformāciju (vārds, e-pasts, tālrunis), tehnisko informāciju (IP adrese, pārlūka veids) un lietošanas datus.' },
+        { title: '4. Kā mēs izmantojam Jūsu datus', content: 'Lai sniegtu pakalpojumus, sazinātos ar Jums, uzlabotu mājas lapu un izpildītu juridiskās saistības.' }
+      ]
+    },
+    cookies: {
+      title: 'Sīkdatņu',
+      subtitle: 'politika',
+      lastUpdated: 'Pēdējo reizi atjaunots: 2025. gada maijs',
+      sections: [
+        { title: '1. Kas ir sīkdatnes?', content: 'Sīkdatnes ir mazi teksta faili, ko tīmekļa vietne saglabā Jūsu ierīcē. Tās ļauj vietnei atcerēties Jūsu iestatījumus un darbības.' },
+        { title: '2. Kāpēc mēs izmantojam sīkdatnes?', content: 'Funkcionalitātes nodrošināšanai, lietošanas pieredzes uzlabošanai un analītikai.' }
+      ]
+    }
+  },
+  en: {
+    nav: {
+      home: 'Home',
+      about: 'About Us',
+      services: 'Services',
+      faq: 'FAQ',
+      contact: 'Contacts',
+    },
+    hero: {
+      title: 'Your path to',
+      subtitle: 'managed property',
+      description: 'We specialize in the management of small and medium segment commercial and private properties, providing transparent and legally correct management',
+      contactBtn: 'CONTACT US',
+      servicesBtn: 'OUR SERVICES',
+    },
+    footer: {
+      aboutTitle: 'About Us',
+      followTitle: 'Follow us',
+      contactTitle: 'Contact Information',
+      addressLabel: 'Legal address:',
+      rights: 'All rights reserved',
+      privacy: 'Privacy Policy',
+      cookies: 'Cookie Policy',
+    },
+    about: {
+      backBtn: 'Back to Home',
+      title: 'About',
+      subtitle: 'us',
+      highlight: 'Our company provides real estate maintenance and management services in small and medium segment commercial properties, as well as Premium segment private properties. At the same time, we also provide legal management of these properties, which allows their owners to receive both practical property management and professional legal support on property-related issues in one place. And, of course - saving time to devote to other business priorities.',
+      p1: 'We work with real estate whose owners value an individual approach, confidentiality, and legally organized relationships with tenants, cooperation partners, and state institutions.',
+      p2: 'Although our company is relatively new, we have more than 12 years of practical experience in real estate management. During this time, we have provided daily management of commercial properties, tenant attraction and contract management, as well as coordinated repairs and related development projects. In working with Premium segment private properties, we have provided property management, maintenance planning, and coordination according to clients\' wishes and needs.',
+      p3: 'This experience allows us to look at the property as a functioning system where every well-thought-out and organized decision affects its profitability, value, and long-term profit.',
+      p4: 'Our operations are based on a structured approach and individual attitude to each client, with clearly defined tasks and goals already at the beginning of cooperation. We ensure that our clients\' property is organized, transparently managed, and financially efficient, reducing the owner\'s daily involvement while ensuring full transparency and control over all processes related to commercial or private property.',
+      p5: 'Our work is aimed at long-term cooperation and the organization and development of properties owned by our clients, promoting the preservation of their value and increasing their financial return.',
+      imageTaglineLine1: 'Your reliable partner',
+      imageTaglineLine2: 'in commercial and private property management',
+    },
+    benefits: {
+      q1: {
+        title: 'Who are our services',
+        subtitle: 'especially suitable for?',
+        items: [
+          { title: 'For owners of office buildings, apartment buildings and other commercial objects (small and medium segment)', desc: 'Management of commercial properties, including office and mixed-use buildings, apartment buildings and other properties, often involves regular communication with tenants, solving technical issues, coordinating service providers, as well as communicating with various state and municipal institutions. We help our clients structure these processes and ensure stable and efficient property management.' },
+          { title: 'Local and foreign investors with multiple properties', desc: 'Professional management is especially important for investors and entrepreneurs who own several real estate properties or investment objects (commercial objects, rental apartments) in Latvia. Structured management of all properties in one place helps ensure timely resolution of administrative issues, coordinated financial flow, and ensures the preservation and increase of their value in the long term.' },
+          { title: 'For owners of detached houses and other private residences', desc: 'Owners of detached houses, villas, summer houses, guest houses, and farmsteads often need a reliable partner to provide regular supervision and administration of the property on their behalf, as well as coordinate necessary works when needed. This is especially true when the owners of these properties live in another city or outside Latvia, and regular presence in their property is not possible.' },
+          { title: 'For any owner of commercial and private property', desc: 'One of the most important aspects in commercial property management is the organization and effective management of documentation related to the property. In practice, working with commercial property documents is often one of the most complex tasks faced by owners, and often it also requires the involvement of legal outsourcing. In private properties, these issues are usually not as numerous, but they tend to be left unresolved for years, which can also potentially lead to certain legal consequences. We can provide our clients with both commercial and private property management, as well as the management of all related legal issues in one place.' }
+          ]      },
+      q2: {
+        title: 'What ',
+        subtitle: 'benefits',
+        suffix: ' do clients get',
+        suffix2: 'by cooperating with us?',
+        desc: 'Cooperation with us ensures a structured, transparent, and responsible approach to real estate management, related legal and administrative issues, and property development. Our goal is to provide clients with an effective set of services on which not only the financial return of the property depends, but also the preservation of its value in the long term.',
+        listPrefix: 'By cooperating with us, clients gain several significant advantages:',
+        items: [
+          { title: 'A comprehensive approach in one place', desc: 'We provide both real estate management and maintenance, as well as legal and corporate support on property-related issues, thus the client does not need to coordinate issues between multiple service providers.' },
+          { title: 'Effective cost optimization', desc: 'Clients do not need to hire a separate real estate manager or attract several outsourced service providers for legal, administrative, or organizational issues. Such an approach provides better transparency, predictable costs, and more efficient management of property-related processes.' },
+          { title: 'Organization of real estate documentation and legal evaluation', desc: 'If necessary, we also review property documentation, perform legal analysis and risk assessment, which helps identify potential problems and eliminate them in a timely manner. This allows the property owner to make thoughtful decisions and ensure a stable legal basis for further property management and development.' },
+          { title: 'One responsible contact person', desc: 'Clients get one contact person who knows all the administrative, legal, and organizational issues related to the specific property, and coordinates all necessary processes in the property.' },
+          { title: 'Individual approach and flexible solutions', desc: 'Unlike large real estate companies, we provide an individual approach to each client, working with more complex or non-standard issues that are often not included in classic management services.' },
+          { title: 'High professional and confidentiality standards', desc: 'When working with client properties, private and business information that comes into our possession, we adhere to the highest principles of professional ethics, confidentiality, and responsible cooperation.' }
+        ]
+      }
+    },
+    services: {
+      title: 'Our',
+      subtitle: 'Services',
+      description: 'We offer both daily real estate maintenance and management, as well as the provision of separate or one-time services according to each client\'s wishes and needs.',
+      learnMore: 'Learn More',
+      items: [
+        {
+                id: 1,
+                title: 'Daily administrative management',
+                desc: 'This service provides structured and continuous real estate management, allowing the owner to focus on their main business development or investment goals while maintaining transparency over property operations.'
+        },
+        {
+                id: 2,
+                title: 'Maintenance budget for technical works',
+                desc: 'A pre-established financial fund designed for the prompt resolution of property technical issues and maintenance works. It provides the opportunity to quickly organize necessary works without causing administrative delays.'
+        },
+        {
+                id: 3,
+                title: 'Additional services',
+                desc: 'Specialized administrative, legal, and project management services that help solve more complex situations or implement property development plans. They are provided together with daily management services or as separate projects according to the client\'s needs.'
+        },
+        {
+                id: 4,
+                title: 'Premium property management',
+                desc: 'Individually tailored management for private and high-value properties where particularly careful organization and maintenance are required. The service ensures that the property is professionally managed even when the owner is not residing there.'
+        }
+      ]
+    },
+    servicesPage: {
+      backBtn: 'Back to Home',
+      title: 'Structure of our services',
+      subtitle: 'and prices',
+      description: 'A professional approach to real estate management – from daily maintenance to legal support.',
+      descriptionLabel: 'Service description:',
+      learnMore: 'Learn More',
+      vatText: 'All service prices indicated above are subject to VAT if provided by the regulatory acts of the Republic of Latvia.',
+      items: [
+        {
+                id: 1,
+                title: '1. Daily administrative management',
+                intro: 'This is a fixed monthly fee for continuous or regular administrative management of the property. This service is provided for small and medium segment properties and includes:',
+                points: [
+                        'daily or regular administrative management of real estate',
+                        'communication with property tenants and cooperation partners',
+                        'attracting tenants or lessees and building sustainable cooperation',
+                        'representation in relations with state/municipal institutions and third parties',
+                        'organizing necessary technical issues and monitoring their execution',
+                        'coordinating maintenance works of the property territory or interior',
+                        'coordinating other operational situations on the property by agreement'
+                ],
+                outro: 'This service provides structured and continuous real estate management, allowing the owner to focus on their main business development or investment goals.',
+                costTitle: 'Administrative management service costs',
+                costText: 'The daily administrative management fee is determined individually, taking into account the type, size, and management intensity of the property. In practice, the fee for such a service for small segment commercial objects is usually determined starting from 250 € per month, while for medium segment or more complex commercial objects it is agreed upon individually.'
+        },
+        {
+                id: 2,
+                title: '2. Maintenance budget for technical works (deposit)',
+                intro: `To ensure fast and efficient resolution of technical issues in the property, a maintenance deposit is used. This is a maintenance budget previously paid by the real estate owner, from which the costs of property technical maintenance works, minor repairs, and other technical issues related to the property are covered.
+
+This system allows for an immediate response to unforeseen technical issues in the property, maintenance works, or equipment maintenance in the property, without causing delays with additional transfers or separate approvals to resolve them.
+
+The maintenance budget can be used for:`,
+                points: [
+                        'covering the costs of minor or unplanned repair works',
+                        'in emergency situations to ensure the safety of people or property',
+                        'specialist call-outs in unforeseen or emergency cases',
+                        'covering costs for checking technical damage or systems',
+                        'covering the costs of territory maintenance works',
+                        'purchasing small urgent materials',
+                        'covering the costs of other operational maintenance works'
+                ],
+                outro: `(this list is not exhaustive and is agreed upon individually in each case)
+
+All costs are documented and reflected in a report issued to the owner at pre-agreed times, ensuring full financial transparency. When the deposit balance reaches the set minimum level, the owner is informed about the need to top it up.
+
+Such a structure ensures operational issue resolution, continuous property maintenance, as well as transparency in the use of budget funds.`,
+                costTitle: 'Amount of the maintenance budget',
+                costText: 'The maintenance deposit amount is determined individually, considering the property size, technical condition, and expected volume of maintenance or repair works. In practice, the deposit amount usually starts from 800-1000 €, but for larger properties with more intensive technical maintenance, it can be much larger. A project management or administration fee may be applied for organizing, coordinating, or supervising technical works on the property, which is agreed upon individually in each case.'
+        },
+        {
+                id: 3,
+                title: '3. Additional services',
+                intro: `In addition to daily real estate maintenance and management, we also offer clients specialized services needed to resolve more complex situations or for property development. Such services are provided as needed and are organized together with daily services or as separate projects or services.
+
+Additional services may include:`,
+                points: [
+                        'providing legal consultations on lease or tenancy relationship issues',
+                        'analysis of legal and financial risks, evaluation of situations, and provision of opinions',
+                        'consultations and joint search for investment opportunities for property development',
+                        'preparation and administration of lease, tenancy, repair works, and other contracts',
+                        'cooperation with an accounting service provider, supervision of financial flow',
+                        'representation in relations with tenants, lessees, state and municipal institutions',
+                        'representation for obtaining residence permits in Latvia by investing in property',
+                        'management of all types of real estate sale or purchase projects',
+                        'resolution of dispute situations and coordination of debt recovery cases',
+                        'corporate support for building sustainable relationships with partners',
+                        'attracting necessary specialists or service providers for repair works',
+                        'supervision and quality control of repair or reconstruction works',
+                        'other legal, organizational, or corporate services by agreement'
+                ],
+                outro: '',
+                costTitle: 'Costs of additional services',
+                costText: 'Fees for additional services are usually provided at an hourly rate or as separate projects. The fee for legal services and other consultations is typically set starting from 70 €/hour, but the costs of larger and more labor-intensive projects are agreed upon individually in each case.'
+        },
+        {
+                id: 4,
+                title: '4. Premium property management',
+                intro: `In addition to classic property maintenance and management, we also offer clients Premium services for private properties. This service is intended for owners of detached houses, villas, residences, summer houses, country farmsteads, holiday homes, guest houses, and similar real estate.
+
+Premium property management services may include:`,
+                points: [
+                        'regular property inspection and management during the owner\'s absence',
+                        'coordination of property territory or interior maintenance works',
+                        'representation in relations with state/municipal institutions and third parties',
+                        'maintenance of electrical equipment, technical and security systems as needed',
+                        'tenant attraction (if necessary) and building sustainable cooperation',
+                        'cooperation with cleaners, gardeners, or technical specialists',
+                        'property maintenance before or after hosting guests',
+                        'preparing the property for the owner\'s arrival',
+                        'provision of legal services and business consultations',
+                        'personal driver and other private household services',
+                        'other private property management services by agreement'
+                ],
+                outro: 'Such a service is particularly relevant for those private owners who stay in the property periodically or permanently live outside Latvia. This provides an opportunity to ensure an organized and aesthetic environment, as well as preserve and increase the value of private property in the long term.',
+                costTitle: 'Costs of Premium property management',
+                costText: 'The fee for Premium property management services is determined individually, considering the property size, location, and required management volume. In practice, the costs of such services usually start from 400 € per month, which is agreed upon individually in each case.'
+        }
+      ]
+    },
+    pricingPage: {
+      backBtn: 'Back to Home',
+      title: 'Cooperation and',
+      subtitle: 'costs',
+      description: 'The costs of our services are determined individually for each client, considering the type of real estate, size, location, volume, duration, and specifics of services.',
+      stepsTitle: 'How does cooperation begin?',
+      steps: [
+        'Initial consultation remotely (by phone or on ZOOM platform)',
+        'Meeting and viewing the real estate in person, assessing the situation',
+        'Agreeing on the format of cooperation and preparing an individual offer',
+        'Conclusion of the cooperation agreement in person or remotely',
+        'Issuing additional power of attorney to perform certain actions (if necessary)',
+        'Settlement for the first month of cooperation in advance',
+        'Commencement of cooperation'
+      ],
+      optionsTitle: 'Service',
+      optionsSubtitle: 'options',
+      modelA: {
+        label: 'Model A',
+        badge: 'Advantageous',
+        title: 'Fixed monthly management fee',
+        desc: 'This model includes payment for regular or daily maintenance and management of real estate, with a clearly defined volume of services and duration of cooperation.',
+        btn: 'Apply'
+      },
+      modelB: {
+        label: 'Model B',
+        title: 'Project or specific task fee',
+        desc: 'This model includes payment for the provision of separate or one-time services, or project execution, with a clearly defined volume of work.',
+        btn: 'Apply'
+      }
+    },
+    faq: {
+      backBtn: 'Back to Home',
+      title: 'Frequently Asked',
+      subtitle: 'Questions',
+      viewAll: 'View all answers',
+      items: [
+        {
+          q: "What types of properties do you work with and how can you help your clients?",
+          a: [
+            "Our company provides real estate maintenance and management services in small and medium segment commercial properties, as well as Premium segment private properties. We work with various types of properties, including:",
+            "• commercial objects, office buildings, mixed-use buildings, salons, warehouses, and other properties",
+            "• apartment buildings, rental apartments, and other investment objects",
+            "• country residences, holiday homes, and guest houses",
+            "• detached houses, villas, summer houses, and farmsteads",
+            "",
+            "We specialize in working with small and medium segment commercial properties, offering clients both professional management and comprehensive legal management and corporate support, including:",
+            "• Legal analysis of documentation related to commercial property",
+            "• Preparation, amendment, and coordination of lease and other agreements with transaction participants",
+            "• Building sustainable and professional relationships with tenants and cooperation partners",
+            "• Representation of commercial property owners in relations with state and municipal institutions, banks, insurers, and other involved parties",
+            "• Representation of commercial property owners in dispute situations with tenants or lessees",
+            "• Legal consultations on lease rights and commercial property management issues",
+            "It is important to note that in the management of commercial properties, one of the most critical aspects is the organization and effective management of documentation related to the property. In practice, working with commercial property documents is often one of the most complex tasks faced by owners, and it often requires the involvement of legal outsourcing.",
+            "Therefore, we provide full legal and corporate support necessary for the organization, management, and long-term development of commercial property."
+          ]
+        },
+        {
+          q: "What advantages will clients gain by starting cooperation with you?",
+          a: [
+            "By cooperating with us, clients gain several significant advantages:",
+            { title: "A comprehensive approach in one place", desc: "We provide both real estate management and maintenance, as well as legal and corporate support on property-related issues, thus the client does not need to coordinate issues between multiple service providers." },
+            { title: "Effective cost optimization", desc: "Clients do not need to hire a separate real estate manager or attract several outsourced service providers for legal, administrative, or organizational issues. Such an approach provides better transparency, predictable costs, and more efficient management of property-related processes." },
+            { title: "Organization of real estate documentation and legal evaluation", desc: "If necessary, we also review property documentation, perform legal analysis and risk assessment, which helps identify potential problems and eliminate them in a timely manner. This allows the property owner to make thoughtful decisions and ensure a stable legal basis for further property management and development." },
+            { title: "One responsible contact person", desc: "Clients get one contact person who knows all the administrative, legal, and organizational issues related to the specific property, and coordinates all necessary processes in the property." },
+            { title: "Individual approach and flexible solutions", desc: "Unlike large real estate companies, we provide an individual approach to each client, working with more complex or non-standard issues that are often not included in classic management services." },
+            { title: "High professional and confidentiality standards", desc: "When working with client properties, private and business information that comes into our possession, we adhere to the highest principles of professional ethics, confidentiality, and responsible cooperation." }
+          ]
+        },
+        {
+          q: "How is client data processing and confidentiality ensured?",
+          a: "All commercial and private information about the property, its owner, and tenants is processed in compliance with high professional standards and confidentiality. Information identifying our clients can only be disclosed in cases specified by the regulatory acts of the Republic of Latvia or upon receiving client consent."
+        },
+        {
+          q: "In which regions of Latvia do you work?",
+          a: "We are a young company and currently work mainly in Riga, Riga district, Jurmala, and Saulkrasti. In the near future, we also plan to expand to Sigulda and Cesis. However, we are open to evaluating cooperation opportunities in other regions by individual agreement."
+        }
+      ]
+    },
+    process: {
+      title: "Cooperation",
+      subtitle: "process",
+      desc: "To ensure effective and transparent cooperation, preparation for it takes place in several stages:",
+      items: [
+        { title: "Initial free consultation (remote)", desc: "At this stage, the real estate situation is discussed, issues to be resolved are identified, and the owner\'s wishes and plans are heard." },
+        { title: "Initial familiarization with the object", desc: "At this stage, a physical inspection of the property is carried out, and an initial discussion of technical and legal issues is held to clarify their possible solutions." },
+        { title: "Preparation of a service plan", desc: "Based on the results of the negotiations, an individual property management plan and a cooperation model with the services chosen by the client are prepared." },
+        { title: "Start of management", desc: "After the approval of the property management plan and the conclusion of the cooperation agreement, property maintenance and management begins." }
+      ]
+    },
+    cookieBanner: {
+      title: "This site uses cookies",
+      description: "We use our own and third-party cookies to ensure and improve the operation of the website, tailor information about our products and services, and analyze website traffic. By clicking \"Confirm all\", you agree to the use of all cookies. Closing the cookie window with an \"X\" does not activate cookies. Read more about the Cookie Policy and Privacy Policy in the bottom corner of the page.",
+      policyLink: "",
+      acceptBtn: "Accept all",
+      rejectBtn: "Reject",
+      settingsBtn: "Customize choice"
+    },
+    contact: {
+      backBtn: 'Back to Home',
+      title: 'Your reliable partner',
+      subtitle: 'in commercial and private property management',
+      formTitle: 'Contact us',
+      formSubtitle: 'to sign up for a consultation',
+      formBoxTitle: 'Apply for a consultation',
+      labelName: 'Name, Surname *',
+      labelCompany: 'Company',
+      labelEmail: 'Email *',
+      labelPhone: 'Phone *',
+      labelMessage: 'Message / Property description',
+      consentText: 'I have read and agree to the',
+      privacyLink: 'data processing terms',
+      submitBtn: 'Submit application',
+      submitting: 'Submitting...',
+      successTitle: 'Thank you. Your message has been received',
+      successSubtitle: '',
+      successMessage: 'We will contact you shortly.',
+      newRequestBtn: 'Send new application',
+      infoTitle: 'Contact',
+      infoSubtitle: 'information',
+      callUs: 'Call us',
+      writeUs: 'Write to us',
+      contactBtn: 'Contact',
+    },
+    useful: {
+      title: 'Useful',
+      backBtn: 'Back to Home',
+      closeBtn: 'Close',
+    },
+    privacy: {
+      title: 'Privacy',
+      subtitle: 'Policy',
+      lastUpdated: 'Last updated: May 2025',
+      sections: [
+        { title: '1. Introduction', content: 'SIA "Avenue Group" is committed to protecting and respecting your privacy. This privacy policy explains how we collect, use, store, and protect your personal data in accordance with the General Data Protection Regulation (GDPR) and the laws of the Republic of Latvia.' },
+        { title: '2. Data Controller', content: 'SIA "Avenue Group", Reg. No. 40203647938, Brīvības gatve 386 k-2-5A, Riga, LV-1024. Email: services@avenuegroup.lv' },
+        { title: '3. What personal data we collect', content: 'We may collect contact information (name, email, phone), technical information (IP address, browser type), and usage data.' },
+        { title: '4. How we use your data', content: 'To provide services, communicate with you, improve the website, and fulfill legal obligations.' }
+      ]
+    },
+    cookies: {
+      title: 'Cookie',
+      subtitle: 'Policy',
+      lastUpdated: 'Last updated: May 2025',
+      sections: [
+        { title: '1. What are cookies?', content: 'Cookies are small text files that a website stores on your device. They allow the website to remember your settings and actions.' },
+        { title: '2. Why do we use cookies?', content: 'To ensure functionality, improve user experience, and for analytics.' }
+      ]
+    }
+  },
+  ru: {
+    nav: {
+      home: 'Главная',
+      about: 'О нас',
+      services: 'Услуги',
+      faq: 'ЧаВо',
+      contact: 'Контакты',
+    },
+    hero: {
+      title: 'Ваш путь к',
+      subtitle: 'упорядоченной недвижимости',
+      description: 'Мы специализируемся на управлении коммерческой и частной недвижимостью малого и среднего сегмента, обеспечивая прозрачное и юридически корректное управление',
+      contactBtn: 'СВЯЗАТЬСЯ С НАМИ',
+      servicesBtn: 'НАШИ УСЛУГИ',
+    },
+    footer: {
+      aboutTitle: 'О нас',
+      followTitle: 'Подписывайтесь на нас',
+      contactTitle: 'Контактная информация',
+      addressLabel: 'Юридический адрес:',
+      rights: 'Все права защищены',
+      privacy: 'Политика конфиденциальности',
+      cookies: 'Политика использования файлов cookie',
+    },
+    about: {
+      backBtn: 'Назад на главную',
+      title: 'О',
+      subtitle: 'нас',
+      highlight: 'Наша компания предоставляет услуги по обслуживанию и управлению недвижимостью малого и среднего сегмента коммерческой недвижимости, а также частной недвижимости Premium сегмента. Одновременно мы также обеспечиваем юридическое управление этой недвижимостью, что позволяет ее владельцам получать как практическое обслуживание, так и профессиональную юридическую поддержку по связанным вопросам в одном месте. И, конечно же, сэкономить время, которое можно посвятить другим бизнес-приоритетам.',
+      p1: 'Мы работаем с недвижимостью, владельцам которой важен индивидуальный подход, конфиденциальность и юридически упорядоченные отношения с арендаторами, партнерами по сотрудничеству и государственными учреждениями.',
+      p2: 'Хотя наша компания относительно молода, мы имеем более 12 лет практического опыта в управлении недвижимостью. За это время мы обеспечивали повседневное обслуживание коммерческой недвижимости, привлечение арендаторов и управление договорными отношениями, а также координировали ремонтные работы и связанные с ними проекты развития. В работе с частной недвижимостью Premium сегмента мы обеспечивали управление недвижимостью, планирование и координацию работ по техническому обслуживанию в соответствии с пожеланиями и потребностями клиентов.',
+      p3: 'Этот опыт позволяет нам смотреть на недвижимость как на функционирующую систему, в которой каждое продуманное и организованное решение влияет на ее рентабельность, стоимость и прибыль в долгосрочной перспективе.',
+      p4: 'В основе нашей деятельности лежит структурированный подход и индивидуальное отношение к каждому клиенту, с четко определенными задачами и целями уже в начале сотрудничества. Мы заботимся о том, чтобы недвижимость наших клиентов была упорядочена, прозрачно управляема и финансово эффективна, снижая повседневную вовлеченность владельца и обеспечивая при этом полную прозрачность и контроль над всеми процессами, связанными с коммерческой или частной недвижимостью.',
+      p5: 'Наша работа направлена на долгосрочное сотрудничество, упорядочивание и развитие недвижимости наших клиентов, способствуя сохранению ее стоимости и увеличению финансовой отдачи.',
+      imageTaglineLine1: 'Ваш надежный партнер',
+      imageTaglineLine2: 'в управлении коммерческой и частной недвижимостью',
+    },
+    benefits: {
+      q1: {
+        title: 'Кому наши услуги',
+        subtitle: 'особенно подходят?',
+        items: [
+          { title: 'Владельцам офисных зданий, доходных домов и других коммерческих объектов (малый и средний сегмент)', desc: 'Управление коммерческой недвижимостью, в том числе офисными и многофункциональными зданиями, доходными домами и другой недвижимостью, часто включает регулярную коммуникацию с арендаторами, решение технических вопросов, координацию поставщиков услуг, а также общение с различными государственными и муниципальными учреждениями. Мы помогаем своим клиентам структурировать эти процессы и обеспечить стабильное и эффективное управление недвижимостью.' },
+          { title: 'Местным и иностранным инвесторам с несколькими объектами недвижимости', desc: 'Профессиональное управление особенно важно для инвесторов и предпринимателей, которым в Латвии принадлежит несколько объектов недвижимости или инвестиционных объектов (коммерческие объекты, арендные квартиры). Структурированное управление всей недвижимостью в одном месте помогает обеспечить своевременное решение административных вопросов, скоординированный финансовый поток, а также в долгосрочной перспективе обеспечивает сохранение и увеличение их стоимости.' },
+          { title: 'Владельцам особняков и других частных резиденций', desc: 'Владельцам особняков, вилл, дач, гостевых домов и хуторов часто необходим надежный партнер, который обеспечивает регулярный надзор и администрирование недвижимости от их имени, а также при необходимости координирует в ней необходимые работы. Это особенно актуально в случаях, когда владельцы этой недвижимости живут в другом городе или за пределами Латвии, и регулярное пребывание в своей недвижимости невозможно.' },
+          { title: 'Любому владельцу коммерческих объектов и частной собственности', desc: 'Одним из наиболее важных аспектов в управлении коммерческой недвижимостью является упорядочивание и эффективное управление документацией, связанной с собственностью. На практике работа с документами коммерческой недвижимости часто является одной из самых сложных задач, с которыми сталкиваются владельцы, и нередко это требует привлечения юридического аутсорсинга. В частных владениях этих вопросов обычно не так много, но они имеют тенденцию оставаться нерешенными годами, что также потенциально может вызвать определенные юридические последствия. Мы можем обеспечить нашим клиентам как управление коммерческой и частной недвижимостью, так и управление всеми связанными с этим юридическими вопросами в одном месте.' }
+          ]      },
+      q2: {
+        title: 'Какие ',
+        subtitle: 'преимущества',
+        suffix: ' получают клиенты,',
+        suffix2: 'начиная сотрудничество с нами?',
+        desc: 'Сотрудничество с нами обеспечивает структурированный, прозрачный и ответственный подход к управлению недвижимостью, связанным с этим юридическим и административным вопросам, и развитию недвижимости. Наша цель - предоставить клиентам эффективный комплекс услуг, от которого зависит не только финансовая отдача недвижимости, но и сохранение ее стоимости в долгосрочной перспективе.',
+        listPrefix: 'Сотрудничая с нами, клиенты получают ряд существенных преимуществ:',
+        items: [
+          { title: 'Комплексный подход в одном месте', desc: 'Мы обеспечиваем как управление и обслуживание недвижимости, так и юридическую и корпоративную поддержку по связанным с недвижимостью вопросам, таким образом клиенту не нужно координировать вопросы между несколькими поставщиками услуг.' },
+          { title: 'Эффективная оптимизация затрат', desc: 'Клиентам не нужно нанимать отдельного управляющего недвижимостью или привлекать нескольких поставщиков внешних услуг для юридических, административных или организационных вопросов. Такой подход обеспечивает лучшую прозрачность, прогнозируемые расходы и более эффективное управление связанными с недвижимостью процессами.' },
+          { title: 'Приведение в порядок документации на недвижимость и юридическая оценка', desc: 'По необходимости мы также проводим пересмотр документации на недвижимость, юридический анализ и оценку рисков, что помогает выявить потенциальные проблемы и своевременно их устранить. Это позволяет владельцу недвижимости принимать продуманные решения и обеспечить стабильную юридическую основу для дальнейшего управления и развития недвижимости.' },
+          { title: 'Одно ответственное контактное лицо', desc: 'Клиенты получают одно контактное лицо, которое знает все административные, юридические и организационные вопросы, связанные с конкретным объектом недвижимости, и координирует все необходимые в недвижимости процессы.' },
+          { title: 'Индивидуальный подход и гибкие решения', desc: 'В отличие от крупных компаний по недвижимости, мы обеспечиваем индивидуальный подход к каждому клиенту, работаем с более сложными или нестандартными вопросами, которые часто не включаются в классические услуги по обслуживанию.' },
+          { title: 'Высокие профессиональные стандарты и стандарты конфиденциальности', desc: 'Работая с недвижимостью клиентов, личной и деловой информацией, которая поступает в наше распоряжение, мы соблюдаем самые высокие принципы профессиональной этики, конфиденциальности и ответственного сотрудничества.' }
+        ]
+      }
+    },
+    services: {
+      title: 'Наши',
+      subtitle: 'Услуги',
+      description: 'Мы предлагаем как повседневное управление и обслуживание недвижимости, так и предоставление отдельных или разовых услуг в соответствии с пожеланиями и потребностями каждого клиента.',
+      learnMore: 'Узнать Больше', 
+      items: [
+        {
+                id: 1,
+                title: 'Повседневное административное управление',
+                desc: 'Эта услуга обеспечивает структурированное и непрерывное управление недвижимостью, что позволяет ее владельцу сосредоточиться на своих основных целях развития бизнеса или инвестиций, сохраняя при этом прозрачность работы недвижимости.'
+        },
+        {
+                id: 2,
+                title: 'Бюджет на техническое обслуживание',
+                desc: 'Заранее созданный финансовый фонд, предназначенный для оперативного решения технических вопросов и работ по техническому обслуживанию недвижимости. Это дает возможность быстро организовать необходимые работы, не создавая административных задержек.'
+        },
+        {
+                id: 3,
+                title: 'Дополнительные услуги',
+                desc: 'Специализированные административные, юридические услуги и услуги по управлению проектами, которые помогают в решении более сложных ситуаций или реализации планов развития недвижимости. Они предоставляются вместе с услугами повседневного управления или как отдельные проекты в соответствии с потребностями клиента.'
+        },
+        {
+                id: 4,
+                title: 'Управление Premium недвижимостью',
+                desc: 'Индивидуально адаптированное управление частной и дорогостоящей недвижимостью, где требуется особенно тщательная организация и обслуживание. Услуга гарантирует, что недвижимость будет профессионально управляться даже тогда, когда владелец в ней не проживает.'
+        }
+]
+    },
+    servicesPage: {
+      backBtn: 'Назад на главную',
+      title: 'Структура наших услуг',
+      subtitle: 'и цены',
+      description: 'Профессиональный подход к управлению недвижимостью – от повседневного обслуживания до юридической поддержки.',
+      descriptionLabel: 'Описание услуги:',
+      learnMore: 'Узнать Больше',
+      vatText: 'Ко всем вышеуказанным ценам на услуги, если это предусмотрено нормативными актами ЛР, применяется НДС.',
+      items: [
+        {
+                id: 1,
+                title: '1. Повседневное административное управление',
+                intro: 'Это фиксированная ежемесячная плата за непрерывное или регулярное административное управление недвижимостью. Эта услуга предоставляется для недвижимости малого и среднего сегмента и включает в себя:',
+                points: [
+                        'повседневное или регулярное административное управление недвижимостью',
+                        'коммуникацию с арендаторами недвижимости и партнерами по сотрудничеству',
+                        'привлечение арендаторов и выстраивание устойчивого сотрудничества',
+                        'представительство в отношениях с государственными/муниципальными учреждениями и третьими лицами',
+                        'организацию необходимых технических вопросов и надзор за их выполнением',
+                        'координацию работ по содержанию территории или внутренних помещений недвижимости',
+                        'координацию других оперативных ситуаций на объекте недвижимости по договоренности'
+                ],
+                outro: 'Эта услуга обеспечивает структурированное и непрерывное управление недвижимостью, что позволяет ее владельцу сосредоточиться на своих основных целях развития бизнеса или инвестиций.',
+                costTitle: 'Стоимость услуги административного управления',
+                costText: 'Плата за повседневное административное управление устанавливается индивидуально, с учетом типа недвижимости, размера и интенсивности управления. На практике плата за такую услугу для коммерческих объектов малого сегмента обычно устанавливается от 250 € в месяц, в то время как для объектов среднего сегмента или более сложных коммерческих объектов она согласовывается индивидуально.'
+        },
+        {
+                id: 2,
+                title: '2. Бюджет на техническое обслуживание (депозит)',
+                intro: 'Для обеспечения быстрого и эффективного решения технических вопросов на объекте недвижимости используется депозит на техническое обслуживание. Это заранее внесенный владельцем недвижимости бюджет на техническое обслуживание, из которого покрываются расходы на работы по техническому обслуживанию недвижимости, мелкие ремонтные работы и решаются другие технические вопросы, связанные с недвижимостью.\n\nЭта система позволяет немедленно реагировать на непредвиденные технические вопросы на объекте недвижимости, работы по техническому обслуживанию или обслуживанию оборудования на объекте недвижимости, не создавая задержек из-за дополнительных перечислений или отдельного утверждения для их решения.\n\nБюджет на техническое обслуживание может быть использован для:',
+                points: [
+                        'покрытия расходов на мелкие или незапланированные ремонтные работы',
+                        'в чрезвычайных ситуациях для обеспечения безопасности людей или имущества',
+                        'вызова специалистов в непредвиденных или аварийных случаях',
+                        'покрытия расходов на проверку технических повреждений или систем',
+                        'покрытия расходов на работы по содержанию территории',
+                        'приобретения небольших срочных материалов',
+                        'покрытия расходов на другие оперативные работы по техническому обслуживанию'
+                ],
+                outro: '(этот перечень не является исчерпывающим и согласовывается индивидуально в каждом случае)\n\nВсе расходы документируются и отражаются в отчете, который выдается владельцу в заранее оговоренные сроки, обеспечивая полную финансовую прозрачность. Когда остаток депозита достигает установленного минимального уровня, владелец информируется о необходимости его пополнения.\n\nТакая структура позволяет обеспечить оперативное решение вопросов, непрерывное содержание недвижимости в порядке, а также прозрачность использования бюджетных средств.',
+                costTitle: 'Размер бюджета на техническое обслуживание',
+                costText: 'Размер депозита на техническое обслуживание определяется индивидуально с учетом размера недвижимости, технического состояния и предполагаемого объема работ по техническому обслуживанию или ремонту. На практике сумма депозита обычно начинается от 800-1000 €, но для более крупной недвижимости с более интенсивным техническим обслуживанием она может быть намного больше. За организацию, координацию или надзор за техническими работами на объекте недвижимости может взиматься плата за управление проектом или администрирование, которая в каждом случае согласовывается индивидуально.'
+        },
+        {
+                id: 3,
+                title: '3. Дополнительные услуги',
+                intro: 'Помимо повседневного обслуживания и управления недвижимостью, мы также предлагаем клиентам специализированные услуги, необходимые для решения более сложных ситуаций или развития недвижимости. Такие услуги предоставляются по мере необходимости и организуются вместе с повседневными услугами или как отдельные проекты или услуги.\n\nДополнительные услуги могут включать:',
+                points: [
+                        'предоставление юридических консультаций по вопросам арендных отношений',
+                        'анализ юридических и финансовых рисков, оценка ситуаций и предоставление заключений',
+                        'консультации и совместный поиск инвестиционных возможностей для развития недвижимости',
+                        'подготовка и администрирование договоров аренды, найма, ремонтных работ и других договоров',
+                        'сотрудничество с поставщиком бухгалтерских услуг, надзор за финансовым потоком',
+                        'представительство в отношениях с арендаторами, нанимателями, государственными и муниципальными учреждениями',
+                        'представительство для получения вида на жительство в Латвии путем инвестирования в имущество',
+                        'управление проектами всех видов по продаже или покупке недвижимости',
+                        'решение спорных ситуаций и координация дел по взысканию задолженностей',
+                        'корпоративная поддержка для создания устойчивых отношений с партнерами',
+                        'привлечение необходимых специалистов или поставщиков услуг для ремонтных работ',
+                        'надзор и контроль качества ремонтных работ или работ по реконструкции',
+                        'другие юридические, организационные или корпоративные услуги по договоренности'
+                ],
+                outro: '',
+                costTitle: 'Стоимость дополнительных услуг',
+                costText: 'Плата за дополнительные услуги обычно предоставляется по почасовой ставке или как отдельные проекты. Плата за юридические услуги и другие консультации обычно устанавливается от 70 €/час, но стоимость более крупных и объемных по работе проектов в каждом случае согласовывается индивидуально.'
+        },
+        {
+                id: 4,
+                title: '4. Управление Premium недвижимостью',
+                intro: 'Помимо классического обслуживания и управления недвижимостью, мы также предлагаем клиентам Premium услуги для частной недвижимости. Эта услуга предназначена для владельцев, которым принадлежат особняки, виллы, резиденции, дачи, хутора, дома для отдыха, гостевые дома и аналогичная недвижимость.\n\nУслуги управления Premium недвижимостью могут включать:',
+                points: [
+                        'регулярный осмотр и управление недвижимостью во время отсутствия владельца',
+                        'координацию работ по содержанию территории или внутренних помещений недвижимости',
+                        'представительство в отношениях с государственными/муниципальными учреждениями и третьими лицами',
+                        'обслуживание электрооборудования, технических систем и систем безопасности по мере необходимости',
+                        'привлечение арендаторов (при необходимости) и выстраивание устойчивого сотрудничества',
+                        'сотрудничество с уборщиками, садовниками или техническими специалистами',
+                        'содержание недвижимости до приема гостей или после него',
+                        'приведение недвижимости в порядок к моменту прибытия владельца',
+                        'предоставление юридических услуг и бизнес-консультаций',
+                        'услуги личного водителя и другие услуги private household',
+                        'другие услуги по управлению частной недвижимостью по договоренности'
+                ],
+                outro: 'Такая услуга особенно актуальна для тех частных владельцев, которые проживают в недвижимости периодически или постоянно живут за пределами Латвии. Это дает возможность позаботиться об упорядоченной и эстетичной среде, а также о сохранении и увеличении стоимости частной собственности в долгосрочной перспективе.',
+                costTitle: 'Стоимость управления Premium недвижимостью',
+                costText: 'Плата за услуги управления Premium недвижимостью устанавливается индивидуально с учетом размера недвижимости, местоположения и необходимого объема управления. На практике стоимость таких услуг обычно начинается от 400 € в месяц, что в каждом случае согласовывается индивидуально.'
+        }
+]
+    },
+    pricingPage: {
+      backBtn: 'Назад на главную',
+      title: 'Сотрудничество и',
+      subtitle: 'расходы',
+      description: 'Стоимость наших услуг определяется для каждого клиента индивидуально, с учетом типа недвижимости, размера, местоположения, объема услуг, продолжительности и специфики.',
+      stepsTitle: 'Как происходит начало сотрудничества?',
+      steps: [
+        'Первоначальная консультация удаленно (по телефону или на платформе ZOOM)',
+        'Встреча и осмотр недвижимости лично, оценка ситуации',
+        'Согласование формата сотрудничества и подготовка индивидуального предложения',
+        'Заключение договора о сотрудничестве лично или удаленно',
+        'Выдача дополнительной доверенности на выполнение определенных действий (при необходимости)',
+        'Осуществление расчетов за первый месяц сотрудничества авансом',
+        'Начало сотрудничества'
+      ],
+      optionsTitle: 'Варианты выбора',
+      optionsSubtitle: 'услуг',
+      modelA: {
+        label: 'Модель А',
+        badge: 'Выгодно',
+        title: 'Фиксированная ежемесячная плата за управление',
+        desc: 'Эта модель включает оплату за регулярное или повседневное обслуживание и управление недвижимостью с четко определенным объемом услуг и продолжительностью сотрудничества',
+        btn: 'Подать заявку'
+      },
+      modelB: {
+        label: 'Модель Б',
+        title: 'Плата за проект или конкретную задачу',
+        desc: 'Эта модель включает оплату за предоставление отдельных или разовых услуг, или выполнение проекта с четко определенным объемом работ.',
+        btn: 'Подать заявку'
+      }
+    },
+    faq: {
+      backBtn: 'Назад на главную',
+      title: 'Часто задаваемые',
+      subtitle: 'вопросы',
+      viewAll: 'Смотреть все ответы',
+      items: [
+        {
+          q: "С какой недвижимостью вы работаете и как вы можете помочь своим клиентам?",
+          a: [
+            "Наша компания предоставляет услуги по обслуживанию и управлению недвижимостью коммерческой недвижимости малого и среднего сегмента, а также частной недвижимости Premium сегмента. Мы работаем с различными видами недвижимости, в том числе:",
+            "• коммерческими объектами, офисными зданиями, многофункциональными зданиями, салонами, складами и другой недвижимостью",
+            "• доходными домами, арендными квартирами и другими инвестиционными объектами",
+            "• загородными резиденциями, домами для отдыха и гостевыми домами",
+            "• особняками, виллами, дачами и хуторами",
+            "",
+            "Мы специализируемся на работе с коммерческой недвижимостью малого и среднего сегмента, предлагая клиентам как профессиональное управление, так и всестороннее юридическое сопровождение и корпоративную поддержку, в том числе:",
+            "• Юридический анализ документации, связанной с коммерческой недвижимостью",
+            "• Подготовка, изменение и согласование договоров аренды и других соглашений с участниками сделки",
+            "• Формирование устойчивых и профессиональных отношений с арендаторами и партнерами по сотрудничеству",
+            "• Представительство владельцев коммерческой недвижимости в отношениях с государственными и муниципальными учреждениями, банками, страховщиками и другими вовлеченными сторонами",
+            "• Представительство владельцев коммерческой недвижимости в спорных ситуациях с арендаторами или нанимателями",
+            "• Юридические консультации по вопросам арендного права и управления коммерческой недвижимостью",
+            "Важно учитывать, что в управлении коммерческой недвижимостью одним из наиболее существенных аспектов является приведение в порядок и эффективное управление документацией, связанной с объектом. На практике работа с документами на коммерческую недвижимость часто является одной из самых сложных задач, с которыми сталкиваются владельцы, и нередко это требует привлечения внешних юридических услуг.",
+            "Поэтому мы обеспечиваем полную юридическую и корпоративную поддержку, необходимую для упорядочивания, управления и долгосрочного развития коммерческой недвижимости."
+          ]
+        },
+        {
+          q: "Какие преимущества получают клиенты, начиная сотрудничество с вами?",
+          a: [
+            "Сотрудничая с нами, клиенты получают ряд существенных преимуществ:",
+            { title: "Комплексный подход в одном месте", desc: "Мы обеспечиваем как управление и обслуживание недвижимости, так и юридическую и корпоративную поддержку по связанным с недвижимостью вопросам, таким образом клиенту не нужно координировать вопросы между несколькими поставщиками услуг." },
+            { title: "Эффективная оптимизация затрат", desc: "Клиентам не нужно нанимать отдельного управляющего недвижимостью или привлекать нескольких поставщиков внешних услуг для юридических, административных или организационных вопросов. Такой подход обеспечивает лучшую прозрачность, прогнозируемые расходы и более эффективное управление связанными с недвижимостью процессами." },
+            { title: "Приведение в порядок документации на недвижимость и юридическая оценка", desc: "По необходимости мы также проводим пересмотр документации на недвижимость, юридический анализ и оценку рисков, что помогает выявить потенциальные проблемы и своевременно их устранить. Это позволяет владельцу недвижимости принимать продуманные решения и обеспечить стабильную юридическую основу для дальнейшего управления и развития недвижимости." },
+            { title: "Одно ответственное контактное лицо", desc: "Клиенты получают одно контактное лицо, которое знает все административные, юридические и организационные вопросы, связанные с конкретным объектом недвижимости, и координирует все необходимые в недвижимости процессы." },
+            { title: "Индивидуальный подход и гибкие решения", desc: "В отличие от крупных компаний по недвижимости, мы обеспечиваем индивидуальный подход к каждому клиенту, работаем с более сложными или нестандартными вопросами, которые часто не включаются в классические услуги по обслуживанию." },
+            { title: "Высокие профессиональные стандарты и стандарты конфиденциальности", desc: "Работая с недвижимостью клиентов, личной и деловой информацией, которая поступает в наше распоряжение, мы соблюдаем самые высокие принципы профессиональной этики, конфиденциальности и ответственного сотрудничества." }
+          ]
+        },
+        {
+          q: "Как обеспечивается обработка данных клиентов и конфиденциальность?",
+          a: "Вся коммерческая и частная информация о недвижимости, ее владельце и арендаторах обрабатывается с соблюдением высоких профессиональных стандартов и конфиденциальности. Информация, идентифицирующая наших клиентов, может быть раскрыта только в случаях, установленных нормативными актами ЛР, или при получении согласия клиентов."
+        },
+        {
+          q: "В каких регионах Латвии вы работаете?",
+          a: "Мы - новая компания и в настоящее время в основном работаем в Риге, Рижском районе, Юрмале и Саулкрасты. В ближайшем будущем планируем также Сигулду и Цесис. Но мы открыты для оценки возможностей сотрудничества и в других регионах по индивидуальной договоренности."
+        }
+      ]
+    },
+    process: {
+      title: "Процесс",
+      subtitle: "сотрудничества",
+      desc: "Для обеспечения эффективного и прозрачного сотрудничества, подготовка к нему проходит в несколько этапов:",
+      items: [
+        { title: "Первоначальная бесплатная консультация (удаленно)", desc: "На этом этапе обсуждается ситуация с недвижимостью, выявляются вопросы для решения и выслушиваются пожелания и замыслы владельца." },
+        { title: "Первоначальное ознакомление с объектом", desc: "На этом этапе происходит осмотр недвижимости в натуре и первоначальное обсуждение технических и юридических вопросов для выяснения их возможных решений." },
+        { title: "Подготовка плана услуг", desc: "На этом этапе, основываясь на результатах переговоров, подготавливается индивидуальный план управления недвижимостью и модель сотрудничества с выбранными клиентом услугами." },
+        { title: "Начало управления", desc: "После утверждения плана управления недвижимостью и заключения договора о сотрудничестве, начинается обслуживание и управление недвижимостью." }
+      ]
+    },
+    cookieBanner: {
+      title: "Этот сайт использует файлы cookie",
+      description: "Мы используем собственные и сторонние файлы cookie для обеспечения и улучшения работы веб-сайта, адаптации информации о наших продуктах и услугах, а также для анализа посещаемости сайта. Нажимая «Принять все», вы соглашаетесь на использование всех файлов cookie. Закрытие окна файлов cookie с помощью «X» не активирует файлы cookie. В нижнем углу страницы читайте подробнее о Политике файлов cookie и Политике конфиденциальности.",
+      policyLink: "",
+      acceptBtn: "Принять все",
+      rejectBtn: "Отклонить",
+      settingsBtn: "Настроить выбор"
+    },
+    contact: {
+      backBtn: 'Назад на главную',
+      title: 'Ваш надежный партнер',
+      subtitle: 'в управлении коммерческой и частной недвижимостью',
+      formTitle: 'Свяжитесь с нами,',
+      formSubtitle: 'чтобы записаться на консультацию',
+      formBoxTitle: 'Записаться на консультацию',
+      labelName: 'Имя, Фамилия *',
+      labelCompany: 'Компания',
+      labelEmail: 'Э-почта *',
+      labelPhone: 'Телефон *',
+      labelMessage: 'Сообщение / Описание объекта',
+      consentText: 'Я ознакомился и согласен с',
+      privacyLink: 'правилами обработки данных',
+      submitBtn: 'Отправить заявку',
+      submitting: 'Отправка заявки...',
+      successTitle: 'Спасибо. Ваше сообщение получено',
+      successSubtitle: '',
+      successMessage: 'Мы скоро с Вами свяжемся.',
+      newRequestBtn: 'Отправить новую заявку',
+      infoTitle: 'Контактная',
+      infoSubtitle: 'информация',
+      callUs: 'Звоните нам',
+      writeUs: 'Пишите нам',
+      contactBtn: 'Связаться',
+    },
+    useful: {
+      title: 'Полезно',
+      backBtn: 'Назад на главную',
+      closeBtn: 'Закрыть',
+    },
+    privacy: {
+      title: 'Политика',
+      subtitle: 'конфиденциальности',
+      lastUpdated: 'Последнее обновление: май 2025 г.',
+      sections: [
+        { title: '1. Введение', content: 'SIA "Avenue Group" обязуется защищать и уважать вашу конфиденциальность. Настоящая политика конфиденциальности объясняет, как мы собираем, используем, храним и защищаем ваши персональные данные в соответствии с Общим регламентом по защите данных (GDPR) и законодательством Латвийской Республики.' },
+        { title: '2. Контролер данных', content: 'SIA "Avenue Group", Рег. № 40203647938, Brīvības gatve 386 k-2-5A, Рига, LV-1024. Электронная почта: services@avenuegroup.lv' },
+        { title: '3. Какие персональные данные мы собираем', content: 'Мы можем собирать контактную информацию (имя, адрес электронной почты, телефон), техническую информацию (IP-адрес, тип браузера) и данные об использовании.' },
+        { title: '4. Как мы используем ваши данные', content: 'Для предоставления услуг, связи с вами, улучшения веб-сайта и выполнения юридических обязательств.' }
+      ]
+    },
+    cookies: {
+      title: 'Политика',
+      subtitle: 'использования файлов cookie',
+      lastUpdated: 'Последнее обновление: май 2025 г.',
+      sections: [
+        { title: '1. Что такое файлы cookie?', content: 'Файлы cookie — это небольшие текстовые файлы, которые веб-сайт сохраняет на вашем устройстве. Они позволяют сайту запоминать ваши настройки и действия.' },
+        { title: '2. Почему мы используем файлы cookie?', content: 'Для обеспечения функциональности, улучшения пользовательского опыта и аналитики.' }
+      ]
+    }
+  }
+};
+
+export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [language, setLanguage] = useState<Language>('lv');
+
+  const t = (keyPath: string): string => {
+    const keys = keyPath.split('.');
+    let current: any = translations[language];
+    for (const key of keys) {
+      if (current[key] === undefined) {
+        return keyPath;
+      }
+      current = current[key];
+    }
+    return current;
+  };
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+};

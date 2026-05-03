@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Offside", system-ui, sans-serif;
+  --font-space: "Space Grotesk", sans-serif;
+  --font-script: "Dancing Script", cursive;
+  --color-yellow-400: #b38207;
+  --color-yellow-500: #b38207;
+  --color-yellow-600: #b38207;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #0f0f0f;
+  color: #ffffff;
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px #b38207;
+  color: transparent;
+}
