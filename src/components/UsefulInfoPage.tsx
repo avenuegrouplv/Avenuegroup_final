@@ -17,14 +17,36 @@ export const UsefulInfoPage: React.FC = () => {
       if (article) {
         setSelectedArticle(article);
         window.scrollTo(0, 0);
+        
+        // SEO: Dynamic title and description
+        document.title = `${article.title} | Avenue Group`;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+          metaDesc.setAttribute('content', article.excerpt);
+        }
       } else {
         // If slug doesn't exist, redirect to list
         navigate('/noderigi', { replace: true });
       }
     } else {
       setSelectedArticle(null);
+      // Reset SEO tags when on list page
+      document.title = `${t('useful.title')} | Avenue Group`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', 'Noderīgi raksti un juridiskie padomi nekustamo īpašumu apsaimniekošanā un pārvaldībā.');
+      }
     }
-  }, [slug, navigate]);
+
+    // Cleanup: Reset title when leaving the component
+    return () => {
+      document.title = 'Avenue Group | Premium Property Management';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', 'Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi komercīpašumiem un privātīpašumiem Latvijā. Profesionāls juridiskais atbalsts un individuāla pieeja.');
+      }
+    };
+  }, [slug, navigate, t]);
 
   const handleArticleClick = (article: Article) => {
     navigate(`/noderigi/${article.slug}`);

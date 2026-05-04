@@ -18,12 +18,14 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-7 gap-y-12 mb-16">
           {/* Logo Column */}
           <div className="flex flex-col">
-            <div className="mb-6 -mt-10">
-              <Link to="/">
+            <div className="mb-8">
+              <Link to="/" onClick={() => window.scrollTo(0, 0)}>
                 <img
-                  src="https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Logo%20PNG.png"
+                  src="https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Logo%20PNG2.webp"
                   alt="Avenue Group Logo"
-                  className="h-[149px] w-auto object-contain"
+                  loading="eager"
+                  fetchPriority="high"
+                  className="h-[100px] md:h-[116px] w-auto object-contain transition-transform"
                   referrerPolicy="no-referrer"
                 />
               </Link>

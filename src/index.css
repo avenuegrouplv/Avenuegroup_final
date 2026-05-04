@@ -9,10 +9,19 @@
   --color-yellow-600: #b38207;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: #0f0f0f;
   color: #ffffff;
+  min-height: 100vh;
 }
 
 .text-stroke {

@@ -14,6 +14,28 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
 
   const faqs = translations[language].faq.items;
 
+  React.useEffect(() => {
+    if (!isPreview) {
+      // SEO: Set page title and description
+      document.title = `${t('faq.title')} ${t('faq.subtitle')} | Avenue Group`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', 'Biežāk uzdotie jautājumi par nekustamo īpašumu apsaimniekošanu, pārvaldību un juridisko atbalstu Avenue Group.');
+      }
+      window.scrollTo(0, 0);
+    }
+
+    return () => {
+      if (!isPreview) {
+        document.title = 'Avenue Group | Premium Property Management';
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+          metaDesc.setAttribute('content', 'Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi komercīpašumiem un privātīpašumiem Latvijā. Profesionāls juridiskais atbalsts un individuāla pieeja.');
+        }
+      }
+    };
+  }, [isPreview, t]);
+
   return (
     <section id="buj" className={`bg-black ${isPreview ? 'pt-8 pb-24' : 'min-h-screen pt-24 md:pt-32 pb-24'}`}>
       <div className="container mx-auto px-6 max-w-5xl">

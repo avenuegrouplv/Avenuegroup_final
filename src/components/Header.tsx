@@ -11,9 +11,10 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const offset = window.scrollY || document.documentElement.scrollTop;
+      setIsScrolled(offset > 10);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -33,28 +34,28 @@ export const Header: React.FC = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/95 backdrop-blur-md py-4 border-b border-white/10' : 'bg-transparent py-6'
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+        isScrolled ? 'bg-black border-b border-white/10 py-2 shadow-2xl' : 'bg-transparent py-6'
       }`}
     >
-      <div className="container mx-auto px-6 flex justify-end items-center min-h-[138.64px] md:min-h-[151.78px]">
+      <div className={`container mx-auto px-6 flex justify-end items-center transition-all duration-300 ${isScrolled ? 'min-h-[70px]' : 'min-h-[120px] md:min-h-[140px]'}`}>
         <Link 
           to="/" 
           onClick={handleLinkClick}
-          className="absolute top-[0.4cm] left-0 md:left-[1.8cm]"
+          className={`absolute left-0 md:left-[1.8cm] transition-all duration-300 ${isScrolled ? 'top-1' : 'top-[0.4cm]'}`}
         >
           <img
-            src="https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Logo%20PNG.png"
+            src="https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Logo%20PNG2.webp"
             alt="Avenue Group Logo"
             loading="eager"
             fetchPriority="high"
-            className="h-[120px] md:h-[140px] w-auto object-contain transition-transform"
+            className={`w-auto object-contain transition-all duration-300 ${isScrolled ? 'h-[55px] md:h-[65px]' : 'h-[100px] md:h-[116px]'}`}
             referrerPolicy="no-referrer"
           />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-8 lg:mr-24 xl:mr-32 relative -top-[5mm]">
+        <nav className={`hidden md:flex items-center space-x-8 lg:mr-12 xl:mr-16 relative transition-all duration-300 ${isScrolled ? 'top-0' : '-top-[5mm]'}`}>
           {/* Language Switcher */}
           <div className="flex items-center space-x-2 mr-4 border-r border-white/10 pr-4">
             <button 
@@ -102,7 +103,7 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center space-x-4 relative -top-[5mm]">
+        <div className={`md:hidden flex items-center space-x-4 relative transition-all duration-300 ${isScrolled ? 'top-0' : '-top-[5mm]'}`}>
           <button className="text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
           </button>

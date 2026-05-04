@@ -32,6 +32,13 @@ export const ServicesPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    // SEO: Set page title and description
+    document.title = `${t('servicesPage.title')} ${t('servicesPage.subtitle')} | Avenue Group`;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', t('servicesPage.description') || 'Avenue Group piedāvā profesionālus nekustamo īpašumu apsaimniekošanas, pārvaldības un juridiskā atbalsta pakalpojumus Latvijā.');
+    }
+
     if (scrollToId !== undefined && scrollToId !== null) {
       setTimeout(() => {
         const el = document.getElementById(`service-${scrollToId}`);
@@ -44,7 +51,16 @@ export const ServicesPage: React.FC = () => {
     } else {
       window.scrollTo(0, 0);
     }
-  }, [scrollToId]);
+
+    // Cleanup: Reset title when leaving the component
+    return () => {
+      document.title = 'Avenue Group | Premium Property Management';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', 'Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi komercīpašumiem un privātīpašumiem Latvijā. Profesionāls juridiskais atbalsts un individuāla pieeja.');
+      }
+    };
+  }, [scrollToId, t]);
 
   return (
     <div id="pakalpojumi" className="bg-black min-h-screen">
@@ -79,7 +95,7 @@ export const ServicesPage: React.FC = () => {
                     <div className="relative overflow-hidden group/img aspect-[16/9] w-full mb-6">
                       <img 
                         src={service.image} 
-                        alt="" 
+                        alt={`${service.title} - Avenue Group`} 
                         loading="eager"
                         fetchPriority="high"
                         decoding="async"

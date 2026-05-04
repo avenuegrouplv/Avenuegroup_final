@@ -9,12 +9,12 @@ export const Hero: React.FC = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <section id="sakums" className="relative min-h-screen flex items-center md:items-end justify-center overflow-hidden pt-52 md:pt-0">
+    <section id="sakums" className="relative w-full min-h-screen flex items-center md:items-end justify-center overflow-hidden pt-52 md:pt-0">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0 bg-[#0a0a0a]">
+      <div className="absolute inset-0 z-0 bg-[#0a0a0a] top-0 left-0">
         <img 
           src={mainImage} 
-          alt="" 
+          alt="Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi Latvijā" 
           loading="eager"
           fetchPriority="high"
           onLoad={() => setImageLoaded(true)}
