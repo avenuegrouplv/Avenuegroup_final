@@ -6,7 +6,7 @@ export const AvenueBenefits: React.FC = () => {
   const { t } = useLanguage();
   
   return (
-    <section className="bg-black border-b border-white/5 pb-12 md:pb-24 pt-0 overflow-hidden">
+    <section className="bg-[#1a1a1a] border-b border-white/5 pb-12 md:pb-24 pt-0 overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="w-72 h-[1px] bg-yellow-400 mb-16 lg:mb-24"></div>
         <div className="grid grid-cols-1 gap-16 lg:gap-24">

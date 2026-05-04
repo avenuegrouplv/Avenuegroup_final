@@ -11,7 +11,7 @@ export const Hero: React.FC = () => {
   return (
     <section id="sakums" className="relative w-full h-screen min-h-[600px] flex items-center md:items-end justify-center overflow-hidden m-0 p-0">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0 bg-[#0a0a0a] h-full w-full overflow-hidden">
+      <div className="absolute inset-0 z-0 bg-[#141414] h-full w-full overflow-hidden">
         <img 
           src={mainImage} 
           alt="Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi Latvijā" 

@@ -37,7 +37,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
   }, [isPreview, t]);
 
   return (
-    <section id="buj" className={`bg-black ${isPreview ? 'pt-8 pb-24' : 'min-h-screen pt-24 md:pt-32 pb-24'}`}>
+    <section id="buj" className={`bg-[#1a1a1a] ${isPreview ? 'pt-8 pb-24' : 'min-h-screen pt-24 md:pt-32 pb-24'}`}>
       <div className="container mx-auto px-6 max-w-5xl">
         {!isPreview && (
           <button 
@@ -56,7 +56,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
 
         <div className="space-y-6">
           {faqs.map((faq: any, i: number) => (
-            <div key={i} className="border border-white/10 bg-[#0a0a0a] group hover:border-white/20 transition-colors">
+            <div key={i} className="border border-white/10 bg-[#222222] group hover:border-white/20 transition-colors">
               <button 
                 className="w-full flex justify-between items-center p-8 text-left transition-colors"
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}

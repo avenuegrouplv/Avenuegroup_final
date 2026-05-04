@@ -58,7 +58,7 @@ export const UsefulInfoPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen pt-24 md:pt-32 pb-24 text-gray-300 font-sans">
+    <div className="bg-[#141414] min-h-screen pt-24 md:pt-32 pb-24 text-gray-300 font-sans">
       <div className="container mx-auto px-6 max-w-7xl">
         <button
           onClick={() => navigate('/')}
@@ -88,7 +88,7 @@ export const UsefulInfoPage: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
                 onClick={() => handleArticleClick(article)}
-                className="group bg-white/5 border border-white/10 flex flex-col aspect-square h-auto hover:border-yellow-400 hover:bg-white/10 transition-all duration-300 rounded-sm overflow-hidden cursor-pointer relative"
+                className="group bg-[#222222] border border-white/10 flex flex-col aspect-square h-auto hover:border-yellow-400 hover:bg-white/10 transition-all duration-300 rounded-sm overflow-hidden cursor-pointer relative"
               >
                 {/* Article Image */}
                 <div className="h-[72%] bg-zinc-800 relative overflow-hidden flex-shrink-0">
@@ -113,7 +113,7 @@ export const UsefulInfoPage: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-zinc-900 border border-white/10 rounded-sm relative overflow-hidden"
+            className="bg-[#1a1a1a] border border-white/10 rounded-sm relative overflow-hidden"
           >
             {/* Article Banner Image */}
             <div className="w-full h-[200px] md:h-[300px] relative">
@@ -129,7 +129,7 @@ export const UsefulInfoPage: React.FC = () => {
             </div>
 
             <div className="p-6 md:p-12 max-w-3xl mx-auto -mt-16 relative z-10">
-              <div className="bg-zinc-900 p-6 md:p-10 border border-white/5 shadow-2xl">
+              <div className="bg-[#1a1a1a] p-6 md:p-10 border border-white/5 shadow-2xl">
                 <div className="text-yellow-400 font-bold tracking-[0.2em] text-[10px] uppercase mb-4 flex items-center">
                   <span className="w-8 h-[1px] bg-yellow-400 mr-3"></span>
                   Noderīga informācija

@@ -11,7 +11,7 @@ export const CookiePolicyPage: React.FC = () => {
   const sections = (t('cookies.sections') as any) || [];
 
   return (
-    <div className="bg-black min-h-screen pt-12 pb-24 text-gray-300">
+    <div className="bg-[#141414] min-h-screen pt-12 pb-24 text-gray-300">
       <div className="container mx-auto px-6 max-w-4xl">
         <button
           onClick={() => navigate('/')}

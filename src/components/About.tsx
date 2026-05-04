@@ -14,7 +14,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
   const navigate = useNavigate();
 
   return (
-    <section id="par-mums" className={`bg-black border-y border-white/5 overflow-hidden ${isStandalone ? 'py-12' : 'pt-24 pb-16 lg:pb-24'}`}>
+    <section id="par-mums" className={`bg-[#1a1a1a] border-y border-white/5 overflow-hidden ${isStandalone ? 'py-12' : 'pt-24 pb-16 lg:pb-24'}`}>
       <div className="container mx-auto px-6 max-w-7xl">
         {isStandalone && (
           <button 

@@ -34,28 +34,28 @@ export const Header: React.FC = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-        isScrolled ? 'bg-black border-b border-white/10 py-2 shadow-2xl' : 'bg-transparent py-6'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-[100] transition-colors duration-300 ${
+        isScrolled ? 'bg-[#1a1a1a] border-b border-white/10 shadow-2xl' : 'bg-transparent'
+      } py-1`}
     >
-      <div className={`container mx-auto px-6 flex justify-end items-center transition-all duration-300 ${isScrolled ? 'min-h-[70px]' : 'min-h-[120px] md:min-h-[140px]'}`}>
+      <div className="container mx-auto px-6 flex justify-end items-center min-h-[110px] md:min-h-[125px]">
         <Link 
           to="/" 
           onClick={handleLinkClick}
-          className={`absolute left-0 md:left-[1.8cm] transition-all duration-300 ${isScrolled ? 'top-1' : 'top-[0.4cm]'}`}
+          className="absolute left-0 md:left-[1.8cm] top-[0.2cm]"
         >
           <img
             src="https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Logo%20PNG2.webp"
             alt="Avenue Group Logo"
             loading="eager"
             fetchPriority="high"
-            className={`w-auto object-contain transition-all duration-300 ${isScrolled ? 'h-[55px] md:h-[65px]' : 'h-[100px] md:h-[116px]'}`}
+            className="h-[100px] md:h-[116px] w-auto object-contain"
             referrerPolicy="no-referrer"
           />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className={`hidden md:flex items-center space-x-8 lg:mr-12 xl:mr-16 relative transition-all duration-300 ${isScrolled ? 'top-0' : '-top-[5mm]'}`}>
+        <nav className="hidden md:flex items-center space-x-8 lg:mr-12 xl:mr-16 relative -top-[5mm]">
           {/* Language Switcher */}
           <div className="flex items-center space-x-2 mr-4 border-r border-white/10 pr-4">
             <button 
@@ -103,7 +103,7 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* Mobile Toggle */}
-        <div className={`md:hidden flex items-center space-x-4 relative transition-all duration-300 ${isScrolled ? 'top-0' : '-top-[5mm]'}`}>
+        <div className="md:hidden flex items-center space-x-4 relative -top-[5mm]">
           <button className="text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
           </button>
@@ -112,7 +112,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-black border-b border-white/10 p-6 flex flex-col space-y-3 items-end animate-in fade-in slide-in-from-top-4">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#1a1a1a] border-b border-white/10 p-6 flex flex-col space-y-3 items-end animate-in fade-in slide-in-from-top-4">
           {navLinks.map((link) => (
             <div key={link.name} className="w-full text-right">
               <Link 

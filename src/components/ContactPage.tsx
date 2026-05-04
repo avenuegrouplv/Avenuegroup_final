@@ -54,7 +54,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
 
   if (status === 'success') {
     return (
-      <section className={`bg-black flex items-center justify-center ${isEmbedded ? 'py-32' : 'min-h-[80vh] pt-32'}`}>
+      <section className={`bg-[#141414] flex items-center justify-center ${isEmbedded ? 'py-32' : 'min-h-[80vh] pt-32'}`}>
         <div className="container mx-auto px-6 max-w-2xl text-center animate-in zoom-in duration-500">
           <div className="w-24 h-24 bg-yellow-400 flex items-center justify-center mx-auto mb-10 shadow-[0_0_50px_rgba(179,130,7,0.3)]">
             <Check size={48} className="text-black stroke-[3px]" />
@@ -81,7 +81,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
   }
 
   return (
-    <section id="kontakti" className={`bg-black relative ${isEmbedded ? 'pt-10 pb-16 border-t border-white/5' : 'min-h-screen pt-24 md:pt-32 pb-16'}`}>
+    <section id="kontakti" className={`bg-[#141414] relative ${isEmbedded ? 'pt-10 pb-16 border-t border-white/5' : 'min-h-screen pt-24 md:pt-32 pb-16'}`}>
       <div className="container mx-auto px-6">
         {!isEmbedded && (
           <button 
@@ -107,7 +107,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
         <div className="flex flex-col items-center space-y-16">
           <div className="w-full max-w-2xl">
             {/* Form Container with Light Gray Tone bg-zinc-800 */}
-            <div className="bg-zinc-800 p-4 md:p-6 border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
+            <div className="bg-[#222222] p-4 md:p-6 border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-400/10 rounded-full blur-[120px]"></div>
               <h3 className="text-lg font-black italic mb-4 tracking-tighter relative z-10 text-white text-center">{t('contact.formBoxTitle')}</h3>
               
@@ -128,7 +128,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full bg-black border-b-2 border-white/20 p-3 outline-none transition-all text-white text-lg focus:bg-black/90"
+                      className="w-full bg-[#141414] border-b-2 border-white/20 p-3 outline-none transition-all text-white text-lg focus:bg-black/90"
                     />
                   </div>
                   <div className="space-y-1">
@@ -138,7 +138,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className="w-full bg-black border-b-2 border-white/20 p-3 outline-none transition-all text-white text-lg focus:bg-black/90"
+                      className="w-full bg-[#141414] border-b-2 border-white/20 p-3 outline-none transition-all text-white text-lg focus:bg-black/90"
                     />
                   </div>
                 </div>
@@ -152,7 +152,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full bg-black border-b-2 border-white/20 p-3 outline-none transition-all text-white text-lg focus:bg-black/90"
+                      className="w-full bg-[#141414] border-b-2 border-white/20 p-3 outline-none transition-all text-white text-lg focus:bg-black/90"
                     />
                   </div>
                   <div className="space-y-1">
@@ -163,7 +163,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
-                      className="w-full bg-black border-b-2 border-white/20 p-3 outline-none transition-all text-white text-lg focus:bg-black/90"
+                      className="w-full bg-[#141414] border-b-2 border-white/20 p-3 outline-none transition-all text-white text-lg focus:bg-black/90"
                     />
                   </div>
                 </div>
@@ -175,7 +175,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                       value={formData.message}
                       onChange={handleInputChange}
                       rows={4}
-                      className="w-full bg-black border-b-2 border-white/20 p-3 outline-none transition-all text-white text-lg resize-none focus:bg-black/90"
+                      className="w-full bg-[#141414] border-b-2 border-white/20 p-3 outline-none transition-all text-white text-lg resize-none focus:bg-black/90"
                     ></textarea>
                 </div>
 

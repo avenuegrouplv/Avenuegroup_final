@@ -29,8 +29,8 @@ const Home: React.FC = () => {
     <>
       <Hero />
       <About />
-      <AvenueBenefits />
       <Services />
+      <AvenueBenefits />
       <FAQPage isPreview={true} />
       <ContactPage isEmbedded={true} />
     </>
@@ -43,7 +43,7 @@ const AppContent: React.FC = () => {
   const isSpecialPage = !isHomePage;
 
   return (
-    <div id="top" className="min-h-screen selection:bg-zinc-700 selection:text-white bg-[#0a0a0a]">
+    <div id="top" className="min-h-screen selection:bg-zinc-700 selection:text-white bg-[#141414]">
       <Header />
       <main className={isSpecialPage ? 'pt-24 md:pt-32' : 'pt-0'}>
         <Routes>

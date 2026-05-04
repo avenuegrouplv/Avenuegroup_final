@@ -38,7 +38,7 @@ export const CookieBanner: React.FC = () => {
   return (
     <div className={`fixed bottom-0 left-0 right-0 z-[100] p-3 md:p-6 transition-all duration-1000 ease-in-out transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
       <div className="container mx-auto max-w-[1080px]">
-        <div className="bg-[#111]/95 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-2xl flex flex-col md:flex-row items-start justify-between gap-6 md:gap-10 relative overflow-hidden">
+        <div className="bg-[#1a1a1a]/95 backdrop-blur-xl border border-white/10 p-6 md:p-8 shadow-2xl flex flex-col md:flex-row items-start justify-between gap-6 md:gap-10 relative overflow-hidden">
           {/* Akcenta līnija */}
           <div className="absolute top-0 left-0 w-1 h-full bg-[#D4AF37]"></div>
           

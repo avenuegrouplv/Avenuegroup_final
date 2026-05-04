@@ -63,7 +63,7 @@ export const ServicesPage: React.FC = () => {
   }, [scrollToId, t]);
 
   return (
-    <div id="pakalpojumi" className="bg-black min-h-screen">
+    <div id="pakalpojumi" className="bg-[#141414] min-h-screen">
       {/* Page Header */}
       <section className="pt-24 md:pt-32 pb-16 border-b border-white/5">
         <div className="container mx-auto px-6">

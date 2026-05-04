@@ -20,7 +20,7 @@ export const Services: React.FC = () => {
   }));
 
   return (
-    <section id="pakalpojumi" className="pt-12 md:pt-24 pb-12 md:pb-24 bg-[#121212] border-y border-white/5">
+    <section id="pakalpojumi" className="pt-12 md:pt-24 pb-12 md:pb-24 bg-[#1a1a1a] border-y border-white/5">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="flex flex-col items-center text-center mb-16 gap-6">
           <div className="max-w-3xl">
