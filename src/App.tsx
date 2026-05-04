@@ -14,13 +14,23 @@ import { CookiePolicyPage } from './components/CookiePolicyPage';
 import { UsefulInfoPage } from './components/UsefulInfoPage';
 import { Footer } from './components/Footer';
 import { CookieBanner } from './components/CookieBanner';
+import DocumentStore from './components/DocumentStore';
+import CheckoutPage from './components/CheckoutPage';
+import TermsOfServicePage from './components/TermsOfServicePage';
 import { LanguageProvider } from './LanguageContext';
 
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      const element = document.getElementById(hash.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
   return null;
 };
 
@@ -30,6 +40,7 @@ const Home: React.FC = () => {
       <Hero />
       <About />
       <Services />
+      <DocumentStore />
       <AvenueBenefits />
       <FAQPage isPreview={true} />
       <ContactPage isEmbedded={true} />
@@ -57,6 +68,8 @@ const AppContent: React.FC = () => {
           <Route path="/sikdatnes" element={<CookiePolicyPage />} />
           <Route path="/noderigi" element={<UsefulInfoPage />} />
           <Route path="/noderigi/:slug" element={<UsefulInfoPage />} />
+          <Route path="/iegade/:docId" element={<CheckoutPage />} />
+          <Route path="/pakalpojuma-noteikumi" element={<TermsOfServicePage />} />
         </Routes>
       </main>
       <Footer />

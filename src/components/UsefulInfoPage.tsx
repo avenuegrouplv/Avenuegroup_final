@@ -81,12 +81,9 @@ export const UsefulInfoPage: React.FC = () => {
 
         {!selectedArticle ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {articles.map((article, index) => (
-              <motion.div
+            {articles.map((article) => (
+              <div
                 key={article.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
                 onClick={() => handleArticleClick(article)}
                 className="group bg-[#222222] border border-white/10 flex flex-col aspect-square h-auto hover:border-yellow-400 hover:bg-white/10 transition-all duration-300 rounded-sm overflow-hidden cursor-pointer relative"
               >
@@ -106,7 +103,7 @@ export const UsefulInfoPage: React.FC = () => {
                     {article.title}
                   </h2>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         ) : (
