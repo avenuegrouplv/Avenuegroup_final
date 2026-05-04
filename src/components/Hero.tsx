@@ -9,9 +9,9 @@ export const Hero: React.FC = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <section id="sakums" className="relative w-full min-h-screen flex items-center md:items-end justify-center overflow-hidden pt-52 md:pt-0">
+    <section id="sakums" className="relative w-full h-screen min-h-[600px] flex items-center md:items-end justify-center overflow-hidden m-0 p-0">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0 bg-[#0a0a0a] top-0 left-0">
+      <div className="absolute inset-0 z-0 bg-[#0a0a0a] h-full w-full overflow-hidden">
         <img 
           src={mainImage} 
           alt="Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi Latvijā" 
@@ -20,6 +20,7 @@ export const Hero: React.FC = () => {
           onLoad={() => setImageLoaded(true)}
           className={`w-full h-full object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
           referrerPolicy="no-referrer"
+          style={{ objectPosition: 'center center' }}
         />
       </div>
       

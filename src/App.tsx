@@ -39,12 +39,13 @@ const Home: React.FC = () => {
 
 const AppContent: React.FC = () => {
   const location = useLocation();
-  const isSpecialPage = location.pathname !== '/' && location.pathname !== '/sakums';
+  const isHomePage = location.pathname === '/' || location.pathname === '/sakums';
+  const isSpecialPage = !isHomePage;
 
   return (
     <div id="top" className="min-h-screen selection:bg-zinc-700 selection:text-white bg-[#0a0a0a]">
       <Header />
-      <main className={isSpecialPage ? 'pt-24' : ''}>
+      <main className={isSpecialPage ? 'pt-24 md:pt-32' : 'pt-0'}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sakums" element={<Home />} />
