@@ -14,14 +14,14 @@ const DocumentStore: React.FC = () => {
   };
 
   return (
-    <section id="veikals" className="bg-white py-24 md:py-32 overflow-hidden border-y border-zinc-200">
+    <section id="veikals" className="bg-[#141414] py-24 md:py-32 overflow-hidden border-y border-white/5">
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-black italic tracking-tighter text-black mb-6 uppercase">
+            <h2 className="text-4xl md:text-5xl font-black italic tracking-tighter text-white mb-6 uppercase">
               {language === 'lv' ? 'Dokumentu bibliotēka' : language === 'en' ? 'Document Library' : 'Библиотека документов'}
             </h2>
-            <p className="text-zinc-600 text-lg">
+            <p className="text-zinc-400 text-lg">
               {language === 'lv' ? 
                 'Iegādājieties un saņemiet tos savā epastā.' : 
                 language === 'en' ? 
@@ -29,8 +29,8 @@ const DocumentStore: React.FC = () => {
                 'Приобретайте и получайте их на свой электронный адрес.'}
             </p>
           </div>
-          <div className="flex items-center space-x-2 text-zinc-400">
-            <div className="w-12 h-[1px] bg-zinc-300"></div>
+          <div className="flex items-center space-x-2 text-zinc-500">
+            <div className="w-12 h-[1px] bg-white/20"></div>
             <span className="text-sm font-bold tracking-widest uppercase">Word Docs</span>
           </div>
         </div>
@@ -40,7 +40,7 @@ const DocumentStore: React.FC = () => {
             <article
               key={doc.id}
               onClick={() => handlePurchase(doc.id)}
-              className="group bg-zinc-50 border border-zinc-200 p-4 flex flex-col h-full hover:shadow-lg transition-all duration-300 hover:border-blue-600/30 cursor-pointer"
+              className="group bg-white border border-zinc-200 p-4 flex flex-col h-full hover:shadow-lg transition-all duration-300 hover:border-blue-600/30 cursor-pointer"
             >
               <header>
                 {/* Word style icon "W" - smaller */}
@@ -88,11 +88,11 @@ const DocumentStore: React.FC = () => {
 
         {/* Custom Document Request */}
         <div className="mt-16 flex flex-col items-center text-center">
-          <div className="w-24 h-[1px] bg-zinc-200 mb-10"></div>
-          <h4 className="text-xl font-bold text-zinc-900 mb-4 tracking-tight">
+          <div className="w-24 h-[1px] bg-white/10 mb-10"></div>
+          <h4 className="text-xl font-bold text-white mb-4 tracking-tight">
             {language === 'lv' ? 'Neatradi vajadzīgo līgumu vai dokumentu?' : 'Cant find the contract or document you need?'}
           </h4>
-          <p className="text-zinc-500 mb-8 max-w-lg">
+          <p className="text-zinc-400 mb-8 max-w-lg">
             {language === 'lv' ? 
               'Sazinies ar mums, un mēs sagatavosim Jums nepieciešamo dokumentu individuāli.' : 
               'Contact us, and we will prepare the document you need individually.'}
