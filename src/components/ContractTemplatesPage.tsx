@@ -165,7 +165,7 @@ export const ContractTemplatesPage: React.FC = () => {
           </h4>
           <p className="text-zinc-650 mb-5 max-w-lg text-xs md:text-sm leading-relaxed">
             {language === 'lv' ? 
-              'Sazinies ar mums, un mēs sagatavosim Jums nepieciešamo dokumentu individuālu.' : 
+              'Sazinieties ar mums, un mēs sagatavosim Jums nepieciešamo dokumentu individuālu.' : 
               language === 'en' ?
               'Contact us, and we will prepare the document you need individually.' :
               'Свяжитесь с нами, и мы подготовим нужный вам документ индивидуально.'}
