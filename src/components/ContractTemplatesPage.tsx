@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingCart, ArrowLeft, MessageSquare, Search, FileText, X, ExternalLink, Loader2, Lock } from 'lucide-react';
+import { ShoppingCart, ArrowLeft, MessageSquare, Search, FileText } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { documents, DocumentItem } from '../data/documents';
@@ -8,8 +8,6 @@ export const ContractTemplatesPage: React.FC = () => {
   const { language } = useLanguage();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const [activeDoc, setActiveDoc] = useState<DocumentItem | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,8 +42,6 @@ export const ContractTemplatesPage: React.FC = () => {
   };
 
   const handlePurchase = (doc: DocumentItem) => {
-    setActiveDoc(doc);
-    setIsCheckoutOpen(true);
     triggerCheckout();
   };
 
@@ -180,69 +176,6 @@ export const ContractTemplatesPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Stripe Checkout Backdrop and Modal Popup overlay */}
-      {isCheckoutOpen && activeDoc && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
-            className="absolute inset-0 bg-black/65 backdrop-blur-xs transition-opacity" 
-            onClick={() => setIsCheckoutOpen(false)}
-          />
-          
-          <div className="bg-white border-2 border-zinc-950 w-full max-w-md relative z-10 p-6 md:p-8 shadow-2xl flex flex-col items-center text-center animate-in fade-in zoom-in-95 duration-200">
-            <button 
-              onClick={() => setIsCheckoutOpen(false)}
-              className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-950 transition-colors cursor-pointer"
-            >
-              <X size={20} />
-            </button>
-
-            <div className="w-14 h-14 bg-yellow-50 text-yellow-600 rounded-none border border-yellow-100 flex items-center justify-center mb-5 animate-pulse">
-              <ShoppingCart size={24} />
-            </div>
-
-            <h3 className="text-lg md:text-xl font-black text-zinc-950 mb-1 tracking-tight uppercase italic">
-              {language === 'lv' ? 'Gatavojam pirkumu' : language === 'en' ? 'Preparing Checkout' : 'Оформление покупки'}
-            </h3>
-            
-            <p className="text-xs md:text-sm font-bold text-yellow-600 mb-4 max-w-sm">
-              {activeDoc.title[language as keyof typeof activeDoc.title] || activeDoc.title.lv}
-            </p>
-
-            <div className="bg-zinc-50 border border-zinc-200 py-2.5 px-4 mb-5 font-mono text-[10px] text-zinc-600 flex items-center gap-2 w-full justify-center">
-              <Lock size={12} className="text-emerald-600 shrink-0" />
-              <span>
-                {language === 'lv' ? 'Drošs maksājums ar Stripe' : language === 'en' ? 'Secure Payment via Stripe' : 'Безопасная оплата через Stripe'}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2 text-zinc-500 text-xs mb-6 font-medium">
-              <Loader2 size={14} className="animate-spin text-yellow-600 shrink-0" />
-              <span>
-                {language === 'lv' ? 'Tiek atvērts drošs maksājuma logs...' : language === 'en' ? 'Opening secure checkout...' : 'Открывается окно оплаты...'}
-              </span>
-            </div>
-
-            <div className="w-full space-y-2">
-              <button
-                onClick={triggerCheckout}
-                className="w-full bg-zinc-950 hover:bg-yellow-600 text-white font-black py-2.5 px-4 text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300 rounded-none cursor-pointer"
-              >
-                <span>
-                  {language === 'lv' ? 'ATVĒRT MAKSĀJUMU' : language === 'en' ? 'OPEN PAYMENT' : 'ОТКРЫТЬ ОПЛАТУ'}
-                </span>
-                <ExternalLink size={12} />
-              </button>
-
-              <button
-                onClick={() => setIsCheckoutOpen(false)}
-                className="w-full bg-transparent hover:bg-zinc-100 text-zinc-500 hover:text-zinc-950 border border-zinc-200 font-black py-2 px-4 text-[10px] uppercase tracking-wider transition-all duration-300 rounded-none cursor-pointer"
-              >
-                {language === 'lv' ? 'Atpakaļ' : language === 'en' ? 'Cancel' : 'Отмена'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
