@@ -50,7 +50,7 @@ export const ContractTemplatesPage: React.FC = () => {
   };
 
   const triggerCheckout = () => {
-    const stripeUrl = 'https://buy.stripe.com/fZueV7e0TgyZdsN5as1Fe01';
+    const stripeUrl = 'https://buy.stripe.com/14A28lcWP2I92O95as1Fe02';
     openCenteredPopup(stripeUrl, 'AvenueGroupCheckout', 550, 800);
   };
 
