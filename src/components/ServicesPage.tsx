@@ -12,9 +12,9 @@ export const ServicesPage: React.FC = () => {
   const scrollToId = queryParams.get('id') ? parseInt(queryParams.get('id')!) : null;
 
   const images = [
-    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=60&w=750",
-    "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=60&w=750",
-    "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=60&w=750",
+    "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/7.%20Kas-isti-ir-komercipasuma-apsaimniekosana.png",
+    "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/13.%20Ka-samazinat-komercipasuma-uzturesanas-izmaksas.png",
+    "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/8.%20Komercipasuma-due-diligence.png",
     "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=60&w=750"
   ];
 
