@@ -74,7 +74,7 @@ export const ContractTemplatesPage: React.FC = () => {
             </h1>
             <p className="text-zinc-650 text-sm md:text-base leading-relaxed">
               {language === 'lv' ? 
-                'Izvēlieties juridiski sakārtotu dokumentu, iegādājieties to un nekavējoties saņemiet savā e-pastā Word (.docx) formātā.' : 
+                'Izvēlieties juridiski sakārtotu dokumentu, iegādājieties to un saņemiet savā e-pastā Word (.docx) formātā.' : 
                 language === 'en' ? 
                 'Choose a legally prepared document model, purchase it and instantly get it in your email inbox in Word (.docx) format.' : 
                 'Выберите юридически корректный шаблон документа, оплатите и мгновенно получите его на электронную почту в формате Word (.docx).'}
