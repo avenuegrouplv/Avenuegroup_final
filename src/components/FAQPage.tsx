@@ -16,7 +16,6 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
 
   React.useEffect(() => {
     if (!isPreview) {
-      // SEO: Set page title and description
       document.title = `${t('faq.title')} ${t('faq.subtitle')} | Avenue Group`;
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
@@ -37,60 +36,64 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
   }, [isPreview, t]);
 
   return (
-    <section id="buj" className={`bg-[#1a1a1a] ${isPreview ? 'pt-8 pb-24' : 'min-h-screen pt-24 md:pt-32 pb-24'}`}>
-      <div className="container mx-auto px-6 max-w-5xl">
+    <section id="buj" className={`bg-[#ebebeb] border-y border-zinc-200 relative overflow-hidden ${isPreview ? 'py-12 md:py-16' : 'min-h-screen pb-16'}`}>
+
+      <div className="container mx-auto px-6 max-w-5xl relative z-10">
         {!isPreview && (
           <button 
             onClick={() => navigate('/')}
-            className="flex items-center text-yellow-400 font-bold tracking-widest text-xs mb-12 hover:text-white transition-colors font-sans"
+            className="group flex items-center gap-3 bg-white border border-zinc-200/80 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 mb-12 shadow-sm rounded-none cursor-pointer"
           >
-            <ArrowLeft size={18} className="mr-2" /> {t('faq.backBtn')}
+            <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
+            <span>{t('faq.backBtn')}</span>
           </button>
         )}
 
-        <div className="mb-16 text-center">
-          <h2 className="text-xl md:text-3xl font-black italic leading-[1.15] tracking-tighter mb-8">
-            {t('faq.title')} <span className="text-yellow-400">{t('faq.subtitle')}</span>
+        <div className="mb-10 text-center">
+          <h2 className="text-3xl md:text-4xl font-black italic tracking-tighter text-zinc-950 uppercase leading-none">
+            {t('faq.title')} <span className="text-yellow-600">{t('faq.subtitle')}</span>
           </h2>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-2.5">
           {faqs.map((faq: any, i: number) => (
-            <div key={i} className="border border-white/10 bg-[#222222] group hover:border-white/20 transition-colors">
+            <div key={i} className="border border-zinc-200 bg-white hover:border-yellow-500 transition-all duration-200 shadow-sm">
               <button 
-                className="w-full flex justify-between items-center p-8 text-left transition-colors"
+                className="w-full flex justify-between items-center py-4 px-5 md:py-4.5 md:px-6 text-left transition-colors cursor-pointer group"
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
               >
                 <div className="flex items-start flex-grow">
-                  <span className="text-lg md:text-xl font-black italic tracking-tighter pr-2 leading-tight group-hover:text-yellow-400 transition-colors">
+                  <span className="text-sm md:text-base font-black italic tracking-tighter pr-2 leading-tight text-zinc-950 group-hover:text-yellow-600 transition-colors">
                     {faq.q}
                   </span>
                 </div>
                 {openIndex === i ? (
-                  <ChevronUp className="text-yellow-400 shrink-0 ml-4" size={28} />
+                  <ChevronUp className="text-yellow-600 shrink-0 ml-4" size={20} />
                 ) : (
-                  <ChevronDown className="text-gray-600 shrink-0 ml-4 group-hover:text-yellow-400 transition-colors" size={28} />
+                  <ChevronDown className="text-zinc-400 shrink-0 ml-4 group-hover:text-yellow-600 transition-colors" size={20} />
                 )}
               </button>
               {openIndex === i && (
-                <div className="p-8 pt-0 text-gray-400 text-base leading-relaxed border-t border-white/5 animate-in fade-in slide-in-from-top-2">
+                <div className="pb-4 px-5 md:pb-5 md:px-6 pt-0 text-zinc-650 text-xs md:text-sm leading-relaxed border-t border-zinc-100 animate-in fade-in slide-in-from-top-1 duration-200">
                   {Array.isArray(faq.a) ? (
-                    <ul className="space-y-4">
+                    <ul className="space-y-2 pt-4">
                       {faq.a.map((item: any, idx: number) => (
-                        <li key={idx} className={typeof item === 'object' ? 'mb-4' : ''}>
+                        <li key={idx} className={typeof item === 'object' ? 'mb-2' : ''}>
                           {typeof item === 'string' ? (
                             <span>{item}</span>
                           ) : (
                             <div className="flex flex-col">
-                              <span className="text-white font-bold italic mb-1">• {item.title}</span>
-                              <span className="text-gray-400 pl-4">{item.desc}</span>
+                              <span className="text-zinc-950 font-black italic mb-0.5">• {item.title}</span>
+                              <span className="text-zinc-650 pl-4">{item.desc}</span>
                             </div>
                           )}
                         </li>
                       ))}
                     </ul>
                   ) : (
-                    <p>{faq.a}</p>
+                    <div className="pt-4 text-zinc-600">
+                      <p>{faq.a}</p>
+                    </div>
                   )}
                 </div>
               )}
@@ -99,12 +102,12 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
         </div>
 
         {isPreview && (
-          <div className="mt-16 text-center">
+          <div className="mt-10 text-center">
              <button 
               onClick={() => navigate('/buj')}
-              className="inline-flex items-center text-yellow-400 font-black tracking-widest hover:text-white transition-colors border-b-2 border-yellow-400 pb-1"
+              className="group inline-flex items-center gap-3 bg-white border border-zinc-250 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 shadow-sm rounded-none mx-auto cursor-pointer"
             >
-              {t('faq.viewAll')} <HelpCircle className="ml-2" size={18} />
+              <span>{t('faq.viewAll')}</span> <HelpCircle className="text-yellow-600 group-hover:text-yellow-400 transition-colors" size={15} />
             </button>
           </div>
         )}

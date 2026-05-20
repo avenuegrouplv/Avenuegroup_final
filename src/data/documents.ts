@@ -34,7 +34,7 @@ export const documents: DocumentItem[] = [
       en: 'Real Estate Donation Agreement',
       ru: 'Договор дарения недвижимости',
     },
-    price: 60.00,
+    price: 70.00,
   },
   {
     id: 'mainas-ligums',
@@ -43,7 +43,7 @@ export const documents: DocumentItem[] = [
       en: 'Real Estate Exchange Agreement',
       ru: 'Договор обмена недвижимости',
     },
-    price: 60.00,
+    price: 70.00,
   },
   {
     id: 'ires-ligums',
@@ -88,7 +88,7 @@ export const documents: DocumentItem[] = [
       en: 'Easement Agreement (e.g., road easement)',
       ru: 'Договор сервитута (например, дорожный сервитут)',
     },
-    price: 60.00,
+    price: 70.00,
   },
   {
     id: 'apsaimniekosanas-ligums',
@@ -97,7 +97,7 @@ export const documents: DocumentItem[] = [
       en: 'Real Estate Management Agreement',
       ru: 'Договор управления недвижимостью',
     },
-    price: 120.00,
+    price: 150.00,
   },
   {
     id: 'starpniecibas-ligums',
@@ -115,7 +115,7 @@ export const documents: DocumentItem[] = [
       en: 'Reservation Agreement (pre-purchase)',
       ru: 'Договор бронирования (перед покупкой)',
     },
-    price: 50.00,
+    price: 70.00,
   },
   {
     id: 'prieksligums',
@@ -142,7 +142,7 @@ export const documents: DocumentItem[] = [
       en: 'Joint Property Use Agreement',
       ru: 'Договор о порядке пользования общей собственностью',
     },
-    price: 90.00,
+    price: 120.00,
   },
   {
     id: 'buvdarbu-ligums',
@@ -151,7 +151,7 @@ export const documents: DocumentItem[] = [
       en: 'Construction Work Contract',
       ru: 'Договор на строительные работы',
     },
-    price: 100.00,
+    price: 120.00,
   },
   {
     id: 'projektesanas-ligums',
@@ -160,7 +160,7 @@ export const documents: DocumentItem[] = [
       en: 'Design Services Agreement',
       ru: 'Договор на проектирование',
     },
-    price: 100.00,
+    price: 120.00,
   },
   {
     id: 'autoruzraudzibas-ligums',
@@ -232,7 +232,7 @@ export const documents: DocumentItem[] = [
       en: 'Application to Land Registry',
       ru: 'Заявка в Земельную книгу',
     },
-    price: 60.00,
+    price: 70.00,
   },
   {
     id: 'pilnvara',
@@ -250,7 +250,7 @@ export const documents: DocumentItem[] = [
       en: 'Documents for LLC (SIA) Registration',
       ru: 'Документы для регистрации ООО (SIA)',
     },
-    price: 120.00,
+    price: 150.00,
   },
   {
     id: 'biedribas-registracija',
@@ -259,7 +259,7 @@ export const documents: DocumentItem[] = [
       en: 'Documents for Association Registration',
       ru: 'Документы для регистрации общества',
     },
-    price: 120.00,
+    price: 150.00,
   },
   {
     id: 'pvn-registracija',

@@ -1,110 +1,74 @@
 import React from 'react';
-import { motion } from 'motion/react';
-import { ShoppingCart, ArrowRight, MessageSquare } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
-import { documents } from '../data/documents';
+import { ArrowRight, ShieldCheck, Mail } from 'lucide-react';
 
 const DocumentStore: React.FC = () => {
   const { language } = useLanguage();
   const navigate = useNavigate();
 
-  const handlePurchase = (docId: string) => {
-    navigate(`/iegade/${docId}`);
-  };
-
   return (
-    <section id="veikals" className="bg-[#141414] py-24 md:py-32 overflow-hidden border-y border-white/5">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-black italic tracking-tighter text-white mb-6 uppercase">
+    <section id="veikals" className="bg-[#ebebeb] py-12 md:py-16 relative overflow-hidden border-y border-zinc-200">
+      
+      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+        <div className="bg-white border border-zinc-200 p-6 md:p-12 shadow-sm rounded-none flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+          
+          <div className="flex-1 space-y-4">
+            <h2 className="text-2xl md:text-3xl font-black italic tracking-tighter text-zinc-950 uppercase leading-none">
               {language === 'lv' ? 'Dokumentu bibliotēka' : language === 'en' ? 'Document Library' : 'Библиотека документов'}
             </h2>
-            <p className="text-zinc-400 text-lg">
-              {language === 'lv' ? 
-                'Iegādājieties un saņemiet tos savā epastā.' : 
-                language === 'en' ? 
-                'Purchase and receive them in your email.' : 
-                'Приобретайте и получайте их на свой электронный адрес.'}
+            
+            <p className="text-zinc-500 text-xs md:text-sm leading-relaxed max-w-2xl">
+              {language === 'lv' ? (
+                'Visi Bibliotēkas sadaļā iegādājamie dokumentu paraugi ir izstrādāti līgumi, kuri satur visus noteikumus, kādus tipiski šādi līgumi satur. Lietotājs saņem līgumu savā e-pastā.'
+              ) : language === 'en' ? (
+                'All document templates purchasable in the Library section are drafted contracts containing all standard clauses typical for such contracts. The user receives the contract in their email.'
+              ) : (
+                'Все шаблоны документов, доступные для покупки в разделе Библиотека, представляют собой разработанные договоры, содержащие все положения, типичные для таких соглашений. Пользователь получает договор на свою электронную почту.'
+              )}
             </p>
+
+            <div className="flex items-center gap-2.5 text-zinc-700 text-xs italic font-bold pt-1">
+              <Mail size={16} className="text-yellow-600 shrink-0" />
+              <span>{language === 'lv' ? 'Tūlītēja saņemšana e-pastā' : language === 'en' ? 'Instant email delivery' : 'Мгновенное получение по электронной почте'}</span>
+            </div>
+
+            <div className="pt-2">
+              <button
+                onClick={() => navigate('/ligumu-paraugi')}
+                className="group flex items-center gap-3 bg-zinc-950 text-white px-6 py-3 font-black text-xs uppercase tracking-widest hover:bg-yellow-500 hover:text-zinc-950 transition-all duration-300 rounded-none shadow-sm"
+              >
+                <span>{language === 'lv' ? 'DOTIES UZ DOKUMENTU BIBLIOTĒKU' : language === 'en' ? 'GO TO DOCUMENT LIBRARY' : 'ПЕРЕЙТИ В БИБЛИОТЕКУ ДОКУМЕНТОВ'}</span>
+                <ArrowRight size={14} className="transform group-hover:translate-x-1.5 transition-transform" />
+              </button>
+            </div>
           </div>
-          <div className="flex items-center space-x-2 text-zinc-500">
-            <div className="w-12 h-[1px] bg-white/20"></div>
-            <span className="text-sm font-bold tracking-widest uppercase">Word Docs</span>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {documents.map((doc) => (
-            <article
-              key={doc.id}
-              onClick={() => handlePurchase(doc.id)}
-              className="group bg-white border border-zinc-200 p-4 flex flex-col h-full hover:shadow-lg transition-all duration-300 hover:border-blue-600/30 cursor-pointer"
-            >
-              <header>
-                {/* Word style icon "W" - smaller */}
-                <div className="mb-4 relative" aria-hidden="true">
-                  <div className="w-12 h-16 bg-white border-2 border-zinc-200 shadow-sm rounded-sm relative overflow-hidden flex items-center justify-center">
-                    {/* The Blue "W" part */}
-                    <div className="absolute top-0 right-0 w-4 h-4 bg-blue-600 transform translate-x-2 -translate-y-2 rotate-45"></div>
-                    <div className="text-blue-600 font-serif font-black text-2xl select-none">W</div>
-                    <div className="absolute bottom-2 left-1.5 right-1.5 h-[1.5px] bg-zinc-100"></div>
-                    <div className="absolute bottom-3.5 left-1.5 right-1.5 h-[1.5px] bg-zinc-100"></div>
-                  </div>
+          <div className="w-full lg:w-[260px] shrink-0 flex justify-center">
+            {/* Visual presentation of Word Document Stack */}
+            <div className="relative w-32 h-44 select-none" aria-hidden="true">
+              {/* Back Mock Card */}
+              <div className="absolute top-2.5 left-2.5 w-26 h-36 bg-zinc-100 border border-zinc-200/80 -rotate-6 transition-transform group-hover:rotate-0 duration-500 shadow-sm animate-pulse"></div>
+              {/* Middle Mock Card */}
+              <div className="absolute top-1.5 left-1.5 w-26 h-36 bg-zinc-50 border border-zinc-200/80 rotate-3 transition-transform group-hover:rotate-0 duration-500 shadow-sm"></div>
+              {/* Front Main Mock Card */}
+              <div className="absolute top-0 left-0 w-26 h-36 bg-white border border-zinc-350 shadow-md flex flex-col justify-between p-2.5">
+                <div className="w-6 h-8 bg-blue-50 border-2 border-blue-100 relative overflow-hidden flex items-center justify-center">
+                  <div className="text-blue-600 font-serif font-black text-[10px] select-none text-center">W</div>
                 </div>
-
-                <h3 className="text-sm font-bold text-zinc-900 mb-3 leading-tight group-hover:text-blue-700 transition-colors">
-                  {doc.title[language as keyof typeof doc.title] || doc.title.lv}
-                </h3>
-              </header>
-
-              {/* SEO hidden description */}
-              <p className="sr-only">
-                {doc.title.lv} paraugs lejuplādei. Profesionāli sagatavots juridisks dokuments Word formātā.
-              </p>
-
-              <div className="mt-auto pt-4 flex flex-col gap-3">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-zinc-500 font-medium tracking-tight">Cena:</span>
-                  <span className="text-xl font-black text-black tracking-tighter">€{doc.price.toFixed(2)}</span>
+                <div className="space-y-1.5">
+                  <div className="h-1 bg-zinc-200 w-full rounded"></div>
+                  <div className="h-1 bg-zinc-200 w-5/6 rounded"></div>
+                  <div className="h-1 bg-zinc-200 w-4/6 rounded"></div>
                 </div>
-                
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handlePurchase(doc.id);
-                  }}
-                  aria-label={`${language === 'lv' ? 'Iegādāties' : 'Purchase'} ${doc.title[language as keyof typeof doc.title] || doc.title.lv}`}
-                  className="w-full bg-black hover:bg-blue-700 text-white font-bold py-2 px-3 text-xs flex items-center justify-center gap-2 transition-all duration-300 group/btn"
-                >
-                  <ShoppingCart size={14} className="transition-transform group-hover/btn:-translate-y-0.5" />
-                  <span>{language === 'lv' ? 'IEGĀDĀTIES' : language === 'en' ? 'PURCHASE' : 'КУПИТЬ'}</span>
-                </button>
+                <div className="flex justify-between items-center text-[8px] font-black text-zinc-400">
+                  <span>DOCX</span>
+                  <span>AVENUE</span>
+                </div>
               </div>
-            </article>
-          ))}
-        </div>
+            </div>
+          </div>
 
-        {/* Custom Document Request */}
-        <div className="mt-16 flex flex-col items-center text-center">
-          <div className="w-24 h-[1px] bg-white/10 mb-10"></div>
-          <h4 className="text-xl font-bold text-white mb-4 tracking-tight">
-            {language === 'lv' ? 'Neatradi vajadzīgo līgumu vai dokumentu?' : 'Cant find the contract or document you need?'}
-          </h4>
-          <p className="text-zinc-400 mb-8 max-w-lg">
-            {language === 'lv' ? 
-              'Sazinies ar mums, un mēs sagatavosim Jums nepieciešamo dokumentu individuāli.' : 
-              'Contact us, and we will prepare the document you need individually.'}
-          </p>
-          <button 
-            onClick={() => navigate('/kontakti')}
-            className="group flex items-center gap-3 bg-black text-white px-8 py-3 font-black text-sm uppercase tracking-widest hover:bg-blue-700 transition-all duration-300"
-          >
-            <MessageSquare size={18} />
-            <span>{language === 'lv' ? 'Sazināties ar mums' : 'Contact Us'}</span>
-            <ArrowRight size={16} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
-          </button>
         </div>
       </div>
     </section>
@@ -112,4 +76,3 @@ const DocumentStore: React.FC = () => {
 };
 
 export default DocumentStore;
-

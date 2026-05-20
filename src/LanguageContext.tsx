@@ -16,6 +16,7 @@ export const translations: Record<Language, Record<string, any>> = {
       home: 'Sākums',
       about: 'Par mums',
       services: 'Pakalpojumi',
+      templates: 'Līgumu paraugi',
       faq: 'BUJ',
       contact: 'Kontakti',
     },
@@ -85,7 +86,7 @@ export const translations: Record<Language, Record<string, any>> = {
         {
                 id: 1,
                 title: 'Ikdienas administratīvā pārvaldība',
-                desc: 'Šis pakalpojums nodrošina strukturētu un nepārtrauktu nekustamā īpašuma pārvaldību, kas ļauj tā īpašniekam koncentrēties uz saviem galvenajiem biznesa attīstības vai investīciju mērķiem, saglabājot pārskatāmību pār īpašuma darbību.'
+                desc: 'Šis pakalpojums nodrošina strukturētu un nepārtrauktu nekustamā īpašuma pārvaldību, kas ļauj tā īpašniekam koncentrēties uz saviem galvenajiem biznesa attīstības vai investīciju mērķiem, saglabājot pārskatāmību pār īpašumu.'
         },
         {
                 id: 2,
@@ -347,6 +348,7 @@ export const translations: Record<Language, Record<string, any>> = {
       home: 'Home',
       about: 'About Us',
       services: 'Services',
+      templates: 'Contract Templates',
       faq: 'FAQ',
       contact: 'Contacts',
     },
@@ -415,7 +417,7 @@ export const translations: Record<Language, Record<string, any>> = {
         {
                 id: 1,
                 title: 'Daily administrative management',
-                desc: 'This service provides structured and continuous real estate management, allowing the owner to focus on their main business development or investment goals while maintaining transparency over property operations.'
+                desc: 'This service provides structured and continuous real estate management.'
         },
         {
                 id: 2,
@@ -425,7 +427,7 @@ export const translations: Record<Language, Record<string, any>> = {
         {
                 id: 3,
                 title: 'Additional services',
-                desc: 'Specialized administrative, legal, and project management services that help solve more complex situations or implement property development plans. They are provided together with daily management services or as separate projects according to the client\'s needs.'
+                desc: 'Specialized administrative, legal, and project management services that help solve more complex situations or implement property development plans. They are provided together with daily management services or as separate projects.'
         },
         {
                 id: 4,
@@ -690,6 +692,7 @@ Premium property management services may include:`,
       home: 'Главная',
       about: 'О нас',
       services: 'Услуги',
+      templates: 'Шаблоны договоров',
       faq: 'ЧаВо',
       contact: 'Контакты',
     },
@@ -758,7 +761,7 @@ Premium property management services may include:`,
         {
                 id: 1,
                 title: 'Повседневное административное управление',
-                desc: 'Эта услуга обеспечивает структурированное и непрерывное управление недвижимостью, что позволяет ее владельцу сосредоточиться на своих основных целях развития бизнеса или инвестиций, сохраняя при этом прозрачность работы недвижимости.'
+                desc: 'Эта услуга обеспечивает структурированное и непрерывное управление недвижимостью.'
         },
         {
                 id: 2,
@@ -768,7 +771,7 @@ Premium property management services may include:`,
         {
                 id: 3,
                 title: 'Дополнительные услуги',
-                desc: 'Специализированные административные, юридические услуги и услуги по управлению проектами, которые помогают в решении более сложных ситуаций или реализации планов развития недвижимости. Они предоставляются вместе с услугами повседневного управления или как отдельные проекты в соответствии с потребностями клиента.'
+                desc: 'Специализированные административные, юридические услуги и услуги по управлению проектами, которые помогают в решении более сложных ситуаций или реализации планов развития недвижимости. Они предоставляются вместе с услугами повседневного управления или как отдельные проекты.'
         },
         {
                 id: 4,

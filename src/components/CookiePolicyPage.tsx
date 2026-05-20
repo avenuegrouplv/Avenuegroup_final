@@ -4,56 +4,56 @@ import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
 
 export const CookiePolicyPage: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
 
-  // Helper to get sections based on language
   const sections = (t('cookies.sections') as any) || [];
 
   return (
-    <div className="bg-[#141414] min-h-screen pt-12 pb-24 text-gray-300">
-      <div className="container mx-auto px-6 max-w-4xl">
+    <div className="bg-[#ebebeb] min-h-screen pb-24 text-zinc-800 relative overflow-hidden">
+
+      <div className="container mx-auto px-6 max-w-4xl relative z-10">
         <button
           onClick={() => navigate('/')}
-          className="flex items-center text-yellow-400 font-bold tracking-widest text-xs mb-12 hover:text-white transition-colors font-sans"
+          className="group flex items-center gap-3 bg-white border border-zinc-200/80 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 mb-12 shadow-sm rounded-none cursor-pointer"
         >
-          <ArrowLeft size={18} className="mr-2" /> {t('useful.backBtn')}
+          <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
+          <span>{language === 'lv' ? 'Atpakaļ' : 'Back'}</span>
         </button>
 
-        <div className="mb-16">
-          <div className="flex items-center space-x-4 text-yellow-400 mb-6">
-            <Cookie size={48} />
-            <h1 className="text-4xl md:text-6xl font-black italic tracking-tighter leading-none">
-              {t('cookies.title')}<br />
-              <span className="text-white">{t('cookies.subtitle')}</span>
+        <div className="mb-12">
+          <div className="flex items-center space-x-3 text-yellow-600 mb-4 h-12">
+            <Cookie size={36} />
+            <h1 className="text-2xl md:text-4xl font-black italic tracking-tighter text-zinc-950 uppercase leading-none">
+              {t('cookies.title')} <span className="text-yellow-600">{t('cookies.subtitle')}</span>
             </h1>
           </div>
-          <p className="text-gray-500 font-bold italic text-sm">
+          <p className="text-zinc-400 text-xs italic font-semibold">
             {t('cookies.lastUpdated')}
           </p>
         </div>
 
-        <div className="space-y-12 leading-relaxed text-base">
+        <div className="space-y-6 bg-white p-6 md:p-10 border border-zinc-200 shadow-sm">
           {Array.isArray(sections) && sections.map((section: any, index: number) => (
-            <section key={index} className="space-y-4">
-              <h2 className="text-xl font-black italic text-white border-l-4 border-yellow-400 pl-4">
+            <section key={index} className="space-y-3 pb-6 border-b border-zinc-100 last:border-none last:pb-0">
+              <h2 className="text-base md:text-lg font-black italic text-zinc-950 uppercase border-l-4 border-yellow-500 pl-4">
                 {section.title}
               </h2>
-              <p>{section.content}</p>
+              <p className="text-zinc-650 text-sm md:text-base leading-relaxed italic">{section.content}</p>
             </section>
           ))}
           
           {!Array.isArray(sections) && (
-             <section className="space-y-4">
-               <p>Informācija drīzumā tiks papildināta.</p>
-             </section>
+              <section className="space-y-4">
+                <p className="text-zinc-650 italic font-medium">Informācija drīzumā tiks papildināta.</p>
+              </section>
           )}
         </div>
         
-        <div className="mt-12 pt-12 border-t border-white/10 flex justify-center">
+        <div className="mt-12 pt-12 border-t border-zinc-200 flex justify-center">
           <button
             onClick={() => navigate('/')}
-            className="bg-yellow-400 text-black px-8 py-3 font-bold hover:bg-white transition-colors"
+            className="bg-zinc-950 text-white hover:bg-yellow-500 hover:text-zinc-950 px-8 py-3.5 font-black text-xs uppercase tracking-widest transition-all"
           >
             {t('useful.closeBtn')}
           </button>

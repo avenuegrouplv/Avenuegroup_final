@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Scroll } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 
 const TermsOfServicePage: React.FC = () => {
@@ -65,26 +65,32 @@ const TermsOfServicePage: React.FC = () => {
   const t_terms = content[language as keyof typeof content] || content.lv;
 
   return (
-    <div className="bg-[#141414] min-h-screen pt-12 pb-24 text-gray-300">
-      <div className="container mx-auto px-6 max-w-4xl">
+    <div className="bg-[#ebebeb] min-h-screen pb-24 text-zinc-800 relative overflow-hidden">
+
+      <div className="container mx-auto px-6 max-w-4xl relative z-10">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center text-zinc-500 hover:text-yellow-400 transition-colors mb-12 group"
+          className="group flex items-center gap-3 bg-white border border-zinc-200/80 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 mb-12 shadow-sm rounded-none cursor-pointer"
         >
-          <ArrowLeft size={20} className="mr-2 transform group-hover:-translate-x-1 transition-transform" />
-          {language === 'lv' ? 'Atpakaļ' : 'Back'}
+          <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
+          <span>{language === 'lv' ? 'Atpakaļ' : 'Back'}</span>
         </button>
 
-        <h1 className="text-4xl font-black italic tracking-tighter text-white mb-2 uppercase">
-          {t_terms.title}
-        </h1>
-        <p className="text-zinc-500 text-sm mb-12">{t_terms.lastUpdated}</p>
+        <div className="mb-12">
+          <div className="flex items-center space-x-3 text-yellow-600 mb-4 h-12">
+            <Scroll size={36} />
+            <h1 className="text-2xl md:text-4xl font-black italic tracking-tighter text-zinc-950 uppercase leading-none">
+              {t_terms.title}
+            </h1>
+          </div>
+          <p className="text-zinc-400 text-xs italic font-semibold">{t_terms.lastUpdated}</p>
+        </div>
 
-        <div className="space-y-12">
+        <div className="space-y-6 bg-white p-6 md:p-10 border border-zinc-200 shadow-sm">
           {t_terms.sections.map((section, idx) => (
-            <div key={idx} className="space-y-4">
-              <h2 className="text-xl font-bold text-white uppercase tracking-tight">{section.title}</h2>
-              <p className="leading-relaxed">{section.content}</p>
+            <div key={idx} className="space-y-3 pb-6 border-b border-zinc-100 last:border-none last:pb-0">
+              <h2 className="text-base md:text-lg font-black italic text-zinc-950 uppercase tracking-tight">{section.title}</h2>
+              <p className="text-zinc-650 text-sm md:text-base leading-relaxed italic">{section.content}</p>
             </div>
           ))}
         </div>

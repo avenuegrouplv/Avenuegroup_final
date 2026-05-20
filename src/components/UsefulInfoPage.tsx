@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Lightbulb, ExternalLink, X } from 'lucide-react';
+import { ArrowLeft, Lightbulb, FileText, Calendar, User } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate, useParams } from 'react-router-dom';
-import { motion } from 'motion/react';
 import { articles, type Article } from '../data/articles';
 
 export const UsefulInfoPage: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
@@ -25,20 +24,17 @@ export const UsefulInfoPage: React.FC = () => {
           metaDesc.setAttribute('content', article.excerpt);
         }
       } else {
-        // If slug doesn't exist, redirect to list
         navigate('/noderigi', { replace: true });
       }
     } else {
       setSelectedArticle(null);
-      // Reset SEO tags when on list page
-      document.title = `${t('useful.title')} | Avenue Group`;
+      document.title = language === 'lv' ? 'Noderīga informācija | Avenue Group' : 'Useful Info | Avenue Group';
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
         metaDesc.setAttribute('content', 'Noderīgi raksti un juridiskie padomi nekustamo īpašumu apsaimniekošanā un pārvaldībā.');
       }
     }
 
-    // Cleanup: Reset title when leaving the component
     return () => {
       document.title = 'Avenue Group | Premium Property Management';
       const metaDesc = document.querySelector('meta[name="description"]');
@@ -46,11 +42,11 @@ export const UsefulInfoPage: React.FC = () => {
         metaDesc.setAttribute('content', 'Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi komercīpašumiem un privātīpašumiem Latvijā. Profesionāls juridiskais atbalsts un individuāla pieeja.');
       }
     };
-  }, [slug, navigate, t]);
+  }, [slug, navigate, language]);
 
   const handleArticleClick = (article: Article) => {
     navigate(`/noderigi/${article.slug}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   };
 
   const handleBackToList = () => {
@@ -58,107 +54,117 @@ export const UsefulInfoPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#141414] min-h-screen pt-24 md:pt-32 pb-24 text-gray-300 font-sans">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <div className="bg-[#ebebeb] min-h-screen pb-24 text-zinc-900 font-sans selection:bg-yellow-250">
+
+      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+        {/* Back Button points back to Līgumu bibliotēka / ligumu-paraugi catalog */}
         <button
-          onClick={() => navigate('/')}
-          className="flex items-center text-yellow-400 font-bold tracking-widest text-xs mb-12 hover:text-white transition-colors uppercase"
+          onClick={() => navigate('/ligumu-paraugi')}
+          className="group flex items-center gap-3 bg-white border border-zinc-200/80 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 mb-12 shadow-sm rounded-none cursor-pointer"
         >
-          <ArrowLeft size={18} className="mr-2" /> {t('useful.backBtn')}
+          <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
+          <span>{language === 'lv' ? 'Atpakaļ uz līgumu paraugiem' : language === 'en' ? 'Back to Contract Templates' : 'Назад к шаблонам'}</span>
         </button>
 
         <div className="mb-16">
-          <div className="flex items-center space-x-4 text-yellow-400 mb-6">
-            <Lightbulb size={48} className="flex-shrink-0" />
+          <div className="flex items-center space-x-4 text-yellow-600 mb-6">
+            <Lightbulb size={40} className="flex-shrink-0" />
             <h1 className="text-3xl md:text-5xl font-black italic tracking-tighter leading-none uppercase">
-              {t('useful.title')}
+              {language === 'lv' ? 'Noderīga informācija' : language === 'en' ? 'Useful info' : 'Полезная информация'}
             </h1>
           </div>
-          <p className="text-gray-400 max-w-2xl text-lg">
-            Noderīgi raksti un juridiskie padomi nekustamo īpašumu apsaimniekošanā un pārvaldībā.
+          <p className="text-zinc-650 max-w-2xl text-base md:text-lg leading-relaxed">
+            {language === 'lv' ? 
+              'Noderīgi raksti, analizēti pieredzes piemēri un profesionāli padomi nekustamo īpašumu apsaimniekošanā, pārvaldībā un juridisko procesu risināšanā.' : 
+              'Useful articles, analysed cases, and professional insights into real estate management, operations, and legal matters.'}
           </p>
         </div>
 
         {!selectedArticle ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {articles.map((article) => (
               <div
                 key={article.id}
                 onClick={() => handleArticleClick(article)}
-                className="group bg-[#222222] border border-white/10 flex flex-col aspect-square h-auto hover:border-yellow-400 hover:bg-white/10 transition-all duration-300 rounded-sm overflow-hidden cursor-pointer relative"
+                className="group bg-white border border-zinc-200 hover:border-yellow-500 hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer relative"
               >
-                {/* Article Image */}
-                <div className="h-[72%] bg-zinc-800 relative overflow-hidden flex-shrink-0">
+                {/* Article Image - Optimized sizes, eager loading */}
+                <div className="aspect-[4/3] bg-zinc-100 relative overflow-hidden flex-shrink-0 border-b border-zinc-100">
                   <img 
                     src={article.image} 
                     alt={article.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300" />
+                  <div className="absolute inset-0 bg-zinc-950/5 group-hover:bg-transparent transition-colors duration-300" />
                 </div>
 
-                <div className="p-3 flex flex-col flex-grow justify-end pb-2 overflow-hidden">
-                  <h2 className="text-white text-[12px] font-bold leading-tight group-hover:text-yellow-400 transition-colors line-clamp-3 uppercase tracking-tight">
-                    {article.title}
-                  </h2>
+                <div className="p-5 flex flex-col flex-grow">
+                  <header>
+                    <div className="flex items-center gap-4 text-[10px] uppercase font-bold text-zinc-400 mb-3 tracking-wider">
+                      <span className="flex items-center gap-1"><Calendar size={12} /> Info</span>
+                      <span className="flex items-center gap-1"><User size={12} /> Avenue</span>
+                    </div>
+                    <h2 className="text-zinc-900 text-sm md:text-base font-black leading-snug line-clamp-3 uppercase tracking-tight group-hover:text-blue-700 transition-colors mb-3">
+                      {article.title}
+                    </h2>
+                  </header>
+                  <p className="text-zinc-500 text-xs md:text-sm leading-relaxed line-clamp-2 mt-auto italic">
+                    {article.excerpt}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-[#1a1a1a] border border-white/10 rounded-sm relative overflow-hidden"
-          >
-            {/* Article Banner Image */}
-            <div className="w-full h-[200px] md:h-[300px] relative">
+          <div className="bg-white border border-zinc-200 relative overflow-hidden shadow-md max-w-4xl mx-auto">
+            {/* Optimized banner image loading */}
+            <div className="w-full h-[240px] md:h-[380px] relative border-b border-zinc-100">
               <img 
                 src={selectedArticle.image} 
                 alt={selectedArticle.title}
                 loading="eager"
                 fetchPriority="high"
+                decoding="async"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-black/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent" />
             </div>
 
-            <div className="p-6 md:p-12 max-w-3xl mx-auto -mt-16 relative z-10">
-              <div className="bg-[#1a1a1a] p-6 md:p-10 border border-white/5 shadow-2xl">
-                <div className="text-yellow-400 font-bold tracking-[0.2em] text-[10px] uppercase mb-4 flex items-center">
-                  <span className="w-8 h-[1px] bg-yellow-400 mr-3"></span>
-                  Noderīga informācija
-                </div>
-                <h2 className="text-xl md:text-3xl font-black text-white italic tracking-tighter uppercase mb-10 leading-none">
-                  {selectedArticle.title}
-                </h2>
-                
-                <div className="space-y-6 text-gray-300 leading-relaxed text-base">
-                  {selectedArticle.content.map((paragraph, i) => (
-                    <p key={i} className={paragraph.trim().startsWith('•') ? "pl-4 border-l-2 border-yellow-400/30" : ""}>
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
+            <div className="p-6 md:p-12 relative z-10">
+              <div className="text-yellow-600 font-extrabold tracking-[0.2em] text-[10px] uppercase mb-4 flex items-center">
+                <span className="w-8 h-[1px] bg-yellow-500 mr-3"></span>
+                Noderīga informācija
+              </div>
+              <h1 className="text-2xl md:text-3xl font-black text-zinc-950 italic tracking-tighter uppercase mb-8 leading-snug">
+                {selectedArticle.title}
+              </h1>
+              
+              <div className="space-y-6 text-zinc-700 leading-relaxed text-sm md:text-base border-t border-zinc-150 pt-8">
+                {selectedArticle.content.map((paragraph, i) => (
+                  <p key={i} className={paragraph.trim().startsWith('•') ? "pl-4 border-l-2 border-yellow-500 font-semibold text-zinc-900" : ""}>
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
 
-                <div className="mt-12 flex justify-start">
-                  <button
-                    onClick={handleBackToList}
-                    className="flex items-center text-yellow-400 font-bold tracking-widest text-xs hover:text-white transition-colors uppercase"
-                  >
-                    <ArrowLeft size={18} className="mr-2" /> Atpakaļ uz sarakstu
-                  </button>
-                </div>
+              <div className="mt-12 pt-8 border-t border-zinc-100 flex justify-start">
+                <button
+                  onClick={handleBackToList}
+                  className="group flex items-center gap-3 bg-white border border-zinc-200/80 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 shadow-sm rounded-none cursor-pointer"
+                >
+                  <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
+                  <span>{language === 'lv' ? 'Atpakaļ uz sarakstu' : 'Back to List'}</span>
+                </button>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-        
-
       </div>
     </div>
   );
 };
-

@@ -18,6 +18,7 @@ import DocumentStore from './components/DocumentStore';
 import CheckoutPage from './components/CheckoutPage';
 import TermsOfServicePage from './components/TermsOfServicePage';
 import { LanguageProvider } from './LanguageContext';
+import { ContractTemplatesPage } from './components/ContractTemplatesPage';
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -40,8 +41,8 @@ const Home: React.FC = () => {
       <Hero />
       <About />
       <Services />
-      <DocumentStore />
       <AvenueBenefits />
+      <DocumentStore />
       <FAQPage isPreview={true} />
       <ContactPage isEmbedded={true} />
     </>
@@ -54,9 +55,9 @@ const AppContent: React.FC = () => {
   const isSpecialPage = !isHomePage;
 
   return (
-    <div id="top" className="min-h-screen selection:bg-zinc-700 selection:text-white bg-[#141414]">
+    <div id="top" className="min-h-screen selection:bg-yellow-200 selection:text-zinc-900 bg-[#ebebeb] text-zinc-900">
       <Header />
-      <main className={isSpecialPage ? 'pt-24 md:pt-32' : 'pt-0'}>
+      <main className={isSpecialPage ? 'pt-[175px] md:pt-[215px]' : 'pt-0'}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sakums" element={<Home />} />
@@ -70,6 +71,7 @@ const AppContent: React.FC = () => {
           <Route path="/noderigi/:slug" element={<UsefulInfoPage />} />
           <Route path="/iegade/:docId" element={<CheckoutPage />} />
           <Route path="/pakalpojuma-noteikumi" element={<TermsOfServicePage />} />
+          <Route path="/ligumu-paraugi" element={<ContractTemplatesPage />} />
         </Routes>
       </main>
       <Footer />

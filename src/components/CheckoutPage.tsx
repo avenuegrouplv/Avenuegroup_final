@@ -32,7 +32,6 @@ const CheckoutPage: React.FC = () => {
   const handlePayment = () => {
     if (agreedToTerms && email) {
       setIsProcessing(true);
-      // Simulates redirect to Stripe or payment process
       setTimeout(() => {
         setIsProcessing(false);
         setIsSuccess(true);
@@ -41,86 +40,86 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#141414] min-h-screen pt-24 pb-16 text-white selection:bg-blue-500/30">
-      <div className="container mx-auto px-6 max-w-xl">
+    <div className="bg-[#ebebeb] min-h-screen pb-20 text-zinc-900 selection:bg-yellow-250 relative overflow-hidden">
+
+      <div className="container mx-auto px-6 max-w-xl relative z-10">
         <button
-          onClick={() => navigate('/#veikals')}
-          className="group flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-2.5 font-black text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 mb-8"
+          onClick={() => navigate('/ligumu-paraugi')}
+          className="group flex items-center gap-3 bg-white border border-zinc-200/80 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 mb-12 shadow-sm rounded-none cursor-pointer"
         >
-          <ArrowLeft size={14} className="transform group-hover:-translate-x-1 transition-transform" />
-          <span>{language === 'lv' ? 'Atpakaļ' : 'Back'}</span>
+          <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
+          <span>{language === 'lv' ? 'Atpakaļ uz līgumiem' : 'Back to Contracts'}</span>
         </button>
 
         <AnimatePresence mode="wait">
           {isSuccess ? (
             <motion.div
               key="success"
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-white text-black p-12 md:p-16 shadow-2xl text-center relative overflow-hidden"
+              className="bg-white text-zinc-950 p-8 md:p-12 border border-zinc-200 shadow-lg text-center relative overflow-hidden"
             >
-              <div className="absolute top-0 left-0 w-full h-1.5 bg-green-500"></div>
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-yellow-500"></div>
               <div className="flex flex-col items-center">
-                <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-8">
-                  <ShieldCheck size={40} />
+                <div className="w-20 h-20 bg-zinc-50 text-yellow-600 rounded-none border border-zinc-150 flex items-center justify-center mb-8">
+                  <ShieldCheck size={40} className="stroke-[2px]" />
                 </div>
-                <h2 className="text-3xl font-black italic tracking-tighter mb-4">Paldies par pirkumu!</h2>
-                <p className="text-zinc-600 mb-8 leading-relaxed">
-                  Pasūtījums ir apstrādāts veiksmīgi. Līgums ir nosūtīts uz Jūsu norādīto e-pasta adresi <strong>{email}</strong>.
+                <h2 className="text-2xl md:text-3xl font-black italic tracking-tighter mb-4 uppercase">Paldies par pirkumu!</h2>
+                <p className="text-zinc-650 mb-8 leading-relaxed italic font-medium">
+                  Pasūtījums ir apstrādāts veiksmīgi. Dokumentu esam nosūtījuši Jums uz e-pasta adresi <strong>{email}</strong> Word (.docx) formātā.
                 </p>
-                <div className="w-full h-[1px] bg-zinc-100 mb-8"></div>
+                <div className="w-full h-[1px] bg-zinc-150 mb-8"></div>
                 <button
-                  onClick={() => navigate('/')}
-                  className="bg-black text-white px-10 py-4 font-black uppercase tracking-widest text-sm hover:bg-blue-700 transition-all"
+                  onClick={() => navigate('/ligumu-paraugi')}
+                  className="bg-zinc-950 text-white px-10 py-4 font-black uppercase tracking-widest text-xs hover:bg-yellow-500 hover:text-zinc-950 transition-all"
                 >
-                  Atgriezties sākumā
+                  Atgriezties pie līgumiem
                 </button>
               </div>
             </motion.div>
           ) : !isProcessing ? (
             <motion.div 
               key="checkout"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white text-black p-8 md:p-12 shadow-2xl relative overflow-hidden"
+              exit={{ opacity: 0, scale: 0.98 }}
+              className="bg-white text-zinc-950 p-6 md:p-10 border border-zinc-200 shadow-md relative overflow-hidden"
             >
-              <div className="absolute top-0 left-0 w-full h-1.5 bg-zinc-900"></div>
+              <div className="absolute top-0 left-0 w-full h-[3px] bg-yellow-500"></div>
               
-              <div className="mb-10 text-center border-b border-zinc-100 pb-10">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-zinc-50 mb-6 rounded-full">
-                  <PackageOpen size={24} className="text-zinc-900" />
+              <div className="mb-8 text-center border-b border-zinc-150 pb-8">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-zinc-50 border border-zinc-150 mb-4 rounded-none">
+                  <PackageOpen size={22} className="text-zinc-900" />
                 </div>
-                <h1 className="text-xl font-bold italic tracking-tighter mb-2 leading-tight px-4">
+                <h1 className="text-lg md:text-xl font-black italic tracking-tight mb-2 leading-snug text-zinc-950 uppercase px-4">
                   {docName}
                 </h1>
-                <p className="text-zinc-400 text-[9px] font-black uppercase tracking-widest">
-                  Microsoft Word vai LibreOffice
+                <p className="text-zinc-400 text-[9px] font-black uppercase tracking-widest italic">
+                  Saņemiet tūlītēji Word (.docx) saiti e-pastā
                 </p>
               </div>
 
-              <div className="space-y-8 mb-10">
-                {/* Email Input */}
+              <div className="space-y-6 mb-8">
                 <div>
-                  <label className="block text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-3">
-                    {language === 'lv' ? 'E-pasts faila saņemšanai' : 'Email for file delivery'}
+                  <label className="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 italic">
+                    {language === 'lv' ? 'E-pasts līguma saņemšanai' : 'Email for file delivery'}
                   </label>
                   <input 
                     type="email" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="piemērs@pasts.lv"
-                    className="w-full bg-zinc-50 border border-zinc-200 p-4 outline-none focus:border-black transition-colors text-zinc-900 font-medium placeholder:text-zinc-300"
+                    className="w-full bg-zinc-50 border border-zinc-200 p-3.5 outline-none focus:border-yellow-600 transition-colors text-zinc-900 font-medium placeholder:text-zinc-350 italic"
                     required
                   />
                 </div>
 
-                <div className="flex justify-between items-center py-6 border-y border-zinc-100">
-                  <span className="text-xs font-black uppercase tracking-widest text-zinc-400">Summa:</span>
-                  <span className="text-xl font-black italic tracking-tighter">€{docPrice.toFixed(2)}</span>
+                <div className="flex justify-between items-center py-4 border-y border-zinc-150">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">Summa paraugu bibliotēkā:</span>
+                  <span className="text-xl font-black italic tracking-tighter text-zinc-950">€{docPrice.toFixed(2)}</span>
                 </div>
 
-                <label className="flex items-start gap-4 cursor-pointer group/label">
+                <label className="flex items-start gap-3 cursor-pointer group/label">
                   <div className="relative mt-0.5">
                     <input 
                       type="checkbox" 
@@ -128,18 +127,18 @@ const CheckoutPage: React.FC = () => {
                       checked={agreedToTerms}
                       onChange={(e) => setAgreedToTerms(e.target.checked)}
                     />
-                    <div className="w-5 h-5 border-2 border-zinc-200 bg-zinc-50 transition-all peer-checked:bg-black peer-checked:border-black"></div>
+                    <div className="w-5 h-5 border-2 border-zinc-250 bg-zinc-50 transition-all peer-checked:bg-yellow-500 peer-checked:border-yellow-500"></div>
                     <div className="absolute inset-0 flex items-center justify-center scale-0 peer-checked:scale-100 transition-transform">
-                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
+                      <svg className="w-3 h-3 text-zinc-955" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
                   </div>
-                  <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-tight leading-relaxed group-hover/label:text-zinc-800 transition-colors">
+                  <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-tight leading-relaxed group-hover/label:text-zinc-850 transition-colors select-none italic">
                     {language === 'lv' ? (
-                      <>Apliecinu, ka esmu iepazinies un piekrītu <Link to="/pakalpojuma-noteikumi" className="text-blue-600 hover:underline">lietošanas noteikumiem</Link> un atrunai.</>
+                      <>Apliecinu, ka piekrītu <Link to="/pakalpojuma-noteikumi" className="text-yellow-650 underline font-extrabold hover:text-zinc-950">pakalpojuma lietošanas noteikumiem</Link> un patiesam dokumentu raksturam.</>
                     ) : (
-                      <>I confirm that I have read and agree to the <Link to="/pakalpojuma-noteikumi" className="text-blue-600 hover:underline">Terms of Service</Link> and disclaimer.</>
+                      <>I confirm that I agree to the <Link to="/pakalpojuma-noteikumi" className="text-yellow-650 underline font-extrabold hover:text-zinc-950">Terms of Service</Link> policies.</>
                     )}
                   </span>
                 </label>
@@ -147,34 +146,34 @@ const CheckoutPage: React.FC = () => {
 
               <button
                 disabled={!agreedToTerms || !email}
-                className={`w-full font-black py-4 px-8 flex items-center justify-center gap-3 transition-all uppercase tracking-widest text-sm ${
+                className={`w-full font-black py-4 px-8 flex items-center justify-center gap-3 transition-all uppercase tracking-widest text-xs border ${
                   agreedToTerms && email
-                    ? 'bg-black text-white hover:bg-blue-700 shadow-xl active:scale-[0.98]' 
-                    : 'bg-zinc-100 text-zinc-300 cursor-not-allowed'
+                    ? 'bg-zinc-950 text-white border-zinc-900 hover:bg-yellow-500 hover:text-zinc-950 shadow-md active:scale-[0.98]' 
+                    : 'bg-zinc-50 text-zinc-350 border-zinc-200 cursor-not-allowed'
                 }`}
                 onClick={handlePayment}
               >
-                <CreditCard size={18} />
-                <span>MAKSĀT</span>
+                <CreditCard size={16} />
+                <span>MAKSĀT DROŠI</span>
               </button>
 
-              <div className="mt-8 flex items-center justify-center gap-4 text-zinc-300 px-2 opacity-50">
-                <ShieldCheck size={14} />
-                <span className="text-[8px] font-black uppercase tracking-[0.2em]">Droši norēķini ar SSL šifrēšanu</span>
+              <div className="mt-8 flex items-center justify-center gap-3 text-zinc-400 opacity-70">
+                <ShieldCheck size={14} className="text-yellow-600" />
+                <span className="text-[8px] font-black uppercase tracking-[0.2em] italic">Prece sagatavota Stripe pieslēgšanai</span>
               </div>
             </motion.div>
           ) : (
             <motion.div 
               key="processing"
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-white text-black p-12 shadow-2xl text-center"
+              className="bg-white text-zinc-950 p-12 border border-zinc-200 shadow-md text-center"
             >
-              <div className="flex flex-col items-center py-12">
-                <Loader2 className="animate-spin text-zinc-900 mb-8" size={64} />
-                <h2 className="text-2xl font-black italic tracking-tighter mb-4">Sagatavojam apmaksu...</h2>
-                <p className="text-zinc-400 text-xs uppercase tracking-widest max-w-xs mx-auto">
-                  Jūs tiekat pāradresēts uz drošu norēķinu vidi.
+              <div className="flex flex-col items-center py-8">
+                <Loader2 className="animate-spin text-yellow-600 mb-6" size={54} />
+                <h2 className="text-xl font-black italic tracking-tighter mb-3 uppercase text-zinc-950">Sagatavojam apmaksu...</h2>
+                <p className="text-zinc-500 text-[10px] uppercase tracking-widest max-w-xs mx-auto italic font-bold">
+                  Skelets tiek integrēts ar Stripe šifrēšanas sistēmu.
                 </p>
               </div>
             </motion.div>

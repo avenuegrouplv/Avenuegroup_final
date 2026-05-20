@@ -4,16 +4,18 @@ import { useLanguage } from '../LanguageContext';
 import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navLinks = [
     { name: t('nav.home'), href: '/sakums' },
     { name: t('nav.services'), href: '/pakalpojumi' },
+    { name: t('nav.templates'), href: '/ligumu-paraugi' },
+    { name: language === 'lv' ? 'Noderīgi' : language === 'en' ? 'Useful info' : 'Полезно', href: '/noderigi' },
     { name: t('nav.faq'), href: '/buj' },
     { name: t('nav.contact'), href: '/kontakti' },
   ];
 
   return (
-    <footer className="bg-[#1a1a1a] border-t border-white/10 py-16">
+    <footer className="bg-[#1a1a1a] border-t border-white/5 py-16 text-gray-300">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-7 gap-y-12 mb-16">
           {/* Logo Column */}
@@ -32,7 +34,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Par Mums Column */}
+          {/* Nav Links Column */}
           <div className="lg:pl-20">
             <h4 className="text-white font-black italic tracking-tighter text-sm uppercase mb-6 border-l-2 border-yellow-400 pl-4">{t('footer.aboutTitle')}</h4>
             <ul className="space-y-1.5">
@@ -49,7 +51,7 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Seko mums Column */}
+          {/* Social Columns */}
           <div className="lg:pl-10">
             <h4 className="text-white font-black italic tracking-tighter text-sm uppercase mb-6 border-l-2 border-yellow-400 pl-4">{t('footer.followTitle')}</h4>
             <div className="flex space-x-4">
@@ -58,6 +60,7 @@ export const Footer: React.FC = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-yellow-400 hover:text-black hover:border-yellow-400 transition-all"
+                aria-label="Facebook Profile"
               >
                 <Facebook size={20} />
               </a>
@@ -66,24 +69,25 @@ export const Footer: React.FC = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-yellow-400 hover:text-black hover:border-yellow-400 transition-all"
+                aria-label="Instagram Profile"
               >
                 <Instagram size={20} />
               </a>
             </div>
           </div>
 
-          {/* Kontakinformācija Column */}
+          {/* Contact Details Column */}
           <div>
             <h4 className="text-white font-black italic tracking-tighter text-sm uppercase mb-6 border-l-2 border-yellow-400 pl-4">{t('footer.contactTitle')}</h4>
             <div className="flex flex-col">
-              <div className="text-xs text-gray-300 font-black italic mb-0.5">Sia "Avenue Group"</div>
-              <div className="text-[9px] text-gray-600 tracking-tighter font-bold mb-0.5">Reģ.Nr. 40203647938</div>
-              <div className="text-[9px] text-gray-600 tracking-tighter font-bold mb-2">PVN Nr. 40203647938</div>
+              <div className="text-xs text-gray-300 font-bold italic mb-0.5">SIA "Avenue Group"</div>
+              <div className="text-[9px] text-gray-500 tracking-tighter font-bold mb-0.5">Reģ.Nr. 40203647938</div>
+              <div className="text-[9px] text-gray-500 tracking-tighter font-bold mb-2">PVN Nr. LV40203647938</div>
               <div className="text-[10px] text-gray-400 font-bold mb-0.5">{t('footer.addressLabel')}</div>
               <div className="text-[10px] text-gray-500 font-bold mb-0.5">Brīvības gatve 386 k-2-5A</div>
               <div className="text-[10px] text-gray-500 font-bold mb-6">Rīga, LV-1024</div>
               <div className="space-y-2">
-                <a href="mailto:services@avenuegroup.lv" className="block text-xs text-yellow-400 hover:text-white transition-colors font-black italic underline underline-offset-4">services@avenuegroup.lv</a>
+                <a href="mailto:services@avenuegroup.lv" className="block text-xs text-yellow-500 hover:text-white transition-colors font-black italic underline underline-offset-4">services@avenuegroup.lv</a>
                 <a href="tel:+37126739899" className="block text-xs text-white hover:text-yellow-400 transition-colors font-black italic">+371 26 739 899</a>
               </div>
             </div>
@@ -92,19 +96,19 @@ export const Footer: React.FC = () => {
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 tracking-wide font-bold font-sans">
           <div className="text-center md:text-left leading-relaxed mb-4 md:mb-0">
-            <div>2025 &copy; {t('footer.rights')} | SIA "Avenue Group"</div>
+            <div>2026 &copy; {t('footer.rights')} | SIA "Avenue Group"</div>
           </div>
           <div className="flex space-x-6 pr-14 md:pr-20">
             <Link 
               to="/privatums"
-              className="hover:text-yellow-400 transition-colors"
+              className="hover:text-yellow-500 transition-colors"
             >
               {t('footer.privacy')}
             </Link>
             <span className="text-gray-800">|</span>
             <Link 
               to="/sikdatnes"
-              className="hover:text-yellow-400 transition-colors"
+              className="hover:text-yellow-500 transition-colors"
             >
               {t('footer.cookies')}
             </Link>
