@@ -96,7 +96,7 @@ export const Footer: React.FC = () => {
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 tracking-wide font-bold font-sans">
           <div className="text-center md:text-left leading-relaxed mb-4 md:mb-0">
-            <div>2026 &copy; {t('footer.rights')} | SIA "Avenue Group"</div>
+            <div>2025 &copy; {t('footer.rights')} | SIA "Avenue Group"</div>
           </div>
           <div className="flex space-x-6 pr-14 md:pr-20">
             <Link 
