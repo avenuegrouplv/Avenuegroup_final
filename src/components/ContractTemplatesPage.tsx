@@ -46,7 +46,7 @@ export const ContractTemplatesPage: React.FC = () => {
   };
 
   const triggerCheckout = () => {
-    const stripeUrl = 'https://buy.stripe.com/14A28lcWP2I92O95as1Fe02';
+    const stripeUrl = 'https://buy.stripe.com/8x2aER2ib82t3SdgTa1Fe03';
     openCenteredPopup(stripeUrl, 'AvenueGroupCheckout', 550, 800);
   };
 
@@ -74,25 +74,27 @@ export const ContractTemplatesPage: React.FC = () => {
             </h1>
             <p className="text-zinc-650 text-sm md:text-base leading-relaxed">
               {language === 'lv' ? 
-                'Izvēlieties juridiski sakārtotu dokumentu, iegādājieties to un saņemiet savā e-pastā Word (.docx) formātā.' : 
+                'Izvēlieties juridiski sakārtotu dokumentu, iegādājieties to un saņemiet savā e-pastā Word (.docx) formātā. Dokumentu paraugu cenas norādītas ar PVN.' : 
                 language === 'en' ? 
-                'Choose a legally prepared document model, purchase it and instantly get it in your email inbox in Word (.docx) format.' : 
-                'Выберите юридически корректный шаблон документа, оплатите и мгновенно получите его на электронную почту в формате Word (.docx).'}
+                'Choose a legally prepared document model, purchase it and instantly get it in your email inbox in Word (.docx) format. Document template prices are inclusive of VAT.' : 
+                'Выберите юридически корректный шаблон документа, оплатите и мгновенно получите его на электронную почту в формате Word (.docx). Цены на шаблоны документов указаны с учетом НДС.'}
             </p>
           </div>
 
           {/* Search Input */}
-          <div className="w-full lg:max-w-md relative">
-            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-zinc-400">
-              <Search size={18} />
+          <div className="w-full lg:max-w-md">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-zinc-400">
+                <Search size={18} />
+              </div>
+              <input
+                type="text"
+                placeholder={language === 'lv' ? 'Meklēt līgumu...' : language === 'en' ? 'Search contracts...' : 'Поиск договоров...'}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full bg-white border border-zinc-200 text-zinc-900 pl-12 pr-6 py-4 rounded-none outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-400 transition-all text-sm shadow-sm"
+              />
             </div>
-            <input
-              type="text"
-              placeholder={language === 'lv' ? 'Meklēt līgumu...' : language === 'en' ? 'Search contracts...' : 'Поиск договоров...'}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-white border border-zinc-200 text-zinc-900 pl-12 pr-6 py-4 rounded-none outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-400 transition-all text-sm shadow-sm"
-            />
           </div>
         </div>
 
