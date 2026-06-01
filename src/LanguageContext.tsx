@@ -34,7 +34,7 @@ export const translations: Record<Language, Record<string, any>> = {
       addressLabel: 'Juridiskā adrese:',
       rights: 'Visas tiesības aizsargātas',
       privacy: 'Privātuma politika',
-      cookies: 'Sīkdatņu politika',
+      cookies: 'Sīkdatņu politika.',
     },
     about: {
       backBtn: 'Atpakaļ uz sākumu',

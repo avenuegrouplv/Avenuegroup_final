@@ -16,7 +16,7 @@ export const documents: DocumentItem[] = [
       en: 'Real Estate Purchase Agreement (apartment, house)',
       ru: 'Договор купли-продажи недвижимости (квартира, дом)',
     },
-    price: 120.00,
+    price: 140.00,
   },
   {
     id: 'pirkuma-ligums-zeme',
@@ -25,7 +25,7 @@ export const documents: DocumentItem[] = [
       en: 'Real Estate Purchase Agreement (land)',
       ru: 'Договор купли-продажи недвижимости (земля)',
     },
-    price: 120.00,
+    price: 140.00,
   },
   {
     id: 'davinajuma-ligums',
@@ -34,7 +34,7 @@ export const documents: DocumentItem[] = [
       en: 'Real Estate Donation Agreement',
       ru: 'Договор дарения недвижимости',
     },
-    price: 110.00,
+    price: 130.00,
   },
   {
     id: 'mainas-ligums',
@@ -43,7 +43,7 @@ export const documents: DocumentItem[] = [
       en: 'Real Estate Exchange Agreement',
       ru: 'Договор обмена недвижимости',
     },
-    price: 110.00,
+    price: 130.00,
   },
   {
     id: 'ires-ligums',
@@ -52,7 +52,7 @@ export const documents: DocumentItem[] = [
       en: 'Real Estate Rental Agreement (residential)',
       ru: 'Договор аренды недвижимости (жилые помещения)',
     },
-    price: 120.00,
+    price: 140.00,
   },
   {
     id: 'nomas-ligums-komerc',
@@ -61,7 +61,7 @@ export const documents: DocumentItem[] = [
       en: 'Commercial Lease Agreement',
       ru: 'Договор аренды помещений (коммерческие площади)',
     },
-    price: 120.00,
+    price: 140.00,
   },
   {
     id: 'zemes-nomas-ligums',
@@ -70,7 +70,7 @@ export const documents: DocumentItem[] = [
       en: 'Land Lease Agreement',
       ru: 'Договор аренды земли',
     },
-    price: 110.00,
+    price: 130.00,
   },
   {
     id: 'apbuves-tiesibu-ligums',
@@ -79,7 +79,7 @@ export const documents: DocumentItem[] = [
       en: 'Building Rights Agreement',
       ru: 'Договор о праве застройки',
     },
-    price: 120.00,
+    price: 140.00,
   },
   {
     id: 'servituta-ligums',
@@ -88,7 +88,7 @@ export const documents: DocumentItem[] = [
       en: 'Easement Agreement (e.g., road easement)',
       ru: 'Договор сервитута (например, дорожный сервитут)',
     },
-    price: 110.00,
+    price: 130.00,
   },
   {
     id: 'apsaimniekosanas-ligums',
@@ -106,7 +106,7 @@ export const documents: DocumentItem[] = [
       en: 'Brokerage Agreement (real estate agents)',
       ru: 'Договор посредничества (агенты по недвижимости)',
     },
-    price: 120.00,
+    price: 140.00,
   },
   {
     id: 'rezervacijas-ligums',
@@ -115,7 +115,7 @@ export const documents: DocumentItem[] = [
       en: 'Reservation Agreement (pre-purchase)',
       ru: 'Договор бронирования (перед покупкой)',
     },
-    price: 110.00,
+    price: 130.00,
   },
   {
     id: 'prieksligums',
@@ -124,7 +124,7 @@ export const documents: DocumentItem[] = [
       en: 'Preliminary Agreement for Real Estate Acquisition',
       ru: 'Предварительный договор о покупке недвижимости',
     },
-    price: 110.00,
+    price: 130.00,
   },
   {
     id: 'hipotekas-ligums',
@@ -133,7 +133,7 @@ export const documents: DocumentItem[] = [
       en: 'Mortgage Agreement (with bank)',
       ru: 'Ипотечный договор (с банком)',
     },
-    price: 120.00,
+    price: 140.00,
   },
   {
     id: 'kopipasuma-ligums',
@@ -142,7 +142,7 @@ export const documents: DocumentItem[] = [
       en: 'Joint Property Use Agreement',
       ru: 'Договор о порядке пользования общей собственностью',
     },
-    price: 160.00,
+    price: 180.00,
   },
   {
     id: 'buvdarbu-ligums',
@@ -151,7 +151,7 @@ export const documents: DocumentItem[] = [
       en: 'Construction Work Contract',
       ru: 'Договор на строительные работы',
     },
-    price: 160.00,
+    price: 180.00,
   },
   {
     id: 'projektesanas-ligums',
@@ -160,7 +160,7 @@ export const documents: DocumentItem[] = [
       en: 'Design Services Agreement',
       ru: 'Договор на проектирование',
     },
-    price: 160.00,
+    price: 180.00,
   },
   {
     id: 'autoruzraudzibas-ligums',
@@ -169,7 +169,7 @@ export const documents: DocumentItem[] = [
       en: 'Author Supervision Agreement',
       ru: 'Договор авторского надзора',
     },
-    price: 160.00,
+    price: 180.00,
   },
   {
     id: 'buvuzraudzibas-ligums',
@@ -178,7 +178,7 @@ export const documents: DocumentItem[] = [
       en: 'Construction Supervision Agreement',
       ru: 'Договор строительного надзора',
     },
-    price: 160.00,
+    price: 180.00,
   },
   {
     id: 'remontdarbu-ligums',
@@ -187,7 +187,7 @@ export const documents: DocumentItem[] = [
       en: 'Renovation Work Contract',
       ru: 'Договор на ремонтные работы',
     },
-    price: 160.00,
+    price: 180.00,
   },
   {
     id: 'inzenerkomunikaciju-ligums',
@@ -196,7 +196,7 @@ export const documents: DocumentItem[] = [
       en: 'Utility Connection Agreement (electricity, water, etc.)',
       ru: 'Договор на подключение инженерных коммуникаций',
     },
-    price: 160.00,
+    price: 180.00,
   },
   {
     id: 'uzturesanas-apsardzes-ligums',
@@ -205,7 +205,7 @@ export const documents: DocumentItem[] = [
       en: 'Territory Maintenance / Security Agreement',
       ru: 'Договор на обслуживание территории / охрану',
     },
-    price: 120.00,
+    price: 140.00,
   },
   {
     id: 'prasibas-pieteikums-parads',
@@ -214,7 +214,7 @@ export const documents: DocumentItem[] = [
       en: 'Claim for Recovery of Rent Arrears',
       ru: 'Исковое заявление о взыскании долга по аренде',
     },
-    price: 160.00,
+    price: 180.00,
   },
   {
     id: 'prasibas-pieteikums-ipasuma-tiesibas',
@@ -232,7 +232,7 @@ export const documents: DocumentItem[] = [
       en: 'Application to Land Registry',
       ru: 'Заявка в Земельную книгу',
     },
-    price: 110.00,
+    price: 130.00,
   },
   {
     id: 'pilnvara',
@@ -241,7 +241,7 @@ export const documents: DocumentItem[] = [
       en: 'Power of Attorney for Property Transactions',
       ru: 'Доверенность на сделки с недвижимостью',
     },
-    price: 80.00,
+    price: 100.00,
   },
   {
     id: 'sia-registracija',
