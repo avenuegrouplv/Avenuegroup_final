@@ -27,6 +27,8 @@ export const Footer: React.FC = () => {
                   alt="Avenue Group Logo"
                   loading="eager"
                   fetchPriority="high"
+                  width={330}
+                  height={116}
                   className="h-[100px] md:h-[116px] w-auto object-contain transition-transform"
                   referrerPolicy="no-referrer"
                 />

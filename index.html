@@ -23,6 +23,69 @@
 
     <link rel="preload" as="image" href="https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Background1.jpg" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=Offside&family=Space+Grotesk:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD Structured Data Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://avenuegroup.lv/#organization",
+          "name": "SIA Avenue Group",
+          "url": "https://avenuegroup.lv/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Logo%20PNG2.webp",
+            "width": "230",
+            "height": "80"
+          },
+          "sameAs": [
+            "https://www.facebook.com/profile.php?id=61576913053177"
+          ]
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://avenuegroup.lv/#localbusiness",
+          "name": "Avenue Group",
+          "image": "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Background1.jpg",
+          "telephone": "+371 26 739 899",
+          "email": "services@avenuegroup.lv",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Brīvības gatve 386 k-2-5A",
+            "addressLocality": "Rīga",
+            "postalCode": "LV-1024",
+            "addressCountry": "LV"
+          },
+          "url": "https://avenuegroup.lv/",
+          "priceRange": "$$",
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://avenuegroup.lv/#website",
+          "url": "https://avenuegroup.lv/",
+          "name": "Avenue Group",
+          "publisher": {
+            "@id": "https://avenuegroup.lv/#organization"
+          },
+          "inLanguage": "lv"
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

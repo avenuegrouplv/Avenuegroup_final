@@ -54,6 +54,8 @@ export const Header: React.FC = () => {
             alt="Avenue Group Logo"
             loading="eager"
             fetchPriority="high"
+            width={230}
+            height={80}
             className="h-[65px] md:h-[80px] w-auto object-contain transition-transform"
             referrerPolicy="no-referrer"
           />

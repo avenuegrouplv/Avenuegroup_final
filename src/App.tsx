@@ -17,7 +17,7 @@ import { CookieBanner } from './components/CookieBanner';
 import DocumentStore from './components/DocumentStore';
 import CheckoutPage from './components/CheckoutPage';
 import TermsOfServicePage from './components/TermsOfServicePage';
-import { LanguageProvider } from './LanguageContext';
+import { LanguageProvider, useLanguage } from './LanguageContext';
 import { ContractTemplatesPage } from './components/ContractTemplatesPage';
 
 const ScrollToTop = () => {
@@ -51,8 +51,156 @@ const Home: React.FC = () => {
 
 const AppContent: React.FC = () => {
   const location = useLocation();
+  const { language } = useLanguage();
   const isHomePage = location.pathname === '/' || location.pathname === '/sakums';
   const isSpecialPage = !isHomePage;
+
+  useEffect(() => {
+    // Dynamic SEO Metadata for Avenue Group routes based on language and pathname
+    const path = location.pathname;
+    let title = '';
+    let description = '';
+
+    if (path === '/' || path === '/sakums') {
+      if (language === 'lv') {
+        title = 'Avenue Group | Komercīpašumu un privātīpašumu apsaimniekošana';
+        description = 'Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi komercīpašumiem un privātīpašumiem Latvijā. Profesionāls juridiskais atbalsts un individuāla pieeja.';
+      } else if (language === 'ru') {
+        title = 'Avenue Group | Управление коммерческой и частной недвижимостью';
+        description = 'Avenue Group - услуги по содержанию и управлению коммерческой и частной недвижимостью в Латвии. Профессиональная юридическая поддержка и индивидуальный подход.';
+      } else {
+        title = 'Avenue Group | Commercial and Private Property Management';
+        description = 'Avenue Group - professional real estate and property management services for commercial and residential properties in Latvia. Custom-tailored legal support.';
+      }
+    } else if (path.startsWith('/par-mums')) {
+      if (language === 'lv') {
+        title = 'Par mums | Avenue Group';
+        description = 'Profesionāla un uzticama nekustamā īpašuma pārvaldīšanas komanda Latvijā. Uzzini vairāk par Avenue Group vērtībām un mūsu misiju.';
+      } else if (language === 'ru') {
+        title = 'О нас | Avenue Group';
+        description = 'Профессиональная и надежная команда по управлению недвижимостью в Латвии. Узнайте больше о ценностях и миссии Avenue Group.';
+      } else {
+        title = 'About Us | Avenue Group';
+        description = 'Professional and reliable real estate management team in Latvia. Learn more about Avenue Group values and our mission.';
+      }
+    } else if (path.startsWith('/pakalpojumi')) {
+      if (language === 'lv') {
+        title = 'Mūsu pakalpojumi | Avenue Group';
+        description = 'Pilna servisa nekustamā īpašuma apsaimniekošana, tehniskā uzraudzība, liftu serviss un juridiskie pakalpojumi visā Latvijā.';
+      } else if (language === 'ru') {
+        title = 'Наши услуги | Avenue Group';
+        description = 'Полный спектр услуг по управлению недвижимостью, технический надзор, обслуживание лифтов и юридическая поддержка в Латвии.';
+      } else {
+        title = 'Our Services | Avenue Group';
+        description = 'Full-service real estate management, technical maintenance, elevator services, and legal support across Latvia.';
+      }
+    } else if (path.startsWith('/ligumu-paraugi')) {
+      if (language === 'lv') {
+        title = 'Līgumu paraugi | Avenue Group';
+        description = 'Profesionāli izstrādāti juridisko līgumu paraugi tūlītējai lejupielādei. Īres, nomas un apsaimniekošanas līgumi.';
+      } else if (language === 'ru') {
+        title = 'Шаблоны договоров | Avenue Group';
+        description = 'Профессионально подготовленные шаблоны договоров для мгновенного скачивания. Договоры аренды и управления.';
+      } else {
+        title = 'Contract Templates | Avenue Group';
+        description = 'Professionally drafted legal contract templates available for instant download. Rental, lease, and management templates.';
+      }
+    } else if (path.startsWith('/noderigi')) {
+      if (language === 'lv') {
+        title = 'Noderīga informācija un raksti | Avenue Group';
+        description = 'Aktuālie raksti un padomi par nekustamā īpašuma apsaimniekošanu, likumdošanas izmaiņām un pārvaldības tendencēm.';
+      } else {
+        title = 'Useful Information and Articles | Avenue Group';
+        description = 'Latest news, tips, and insights on real estate management, legal changes, and property maintenance in Latvia.';
+      }
+    } else if (path.startsWith('/buj')) {
+      if (language === 'lv') {
+        title = 'Biežāk uzdotie jautājumi (BUJ) | Avenue Group';
+        description = 'Atbildes uz biežāk uzdotajiem jautājumiem par nekustamo īpašumu apsaimniekošanu, pakalpojumu cenām un līguma slēgšanu.';
+      } else if (language === 'ru') {
+        title = 'Часто задаваемые вопросы (FAQ) | Avenue Group';
+        description = 'Ответы на часто задаваемые вопросы об управлении недвижимостью, ценах и заключении договоров с Avenue Group.';
+      } else {
+        title = 'Frequently Asked Questions (FAQ) | Avenue Group';
+        description = 'Answers to frequently asked questions about real estate management, service prices, and signing contracts in Latvia.';
+      }
+    } else if (path.startsWith('/kontakti')) {
+      if (language === 'lv') {
+        title = 'Kontakti un pieteikumi | Avenue Group';
+        description = 'Sazinieties ar Avenue Group ekspertiem. Tālrunis +371 26 739 899, e-pasts services@avenuegroup.lv, Brīvības gatve 386 k-2-5A.';
+      } else if (language === 'ru') {
+        title = 'Контакты | Avenue Group';
+        description = 'Свяжитесь со специалистами Avenue Group. Телефон +371 26 739 899, эл. почта services@avenuegroup.lv. Ждем ваших заявок!';
+      } else {
+        title = 'Contacts and Requests | Avenue Group';
+        description = 'Contact Avenue Group property experts. Mobile +371 26 739 899, email services@avenuegroup.lv, Brivibas gatve 386.';
+      }
+    } else if (path.startsWith('/privatums')) {
+      if (language === 'lv') {
+        title = 'Privātuma politika | Avenue Group';
+        description = 'SIA Avenue Group privātuma politika un lietotāju personas datu aizsardzība atbilstoši vispārīgajai datu aizsardzības regulai (GDPR).';
+      } else {
+        title = 'Privacy Policy | Avenue Group';
+        description = 'SIA Avenue Group privacy policy, ensuring complete protection of your personal and business data under GDPR compliance.';
+      }
+    } else if (path.startsWith('/sikdatnes')) {
+      if (language === 'lv') {
+        title = 'Sīkdatņu politika | Avenue Group';
+        description = 'Informācija par to, kā un kāpēc mēs izmantojam sīkdatnes (cookies) Avenue Group tīmekļa vietnes lietošanas ērtībai.';
+      } else {
+        title = 'Cookie Policy | Avenue Group';
+        description = 'Learn about our cookie policy and how cookies are utilized to elevate your browsing experience on our platform.';
+      }
+    } else if (path.startsWith('/pakalpojuma-noteikumi')) {
+      if (language === 'lv') {
+        title = 'Pakalpojuma sniegšanas noteikumi | Avenue Group';
+        description = 'SIA Avenue Group pakalpojumu sniegšanas, dokumentu iegādes un mājaslapas lietošanas noteikumi un nosacījumi.';
+      } else {
+        title = 'Terms of Service | Avenue Group';
+        description = 'SIA Avenue Group terms of service, template purchase terms and website terms & conditions.';
+      }
+    }
+
+    if (title) {
+      document.title = title;
+      
+      // Update meta description
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', description);
+      }
+      
+      // Update og:title
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) {
+        ogTitle.setAttribute('content', title);
+      }
+      
+      // Update og:description
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) {
+        ogDesc.setAttribute('content', description);
+      }
+      
+      // Update twitter:title
+      const twTitle = document.querySelector('meta[property="twitter:title"]');
+      if (twTitle) {
+        twTitle.setAttribute('content', title);
+      }
+      
+      // Update twitter:description
+      const twDesc = document.querySelector('meta[property="twitter:description"]');
+      if (twDesc) {
+        twDesc.setAttribute('content', description);
+      }
+
+      // Update og:url
+      const ogUrl = document.querySelector('meta[property="og:url"]');
+      if (ogUrl) {
+        ogUrl.setAttribute('content', `https://avenuegroup.lv${path}`);
+      }
+    }
+  }, [location.pathname, language]);
 
   return (
     <div id="top" className="min-h-screen selection:bg-yellow-200 selection:text-zinc-900 bg-[#ebebeb] text-zinc-900">

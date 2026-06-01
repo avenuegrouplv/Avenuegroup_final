@@ -77,8 +77,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                   alt="Avenue Group nekustamā īpašuma pārvaldības piemērs" 
                   className="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105"
                   referrerPolicy="no-referrer"
-                  loading="eager"
-                  fetchPriority="high"
+                  loading="lazy"
                   decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent opacity-60"></div>
@@ -97,8 +96,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                   alt="Modernā arhitektūra un nekustamais īpašums Avenue Group" 
                   className="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105"
                   referrerPolicy="no-referrer"
-                  loading="eager"
-                  fetchPriority="high"
+                  loading="lazy"
                   decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent opacity-70"></div>

@@ -26,7 +26,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
 
     return () => {
       if (!isPreview) {
-        document.title = 'Avenue Group | Premium Property Management';
+        document.title = 'Avenue Group | Komercīpašumu un privātīpašumu apsaimniekošana';
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) {
           metaDesc.setAttribute('content', 'Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi komercīpašumiem un privātīpašumiem Latvijā. Profesionāls juridiskais atbalsts un individuāla pieeja.');

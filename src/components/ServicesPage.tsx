@@ -51,7 +51,7 @@ export const ServicesPage: React.FC = () => {
     }
 
     return () => {
-      document.title = 'Avenue Group | Premium Property Management';
+      document.title = 'Avenue Group | Komercīpašumu un privātīpašumu apsaimniekošana';
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
         metaDesc.setAttribute('content', 'Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi komercīpašumiem un privātīpašumiem Latvijā. Profesionāls juridiskais atbalsts un individuāla pieeja.');
@@ -96,8 +96,7 @@ export const ServicesPage: React.FC = () => {
                       <img 
                         src={service.image} 
                         alt={`${service.title} - Avenue Group`} 
-                        loading="eager"
-                        fetchPriority="high"
+                        loading="lazy"
                         decoding="async"
                         className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
                         referrerPolicy="no-referrer"
