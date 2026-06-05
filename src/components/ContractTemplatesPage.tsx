@@ -197,7 +197,7 @@ export const ContractTemplatesPage: React.FC = () => {
 
       {/* Checkout Modal Overlay */}
       {selectedDocForPayment && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-6 overflow-y-auto pt-16 md:pt-24">
+        <div className="fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-6 overflow-y-auto pt-24 sm:pt-32 md:pt-40">
           {/* Backdrop with elegant blur */}
           <div 
             className="fixed inset-0 bg-zinc-950/60 backdrop-blur-xs transition-opacity duration-300"
