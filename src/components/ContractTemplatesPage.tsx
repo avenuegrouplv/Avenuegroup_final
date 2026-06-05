@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingCart, ArrowLeft, MessageSquare, Search, FileText } from 'lucide-react';
+import { ShoppingCart, ArrowLeft, MessageSquare, Search, FileText, Globe } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { documents, DocumentItem } from '../data/documents';
@@ -107,12 +107,19 @@ export const ContractTemplatesPage: React.FC = () => {
                 className="group bg-white border border-zinc-200 p-3 md:p-4 flex flex-col h-full hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 hover:border-yellow-500 cursor-pointer rounded-none relative shadow-xs"
               >
                 <header className="relative">
-                  {/* Decorative Word File Mockup */}
+                  {/* Decorative Word File Mockup or Service Icon */}
                   <div className="mb-2 relative" aria-hidden="true">
-                    <div className="w-6 h-8 bg-blue-50 border border-blue-100 shadow-xs rounded-none relative overflow-hidden flex items-center justify-center">
-                      <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-blue-600 transform translate-x-1.5 -translate-y-1.5 rotate-45"></div>
-                      <div className="text-blue-600 font-serif font-black text-xs select-none">W</div>
-                    </div>
+                    {doc.isService ? (
+                      <div className="w-6 h-8 bg-amber-50 border border-amber-100 shadow-xs rounded-none relative overflow-hidden flex items-center justify-center">
+                        <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-amber-600 transform translate-x-1.5 -translate-y-1.5 rotate-45"></div>
+                        <Globe size={12} className="text-amber-600" />
+                      </div>
+                    ) : (
+                      <div className="w-6 h-8 bg-blue-50 border border-blue-100 shadow-xs rounded-none relative overflow-hidden flex items-center justify-center">
+                        <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-blue-600 transform translate-x-1.5 -translate-y-1.5 rotate-45"></div>
+                        <div className="text-blue-600 font-serif font-black text-xs select-none">W</div>
+                      </div>
+                    )}
                   </div>
 
                   <h3 className="text-xs md:text-sm font-black text-zinc-950 mb-2 leading-tight group-hover:text-blue-700 transition-colors line-clamp-3 min-h-[40px]">
@@ -121,7 +128,9 @@ export const ContractTemplatesPage: React.FC = () => {
                 </header>
 
                 <p className="sr-only">
-                  {doc.title.lv} paraugs lejuplādei. Profesionāli sagatavots juridisks dokuments Word formātā.
+                  {doc.isService 
+                    ? `${doc.title[language as keyof typeof doc.title] || doc.title.lv} pakalpojums.` 
+                    : `${doc.title.lv} paraugs lejuplādei. Profesionāli sagatavots juridisks dokuments Word formātā.`}
                 </p>
 
                 <div className="mt-auto pt-3 flex flex-col gap-2 border-t border-zinc-100">

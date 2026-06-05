@@ -6,6 +6,7 @@ export interface DocumentItem {
     ru: string;
   };
   price: number;
+  isService?: boolean;
 }
 
 export const documents: DocumentItem[] = [
@@ -269,5 +270,15 @@ export const documents: DocumentItem[] = [
       ru: 'Заявление на регистрацию НДС',
     },
     price: 270.00,
+  },
+  {
+    id: 'asv-kompanija-konts-stripe',
+    title: {
+      lv: 'Kompānijas atvēršana ASV, bankas konta ASV atvēršana, Stripe maksājumu sistēmas pieslēgšana',
+      en: 'US Company Formation, US Bank Account Opening, Stripe Payment System Integration',
+      ru: 'Регистрация компании в США, открытие банковского счета в США, подключение платежной системы Stripe',
+    },
+    price: 1400.00,
+    isService: true,
   },
 ];
