@@ -122,7 +122,10 @@ export const ContractTemplatesPage: React.FC = () => {
                     )}
                   </div>
 
-                  <h3 className="text-xs md:text-sm font-black text-zinc-950 mb-2 leading-tight group-hover:text-blue-700 transition-colors line-clamp-3 min-h-[40px]">
+                  <h3 
+                    title={doc.title[language as keyof typeof doc.title] || doc.title.lv}
+                    className="text-xs md:text-sm font-black text-zinc-950 mb-2 leading-tight group-hover:text-blue-700 transition-colors line-clamp-3 min-h-[40px]"
+                  >
                     {doc.title[language as keyof typeof doc.title] || doc.title.lv}
                   </h3>
                 </header>

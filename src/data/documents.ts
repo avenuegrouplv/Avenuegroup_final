@@ -17,7 +17,7 @@ export const documents: DocumentItem[] = [
       en: 'Real Estate Purchase Agreement (apartment, house)',
       ru: 'Договор купли-продажи недвижимости (квартира, дом)',
     },
-    price: 140.00,
+    price: 150.00,
   },
   {
     id: 'pirkuma-ligums-zeme',
@@ -26,7 +26,7 @@ export const documents: DocumentItem[] = [
       en: 'Real Estate Purchase Agreement (land)',
       ru: 'Договор купли-продажи недвижимости (земля)',
     },
-    price: 140.00,
+    price: 150.00,
   },
   {
     id: 'davinajuma-ligums',
@@ -53,7 +53,7 @@ export const documents: DocumentItem[] = [
       en: 'Real Estate Rental Agreement (residential)',
       ru: 'Договор аренды недвижимости (жилые помещения)',
     },
-    price: 140.00,
+    price: 150.00,
   },
   {
     id: 'nomas-ligums-komerc',
@@ -62,7 +62,7 @@ export const documents: DocumentItem[] = [
       en: 'Commercial Lease Agreement',
       ru: 'Договор аренды помещений (коммерческие площади)',
     },
-    price: 140.00,
+    price: 150.00,
   },
   {
     id: 'zemes-nomas-ligums',
@@ -80,7 +80,7 @@ export const documents: DocumentItem[] = [
       en: 'Building Rights Agreement',
       ru: 'Договор о праве застройки',
     },
-    price: 140.00,
+    price: 150.00,
   },
   {
     id: 'servituta-ligums',
@@ -107,7 +107,7 @@ export const documents: DocumentItem[] = [
       en: 'Brokerage Agreement (real estate agents)',
       ru: 'Договор посредничества (агенты по недвижимости)',
     },
-    price: 140.00,
+    price: 150.00,
   },
   {
     id: 'rezervacijas-ligums',
@@ -134,7 +134,7 @@ export const documents: DocumentItem[] = [
       en: 'Mortgage Agreement (with bank)',
       ru: 'Ипотечный договор (с банком)',
     },
-    price: 140.00,
+    price: 150.00,
   },
   {
     id: 'kopipasuma-ligums',
@@ -206,7 +206,7 @@ export const documents: DocumentItem[] = [
       en: 'Territory Maintenance / Security Agreement',
       ru: 'Договор на обслуживание территории / охрану',
     },
-    price: 140.00,
+    price: 150.00,
   },
   {
     id: 'prasibas-pieteikums-parads',
@@ -215,7 +215,7 @@ export const documents: DocumentItem[] = [
       en: 'Claim for Recovery of Rent Arrears',
       ru: 'Исковое заявление о взыскании долга по аренде',
     },
-    price: 180.00,
+    price: 250.00,
   },
   {
     id: 'prasibas-pieteikums-ipasuma-tiesibas',
@@ -242,7 +242,7 @@ export const documents: DocumentItem[] = [
       en: 'Power of Attorney for Property Transactions',
       ru: 'Доверенность на сделки с недвижимостью',
     },
-    price: 100.00,
+    price: 70.00,
   },
   {
     id: 'sia-registracija',
@@ -274,11 +274,11 @@ export const documents: DocumentItem[] = [
   {
     id: 'asv-kompanija-konts-stripe',
     title: {
-      lv: 'Kompānijas atvēršana ASV, bankas konta ASV atvēršana, Stripe maksājumu sistēmas pieslēgšana',
-      en: 'US Company Formation, US Bank Account Opening, Stripe Payment System Integration',
-      ru: 'Регистрация компании в США, открытие банковского счета в США, подключение платежной системы Stripe',
+      lv: 'Kompānijas atvēršana ASV, bankas konts, Stripe pieslēgšana (priekšapmaksa 50%)',
+      en: 'US Company Formation, Bank Account, Stripe Connection (50% prepayment)',
+      ru: 'Регистрация компании в США, банковский счет, подключение Stripe (предоплата 50%)',
     },
-    price: 1400.00,
+    price: 1500.00,
     isService: true,
   },
 ];
