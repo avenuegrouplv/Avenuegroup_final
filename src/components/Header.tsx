@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
 
@@ -17,6 +18,19 @@ export const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (isLangDropdownOpen) {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.lang-dropdown-container')) {
+          setIsLangDropdownOpen(false);
+        }
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, [isLangDropdownOpen]);
 
   // Ordered strictly as requested:
   // 1) home -> 2) services -> 3) templates -> 4) useful -> 5) faq -> 6) contact
@@ -63,29 +77,6 @@ export const Header: React.FC = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 lg:mr-4 xl:mr-8">
-          {/* Language Switcher */}
-          <div className="flex items-center space-x-2 mr-4 border-r border-zinc-800 pr-4">
-            <button 
-              onClick={() => setLanguage('lv')}
-              className={`text-xs font-bold transition-colors ${language === 'lv' ? 'text-yellow-500' : 'text-zinc-400 hover:text-white'}`}
-            >
-              LV
-            </button>
-            <span className="text-zinc-700 text-xs">|</span>
-            <button 
-              onClick={() => setLanguage('ru')}
-              className={`text-xs font-bold transition-colors ${language === 'ru' ? 'text-yellow-500' : 'text-zinc-400 hover:text-white'}`}
-            >
-              RUS
-            </button>
-            <span className="text-zinc-700 text-xs">|</span>
-            <button 
-              onClick={() => setLanguage('en')}
-              className={`text-xs font-bold transition-colors ${language === 'en' ? 'text-yellow-500' : 'text-zinc-400 hover:text-white'}`}
-            >
-              ENG
-            </button>
-          </div>
           {navLinks.map((link) => (
             <Link 
               key={link.id} 
@@ -107,6 +98,55 @@ export const Header: React.FC = () => {
           >
             {t('contact.contactBtn')}
           </Link>
+
+          {/* Custom Language Dropdown on Far Right */}
+          <div className="relative lang-dropdown-container ml-2">
+            <button
+              onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+              className="flex items-center space-x-2.5 bg-zinc-900 border border-zinc-800 text-zinc-100 px-4 py-2.5 text-sm font-bold uppercase hover:bg-zinc-850 hover:text-white transition-all cursor-pointer rounded-none"
+            >
+              <span className="text-base select-none">
+                {language === 'lv' ? '🇱🇻' : language === 'en' ? '🇬🇧' : '🇷🇺'}
+              </span>
+              <span className="tracking-widest">
+                {language === 'lv' ? 'LV' : language === 'en' ? 'ENG' : 'RUS'}
+              </span>
+              <svg 
+                className={`w-4 h-4 text-zinc-400 transition-transform duration-200 ${isLangDropdownOpen ? 'rotate-180' : ''}`} 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor" 
+                strokeWidth="2.5"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {isLangDropdownOpen && (
+              <div className="absolute right-0 mt-1.5 w-32 bg-[#18181b] border border-zinc-700 shadow-xl py-1 z-[110] animate-in fade-in slide-in-from-top-1 duration-150">
+                <button
+                  onClick={() => { setLanguage('lv'); setIsLangDropdownOpen(false); }}
+                  className="w-full text-left px-4 py-3 text-xs font-bold uppercase transition-colors hover:bg-zinc-800 text-zinc-300 hover:text-white flex items-center space-x-3 cursor-pointer"
+                >
+                  <span className="text-base">🇱🇻</span>
+                  <span>LV</span>
+                </button>
+                <button
+                  onClick={() => { setLanguage('en'); setIsLangDropdownOpen(false); }}
+                  className="w-full text-left px-4 py-3 text-xs font-bold uppercase transition-colors hover:bg-zinc-800 text-zinc-300 hover:text-white flex items-center space-x-3 cursor-pointer"
+                >
+                  <span className="text-base">🇬🇧</span>
+                  <span>ENG</span>
+                </button>
+                <button
+                  onClick={() => { setLanguage('ru'); setIsLangDropdownOpen(false); }}
+                  className="w-full text-left px-4 py-3 text-xs font-bold uppercase transition-colors hover:bg-zinc-800 text-zinc-300 hover:text-white flex items-center space-x-3 cursor-pointer"
+                >
+                  <span className="text-base">🇷🇺</span>
+                  <span>RUS</span>
+                </button>
+              </div>
+            )}
+          </div>
         </nav>
 
         {/* Mobile Toggle */}
@@ -144,26 +184,27 @@ export const Header: React.FC = () => {
           </Link>
           
           {/* Mobile Language Switcher inside Menu */}
-          <div className="flex items-center space-x-4 justify-center w-full pt-4 border-t border-zinc-800">
+          <div className="flex items-center justify-around w-full pt-4 border-t border-zinc-800">
             <button 
               onClick={() => { setLanguage('lv'); setIsMenuOpen(false); }}
-              className={`text-sm font-bold transition-colors ${language === 'lv' ? 'text-yellow-500 font-black' : 'text-zinc-400 hover:text-white'}`}
+              className={`flex items-center space-x-2 text-sm font-bold transition-colors py-2 px-3 bg-zinc-900 border ${language === 'lv' ? 'text-yellow-500 border-yellow-500' : 'text-zinc-400 border-zinc-800 hover:text-white'}`}
             >
-              LV
+              <span>🇱🇻</span>
+              <span>LV</span>
             </button>
-            <span className="text-zinc-700 text-sm">|</span>
             <button 
               onClick={() => { setLanguage('ru'); setIsMenuOpen(false); }}
-              className={`text-sm font-bold transition-colors ${language === 'ru' ? 'text-yellow-500 font-black' : 'text-zinc-400 hover:text-white'}`}
+              className={`flex items-center space-x-2 text-sm font-bold transition-colors py-2 px-3 bg-zinc-900 border ${language === 'ru' ? 'text-yellow-500 border-yellow-500' : 'text-zinc-400 border-zinc-800 hover:text-white'}`}
             >
-              RUS
+              <span>🇷🇺</span>
+              <span>RUS</span>
             </button>
-            <span className="text-zinc-700 text-sm">|</span>
             <button 
               onClick={() => { setLanguage('en'); setIsMenuOpen(false); }}
-              className={`text-sm font-bold transition-colors ${language === 'en' ? 'text-yellow-500 font-black' : 'text-zinc-400 hover:text-white'}`}
+              className={`flex items-center space-x-2 text-sm font-bold transition-colors py-2 px-3 bg-zinc-900 border ${language === 'en' ? 'text-yellow-500 border-yellow-500' : 'text-zinc-400 border-zinc-800 hover:text-white'}`}
             >
-              ENG
+              <span>🇬🇧</span>
+              <span>ENG</span>
             </button>
           </div>
         </div>

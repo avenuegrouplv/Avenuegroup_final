@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ShoppingCart, ArrowLeft, MessageSquare, Search, FileText, Globe, X, Lock, ShieldCheck, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate, Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'motion/react';
 import { documents, DocumentItem } from '../data/documents';
 
 export const ContractTemplatesPage: React.FC = () => {
@@ -10,6 +11,88 @@ export const ContractTemplatesPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDocForPayment, setSelectedDocForPayment] = useState<DocumentItem | null>(null);
   const [agreedToTermsOfService, setAgreedToTermsOfService] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
+
+  const termsContent = {
+    lv: {
+      title: 'Pakalpojuma lietošanas noteikumi',
+      lastUpdated: 'Pēdējās izmaiņas: 2026. gada marts',
+      sections: [
+        {
+          title: '1. Vispārīgie noteikumi',
+          content: 'Šie noteikumi nosaka kārtību, kādā tiek veikti pirkumi interneta vietnē avenuegroup.lv. Veicot pirkumu, lietotājs apliecina, ka ir iepazinies ar šiem noteikumiem un piekrīt tiem.'
+        },
+        {
+          title: '2. Pakalpojuma raksturs un atbildības ierobežojums',
+          content: 'Visi Bibliotēkas sadaļā iegādājamie dokumentu paraugi ir izstrādāti līgumi, kuri satur visus noteikumus, kādus tipiski šādi līgumi satur. Šie dokumenti NAV uzskatāmi par juridisku konsultāciju. Pakalpojuma sniedzējs neuzņemas nekādu atbildību par šo dokumentu izmantošanu konkrētā klienta specifiskajā situācijā vai par jebkādiem zaudējumiem, kas var rasties dokumentu izmantošanas rezultātā.'
+        },
+        {
+          title: '3. Dokumentu stāvoklis un izmaiņas',
+          content: 'Dokuments tiek iegādāts tādā stāvoklī, kāds tas ir ("as-is"). Produkta cenā NAV iekļautas nekādas izmaiņas līgumā, pielāgojumi konkrētai situācijai vai juridiskas konsultācijas. Ja lietotājam ir nepieciešams pielāgots līgums vai juridiska palīdzība, lūdzam sazināties ar mums, izmantojot kontaktu sadaļu, lai vienotos par individuālu pakalpojumu.'
+        },
+        {
+          title: '4. Preces saņemšana',
+          content: 'Pēc veiksmīgas apmaksas veikšanas, lietotājs e-pastā saņem līgumu uz norādīto e-pasta adresi. Digitālo preču rakstura dēļ, atteikuma tiesības nav izmantojamas pēc tam, kad fails id nosūtīts pircējam.'
+        },
+        {
+          title: '5. Intelektuālais īpašums',
+          content: 'Iegādātie dokumenti ir paredzēti pircēja personīgai vai viņa pārstāvētā uzņēmuma iekšējai lietošanai. Dokumentu tālākpārdošana vai publiska izplatīšana bez Pakalpojuma sniedzēja rakstiskas piekrišanas ir aizliegta.'
+        }
+      ]
+    },
+    en: {
+      title: 'Terms of Service',
+      lastUpdated: 'Last updated: March 2026',
+      sections: [
+        {
+          title: '1. General Terms',
+          content: 'These terms define the ordering procedure on the avenuegroup.lv website. By making a purchase, the user confirms they have read and agree to these terms.'
+        },
+        {
+          title: '2. Nature of Service and Limitation of Liability',
+          content: 'All document templates available in the Library section are developed contracts containing all provisions typically found in such contracts. These documents are NOT to be considered legal advice. The service provider assumes no responsibility for the use of these documents in the specific situation of a client or for any damages that may arise from the use of the documents.'
+        },
+        {
+          title: '3. Document Condition and Modifications',
+          content: 'The document is purchased as-is. The price does NOT include any modifications to the contract, tailoring to a specific situation, or legal consultations. If the user requires a customized contract or legal assistance, please contact us via the contact section to arrange an individual service.'
+        },
+        {
+          title: '4. Receipt of Goods',
+          content: 'After successful payment, the user receives the contract at the specified email address. Due to the nature of digital goods, the right of withdrawal is not applicable after the file has been sent to the buyer.'
+        },
+        {
+          title: '5. Intellectual Property',
+          content: 'Purchased documents are intended for the buyers personal or internal company use. Resale or public distribution of the documents without the written consent of the Service Provider is prohibited.'
+        }
+      ]
+    },
+    ru: {
+      title: 'Условия предоставления услуг',
+      lastUpdated: 'Последнее обновление: март 2026 г.',
+      sections: [
+        {
+          title: '1. Общие положения',
+          content: 'Настоящие условия определяют порядок совершения покупок на сайте avenuegroup.lv. Совершая покупку, пользователь подтверждает, что ознакомился с настоящими условиями и согласен с ними.'
+        },
+        {
+          title: '2. Характер услуг и ограничение ответственности',
+          content: 'Все шаблоны документов, доступные в разделе Библиотека, представляют собой разработанные договоры, содержащие все типичные положения. Эти документы НЕ являются юридической консультацией. Провайдер не несет ответственности за использование этих документов в конкретной ситуации клиента или за любые убытки, возникшие в результате использования документов.'
+        },
+        {
+          title: '3. Состояние документов и изменения',
+          content: 'Документ приобретается в состоянии как есть ("as-is"). Цена продукта НЕ включает в себя изменения документа, его адаптацию под конкретную ситуацию или юридические консультации. Если пользователю требуется индивидуальный договор или юридическая помощь, пожалуйста, свяжитесь с нами через контакты.'
+        },
+        {
+          title: '4. Получение товара',
+          content: 'После успешной оплаты пользователь получает договор на указанный адрес электронной почты. В силу специфики цифровых товаров право на отказ не применяется после отправки файла покупателю.'
+        },
+        {
+          title: '5. Интеллектуальная собственность',
+          content: 'Приобретенные документы предназначены для личного использования покупателем или внутреннего использования его компании. Перепродажа или публичное распространение документов без письменного согласия Провайдера запрещены.'
+        }
+      ]
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -346,43 +429,37 @@ export const ContractTemplatesPage: React.FC = () => {
                   {language === 'lv' ? (
                     <>
                       Apliecinu, ka esmu iepazinies ar{' '}
-                      <a 
-                        href="https://avenuegroup.lv/pakalpojuma-noteikumi" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-yellow-600 underline font-normal hover:text-zinc-950 transition-colors"
-                        onClick={(e) => e.stopPropagation()}
+                      <button 
+                        type="button" 
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsTermsOpen(true); }}
+                        className="text-yellow-600 underline font-semibold hover:text-zinc-950 transition-colors inline p-0 bg-transparent border-none cursor-pointer"
                       >
                         Pakalpojuma lietošanas noteikumiem
-                      </a>
+                      </button>
                       , un tiem piekrītu.
                     </>
                   ) : language === 'en' ? (
                     <>
                       I confirm that I have read the{' '}
-                      <a 
-                        href="https://avenuegroup.lv/pakalpojuma-noteikumi" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-yellow-600 underline font-normal hover:text-zinc-950 transition-colors"
-                        onClick={(e) => e.stopPropagation()}
+                      <button 
+                        type="button" 
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsTermsOpen(true); }}
+                        className="text-yellow-600 underline font-semibold hover:text-zinc-950 transition-colors inline p-0 bg-transparent border-none cursor-pointer"
                       >
                         Terms of Service
-                      </a>
+                      </button>
                       , and agree to them.
                     </>
                   ) : (
                     <>
                       Я подтверждаю, что ознакомился с{' '}
-                      <a 
-                        href="https://avenuegroup.lv/pakalpojuma-noteikumi" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-yellow-600 underline font-normal hover:text-zinc-950 transition-colors"
-                        onClick={(e) => e.stopPropagation()}
+                      <button 
+                        type="button" 
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsTermsOpen(true); }}
+                        className="text-yellow-600 underline font-semibold hover:text-zinc-950 transition-colors inline p-0 bg-transparent border-none cursor-pointer"
                       >
                         Условиями предоставления услуг
-                      </a>
+                      </button>
                       , и согласен с ними.
                     </>
                   )}
@@ -424,6 +501,66 @@ export const ContractTemplatesPage: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Terms of Service Modal Overlay */}
+      <AnimatePresence>
+        {isTermsOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              className="bg-[#ebebeb] text-zinc-900 w-full max-w-2xl max-h-[85vh] flex flex-col border border-zinc-200 shadow-2xl relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-[5px] bg-yellow-500"></div>
+              
+              {/* Modal Header */}
+              <div className="p-6 md:p-8 border-b border-zinc-200">
+                <div className="flex items-center space-x-3 text-yellow-600 mb-2 h-8">
+                  <svg className="w-8 h-8 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <h2 className="text-xl md:text-2xl font-black italic tracking-tighter text-zinc-950 uppercase leading-none">
+                    {termsContent[language as keyof typeof termsContent]?.title || termsContent.lv.title}
+                  </h2>
+                </div>
+                <p className="text-zinc-500 text-[10px] font-semibold italic">
+                  {termsContent[language as keyof typeof termsContent]?.lastUpdated || termsContent.lv.lastUpdated}
+                </p>
+              </div>
+
+              {/* Modal Body (Scrollable) */}
+              <div className="p-6 md:p-8 overflow-y-auto space-y-6 flex-1">
+                {(termsContent[language as keyof typeof termsContent] || termsContent.lv).sections.map((section, idx) => (
+                  <div key={idx} className="space-y-3 pb-6 border-b border-zinc-250 last:border-none last:pb-0">
+                    <h3 className="text-xs md:text-sm font-black italic text-zinc-950 uppercase tracking-tight border-l-4 border-yellow-500 pl-3">
+                      {section.title}
+                    </h3>
+                    <p className="text-zinc-650 text-xs md:text-sm leading-relaxed italic">
+                      {section.content}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Modal Footer / Close Button */}
+              <div className="p-6 bg-white border-t border-zinc-200 flex justify-center">
+                <button
+                  onClick={() => setIsTermsOpen(false)}
+                  className="bg-zinc-950 text-white hover:bg-yellow-500 hover:text-zinc-950 px-12 py-3.5 font-black text-xs uppercase tracking-widest transition-all shadow-md cursor-pointer"
+                >
+                  {language === 'lv' ? 'Aizvērt' : 'Close'}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
