@@ -72,17 +72,6 @@ const AppContent: React.FC = () => {
         title = 'Avenue Group | Commercial and Private Property Management';
         description = 'Avenue Group - professional real estate and property management services for commercial and residential properties in Latvia. Custom-tailored legal support.';
       }
-    } else if (path.startsWith('/par-mums')) {
-      if (language === 'lv') {
-        title = 'Par mums | Avenue Group';
-        description = 'Profesionāla un uzticama nekustamā īpašuma pārvaldīšanas komanda Latvijā. Uzzini vairāk par Avenue Group vērtībām un mūsu misiju.';
-      } else if (language === 'ru') {
-        title = 'О нас | Avenue Group';
-        description = 'Профессиональная и надежная команда по управлению недвижимостью в Латвии. Узнайте больше о ценностях и миссии Avenue Group.';
-      } else {
-        title = 'About Us | Avenue Group';
-        description = 'Professional and reliable real estate management team in Latvia. Learn more about Avenue Group values and our mission.';
-      }
     } else if (path.startsWith('/pakalpojumi')) {
       if (language === 'lv') {
         title = 'Mūsu pakalpojumi | Avenue Group';
@@ -219,7 +208,6 @@ const AppContent: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sakums" element={<Navigate to="/" replace />} />
-          <Route path="/par-mums" element={<About isStandalone={true} />} />
           <Route path="/pakalpojumi" element={<ServicesPage />} />
           <Route path="/buj" element={<FAQPage />} />
           <Route path="/kontakti" element={<ContactPage />} />

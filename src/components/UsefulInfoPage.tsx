@@ -59,11 +59,11 @@ export const UsefulInfoPage: React.FC = () => {
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Back Button points back to Līgumu bibliotēka / ligumu-paraugi catalog */}
         <button
-          onClick={() => navigate('/ligumu-paraugi')}
+          onClick={() => navigate('/')}
           className="group flex items-center gap-3 bg-white border border-zinc-200/80 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 mb-12 shadow-sm rounded-none cursor-pointer"
         >
           <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
-          <span>{language === 'lv' ? 'Atpakaļ uz līgumu paraugiem' : language === 'en' ? 'Back to Contract Templates' : 'Назад к шаблонам'}</span>
+          <span>{language === 'lv' ? 'Atpakaļ uz sākumu' : language === 'en' ? 'Back to Home' : 'Назад на главную'}</span>
         </button>
 
         <div className="mb-16">

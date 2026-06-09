@@ -100,7 +100,7 @@ export const Footer: React.FC = () => {
           <div className="text-center md:text-left leading-relaxed mb-4 md:mb-0">
             <div>2025 &copy; {t('footer.rights')} | SIA "Avenue Group"</div>
           </div>
-          <div className="flex space-x-6 pr-14 md:pr-20">
+          <div className="flex space-x-6 pr-14 md:pr-20 flex-wrap justify-center md:justify-end gap-y-2">
             <Link 
               to="/privatums"
               className="hover:text-yellow-500 transition-colors"
@@ -113,6 +113,13 @@ export const Footer: React.FC = () => {
               className="hover:text-yellow-500 transition-colors"
             >
               {t('footer.cookies')}
+            </Link>
+            <span className="text-gray-800">|</span>
+            <Link 
+              to="/pakalpojuma-noteikumi"
+              className="hover:text-yellow-500 transition-colors"
+            >
+              {language === 'lv' ? 'Lietošanas noteikumi' : language === 'en' ? 'Terms of Service' : 'Правила'}
             </Link>
           </div>
         </div>

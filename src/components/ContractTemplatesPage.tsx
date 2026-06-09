@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ShoppingCart, ArrowLeft, MessageSquare, Search, FileText, Globe, X, Lock, ShieldCheck, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { documents, DocumentItem } from '../data/documents';
 
 export const ContractTemplatesPage: React.FC = () => {
@@ -9,6 +9,7 @@ export const ContractTemplatesPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDocForPayment, setSelectedDocForPayment] = useState<DocumentItem | null>(null);
+  const [agreedToTermsOfService, setAgreedToTermsOfService] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,6 +45,7 @@ export const ContractTemplatesPage: React.FC = () => {
 
   const handlePurchase = (doc: DocumentItem) => {
     setSelectedDocForPayment(doc);
+    setAgreedToTermsOfService(false);
     // Track facebook pixel - InitiateCheckout
     try {
       if (typeof window !== 'undefined' && (window as any).fbq) {
@@ -206,7 +208,7 @@ export const ContractTemplatesPage: React.FC = () => {
           </h4>
           <p className="text-zinc-650 mb-5 max-w-lg text-xs md:text-sm leading-relaxed">
             {language === 'lv' ? 
-              'Sazinieties ar mums, un mēs sagatavosim Jums nepieciešamo dokumentu individuālu.' : 
+              'Sazinieties ar mums, un mēs sagatavosim Jums nepieciešamo dokumentu individuāli.' : 
               language === 'en' ?
               'Contact us, and we will prepare the document you need individually.' :
               'Свяжитесь с нами, и мы подготовим нужный вам документ индивидуально.'}
@@ -323,12 +325,85 @@ export const ContractTemplatesPage: React.FC = () => {
                 </div>
               </div>
 
+              {/* Agree to Terms of Service Checkbox */}
+              <div className="flex items-start gap-4 bg-zinc-50 border border-zinc-200 p-4">
+                <label htmlFor="terms-of-service" className="relative mt-0.5 shrink-0 cursor-pointer flex items-center">
+                  <input 
+                    id="terms-of-service"
+                    type="checkbox" 
+                    className="peer sr-only"
+                    checked={agreedToTermsOfService}
+                    onChange={(e) => setAgreedToTermsOfService(e.target.checked)}
+                  />
+                  <div className="w-5 h-5 border-2 border-zinc-400 bg-white transition-all peer-checked:bg-yellow-500 peer-checked:border-yellow-500 hover:border-zinc-500"></div>
+                  <div className="absolute inset-x-0 inset-y-0 flex items-center justify-center scale-0 peer-checked:scale-100 transition-transform pointer-events-none">
+                    <svg className="w-3 h-3 text-zinc-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                </label>
+                <span className="text-xs md:text-sm font-sans font-normal text-zinc-950 tracking-wide leading-relaxed">
+                  {language === 'lv' ? (
+                    <>
+                      Apliecinu, ka esmu iepazinies ar{' '}
+                      <a 
+                        href="https://avenuegroup.lv/pakalpojuma-noteikumi" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-yellow-600 underline font-normal hover:text-zinc-950 transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Pakalpojuma lietošanas noteikumiem
+                      </a>
+                      , un tiem piekrītu.
+                    </>
+                  ) : language === 'en' ? (
+                    <>
+                      I confirm that I have read the{' '}
+                      <a 
+                        href="https://avenuegroup.lv/pakalpojuma-noteikumi" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-yellow-600 underline font-normal hover:text-zinc-950 transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Terms of Service
+                      </a>
+                      , and agree to them.
+                    </>
+                  ) : (
+                    <>
+                      Я подтверждаю, что ознакомился с{' '}
+                      <a 
+                        href="https://avenuegroup.lv/pakalpojuma-noteikumi" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-yellow-600 underline font-normal hover:text-zinc-950 transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Условиями предоставления услуг
+                      </a>
+                      , и согласен с ними.
+                    </>
+                  )}
+                </span>
+              </div>
+
               {/* Call to Actions */}
               <div className="flex flex-col gap-3">
                 <button
                   id="checkout-modal-pay-button"
-                  onClick={() => triggerCheckout()}
-                  className="w-full bg-zinc-950 hover:bg-blue-600 text-white font-black py-4 px-6 text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300 rounded-none shadow-xs cursor-pointer min-h-[48px]"
+                  disabled={!agreedToTermsOfService}
+                  onClick={() => {
+                    if (agreedToTermsOfService) {
+                      triggerCheckout();
+                    }
+                  }}
+                  className={`w-full font-black py-4 px-6 text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300 rounded-none shadow-xs min-h-[48px] ${
+                    agreedToTermsOfService
+                      ? 'bg-zinc-950 hover:bg-blue-600 text-white cursor-pointer'
+                      : 'bg-zinc-100 text-zinc-400 border border-zinc-200 cursor-not-allowed'
+                  }`}
                 >
                   <Lock size={14} />
                   <span>

@@ -94,6 +94,15 @@ const TermsOfServicePage: React.FC = () => {
             </div>
           ))}
         </div>
+
+        <div className="mt-12 pt-12 border-t border-zinc-200 flex justify-center">
+          <button
+            onClick={() => navigate('/')}
+            className="bg-zinc-950 text-white hover:bg-yellow-500 hover:text-zinc-950 px-8 py-3.5 font-black text-xs uppercase tracking-widest transition-all cursor-pointer"
+          >
+            {language === 'lv' ? 'Aizvērt' : language === 'en' ? 'Close' : 'Закрыть'}
+          </button>
+        </div>
       </div>
     </div>
   );
