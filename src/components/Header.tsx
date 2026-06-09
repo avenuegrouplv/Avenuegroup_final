@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
   // Ordered strictly as requested:
   // 1) home -> 2) services -> 3) templates -> 4) useful -> 5) faq -> 6) contact
   const navLinks = [
-    { id: 'home', name: t('nav.home'), href: '/sakums' },
+    { id: 'home', name: t('nav.home'), href: '/' },
     { id: 'services', name: t('nav.services'), href: '/pakalpojumi' },
     { id: 'templates', name: t('nav.templates'), href: '/ligumu-paraugi' },
     { id: 'useful', name: language === 'lv' ? 'Noderīgi' : language === 'en' ? 'Useful info' : 'Полезно', href: '/noderigi' },
@@ -33,7 +33,7 @@ export const Header: React.FC = () => {
     setIsMenuOpen(false);
   };
 
-  const currentPath = location.pathname === '/' ? '/sakums' : location.pathname;
+  const currentPath = location.pathname;
 
   return (
     <header 

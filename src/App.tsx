@@ -1,6 +1,6 @@
 // Avenue Group Application
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -199,6 +199,16 @@ const AppContent: React.FC = () => {
       if (ogUrl) {
         ogUrl.setAttribute('content', `https://avenuegroup.lv${path}`);
       }
+
+      // Dynamic Canonical URL configuration
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+      }
+      const cleanPath = path === '/sakums' ? '/' : path.replace(/\/$/, "");
+      canonicalLink.setAttribute('href', `https://avenuegroup.lv${cleanPath || '/'}`);
     }
   }, [location.pathname, language]);
 
@@ -208,7 +218,7 @@ const AppContent: React.FC = () => {
       <main className={isSpecialPage ? 'pt-[175px] md:pt-[215px]' : 'pt-0'}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/sakums" element={<Home />} />
+          <Route path="/sakums" element={<Navigate to="/" replace />} />
           <Route path="/par-mums" element={<About isStandalone={true} />} />
           <Route path="/pakalpojumi" element={<ServicesPage />} />
           <Route path="/buj" element={<FAQPage />} />

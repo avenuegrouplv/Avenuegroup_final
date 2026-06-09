@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export const Footer: React.FC = () => {
   const { t, language } = useLanguage();
   const navLinks = [
-    { name: t('nav.home'), href: '/sakums' },
+    { name: t('nav.home'), href: '/' },
     { name: t('nav.services'), href: '/pakalpojumi' },
     { name: t('nav.templates'), href: '/ligumu-paraugi' },
     { name: language === 'lv' ? 'Noderīgi' : language === 'en' ? 'Useful info' : 'Полезно', href: '/noderigi' },

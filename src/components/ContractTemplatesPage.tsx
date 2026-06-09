@@ -44,10 +44,36 @@ export const ContractTemplatesPage: React.FC = () => {
 
   const handlePurchase = (doc: DocumentItem) => {
     setSelectedDocForPayment(doc);
+    // Track facebook pixel - InitiateCheckout
+    try {
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'InitiateCheckout', {
+          content_name: doc.title[language as keyof typeof doc.title] || doc.title.lv,
+          value: doc.price,
+          currency: 'EUR'
+        });
+      }
+    } catch (e) {
+      console.error('FB Pixel error:', e);
+    }
   };
 
   const triggerCheckout = () => {
     const stripeUrl = 'https://buy.stripe.com/8x2aER2ib82t3SdgTa1Fe03';
+    
+    // Track facebook pixel - Purchase
+    try {
+      if (selectedDocForPayment && typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'Purchase', {
+          content_name: selectedDocForPayment.title[language as keyof typeof selectedDocForPayment.title] || selectedDocForPayment.title.lv,
+          value: selectedDocForPayment.price,
+          currency: 'EUR'
+        });
+      }
+    } catch (e) {
+      console.error('FB Pixel error:', e);
+    }
+
     openCenteredPopup(stripeUrl, 'AvenueGroupCheckout', 550, 800);
   };
 
