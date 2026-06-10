@@ -48,6 +48,8 @@ export const translations: Record<Language, Record<string, any>> = {
       p5: 'Mūsu darbs ir vērsts uz ilgtermiņa sadarbību un mūsu klientiem piederošo īpašumu sakārtošanu un attīstību, veicinot to vērtības saglabāšanu un palielinot to finansiālo atdevi.',
       imageTaglineLine1: 'Jūsu uzticamais partneris',
       imageTaglineLine2: 'komercīpašumu un privātīpašumu pārvaldībā',
+      image3TaglineLine1: 'Individuāla pieeja',
+      image3TaglineLine2: 'un profesionāls juridiskais atbalsts',
     },
     benefits: {
       q1: {
@@ -380,6 +382,8 @@ export const translations: Record<Language, Record<string, any>> = {
       p5: 'Our work is aimed at long-term cooperation and the organization and development of properties owned by our clients, promoting the preservation of their value and increasing their financial return.',
       imageTaglineLine1: 'Your reliable partner',
       imageTaglineLine2: 'in commercial and private property management',
+      image3TaglineLine1: 'Individual approach',
+      image3TaglineLine2: 'and professional legal support',
     },
     benefits: {
       q1: {
@@ -724,6 +728,8 @@ Premium property management services may include:`,
       p5: 'Наша работа направлена на долгосрочное сотрудничество, упорядочивание и развитие недвижимости наших клиентов, способствуя сохранению ее стоимости и увеличению финансовой отдачи.',
       imageTaglineLine1: 'Ваш надежный партнер',
       imageTaglineLine2: 'в управлении коммерческой и частной недвижимостью',
+      image3TaglineLine1: 'Индивидуальный подход',
+      image3TaglineLine2: 'и профессиональная юридическая поддержка',
     },
     benefits: {
       q1: {
