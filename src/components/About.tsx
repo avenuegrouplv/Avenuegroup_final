@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import aboutThirdImage from '../assets/images/about_third_image_1781093984050.png';
-import tempTestImage from '../assets/images/IMG_1140.png';
+import aboutFourthImage from '../assets/images/about_fourth_image_1781093984050.png';
 
 interface AboutProps {
   isStandalone?: boolean;
@@ -146,8 +146,8 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 className="relative h-[280px] md:h-[320px] overflow-hidden group shadow-md border border-zinc-200"
               >
                 <img 
-                  src={tempTestImage} 
-                  alt="Testa attēls IMG_1140" 
+                  src={aboutFourthImage} 
+                  alt="Testa attēls (IMG_1140)" 
                   className="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                   loading="lazy"
