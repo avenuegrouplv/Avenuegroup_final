@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import aboutThirdImage from '../assets/images/about_third_image_1781093984050.png';
-import aboutFourthImage from '../assets/images/about_fourth_image_1781093984050.png';
+import aboutFourthImage from '../assets/images/about_fourth_image_1781093984050.webp';
 
 interface AboutProps {
   isStandalone?: boolean;
@@ -137,7 +137,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 </div>
               </motion.div>
 
-              {/* Image 4 (TEMP TEST IMAGE): Converted from HEIC */}
+              {/* Image 4: Converted from HEIC, optimized to webp with translated taglines */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.98 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -147,7 +147,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
               >
                 <img 
                   src={aboutFourthImage} 
-                  alt="Testa attēls (IMG_1140)" 
+                  alt="Apsaimniekošana un ikdienas tehniskie darbi" 
                   className="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                   loading="lazy"
@@ -155,9 +155,11 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent opacity-70"></div>
                 <div className="absolute bottom-4 left-4 border-l-2 border-yellow-500 pl-3 max-w-[250px]">
-                  <div className="text-sm md:text-base font-black italic text-yellow-400 mb-1 tracking-tighter">Testa Attēls (IMG_1140)</div>
+                  <div className="text-sm md:text-base font-black italic text-yellow-400 mb-1 tracking-tighter">
+                    {t('about.image4TaglineLine1')}
+                  </div>
                   <div className="text-white text-xs md:text-sm font-medium italic leading-normal">
-                    <div>Pagaidu HEIC-to-PNG tests</div>
+                    <div>{t('about.image4TaglineLine2')}</div>
                   </div>
                 </div>
               </motion.div>

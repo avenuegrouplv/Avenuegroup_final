@@ -50,6 +50,8 @@ export const translations: Record<Language, Record<string, any>> = {
       imageTaglineLine2: 'komercīpašumu un privātīpašumu pārvaldībā',
       image3TaglineLine1: 'Individuāla pieeja',
       image3TaglineLine2: 'un profesionāls juridiskais atbalsts',
+      image4TaglineLine1: 'Profesionāla pārvaldība',
+      image4TaglineLine2: 'un ikdienas tehnisko darbu kontrole',
     },
     benefits: {
       q1: {
@@ -384,6 +386,8 @@ export const translations: Record<Language, Record<string, any>> = {
       imageTaglineLine2: 'in commercial and private property management',
       image3TaglineLine1: 'Individual approach',
       image3TaglineLine2: 'and professional legal support',
+      image4TaglineLine1: 'Professional management',
+      image4TaglineLine2: 'and daily technical control',
     },
     benefits: {
       q1: {
@@ -730,6 +734,8 @@ Premium property management services may include:`,
       imageTaglineLine2: 'в управлении коммерческой и частной недвижимостью',
       image3TaglineLine1: 'Индивидуальный подход',
       image3TaglineLine2: 'и профессиональная юридическая поддержка',
+      image4TaglineLine1: 'Профессиональное управление',
+      image4TaglineLine2: 'и ежедневный технический контроль',
     },
     benefits: {
       q1: {
