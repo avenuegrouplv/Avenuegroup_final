@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import aboutThirdImage from '../assets/images/about_third_image_1781093984050.png';
-import tempTestImage from '../assets/images/IMG_1140.webp';
+import tempTestImage from '../assets/images/IMG_1140.png';
 
 interface AboutProps {
   isStandalone?: boolean;
@@ -157,7 +157,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 <div className="absolute bottom-4 left-4 border-l-2 border-yellow-500 pl-3 max-w-[250px]">
                   <div className="text-sm md:text-base font-black italic text-yellow-400 mb-1 tracking-tighter">Testa Attēls (IMG_1140)</div>
                   <div className="text-white text-xs md:text-sm font-medium italic leading-normal">
-                    <div>Pagaidu HEIC-to-WebP tests</div>
+                    <div>Pagaidu HEIC-to-PNG tests</div>
                   </div>
                 </div>
               </motion.div>
