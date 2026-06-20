@@ -3,6 +3,8 @@ import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
+import aboutThirdImage from '../assets/images/about_third_image_1781093984050.png';
+import aboutFourthImage from '../assets/images/about_fourth_image_1781093984050.png';
 
 interface AboutProps {
   isStandalone?: boolean;
@@ -118,7 +120,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 className="relative h-[280px] md:h-[320px] overflow-hidden group shadow-md border border-zinc-200"
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=55&w=600" 
+                  src={aboutThirdImage} 
                   alt="Modernā nekustamā īpašuma arhitektūra un apsaimniekošana" 
                   className="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105"
                   referrerPolicy="no-referrer"
@@ -144,7 +146,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 className="relative h-[280px] md:h-[320px] overflow-hidden group shadow-md border border-zinc-200"
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=55&w=600" 
+                  src={aboutFourthImage} 
                   alt="Apsaimniekošana un ikdienas tehniskie darbi" 
                   className="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105"
                   referrerPolicy="no-referrer"
