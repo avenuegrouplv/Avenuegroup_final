@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
-import aboutNewImage from '../assets/1. Kas-notiek-ja-mainas-kopipasnieks.png';
+import aboutNewImage from '../assets/1. Kas-notiek-ja-mainas-kopipasnieks.webp';
 
 interface AboutProps {
   isStandalone?: boolean;
