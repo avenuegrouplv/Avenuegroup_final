@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import aboutThirdImage from '../assets/images/about_third_image_1781093984050.png';
-import aboutFourthImage from '../assets/images/about_fourth_image_1781093984050.webp';
+import aboutFourthImage from '../assets/images/about_fourth_image_1781093984050.png';
 
 interface AboutProps {
   isStandalone?: boolean;
@@ -137,7 +137,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 </div>
               </motion.div>
 
-              {/* Image 4: Converted from HEIC, optimized to webp with translated taglines */}
+              {/* Image 4: Converted to JPEG format and saved with .png extension (Netlify optimized) */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.98 }}
                 whileInView={{ opacity: 1, scale: 1 }}
