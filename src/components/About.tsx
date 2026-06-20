@@ -3,8 +3,8 @@ import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
-import aboutThirdImage from '../assets/images/about_third_image_1781093984050.png';
-import aboutFourthImage from '../assets/images/about_fourth_image_1781093984050.png';
+import aboutThirdImage from '../assets/images/about_third_image.webp';
+import aboutFourthImage from '../assets/images/about_fourth_image.webp';
 
 interface AboutProps {
   isStandalone?: boolean;
