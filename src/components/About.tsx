@@ -3,8 +3,6 @@ import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
-import aboutThirdImage from '../assets/images/about_third_image_1781093984050.png';
-import aboutFourthImage from '../assets/images/about_fourth_image_1781093984050.png';
 
 interface AboutProps {
   isStandalone?: boolean;
@@ -111,7 +109,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 </div>
               </motion.div>
 
-              {/* Image 3: Local WebP Image with customized taglines */}
+              {/* Image 3: Optimized Image with customized taglines */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.98 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -120,7 +118,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 className="relative h-[280px] md:h-[320px] overflow-hidden group shadow-md border border-zinc-200"
               >
                 <img 
-                  src={aboutThirdImage} 
+                  src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=55&w=600" 
                   alt="Modernā nekustamā īpašuma arhitektūra un apsaimniekošana" 
                   className="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105"
                   referrerPolicy="no-referrer"
@@ -137,7 +135,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 </div>
               </motion.div>
 
-              {/* Image 4: Converted to JPEG format and saved with .png extension (Netlify optimized) */}
+              {/* Image 4: Optimized Image with customized taglines */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.98 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -146,7 +144,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 className="relative h-[280px] md:h-[320px] overflow-hidden group shadow-md border border-zinc-200"
               >
                 <img 
-                  src={aboutFourthImage} 
+                  src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=55&w=600" 
                   alt="Apsaimniekošana un ikdienas tehniskie darbi" 
                   className="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105"
                   referrerPolicy="no-referrer"
