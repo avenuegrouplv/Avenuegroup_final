@@ -11,7 +11,7 @@ export const articles: Article[] = [
   {
     id: 1,
     slug: "komeripasuma-ipasnieka-maina-nomas-ligumi",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/1.%20Kas-notiek-ja-mainas-kopipasnieks.png",
+    image: "/images/noderigi/raksti/kas-notiek-ja-mainas-kopipasnieks.webp",
     title: "Kas notiek, ja komerīpašumam mainās īpašnieks un kā tas ietekmē nomas līgumus?",
     excerpt: "Īpašuma īpašnieka maiņa komercvidē bieži tiek uztverta kā izaicinājums, taču tā ir arī iespēja pārskatīt esošās attiecības.",
     content: [
@@ -28,7 +28,7 @@ export const articles: Article[] = [
   {
     id: 2,
     slug: "komercnomas-ligums-obligatie-punkti-riski",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/2.%20Kas-obligati-jaieklauj-komercnomas-liguma.png",
+    image: "/images/noderigi/raksti/kas-obligati-jaieklauj-komercnomas-liguma.webp",
     title: "Kas obligāti jāiekļauj komercnomas līgumā, lai pasargātu sevi no riskiem?",
     excerpt: "Komercnomas līgums ir viens no svarīgākajiem dokumentiem uzņēmējdarbībā. Uzziniet, kādiem punktiem jābūt iekļautiem.",
     content: [
@@ -46,7 +46,7 @@ export const articles: Article[] = [
   {
     id: 3,
     slug: "drošibas-depozits-komercipasuma-noma",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/3.%20Drosibas-depozits-komercipasuma-nomas-liguma.png",
+    image: "/images/noderigi/raksti/drosibas-depozits-komercipasuma-nomas-liguma.webp",
     title: "Drošības depozīts komercīpašuma nomas līgumā: cik liels tas ir, kā to izmantot un kad to nedrīkst ieturēt?",
     excerpt: "Drošības depozīts kalpo kā finanšu drošības spilvens komerctelpu īpašniekam. Uzziniet par tā apmēriem un lietojumu.",
     content: [
@@ -62,7 +62,7 @@ export const articles: Article[] = [
   {
     id: 4,
     slug: "vairaki-ipasnieki-komercipasums-parvaldibas-ietekme",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/4.%20Ko-darit-ja-komercipasumam-ir-vairaki-ipasnieki.png",
+    image: "/images/noderigi/raksti/ko-darit-ja-komercipasumam-ir-vairaki-ipasnieki.webp",
     title: "Ko darīt, ja komercīpašumam ir vairāki īpašnieki? Kā tas ietekmē īpašuma pārvaldību?",
     excerpt: "Kopīpašums var šķist kā normāla situācija, taču praksē tieši šeit visbiežāk sākas sarežģījumi ar lēmumu pieņemšanu.",
     content: [
@@ -78,7 +78,7 @@ export const articles: Article[] = [
   {
     id: 5,
     slug: "bojajumi-telpas-ipasnieka-nomnieka-atbildiba",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/5.%20Bojajumi-nomas-telpas-ka-atbildiba-ta-ir.png",
+    image: "/images/noderigi/raksti/bojajumi-nomas-telpas-ka-atbildiba-ta-ir.webp",
     title: "Bojājumi telpās: īpašnieka vai nomnieka atbildība?",
     excerpt: "Kurš ir atbildīgs par bojājumiem telpās? Izpētiet robežu starp dabisku nolietojumu un nolaidību.",
     content: [
@@ -106,7 +106,7 @@ export const articles: Article[] = [
   {
     id: 6,
     slug: "vienpuseja-liguma-izbeigsana-nosacijumi-noformesana",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/6.%20Vienpuseja-nomas-liguma-izbeigsana.png",
+    image: "/images/noderigi/raksti/vienpuseja-nomas-liguma-izbeigsana.webp",
     title: "Vienpusēja līguma izbeigšana: kad tas ir iespējams un kā to pareizi noformēt?",
     excerpt: "Vienpusēja līguma izbeigšana nav “brīva izvēle” – tā ir iespējama tikai konkrētos gadījumos ar skaidru iemeslu.",
     content: [
@@ -130,7 +130,7 @@ export const articles: Article[] = [
   {
     id: 7,
     slug: "kas-ir-komercipasuma-apsaimniekosana",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/7.%20Kas-isti-ir-komercipasuma-apsaimniekosana.png",
+    image: "/images/noderigi/raksti/kas-isti-ir-komercipasuma-apsaimniekosana.webp",
     title: "Kas īsti ir komercīpašuma apsaimniekošana un par ko tu maksā katru mēnesi?",
     excerpt: "Apsaimniekošana nav tikai telpu uzturēšana kārtībā. Tā ir sistemātiska īpašuma pārvaldība – tehniska un juridiska.",
     content: [
@@ -151,7 +151,7 @@ export const articles: Article[] = [
   {
     id: 8,
     slug: "komercipasuma-due-diligence-juridiska-parbaude",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/8.%20Komercipasuma-due-diligence.png",
+    image: "/images/noderigi/raksti/komercipasuma-due-diligence.webp",
     title: "Komercīpašuma Due diligence: ko pārbauda jurists pirms tā iegādes?",
     excerpt: "Juridiskā pārbaude bieži atklāj riskus, kas var būtiski ietekmēt darījuma vērtību. Uzziniet galvenās jomas.",
     content: [
@@ -192,7 +192,7 @@ export const articles: Article[] = [
   {
     id: 9,
     slug: "labs-nomnieks-ipasnieka-problema",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/9.%20Kapec-labs-nomnieks-var-klut-par-problemu.png",
+    image: "/images/noderigi/raksti/kapec-labs-nomnieks-var-klut-par-problemu.webp",
     title: "Kāpēc “labs” nomnieks var kļūt par īpašnieka lielāko problēmu?",
     excerpt: "Jo ilgāk attiecības turpinās bez sarežģījumiem, jo vairāk tās sāk balstīties uz uzticēšanos, nevis līgumu.",
     content: [
@@ -214,7 +214,7 @@ export const articles: Article[] = [
   {
     id: 10,
     slug: "ipasuma-apsaimniekosana-pasa-spekiem-vai-profesionali",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/10.%20Kad-ipasumu-apsaimniekot-pasam-un-kad-to-nedarit.png",
+    image: "/images/noderigi/raksti/kad-ipasumu-apsaimniekot-pasam-un-kad-to-nedarit.webp",
     title: "Kad īpašumu apsaimniekot pašam – un kad to labāk nedarīt?",
     excerpt: "Daudzi komercīpašumu īpašnieki saskaras ar situācijām, kur paša spēkiem nepietiek. Uzziniet, kad piesaistīt profesionāļus.",
     content: [
@@ -246,7 +246,7 @@ export const articles: Article[] = [
   {
     id: 11,
     slug: "dzivoklis-bez-dzivokla-ipasuma-statusa-riski",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/11.%20Iegadaties-dzivokli-bez-dzivokla-ipasuma-statusa.png",
+    image: "/images/noderigi/raksti/iegadaties-dzivokli-bez-dzivokla-ipasuma-statusa.webp",
     title: "Iegādāts dzīvoklis bez dzīvokļa īpašuma statusa: ko tas patiesībā nozīmē un kādi riski ar to saistās?",
     excerpt: "Nekustamo īpašumu tirgū Latvijā joprojām ir sastopami darījumi ar domājamām daļām. Uzziniet par riskiem.",
     content: [
@@ -273,7 +273,7 @@ export const articles: Article[] = [
   {
     id: 12,
     slug: "komercipasuma-apsaimniekosana-vertibas-palielinasana",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/12.%20Ka-pareiza-komercipasuma-apsaimniekosana-palielina-ta-vertibu.png",
+    image: "/images/noderigi/raksti/ka-pareiza-komercipasuma-apsaimniekosana-palielina-ta-vertibu.webp",
     title: "Kā pareiza komercīpašuma apsaimniekošana palielina komercīpašuma vērtību ilgtermiņā?",
     excerpt: "Laba apsaimniekošana ne tikai samazina izmaksas, bet arī palielina ienākumus un padara īpašumu pievilcīgāku.",
     content: [
@@ -304,7 +304,7 @@ export const articles: Article[] = [
   {
     id: 13,
     slug: "komercipasuma-uzturesanas-izmaksu-samazinasana",
-    image: "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/13.%20Ka-samazinat-komercipasuma-uzturesanas-izmaksas.png",
+    image: "/images/noderigi/raksti/ka-samazinat-komercipasuma-uzturesanas-izmaksas.webp",
     title: "Kā samazināt komercīpašuma uzturēšanas izmaksas, nezaudējot kvalitāti",
     excerpt: "Uzziniet, kā optimizēt izdevumus, uzlabojot īpašuma stāvokli un efektivitāti.",
     content: [
@@ -328,7 +328,7 @@ export const articles: Article[] = [
   {
     id: 14,
     slug: "5-lietas-regulari-japarbauda-komercipasuma",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1073&auto=format&fit=crop",
+    image: "/images/noderigi/raksti/kas-regulari-japarbauda-komercipasuma-lai-izvairitos-no-remontiem.webp",
     title: "5 lietas, kas regulāri jāpārbauda komercīpašumā, lai izvairītos no dārgiem remontiem",
     excerpt: "Apskatiet 5 būtiskākos punktus, kas jāseko līdzi katram īpašniekam un apsaimniekotājam.",
     content: [
