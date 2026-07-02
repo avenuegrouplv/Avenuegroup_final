@@ -2,5 +2,7 @@
   "name": "Avenue Group",
   "description": "Mēs specializējamies mazā un vidējā segmenta komercīpašumu un privātīpašumu apsaimniekošanā, nodrošinot pārskatāmu un finansiāli efektīvu pārvaldību.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
