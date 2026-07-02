@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { Link } from 'react-router-dom';
@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 export const Hero: React.FC = () => {
   const mainImage = 'https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Background1.jpg';
   const { t } = useLanguage();
-  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <section id="sakums" className="relative w-full h-screen min-h-[600px] flex items-center md:items-end justify-center overflow-hidden m-0 p-0">
@@ -17,8 +16,7 @@ export const Hero: React.FC = () => {
           alt="Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi Latvijā" 
           loading="eager"
           fetchPriority="high"
-          onLoad={() => setImageLoaded(true)}
-          className={`w-full h-full object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
           style={{ objectPosition: 'center center' }}
         />

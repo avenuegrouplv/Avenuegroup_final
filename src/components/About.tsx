@@ -3,7 +3,6 @@ import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
-import aboutNewImage from '../assets/kas-notiek-ja-mainas-kopipasnieks.webp';
 
 interface AboutProps {
   isStandalone?: boolean;
@@ -106,32 +105,6 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                   <div className="text-white text-xs md:text-sm font-medium italic leading-normal">
                     <div className="mb-1">{t('about.imageTaglineLine1')}</div>
                     <div>{t('about.imageTaglineLine2')}</div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Image 3: Latvian Image Asset with Custom Tagline */}
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.98 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="relative h-[280px] md:h-[320px] overflow-hidden group shadow-md border border-zinc-200"
-              >
-                <img 
-                  src={aboutNewImage} 
-                  alt="Avenue Group nekustamā īpašuma kopīpašuma pārvaldība" 
-                  className="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent opacity-70"></div>
-                <div className="absolute bottom-4 left-4 border-l-2 border-yellow-500 pl-3 max-w-[250px]">
-                  <div className="text-sm md:text-base font-black italic text-yellow-400 mb-1 tracking-tighter">Avenue Group</div>
-                  <div className="text-white text-xs md:text-sm font-medium italic leading-normal">
-                    <div className="mb-1">{t('about.image3TaglineLine1')}</div>
-                    <div>{t('about.image3TaglineLine2')}</div>
                   </div>
                 </div>
               </motion.div>
