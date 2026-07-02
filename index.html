@@ -1,30 +1,54 @@
 <!doctype html>
 <html lang="lv">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KM5KHF8YKN"></script>
+    <!-- Google & Meta Analytics Lazy Initialization -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      (function() {
+        var initialized = false;
+        function initAnalytics() {
+          if (initialized) return;
+          initialized = true;
 
-      gtag('config', 'G-KM5KHF8YKN');
-    </script>
+          // Remove event listeners
+          window.removeEventListener('scroll', initAnalytics);
+          window.removeEventListener('mousemove', initAnalytics);
+          window.removeEventListener('touchstart', initAnalytics);
 
-    <!-- Meta Pixel Code -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1229292339149371');
-      fbq('track', 'PageView');
+          // Inject Google Tag Manager
+          var gtm = document.createElement('script');
+          gtm.async = true;
+          gtm.src = 'https://www.googletagmanager.com/gtag/js?id=G-KM5KHF8YKN';
+          document.head.appendChild(gtm);
+
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function(){window.dataLayer.push(arguments);}
+          window.gtag('js', new Date());
+          window.gtag('config', 'G-KM5KHF8YKN');
+
+          // Inject Meta Pixel
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1229292339149371');
+          fbq('track', 'PageView');
+        }
+
+        // Initialize on interaction
+        window.addEventListener('scroll', initAnalytics, { passive: true });
+        window.addEventListener('mousemove', initAnalytics, { passive: true });
+        window.addEventListener('touchstart', initAnalytics, { passive: true });
+
+        // Fallback to load after 4.5 seconds if no interaction
+        window.addEventListener('load', function() {
+          setTimeout(initAnalytics, 4500);
+        });
+      })();
     </script>
-    <!-- End Meta Pixel Code -->
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -50,7 +74,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Background1.webp" fetchpriority="high">
-    <link href="https://fonts.googleapis.com/css2?family=Offside&family=Space+Grotesk:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Offside&family=Space+Grotesk:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Offside&family=Space+Grotesk:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet"></noscript>
 
     <!-- JSON-LD Structured Data Schema Markup -->
     <script type="application/ld+json">

@@ -25,8 +25,8 @@ export const Footer: React.FC = () => {
                 <img
                   src="https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Logo%20PNG2.webp"
                   alt="Avenue Group Logo"
-                  loading="eager"
-                  fetchPriority="high"
+                  loading="lazy"
+                  decoding="async"
                   width={330}
                   height={116}
                   className="h-[100px] md:h-[116px] w-auto object-contain transition-transform"
