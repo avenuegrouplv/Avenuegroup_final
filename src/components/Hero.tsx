@@ -4,7 +4,7 @@ import { useLanguage } from '../LanguageContext';
 import { Link } from 'react-router-dom';
 
 export const Hero: React.FC = () => {
-  const mainImage = 'https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Background1.jpg';
+  const mainImage = 'https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Background1.webp';
   const { t } = useLanguage();
 
   return (
