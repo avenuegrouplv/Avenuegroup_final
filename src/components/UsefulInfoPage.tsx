@@ -85,8 +85,16 @@ export const UsefulInfoPage: React.FC = () => {
             {articles.map((article) => (
               <div
                 key={article.id}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleArticleClick(article);
+                  }
+                }}
                 onClick={() => handleArticleClick(article)}
-                className="group bg-white border border-zinc-200 hover:border-yellow-500 hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer relative"
+                className="group bg-white border border-zinc-200 hover:border-yellow-500 hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer relative focus:outline-none focus:ring-2 focus:ring-yellow-500"
               >
                 {/* Article Image - Optimized sizes, eager loading */}
                 <div className="aspect-[4/3] bg-zinc-100 relative overflow-hidden flex-shrink-0 border-b border-zinc-100">

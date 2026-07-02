@@ -76,7 +76,10 @@ export const Header: React.FC = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 lg:mr-4 xl:mr-8">
+        <nav 
+          aria-label="Galvenā navigācija"
+          className="hidden md:flex items-center space-x-6 lg:space-x-8 lg:mr-4 xl:mr-8"
+        >
           {navLinks.map((link) => (
             <Link 
               key={link.id} 
@@ -103,6 +106,9 @@ export const Header: React.FC = () => {
           <div className="relative lang-dropdown-container ml-2">
             <button
               onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+              aria-expanded={isLangDropdownOpen}
+              aria-haspopup="true"
+              aria-label="Mainīt valodu / Change language"
               className="flex items-center space-x-2.5 bg-zinc-900 border border-zinc-800 text-zinc-100 px-4 py-2.5 text-sm font-bold uppercase hover:bg-zinc-850 hover:text-white transition-all cursor-pointer rounded-none"
             >
               <span className="text-base select-none">
@@ -151,7 +157,13 @@ export const Header: React.FC = () => {
 
         {/* Mobile Toggle */}
         <div className="md:hidden flex items-center space-x-4">
-          <button className="text-white focus:outline-none" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button 
+            className="text-white focus:outline-none" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Aizvērt izvēlni" : "Atvērt izvēlni"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+          >
             {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
@@ -159,7 +171,12 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#141414] border-b border-zinc-800 shadow-xl p-6 flex flex-col space-y-4 items-end animate-in fade-in slide-in-from-top-4 duration-250">
+        <div 
+          id="mobile-menu"
+          role="region"
+          aria-label="Mobilā izvēlne"
+          className="md:hidden absolute top-full left-0 right-0 bg-[#141414] border-b border-zinc-800 shadow-xl p-6 flex flex-col space-y-4 items-end animate-in fade-in slide-in-from-top-4 duration-250"
+        >
           {navLinks.map((link) => (
             <div key={link.id} className="w-full text-right">
               <Link 

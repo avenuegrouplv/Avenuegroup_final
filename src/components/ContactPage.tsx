@@ -122,8 +122,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                 <input type="hidden" name="form-name" value="contact" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-1">
-                    <label className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelName')}</label>
+                    <label htmlFor="contact-name" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelName')}</label>
                     <input 
+                      id="contact-name"
                       type="text" 
                       name="name"
                       value={formData.name}
@@ -133,8 +134,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelCompany')}</label>
+                    <label htmlFor="contact-company" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelCompany')}</label>
                     <input 
+                      id="contact-company"
                       type="text" 
                       name="company"
                       value={formData.company}
@@ -146,8 +148,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-1">
-                    <label className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelEmail')}</label>
+                    <label htmlFor="contact-email" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelEmail')}</label>
                     <input 
+                      id="contact-email"
                       type="email" 
                       name="email"
                       value={formData.email}
@@ -157,8 +160,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelPhone')}</label>
+                    <label htmlFor="contact-phone" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelPhone')}</label>
                     <input 
+                      id="contact-phone"
                       type="tel" 
                       name="phone"
                       value={formData.phone}
@@ -170,8 +174,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                 </div>
 
                 <div className="space-y-1">
-                  <label className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelMessage')}</label>
+                  <label htmlFor="contact-message" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelMessage')}</label>
                   <textarea 
+                    id="contact-message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
@@ -180,12 +185,22 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                   ></textarea>
                 </div>
 
-                <div className="flex items-start space-x-3 cursor-pointer group/consent" onClick={() => setConsent(!consent)}>
-                  <div className={`w-5 h-5 border-2 flex items-center justify-center shrink-0 transition-all mt-0.5 ${consent ? 'bg-yellow-500 border-yellow-500 shadow-sm' : 'border-zinc-300 bg-white group-hover/consent:border-zinc-500'}`}>
+                <div className="flex items-start space-x-3 group/consent">
+                  <button
+                    type="button"
+                    role="checkbox"
+                    aria-checked={consent}
+                    id="consent-checkbox"
+                    aria-label={t('contact.consentText')}
+                    onClick={() => setConsent(!consent)}
+                    className={`w-5 h-5 border-2 flex items-center justify-center shrink-0 transition-all mt-0.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 ${consent ? 'bg-yellow-500 border-yellow-500 shadow-sm' : 'border-zinc-300 bg-white group-hover/consent:border-zinc-500'}`}
+                  >
                     {consent && <Check size={14} className="text-zinc-950 font-bold" />}
-                  </div>
+                  </button>
                   <div className="text-[11px] text-zinc-650 font-semibold tracking-wide leading-relaxed select-none italic group-hover/consent:text-zinc-900 transition-colors">
-                    {t('contact.consentText')}{' '}
+                    <label htmlFor="consent-checkbox" className="cursor-pointer">
+                      {t('contact.consentText')}{' '}
+                    </label>
                     <button 
                       type="button"
                       onClick={(e) => {

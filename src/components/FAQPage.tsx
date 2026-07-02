@@ -59,6 +59,9 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
           {faqs.map((faq: any, i: number) => (
             <div key={i} className="border border-zinc-200 bg-white hover:border-yellow-500 transition-all duration-200 shadow-sm">
               <button 
+                id={`faq-btn-${i}`}
+                aria-expanded={openIndex === i}
+                aria-controls={`faq-panel-${i}`}
                 className="w-full flex justify-between items-center py-4 px-5 md:py-4.5 md:px-6 text-left transition-colors cursor-pointer group"
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
               >
@@ -74,7 +77,12 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
                 )}
               </button>
               {openIndex === i && (
-                <div className="pb-4 px-5 md:pb-5 md:px-6 pt-0 text-zinc-650 text-xs md:text-sm leading-relaxed border-t border-zinc-100 animate-in fade-in slide-in-from-top-1 duration-200">
+                <div 
+                  id={`faq-panel-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-btn-${i}`}
+                  className="pb-4 px-5 md:pb-5 md:px-6 pt-0 text-zinc-650 text-xs md:text-sm leading-relaxed border-t border-zinc-100 animate-in fade-in slide-in-from-top-1 duration-200"
+                >
                   {Array.isArray(faq.a) ? (
                     <ul className="space-y-2 pt-4">
                       {faq.a.map((item: any, idx: number) => (

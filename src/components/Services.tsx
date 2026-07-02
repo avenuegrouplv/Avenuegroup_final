@@ -38,7 +38,15 @@ export const Services: React.FC = () => {
           {services.map((s) => (
             <div 
               key={s.id} 
-              className="bg-white border border-zinc-200 px-5 py-4.5 hover:border-yellow-500 hover:shadow-lg transition-all duration-300 group flex flex-col h-full cursor-pointer relative"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  navigate(`/Pakalpojumi?id=${s.id}`);
+                }
+              }}
+              className="bg-white border border-zinc-200 px-5 py-4.5 hover:border-yellow-500 hover:shadow-lg transition-all duration-300 group flex flex-col h-full cursor-pointer relative focus:outline-none focus:ring-2 focus:ring-yellow-500"
               onClick={() => {
                 navigate(`/Pakalpojumi?id=${s.id}`);
               }}
