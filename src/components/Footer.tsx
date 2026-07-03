@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
   const { t, language } = useLanguage();
+  const developerLabel = language === 'lv' ? 'Izstrādātājs:' : language === 'en' ? 'Developer:' : 'Разработчик:';
   const navLinks = [
     { name: t('nav.home'), href: '/' },
     { name: t('nav.services'), href: '/pakalpojumi' },
@@ -15,9 +16,9 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-[#1a1a1a] border-t border-white/5 py-16 text-gray-300">
+    <footer className="bg-[#1a1a1a] border-t border-white/5 pt-12 pb-8 text-gray-300">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-7 gap-y-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-7 gap-y-12 mb-6">
           {/* Logo Column */}
           <div className="flex flex-col">
             <div className="mb-8">
@@ -96,31 +97,48 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 tracking-wide font-bold font-sans">
-          <div className="text-center md:text-left leading-relaxed mb-4 md:mb-0">
+        <div className="pt-5 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 tracking-wide font-bold font-sans relative">
+          <div className="text-center md:text-left leading-relaxed mb-4 md:mb-0 md:whitespace-nowrap shrink-0">
             <div>2025 &copy; {t('footer.rights')} | SIA "Avenue Group"</div>
           </div>
-          <div className="flex space-x-6 pr-14 md:pr-20 flex-wrap justify-center md:justify-end gap-y-2">
+          <div className="flex space-x-4 md:space-x-6 flex-wrap justify-center md:absolute md:left-1/2 md:-translate-x-1/2 gap-y-2">
             <Link 
               to="/privatums"
-              className="hover:text-yellow-500 transition-colors"
+              className="hover:text-yellow-500 transition-colors whitespace-nowrap"
             >
               {t('footer.privacy')}
             </Link>
             <span className="text-gray-800">|</span>
             <Link 
               to="/sikdatnes"
-              className="hover:text-yellow-500 transition-colors"
+              className="hover:text-yellow-500 transition-colors whitespace-nowrap"
             >
               {t('footer.cookies')}
             </Link>
             <span className="text-gray-800">|</span>
             <Link 
               to="/pakalpojuma-noteikumi"
-              className="hover:text-yellow-500 transition-colors"
+              className="hover:text-yellow-500 transition-colors whitespace-nowrap"
             >
               {language === 'lv' ? 'Lietošanas noteikumi' : language === 'en' ? 'Terms of Service' : 'Правила'}
             </Link>
+          </div>
+
+          {/* Developer Section (Desktop: right bottom corner, Mobile: bottom center) */}
+          <div className="flex items-center space-x-2 mt-6 md:mt-0 z-10">
+            <span className="text-gray-400 text-xs font-bold italic">{developerLabel}</span>
+            <a 
+              href="https://www.facebook.com/share/17wdCm8QSy/?mibextid=wwXIfr" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="cursor-pointer z-10 inline-flex items-center"
+            >
+              <img 
+                src="/logo.png" 
+                alt="Developer Logo" 
+                className="w-[38px] h-[38px] rounded-full border border-yellow-400/10 object-cover pointer-events-none"
+              />
+            </a>
           </div>
         </div>
       </div>
