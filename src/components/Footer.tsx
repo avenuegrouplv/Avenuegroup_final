@@ -15,9 +15,9 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-[#1a1a1a] border-t border-white/5 py-16 text-gray-300">
+    <footer className="bg-[#1a1a1a] border-t border-white/5 pt-12 pb-8 text-gray-300">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-7 gap-y-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-7 gap-y-12 mb-6">
           {/* Logo Column */}
           <div className="flex flex-col">
             <div className="mb-8">
@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
           {/* Social Columns */}
           <div className="lg:pl-10">
             <h4 className="text-white font-black italic tracking-tighter text-sm uppercase mb-6 border-l-2 border-yellow-400 pl-4">{t('footer.followTitle')}</h4>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mb-6">
               <a 
                 href="https://www.facebook.com/profile.php?id=61576913053177" 
                 target="_blank" 
@@ -91,12 +91,32 @@ export const Footer: React.FC = () => {
               <div className="space-y-2">
                 <a href="mailto:services@avenuegroup.lv" className="block text-xs text-yellow-500 hover:text-white transition-colors font-black italic underline underline-offset-4">services@avenuegroup.lv</a>
                 <a href="tel:+37126739899" className="block text-xs text-white hover:text-yellow-400 transition-colors font-black italic">+371 26 739 899</a>
+                
+                <div className="flex items-center space-x-3 pt-3">
+                  <span className="text-xs font-bold italic text-gray-400">
+                    {language === 'lv' ? 'Izstrādātājs:' : language === 'en' ? 'Developer:' : 'Разработчик:'}
+                  </span>
+                  <a 
+                    href="https://www.facebook.com/share/17wdCm8QSy/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer z-10 block hover:opacity-80 transition-opacity"
+                  >
+                    <img 
+                      src="/logo.png" 
+                      alt="Developer Logo"
+                      width={38}
+                      height={38}
+                      className="w-[38px] h-[38px] rounded-full border border-yellow-500/10 object-cover pointer-events-none"
+                    />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 tracking-wide font-bold font-sans">
+        <div className="pt-4 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 tracking-wide font-bold font-sans">
           <div className="text-center md:text-left leading-relaxed mb-4 md:mb-0">
             <div>2025 &copy; {t('footer.rights')} | SIA "Avenue Group"</div>
           </div>
