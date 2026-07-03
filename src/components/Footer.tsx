@@ -2,6 +2,7 @@ import React from 'react';
 import { Facebook, Instagram } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { Link } from 'react-router-dom';
+import developerLogo from './logo.png';
 
 export const Footer: React.FC = () => {
   const { t, language } = useLanguage();
@@ -134,7 +135,7 @@ export const Footer: React.FC = () => {
               className="cursor-pointer z-10 inline-flex items-center"
             >
               <img 
-                src="/logo.png" 
+                src={developerLogo} 
                 alt="Developer Logo" 
                 className="w-[38px] h-[38px] rounded-full border border-yellow-400/10 object-cover pointer-events-none"
               />
