@@ -2,7 +2,6 @@ import React from 'react';
 import { Facebook, Instagram } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { Link } from 'react-router-dom';
-import developerLogo from './logo.png';
 
 export const Footer: React.FC = () => {
   const { t, language } = useLanguage();
@@ -126,19 +125,15 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Developer Section (Desktop: right bottom corner, Mobile: bottom center) */}
-          <div className="flex items-center space-x-2 mt-6 md:mt-0 z-10">
-            <span className="text-gray-400 text-xs font-bold italic">{developerLabel}</span>
+          <div className="flex items-center space-x-1.5 mt-6 md:mt-0 z-10">
+            <span className="text-gray-500 text-xs font-bold italic">{developerLabel}</span>
             <a 
               href="https://www.facebook.com/share/17wdCm8QSy/?mibextid=wwXIfr" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="cursor-pointer z-10 inline-flex items-center"
+              className="text-yellow-500 hover:text-white transition-colors text-xs font-black italic tracking-wider uppercase cursor-pointer"
             >
-              <img 
-                src={developerLogo} 
-                alt="Developer Logo" 
-                className="w-[38px] h-[38px] rounded-full border border-yellow-400/10 object-cover pointer-events-none"
-              />
+              SageOn
             </a>
           </div>
         </div>
