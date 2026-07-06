@@ -22,6 +22,7 @@ const CheckoutPage = React.lazy(() => import('./components/CheckoutPage'));
 const TermsOfServicePage = React.lazy(() => import('./components/TermsOfServicePage'));
 const ContractTemplatesPage = React.lazy(() => import('./components/ContractTemplatesPage').then(module => ({ default: module.ContractTemplatesPage })));
 const CustomDynamicPage = React.lazy(() => import('./components/CustomDynamicPage').then(module => ({ default: module.CustomDynamicPage })));
+const KeystaticAdminPage = React.lazy(() => import('./components/KeystaticAdminPage'));
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -55,8 +56,9 @@ const Home: React.FC = () => {
 const AppContent: React.FC = () => {
   const location = useLocation();
   const { language } = useLanguage();
+  const isCmsPage = location.pathname.startsWith('/admin');
   const isHomePage = location.pathname === '/' || location.pathname === '/sakums';
-  const isSpecialPage = !isHomePage;
+  const isSpecialPage = !isHomePage && !isCmsPage;
 
   useEffect(() => {
     // Dynamic SEO Metadata for Avenue Group routes based on language and pathname
@@ -203,6 +205,23 @@ const AppContent: React.FC = () => {
       canonicalLink.setAttribute('href', `https://avenuegroup.lv${cleanPath || '/'}`);
     }
   }, [location.pathname, language]);
+
+  if (isCmsPage) {
+    return (
+      <div className="min-h-screen bg-zinc-900 text-white">
+        <React.Suspense fallback={
+          <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-900 text-white font-sans p-6">
+            <div className="w-10 h-10 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+            <div className="font-bold tracking-widest text-xs uppercase text-zinc-400">Ielādē CMS...</div>
+          </div>
+        }>
+          <Routes>
+            <Route path="/admin/*" element={<KeystaticAdminPage />} />
+          </Routes>
+        </React.Suspense>
+      </div>
+    );
+  }
 
   return (
     <div id="top" className="min-h-screen selection:bg-yellow-200 selection:text-zinc-900 bg-[#ebebeb] text-zinc-900">
