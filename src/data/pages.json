@@ -1,0 +1,15 @@
+{
+  "pages": [
+    {
+      "slug": "galerijas",
+      "title": "Galerijas",
+      "content": "Šeit Jūs varat apskatīt mūsu objektu galerijas un paveiktos darbus komercīpašumu un privātīpašumu apsaimniekošanā.",
+      "images": [
+        {
+          "image": "/images/noderigi/raksti/kas-notiek-ja-mainas-kopipasnieks.webp",
+          "caption": "Mūsu apsaimniekotais objekts Rīgas centrā"
+        }
+      ]
+    }
+  ]
+}

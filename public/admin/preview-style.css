@@ -1,0 +1,95 @@
+/* CMS Preview Style to match Avenue Group visual identity */
+@import url('https://fonts.googleapis.com/css2?family=Offside&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+body {
+  background-color: #141414 !important;
+  color: #ffffff !important;
+  font-family: "Space Grotesk", sans-serif !important;
+  padding: 2rem !important;
+}
+
+/* Ensure container itself has correct color */
+div[id^="nc-root"] {
+  background-color: #141414 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff !important;
+  font-family: "Offside", system-ui, sans-serif !important;
+  letter-spacing: -0.025em;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1rem !important;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 2rem !important;
+  color: #b38207 !important;
+}
+
+h2 {
+  font-size: 1.5rem !important;
+}
+
+p {
+  color: #ebebeb !important;
+  line-height: 1.7 !important;
+  margin-bottom: 1.25rem !important;
+  font-size: 1rem !important;
+}
+
+a {
+  color: #b38207 !important;
+  text-decoration: underline !important;
+}
+
+img {
+  border-radius: 0.5rem !important;
+  border: 1px solid #b38207 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 1.5rem 0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+ul, ol {
+  margin-left: 1.5rem !important;
+  margin-bottom: 1.25rem !important;
+  color: #ebebeb !important;
+}
+
+li {
+  margin-bottom: 0.5rem !important;
+}
+
+blockquote {
+  border-left: 4px solid #b38207 !important;
+  padding-left: 1rem !important;
+  color: #a1a1aa !important;
+  font-style: italic !important;
+  margin: 1.5rem 0 !important;
+}
+
+/* Specific styling for list items widget, tables, etc */
+table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 1.5rem 0 !important;
+}
+
+th, td {
+  border: 1px solid #333 !important;
+  padding: 0.75rem !important;
+  text-align: left !important;
+}
+
+th {
+  background-color: #222 !important;
+  color: #b38207 !important;
+}
+
+/* Dark theme overrides for standard decap container classes */
+.nc-previewPane-frame {
+  background-color: #141414 !important;
+}

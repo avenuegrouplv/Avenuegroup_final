@@ -2,10 +2,17 @@ import React from 'react';
 import { Facebook, Instagram } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { Link } from 'react-router-dom';
+import { customPages } from '../data/pages';
 
 export const Footer: React.FC = () => {
   const { t, language } = useLanguage();
   const developerLabel = language === 'lv' ? 'Izstrādātājs:' : language === 'en' ? 'Developer:' : 'Разработчик:';
+  
+  const dynamicLinks = customPages.map((page) => ({
+    name: page.title,
+    href: `/lapa/${page.slug}`
+  }));
+
   const navLinks = [
     { name: t('nav.home'), href: '/' },
     { name: t('nav.services'), href: '/pakalpojumi' },
@@ -13,6 +20,7 @@ export const Footer: React.FC = () => {
     { name: language === 'lv' ? 'Noderīgi' : language === 'en' ? 'Useful info' : 'Полезно', href: '/noderigi' },
     { name: t('nav.faq'), href: '/buj' },
     { name: t('nav.contact'), href: '/kontakti' },
+    ...dynamicLinks
   ];
 
   return (

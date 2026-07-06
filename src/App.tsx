@@ -21,6 +21,7 @@ const UsefulInfoPage = React.lazy(() => import('./components/UsefulInfoPage').th
 const CheckoutPage = React.lazy(() => import('./components/CheckoutPage'));
 const TermsOfServicePage = React.lazy(() => import('./components/TermsOfServicePage'));
 const ContractTemplatesPage = React.lazy(() => import('./components/ContractTemplatesPage').then(module => ({ default: module.ContractTemplatesPage })));
+const CustomDynamicPage = React.lazy(() => import('./components/CustomDynamicPage').then(module => ({ default: module.CustomDynamicPage })));
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -226,6 +227,7 @@ const AppContent: React.FC = () => {
             <Route path="/iegade/:docId" element={<CheckoutPage />} />
             <Route path="/pakalpojuma-noteikumi" element={<TermsOfServicePage />} />
             <Route path="/ligumu-paraugi" element={<ContractTemplatesPage />} />
+            <Route path="/lapa/:slug" element={<CustomDynamicPage />} />
           </Routes>
         </React.Suspense>
       </main>

@@ -311,3 +311,27 @@ collections:
                 ] }
               - { label: "Cena (Eiro centos vai eiro, piem: 15 vai 15.00)", name: "price", widget: "number", value_type: "float" }
               - { label: "Vai tas ir pakalpojums (Service)?", name: "isService", widget: "boolean", default: false, required: false }
+
+  # 4. Custom Pages (Dinamiskās lapas)
+  - name: "custom_pages_collection"
+    label: "Dinamiskās Lapas"
+    i18n: false
+    files:
+      - name: "pages"
+        label: "Visas Lapas"
+        file: "src/data/pages.json"
+        fields:
+          - label: "Lapu saraksts"
+            name: "pages"
+            widget: "list"
+            fields:
+              - { label: "Slug (Saites adrese, piem: galerijas)", name: "slug", widget: "string" }
+              - { label: "Nosaukums / Virsraksts", name: "title", widget: "string" }
+              - { label: "Saturs (Apraksts)", name: "content", widget: "markdown" }
+              - label: "Attēlu galerija"
+                name: "images"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Attēls", name: "image", widget: "image" }
+                  - { label: "Attēla paraksts", name: "caption", widget: "string", required: false }
