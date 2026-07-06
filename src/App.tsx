@@ -58,6 +58,37 @@ const AppContent: React.FC = () => {
   const isSpecialPage = !isHomePage;
 
   useEffect(() => {
+    // React fallback handler for Netlify Identity invitation or recovery tokens
+    const hash = window.location.hash;
+    if (
+      hash &&
+      (hash.includes('invite_token=') ||
+       hash.includes('recovery_token=') ||
+       hash.includes('confirmation_token=') ||
+       hash.includes('_token='))
+    ) {
+      console.log('React detected Netlify Identity token in hash:', hash);
+      const interval = setInterval(() => {
+        const netlifyIdentity = (window as any).netlifyIdentity;
+        if (netlifyIdentity) {
+          clearInterval(interval);
+          console.log('Triggering Netlify Identity widget open via React mounting effect...');
+          setTimeout(() => {
+            try {
+              netlifyIdentity.open();
+            } catch (e) {
+              console.error('Error opening netlifyIdentity widget:', e);
+            }
+          }, 150);
+        }
+      }, 100);
+      
+      // Safety auto-cleanup after 10 seconds
+      setTimeout(() => clearInterval(interval), 10000);
+    }
+  }, []);
+
+  useEffect(() => {
     // Dynamic SEO Metadata for Avenue Group routes based on language and pathname
     const path = location.pathname;
     let title = '';

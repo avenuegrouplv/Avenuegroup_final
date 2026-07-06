@@ -167,6 +167,8 @@
       ]
     }
     </script>
+    <!-- Netlify Identity Widget inside head to parse tokens early -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <!-- Meta Pixel Fallback -->
@@ -176,8 +178,7 @@
     <!-- End Meta Pixel Fallback -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Netlify Identity Initialization and Token Handler -->
     <script>
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", function(user) {
@@ -186,18 +187,21 @@
               document.location.href = "/admin/";
             });
           }
-        });
 
-        // Auto-open widget when invitation, recovery or confirmation token is present in the URL hash
-        if (
-          document.location.hash &&
-          (document.location.hash.indexOf("_token=") !== -1 ||
-           document.location.hash.indexOf("invite_token=") !== -1 ||
-           document.location.hash.indexOf("recovery_token=") !== -1 ||
-           document.location.hash.indexOf("confirmation_token=") !== -1)
-        ) {
-          window.netlifyIdentity.open();
-        }
+          // Auto-open widget when invitation, recovery or confirmation token is present in the URL hash
+          if (
+            document.location.hash &&
+            (document.location.hash.indexOf("_token=") !== -1 ||
+             document.location.hash.indexOf("invite_token=") !== -1 ||
+             document.location.hash.indexOf("recovery_token=") !== -1 ||
+             document.location.hash.indexOf("confirmation_token=") !== -1)
+          ) {
+            console.log("Token detected during init. Auto-opening Netlify Identity Widget...");
+            setTimeout(function() {
+              window.netlifyIdentity.open();
+            }, 100);
+          }
+        });
       }
     </script>
   </body>
