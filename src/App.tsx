@@ -56,9 +56,15 @@ const Home: React.FC = () => {
 const AppContent: React.FC = () => {
   const location = useLocation();
   const { language } = useLanguage();
-  const isCmsPage = location.pathname.startsWith('/admin');
+  const isCmsPage = location.pathname.startsWith('/admin') || location.pathname.startsWith('/keystatic');
   const isHomePage = location.pathname === '/' || location.pathname === '/sakums';
   const isSpecialPage = !isHomePage && !isCmsPage;
+
+  useEffect(() => {
+    if ((window as any).netlifyIdentity) {
+      (window as any).netlifyIdentity.init();
+    }
+  }, []);
 
   useEffect(() => {
     // Dynamic SEO Metadata for Avenue Group routes based on language and pathname
@@ -216,7 +222,8 @@ const AppContent: React.FC = () => {
           </div>
         }>
           <Routes>
-            <Route path="/admin/*" element={<KeystaticAdminPage />} />
+            <Route path="/keystatic/*" element={<KeystaticAdminPage />} />
+            <Route path="/admin/*" element={<Navigate to="/keystatic" replace />} />
           </Routes>
         </React.Suspense>
       </div>
