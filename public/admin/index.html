@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Offside&family=Space+Grotesk:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
   
   <style>
-    /* Custom Login Page Styling */
+    /* Custom Minimalist Generic Login Page Styling */
     html, body {
       margin: 0;
       padding: 0;
@@ -33,7 +33,7 @@
       align-items: center;
       justify-content: center;
       background-color: #141414;
-      background-image: radial-gradient(circle at 50% 50%, #1e1e1e 0%, #141414 100%);
+      background-image: radial-gradient(circle at 50% 50%, #1c1c1e 0%, #141414 100%);
       padding: 20px;
       box-sizing: border-box;
     }
@@ -48,50 +48,36 @@
 
     .login-card {
       background-color: #1c1c1e;
-      border: 1px solid rgba(179, 130, 7, 0.3);
-      padding: 3.5rem 2.5rem;
+      border: 1px solid #2d2d30;
+      padding: 4rem 2.5rem;
       width: 100%;
-      max-width: 420px;
+      max-width: 400px;
       text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-      position: relative;
-    }
-
-    .login-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background-color: #b38207;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
     }
 
     .login-logo {
-      font-family: "Offside", sans-serif;
-      font-size: 1.85rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.8rem;
       font-weight: 700;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.1em;
       margin-bottom: 0.5rem;
       color: #ffffff;
-    }
-
-    .login-logo span {
-      color: #b38207;
     }
 
     .login-subtitle {
       font-family: "Space Grotesk", sans-serif;
       font-size: 0.85rem;
-      color: #a1a1aa;
+      color: #8e8e93;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
       margin-bottom: 3rem;
       font-weight: 500;
     }
 
     .btn-login {
-      background-color: #b38207;
+      background-color: #ffffff;
       color: #141414;
       border: none;
       width: 100%;
@@ -100,16 +86,35 @@
       font-size: 0.9rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(179, 130, 7, 0.2);
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
     }
 
     .btn-login:hover {
-      background-color: #d49c12;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(179, 130, 7, 0.3);
+      background-color: #f2f2f7;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Universāli paslēpj Decap CMS kļūdu paziņojumus un sarkanos banerus uz ekrāna */
+    .nc-app-layout-errors,
+    .nc-notification-container,
+    div[class*="Notification"],
+    div[class*="notification"],
+    div[class*="Toast"],
+    div[class*="toast"],
+    div[class*="Error"],
+    div[class*="error"],
+    div[style*="background-color: rgb(240, 80, 80)"],
+    div[style*="background-color: rgb(244, 67, 54)"],
+    div[style*="background-color: #f44336"] {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
     }
 
     /* Netlify Widget Iframe Custom Overrides to fit styling */
@@ -120,11 +125,11 @@
 </head>
 <body class="cms-logged-out">
 
-  <!-- Custom Beautiful Login Screen -->
+  <!-- Custom Beautiful Minimalist Login Screen -->
   <div id="custom-login-container">
     <div class="login-card">
-      <div class="login-logo">AVENUE <span>GROUP</span></div>
-      <div class="login-subtitle">Satura Pārvaldības Sistēma</div>
+      <div class="login-logo">CMS</div>
+      <div class="login-subtitle">Satura pārvaldības sistēma</div>
       
       <button id="custom-login-btn" class="btn-login">Pieslēgties</button>
     </div>
@@ -452,9 +457,9 @@ collections:
               - { label: "Cena (Eiro centos vai eiro, piem: 15 vai 15.00)", name: "price", widget: "number", value_type: "float" }
               - { label: "Vai tas ir pakalpojums (Service)?", name: "isService", widget: "boolean", default: false, required: false }
 
-  # 4. Custom Pages (Dinamiskās lapas)
+  # 4. Custom Pages (Jaunas lapas)
   - name: "custom_pages_collection"
-    label: "Dinamiskās Lapas"
+    label: "Jaunas Lapas"
     i18n: false
     files:
       - name: "pages"
@@ -466,15 +471,67 @@ collections:
             widget: "list"
             fields:
               - { label: "Slug (Saites adrese, piem: galerijas)", name: "slug", widget: "string" }
-              - { label: "Nosaukums / Virsraksts", name: "title", widget: "string" }
-              - { label: "Saturs (Apraksts)", name: "content", widget: "markdown" }
-              - label: "Attēlu galerija"
-                name: "images"
+              - { label: "Lapas nosaukums (Virsraksts)", name: "title", widget: "string" }
+              - { label: "Rādīt augšējā rīkjoslā (Navigācijā)?", name: "showInHeader", widget: "boolean", default: false }
+              - { label: "Secība rīkjoslā (Skaitlis, piem: 1)", name: "headerOrder", widget: "number", value_type: "int", default: 5, required: false }
+              - label: "Lapas satura bloki (Satura būvētājs)"
+                name: "blocks"
                 widget: "list"
-                required: false
-                fields:
-                  - { label: "Attēls", name: "image", widget: "image" }
-                  - { label: "Attēla paraksts", name: "caption", widget: "string", required: false }
+                types:
+                  - label: "Teksta bloks"
+                    name: "text_block"
+                    widget: "object"
+                    fields:
+                      - { label: "Virsraksts", name: "title", widget: "string", required: false }
+                      - { label: "Saturs (atbalsta markdown)", name: "content", widget: "markdown" }
+                  - label: "Attēlu galerija"
+                    name: "gallery_block"
+                    widget: "object"
+                    fields:
+                      - { label: "Sadaļas virsraksts", name: "title", widget: "string", required: false }
+                      - label: "Attēlu saraksts"
+                        name: "images"
+                        widget: "list"
+                        fields:
+                          - { label: "Attēls", name: "image", widget: "image" }
+                          - { label: "Paraksts", name: "caption", widget: "string", required: false }
+                  - label: "Atsauksmju bloks"
+                    name: "testimonials_block"
+                    widget: "object"
+                    fields:
+                      - { label: "Sadaļas virsraksts", name: "title", widget: "string", required: false }
+                      - label: "Atsauksmju saraksts"
+                        name: "testimonials"
+                        widget: "list"
+                        fields:
+                          - { label: "Autors (Vārds)", name: "author", widget: "string" }
+                          - { label: "Amats / Uzņēmums", name: "company", widget: "string", required: false }
+                          - { label: "Vērtējums (1-5)", name: "rating", widget: "number", value_type: "int", default: 5 }
+                          - { label: "Atsauksmes teksts", name: "text", widget: "text" }
+                  - label: "Soctīklu publikāciju bloks"
+                    name: "social_block"
+                    widget: "object"
+                    fields:
+                      - { label: "Sadaļas virsraksts", name: "title", widget: "string", required: false }
+                      - { label: "Soctīklu ieraksti"
+                        name: "posts"
+                        widget: "list"
+                        fields:
+                          - { label: "Platforma", name: "platform", widget: "select", options: ["Facebook", "Instagram", "LinkedIn", "Twitter", "TikTok", "Citi"] }
+                          - { label: "Ieraksta URL saite", name: "url", widget: "string" }
+                          - { label: "Ieraksta embed kods / teksts", name: "embed_code", widget: "text", required: false }
+                  - label: "Jaunākie bloga raksti"
+                    name: "blog_posts_block"
+                    widget: "object"
+                    fields:
+                      - { label: "Sadaļas virsraksts", name: "title", widget: "string", required: false }
+                      - { label: "Rādāmo rakstu skaits", name: "count", widget: "number", value_type: "int", default: 3 }
+                  - label: "Saziņas un pieteikuma forma"
+                    name: "contact_form_block"
+                    widget: "object"
+                    fields:
+                      - { label: "Virsraksts", name: "title", widget: "string", required: false }
+                      - { label: "Apraksts", name: "description", widget: "text", required: false }
   </script>
 
   <script>
@@ -538,55 +595,106 @@ collections:
       });
 
       window.netlifyIdentity.on("logout", function() {
-        document.body.classList.add("cms-logged-out");
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.close();
+        }
+        // Clean up UI, hide Decap to avoid any flash, do NOT toggle layout states beforehand to avoid any layout shifts before reload
         var ncRoot = document.getElementById("nc-root");
         if (ncRoot) {
           ncRoot.style.display = "none";
         }
         setTimeout(function() {
           document.location.reload();
-        }, 100);
+        }, 80);
       });
     }
 
     // React iestatījumi priekšskatījuma logiem
     const h = window.h;
 
-    // 1. Dinamisko lapu priekšskatījuma template
+    // 1. Jauno lapu priekšskatījuma template
     const PagePreview = function(props) {
       const entry = props.entry;
       const pages = entry.getIn(['data', 'pages']);
       if (!pages) return h('div', { style: { padding: '20px', color: '#b38207' } }, 'Nav izveidotu lapu.');
 
-      return h('div', { className: 'pages-preview-container' },
+      return h('div', { className: 'pages-preview-container', style: { fontFamily: '"Space Grotesk", sans-serif', padding: '20px', backgroundColor: '#ebebeb', minHeight: '100vh', color: '#1c1c1e' } },
         pages.map(function(page, idx) {
-          const title = page.get('title') || 'Nosaukums';
+          const title = page.get('title') || 'Bez nosaukuma';
           const slug = page.get('slug') || '';
-          const content = page.get('content') || '';
-          const images = page.get('images') || window.Immutable.List();
+          const showInHeader = page.get('showInHeader') ? 'Rādīt navigācijā' : 'Slēpt navigācijā';
+          const blocks = page.get('blocks') || window.Immutable.List();
 
-          return h('div', { key: idx, className: 'custom-page-card' },
-            h('div', { className: 'page-header' },
-              h('span', { className: 'page-badge' }, 'Dinamiskā lapa'),
-              h('h1', null, title),
-              h('span', { className: 'page-slug' }, '/lapa/' + slug)
+          return h('div', { key: idx, style: { backgroundColor: '#ffffff', border: '1px solid #e4e4e7', padding: '30px', marginBottom: '30px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' } },
+            h('div', { style: { borderBottom: '2px solid #b38207', paddingBottom: '15px', marginBottom: '20px' } },
+              h('span', { style: { backgroundColor: '#1c1c1e', color: '#ffffff', fontSize: '10px', fontWeight: 'bold', padding: '4px 8px', textTransform: 'uppercase', letterSpacing: '0.05em' } }, 'Lapa: ' + showInHeader),
+              h('h1', { style: { margin: '10px 0 5px 0', fontSize: '24px', fontWeight: '900', color: '#141414', textTransform: 'uppercase' } }, title),
+              h('span', { style: { fontSize: '12px', color: '#b38207', fontWeight: 'bold' } }, '/lapa/' + slug)
             ),
-            h('div', { className: 'page-content-wrapper' },
-              h('p', { className: 'page-content-text' }, content)
-            ),
-            images.size > 0 ? h('div', { className: 'gallery-section' },
-              h('h3', null, 'Attēlu galerija'),
-              h('div', { className: 'gallery-grid' },
-                images.map(function(imgObj, imgIdx) {
-                  const src = imgObj.get('image');
-                  const caption = imgObj.get('caption');
-                  return h('div', { key: imgIdx, className: 'gallery-item' },
-                    h('img', { src: src }),
-                    caption ? h('p', { className: 'image-caption' }, caption) : null
+            blocks.size > 0 ? h('div', { style: { display: 'flex', flexDirection: 'column', gap: '30px' } },
+              blocks.map(function(block, bIdx) {
+                const type = block.get('type');
+                const bTitle = block.get('title') || '';
+                
+                if (type === 'text_block') {
+                  return h('div', { key: bIdx, style: { paddingBottom: '15px', borderBottom: '1px solid #f4f4f5' } },
+                    bTitle ? h('h3', { style: { fontSize: '18px', fontWeight: '800', margin: '0 0 10px 0' } }, bTitle) : null,
+                    h('div', { style: { fontSize: '14px', lineHeight: '1.6', color: '#3f3f46', whiteSpace: 'pre-wrap' } }, block.get('content') || '')
                   );
-                })
-              )
-            ) : null
+                } else if (type === 'gallery_block') {
+                  const bImages = block.get('images') || window.Immutable.List();
+                  return h('div', { key: bIdx, style: { paddingBottom: '15px', borderBottom: '1px solid #f4f4f5' } },
+                    h('h3', { style: { fontSize: '16px', fontWeight: '800', margin: '0 0 10px 0', color: '#b38207' } }, bTitle || 'Attēlu galerija'),
+                    h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '10px' } },
+                      bImages.map(function(img, imgIdx) {
+                        return h('div', { key: imgIdx, style: { textAlign: 'center' } },
+                          h('img', { src: img.get('image'), style: { width: '100%', height: '80px', objectFit: 'cover', border: '1px solid #e4e4e7' } }),
+                          img.get('caption') ? h('p', { style: { fontSize: '10px', margin: '4px 0 0 0', color: '#71717a' } }, img.get('caption')) : null
+                        );
+                      })
+                    )
+                  );
+                } else if (type === 'testimonials_block') {
+                  const bTesti = block.get('testimonials') || window.Immutable.List();
+                  return h('div', { key: bIdx, style: { paddingBottom: '15px', borderBottom: '1px solid #f4f4f5' } },
+                    h('h3', { style: { fontSize: '16px', fontWeight: '800', margin: '0 0 10px 0' } }, bTitle || 'Atsauksmes'),
+                    h('div', { style: { display: 'flex', flexDirection: 'column', gap: '10px' } },
+                      bTesti.map(function(t, tIdx) {
+                        return h('div', { key: tIdx, style: { backgroundColor: '#f9f9fb', padding: '12px', borderLeft: '3px solid #b38207' } },
+                          h('p', { style: { margin: '0 0 5px 0', fontSize: '13px', fontStyle: 'italic' } }, '"' + (t.get('text') || '') + '"'),
+                          h('strong', { style: { fontSize: '11px' } }, t.get('author') || ''),
+                          t.get('company') ? h('span', { style: { fontSize: '10px', color: '#71717a', marginLeft: '5px' } }, '(' + t.get('company') + ')') : null
+                        );
+                      })
+                    )
+                  );
+                } else if (type === 'social_block') {
+                  const bPosts = block.get('posts') || window.Immutable.List();
+                  return h('div', { key: bIdx, style: { paddingBottom: '15px', borderBottom: '1px solid #f4f4f5' } },
+                    h('h3', { style: { fontSize: '16px', fontWeight: '800', margin: '0 0 10px 0' } }, bTitle || 'Soctīklu publikācijas'),
+                    h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '10px' } },
+                      bPosts.map(function(p, pIdx) {
+                        return h('div', { key: pIdx, style: { border: '1px dashed #cccccc', padding: '10px', fontSize: '11px' } },
+                          h('span', { style: { fontWeight: 'bold', color: '#b38207' } }, '[' + (p.get('platform') || 'Citi') + '] '),
+                          h('a', { href: p.get('url'), target: '_blank', style: { color: '#0066cc', wordBreak: 'break-all' } }, p.get('url') || 'Saite')
+                        );
+                      })
+                    )
+                  );
+                } else if (type === 'blog_posts_block') {
+                  return h('div', { key: bIdx, style: { paddingBottom: '15px', borderBottom: '1px solid #f4f4f5' } },
+                    h('h3', { style: { fontSize: '16px', fontWeight: '800', margin: '0 0 5px 0' } }, bTitle || 'Jaunākie bloga raksti'),
+                    h('p', { style: { fontSize: '12px', color: '#71717a', margin: '0' } }, 'Automātiski parādīs pēdējos ' + (block.get('count') || 3) + ' rakstus no bloga.')
+                  );
+                } else if (type === 'contact_form_block') {
+                  return h('div', { key: bIdx, style: { padding: '15px', backgroundColor: '#f4f4f5', textAlign: 'center' } },
+                    h('h4', { style: { margin: '0 0 5px 0', fontSize: '14px', fontWeight: 'bold' } }, bTitle || 'Saziņas forma'),
+                    h('p', { style: { margin: '0', fontSize: '11px', color: '#71717a' } }, block.get('description') || 'Aizpildiet formu lai sazinātos.')
+                  );
+                }
+                return null;
+              })
+            ) : h('p', { style: { color: '#71717a', fontSize: '13px' } }, 'Lapa ir tukša (pievienojiet blokus satura būvētājā).')
           );
         })
       );

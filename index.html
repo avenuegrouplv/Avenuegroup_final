@@ -183,13 +183,14 @@
       // 1. Check if there is an identity token in the hash BEFORE widget initializes.
       // If a token is present, we clear any existing/stale logged-in session from localStorage
       // to avoid conflicts like "User not found" or "Logged in as...".
-      if (
-        document.location.hash &&
-        (document.location.hash.indexOf("_token=") !== -1 ||
-         document.location.hash.indexOf("invite_token=") !== -1 ||
-         document.location.hash.indexOf("recovery_token=") !== -1 ||
-         document.location.hash.indexOf("confirmation_token=") !== -1)
-      ) {
+      var hasIdentityToken = document.location.hash && (
+        document.location.hash.indexOf("_token=") !== -1 ||
+        document.location.hash.indexOf("invite_token=") !== -1 ||
+        document.location.hash.indexOf("recovery_token=") !== -1 ||
+        document.location.hash.indexOf("confirmation_token=") !== -1
+      );
+
+      if (hasIdentityToken) {
         console.log("Identity token detected in URL hash. Clearing stale sessions to prevent conflicts.");
         try {
           localStorage.removeItem("gotrue.user");
@@ -199,10 +200,13 @@
       }
 
       if (window.netlifyIdentity) {
-        // 2. Always register the login redirect handler
+        // 2. Only redirect to /admin/ if they logged in because they had an invite/confirmation/recovery token in the URL hash.
+        // This ensures normal website visitors with active background sessions never get redirected.
         window.netlifyIdentity.on("login", function() {
-          console.log("Login detected, redirecting to /admin/...");
-          document.location.href = "/admin/";
+          if (hasIdentityToken) {
+            console.log("Login detected from email token, redirecting to /admin/...");
+            document.location.href = "/admin/";
+          }
         });
       }
     </script>

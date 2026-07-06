@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { Link, useLocation } from 'react-router-dom';
+import { customPages } from '../data/pages';
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,13 +33,24 @@ export const Header: React.FC = () => {
     return () => document.removeEventListener('click', handleOutsideClick);
   }, [isLangDropdownOpen]);
 
-  // Ordered strictly as requested:
-  // 1) home -> 2) services -> 3) templates -> 4) useful -> 5) faq -> 6) contact
+  // Order custom pages if they are flagged to show in navigation
+  const customNavLinks = (customPages || [])
+    .filter((page) => page.showInHeader)
+    .sort((a, b) => (a.headerOrder ?? 99) - (b.headerOrder ?? 99))
+    .map((page) => ({
+      id: `custom-${page.slug}`,
+      name: page.title,
+      href: `/lapa/${page.slug}`
+    }));
+
+  // Ordered strictly as requested, now with custom dynamic pages cleanly embedded:
+  // 1) home -> 2) services -> 3) templates -> 4) useful -> [custom pages] -> 5) faq -> 6) contact
   const navLinks = [
     { id: 'home', name: t('nav.home'), href: '/' },
     { id: 'services', name: t('nav.services'), href: '/pakalpojumi' },
     { id: 'templates', name: t('nav.templates'), href: '/ligumu-paraugi' },
     { id: 'useful', name: language === 'lv' ? 'Noderīgi' : language === 'en' ? 'Useful info' : 'Полезно', href: '/noderigi' },
+    ...customNavLinks,
     { id: 'faq', name: t('nav.faq'), href: '/buj' },
     { id: 'contact', name: t('nav.contact'), href: '/kontakti' },
   ];
