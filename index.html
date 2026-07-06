@@ -180,14 +180,32 @@
     <script type="module" src="/src/main.tsx"></script>
     <!-- Netlify Identity Initialization and Token Handler -->
     <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", function(user) {
-          if (!user) {
-            window.netlifyIdentity.on("login", function() {
-              document.location.href = "/admin/";
-            });
-          }
+      // 1. Check if there is an identity token in the hash BEFORE widget initializes.
+      // If a token is present, we clear any existing/stale logged-in session from localStorage
+      // to avoid conflicts like "User not found" or "Logged in as...".
+      if (
+        document.location.hash &&
+        (document.location.hash.indexOf("_token=") !== -1 ||
+         document.location.hash.indexOf("invite_token=") !== -1 ||
+         document.location.hash.indexOf("recovery_token=") !== -1 ||
+         document.location.hash.indexOf("confirmation_token=") !== -1)
+      ) {
+        console.log("Identity token detected in URL hash. Clearing stale sessions to prevent conflicts.");
+        try {
+          localStorage.removeItem("gotrue.user");
+        } catch (e) {
+          console.error("Failed to clear localStorage:", e);
+        }
+      }
 
+      if (window.netlifyIdentity) {
+        // 2. Always register the login redirect handler
+        window.netlifyIdentity.on("login", function() {
+          console.log("Login detected, redirecting to /admin/...");
+          document.location.href = "/admin/";
+        });
+
+        window.netlifyIdentity.on("init", function(user) {
           // Auto-open widget when invitation, recovery or confirmation token is present in the URL hash
           if (
             document.location.hash &&
@@ -199,7 +217,7 @@
             console.log("Token detected during init. Auto-opening Netlify Identity Widget...");
             setTimeout(function() {
               window.netlifyIdentity.open();
-            }, 100);
+            }, 150);
           }
         });
       }
