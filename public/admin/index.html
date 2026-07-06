@@ -8,7 +8,11 @@
   <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
   <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Offside&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Oficiālie un autentiskie mājaslapas fonti no Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Offside&family=Space+Grotesk:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
   
   <style>
     /* Custom Login Page Styling */
@@ -47,9 +51,9 @@
     .login-card {
       background-color: #1c1c1e;
       border: 1px solid rgba(179, 130, 7, 0.3);
-      padding: 3rem 2.5rem;
+      padding: 3.5rem 2.5rem;
       width: 100%;
-      max-width: 450px;
+      max-width: 420px;
       text-align: center;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
       position: relative;
@@ -67,7 +71,7 @@
 
     .login-logo {
       font-family: "Offside", sans-serif;
-      font-size: 1.75rem;
+      font-size: 1.85rem;
       font-weight: 700;
       letter-spacing: 0.15em;
       margin-bottom: 0.5rem;
@@ -79,26 +83,13 @@
     }
 
     .login-subtitle {
+      font-family: "Space Grotesk", sans-serif;
       font-size: 0.85rem;
       color: #a1a1aa;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 2.5rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 3rem;
       font-weight: 500;
-    }
-
-    .login-welcome {
-      font-size: 1.15rem;
-      margin-bottom: 1rem;
-      color: #ffffff;
-      font-weight: 600;
-    }
-
-    .login-desc {
-      font-size: 0.85rem;
-      color: #71717a;
-      line-height: 1.6;
-      margin-bottom: 2.5rem;
     }
 
     .btn-login {
@@ -106,12 +97,12 @@
       color: #141414;
       border: none;
       width: 100%;
-      padding: 1rem;
-      font-family: "Offside", sans-serif;
-      font-size: 0.85rem;
-      font-weight: bold;
+      padding: 1.1rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 12px rgba(179, 130, 7, 0.2);
@@ -121,12 +112,6 @@
       background-color: #d49c12;
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(179, 130, 7, 0.3);
-    }
-
-    .login-footer {
-      margin-top: 3rem;
-      font-size: 0.75rem;
-      color: #52525b;
     }
 
     /* Netlify Widget Iframe Custom Overrides to fit styling */
@@ -143,16 +128,7 @@
       <div class="login-logo">AVENUE <span>GROUP</span></div>
       <div class="login-subtitle">Satura Pārvaldības Sistēma</div>
       
-      <div class="login-welcome">Sveicināti administrācijas panelī!</div>
-      <div class="login-desc">
-        Lai piekļūtu mājaslapas satura, pakalpojumu, rakstu un līgumu paraugu labošanas rīkiem, lūdzu, autorizējieties ar savu e-pastu un paroli.
-      </div>
-      
-      <button id="custom-login-btn" class="btn-login">Pieslēgties sistēmai</button>
-      
-      <div class="login-footer">
-        © 2026 Avenue Group. Visas tiesības aizsargātas.
-      </div>
+      <button id="custom-login-btn" class="btn-login">Pieslēgties</button>
     </div>
   </div>
 
@@ -528,22 +504,6 @@ collections:
       }
     }
 
-    // Dynamic state check for login/logout to hide/show UI elements cleanly
-    function checkAuthState() {
-      const user = localStorage.getItem("gotrue.user");
-      if (!user) {
-        document.body.classList.add("cms-logged-out");
-      } else {
-        document.body.classList.remove("cms-logged-out");
-      }
-    }
-
-    // Run check immediately
-    checkAuthState();
-
-    // Set interval to catch localStorage changes or state shifts
-    setInterval(checkAuthState, 200);
-
     // Setup click handler for custom login button
     document.getElementById("custom-login-btn").addEventListener("click", function() {
       if (window.netlifyIdentity) {
@@ -551,11 +511,20 @@ collections:
       }
     });
 
-    // Handle Netlify Identity authentication states cleanly
+    // Handle Netlify Identity authentication states cleanly using the robust official Netlify Identity pattern
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", function(user) {
         if (!user) {
           document.body.classList.add("cms-logged-out");
+          
+          // Only listen to login event and trigger reload if the user was previously logged out.
+          // This prevents the infinite reload loop on initial page load / session restore!
+          window.netlifyIdentity.on("login", function() {
+            document.body.classList.remove("cms-logged-out");
+            setTimeout(function() {
+              document.location.reload();
+            }, 100);
+          });
         } else {
           document.body.classList.remove("cms-logged-out");
         }
@@ -572,14 +541,6 @@ collections:
         }
         
         // Pārlādējam lapu, lai nodrošinātu drošu un tīru autorizācijas loga stāvokli
-        setTimeout(function() {
-          document.location.reload();
-        }, 100);
-      });
-
-      window.netlifyIdentity.on("login", function(user) {
-        console.log("Ielogošanās veiksmīga, ielādē interfeisu...");
-        document.body.classList.remove("cms-logged-out");
         setTimeout(function() {
           document.location.reload();
         }, 100);
