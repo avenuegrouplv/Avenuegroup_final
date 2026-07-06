@@ -4,8 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Avenue Group CMS - Satura pārvaldības sistēma</title>
-  <!-- Norādām precīzu un absolūtu konfigurācijas faila atrašanās vietu -->
-  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
   <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   
@@ -511,39 +509,38 @@ collections:
       }
     });
 
-    // Handle Netlify Identity authentication states cleanly using the robust official Netlify Identity pattern
+    // Handle Netlify Identity authentication states cleanly and robustly
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", function(user) {
         if (!user) {
           document.body.classList.add("cms-logged-out");
-          
-          // Only listen to login event and trigger reload if the user was previously logged out.
-          // This prevents the infinite reload loop on initial page load / session restore!
-          window.netlifyIdentity.on("login", function() {
-            document.body.classList.remove("cms-logged-out");
-            setTimeout(function() {
-              document.location.reload();
-            }, 100);
-          });
         } else {
           document.body.classList.remove("cms-logged-out");
         }
       });
 
-      window.netlifyIdentity.on("logout", function() {
-        console.log("Izlogošanās konstatēta. Tīra interfeisa sagatavošana...");
-        document.body.classList.add("cms-logged-out");
-        
-        // Paslēpjam CMS elementu
-        var ncRoot = document.getElementById("nc-root");
-        if (ncRoot) {
-          ncRoot.style.display = "none";
+      window.netlifyIdentity.on("login", function(user) {
+        // Reload only if we were previously logged out, preventing duplicate loads
+        if (document.body.classList.contains("cms-logged-out")) {
+          document.body.classList.remove("cms-logged-out");
+          setTimeout(function() {
+            document.location.reload();
+          }, 100);
         }
-        
-        // Pārlādējam lapu, lai nodrošinātu drošu un tīru autorizācijas loga stāvokli
-        setTimeout(function() {
-          document.location.reload();
-        }, 100);
+      });
+
+      window.netlifyIdentity.on("logout", function() {
+        // Reload only if we were previously logged in, completely avoiding infinite startup reload loops
+        if (!document.body.classList.contains("cms-logged-out")) {
+          document.body.classList.add("cms-logged-out");
+          var ncRoot = document.getElementById("nc-root");
+          if (ncRoot) {
+            ncRoot.style.display = "none";
+          }
+          setTimeout(function() {
+            document.location.reload();
+          }, 100);
+        }
       });
     }
 
