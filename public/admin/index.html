@@ -13,6 +13,202 @@
   <script>
     // Register custom CSS for visual style in preview pane
     CMS.registerPreviewStyle("/admin/preview-style.css");
+
+    // Handle Netlify Identity authentication states cleanly
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("logout", function() {
+        console.log("Izlogošanās konstatēta. Tīra interfeisa sagatavošana...");
+        // Paslēpjam CMS elementu, lai nekas nepaliktu fonā
+        var ncRoot = document.getElementById("nc-root");
+        if (ncRoot) {
+          ncRoot.style.display = "none";
+        }
+        // Pārlādējam lapu, lai nodrošinātu drošu un tīru autorizācijas loga stāvokli
+        setTimeout(function() {
+          document.location.reload();
+        }, 150);
+      });
+
+      window.netlifyIdentity.on("login", function() {
+        console.log("Ielogošanās veiksmīga, ielādē interfeisu...");
+        setTimeout(function() {
+          document.location.reload();
+        }, 150);
+      });
+    }
+
+    // React iestatījumi priekšskatījuma logiem
+    const h = window.h;
+
+    // 1. Dinamisko lapu priekšskatījuma template
+    const PagePreview = function(props) {
+      const entry = props.entry;
+      const pages = entry.getIn(['data', 'pages']);
+      if (!pages) return h('div', { style: { padding: '20px', color: '#b38207' } }, 'Nav izveidotu lapu.');
+
+      return h('div', { className: 'pages-preview-container' },
+        pages.map(function(page, idx) {
+          const title = page.get('title') || 'Nosaukums';
+          const slug = page.get('slug') || '';
+          const content = page.get('content') || '';
+          const images = page.get('images') || window.Immutable.List();
+
+          return h('div', { key: idx, className: 'custom-page-card' },
+            h('div', { className: 'page-header' },
+              h('span', { className: 'page-badge' }, 'Dinamiskā lapa'),
+              h('h1', null, title),
+              h('span', { className: 'page-slug' }, '/lapa/' + slug)
+            ),
+            h('div', { className: 'page-content-wrapper' },
+              h('p', { className: 'page-content-text' }, content)
+            ),
+            images.size > 0 ? h('div', { className: 'gallery-section' },
+              h('h3', null, 'Attēlu galerija'),
+              h('div', { className: 'gallery-grid' },
+                images.map(function(imgObj, imgIdx) {
+                  const src = imgObj.get('image');
+                  const caption = imgObj.get('caption');
+                  return h('div', { key: imgIdx, className: 'gallery-item' },
+                    h('img', { src: src }),
+                    caption ? h('p', { className: 'image-caption' }, caption) : null
+                  );
+                })
+              )
+            ) : null
+          );
+        })
+      );
+    };
+
+    // 2. Rakstu (Blogs) priekšskatījuma template
+    const ArticlesPreview = function(props) {
+      const entry = props.entry;
+      const articles = entry.getIn(['data', 'articles']);
+      if (!articles) return h('div', { style: { padding: '20px', color: '#b38207' } }, 'Nav rakstu.');
+
+      return h('div', { className: 'articles-preview-container' },
+        articles.map(function(article, idx) {
+          const title = article.get('title') || 'Nosaukums';
+          const excerpt = article.get('excerpt') || '';
+          const image = article.get('image') || '';
+          const content = article.get('content') || window.Immutable.List();
+
+          return h('div', { key: idx, className: 'article-card' },
+            h('div', { className: 'article-header-grid' },
+              image ? h('div', { className: 'article-img-wrapper' }, h('img', { src: image })) : null,
+              h('div', { className: 'article-meta' },
+                h('span', { className: 'article-badge' }, 'RAKSTS / NODERĪGI'),
+                h('h2', null, title),
+                h('p', { className: 'article-excerpt' }, excerpt)
+              )
+            ),
+            h('div', { className: 'article-body' },
+              content.size > 0 ? content.map(function(paragraph, pIdx) {
+                const text = typeof paragraph === 'string' ? paragraph : (paragraph.get('value') || '');
+                return h('p', { key: pIdx, className: 'article-paragraph' }, text);
+              }) : null
+            )
+          );
+        })
+      );
+    };
+
+    // 3. Mājaslapas tekstu un sadaļu priekšskatījuma template
+    const TranslationsPreview = function(props) {
+      const entry = props.entry;
+      const data = entry.get('data');
+      if (!data) return h('div', { style: { padding: '20px', color: '#b38207' } }, 'Ielādē datus...');
+
+      const hero = data.get('hero') || window.Immutable.Map();
+      const about = data.get('about') || window.Immutable.Map();
+      const benefits = data.get('benefits') || window.Immutable.Map();
+      const services = data.get('services') || window.Immutable.Map();
+
+      const q1Items = benefits.getIn(['q1', 'items']) || window.Immutable.List();
+      const serviceItems = services.get('items') || window.Immutable.List();
+
+      return h('div', { className: 'site-preview-wrapper' },
+        h('header', { className: 'mock-header' },
+          h('div', { className: 'logo' }, 'AVENUE GROUP'),
+          h('nav', null,
+            h('span', null, 'Sākums'),
+            h('span', null, 'Pakalpojumi'),
+            h('span', null, 'Līgumu paraugi'),
+            h('span', null, 'Noderīgi'),
+            h('span', null, 'BUJ'),
+            h('span', null, 'Kontakti')
+          )
+        ),
+        h('section', { className: 'mock-hero' },
+          h('div', { className: 'hero-content' },
+            h('h1', null,
+              h('span', null, hero.get('title') || 'Virsraksts 1 '),
+              h('span', { className: 'gold-text' }, hero.get('subtitle') || 'Virsraksts 2')
+            ),
+            h('p', { className: 'hero-desc' }, hero.get('description') || 'Apraksts...'),
+            h('div', { className: 'hero-buttons' },
+              h('button', { className: 'gold-btn' }, hero.get('servicesBtn') || 'Skatīt pakalpojumus'),
+              h('button', { className: 'outline-btn' }, hero.get('contactBtn') || 'Sazināties')
+            )
+          )
+        ),
+        h('section', { className: 'mock-about' },
+          h('div', { className: 'section-title-wrap' },
+            h('h2', null, about.get('title') || 'Par mums'),
+            h('p', { className: 'section-subtitle' }, about.get('subtitle') || 'Apakšvirsraksts')
+          ),
+          h('div', { className: 'about-grid' },
+            h('div', { className: 'about-text-side' },
+              about.get('highlight') ? h('p', { className: 'about-highlight' }, about.get('highlight')) : null,
+              about.get('p1') ? h('p', null, about.get('p1')) : null,
+              about.get('p2') ? h('p', null, about.get('p2')) : null,
+              about.get('p3') ? h('p', null, about.get('p3')) : null
+            ),
+            h('div', { className: 'about-decor-side' },
+              h('div', { className: 'decor-badge' },
+                h('span', null, about.get('imageTaglineLine1') || 'Kvalitāte'),
+                h('span', { className: 'gold-text' }, about.get('imageTaglineLine2') || 'Garantija')
+              )
+            )
+          )
+        ),
+        q1Items.size > 0 ? h('section', { className: 'mock-benefits' },
+          h('h2', null,
+            h('span', null, benefits.getIn(['q1', 'title']) || 'Kāpēc '),
+            h('span', { className: 'gold-text' }, benefits.getIn(['q1', 'subtitle']) || 'izvēlēties mūs?')
+          ),
+          h('div', { className: 'benefits-list' },
+            q1Items.map(function(item, idx) {
+              return h('div', { key: idx, className: 'benefit-card' },
+                h('h4', null, item.get('title')),
+                h('p', null, item.get('desc'))
+              );
+            })
+          )
+        ) : null,
+        serviceItems.size > 0 ? h('section', { className: 'mock-services' },
+          h('h2', null,
+            h('span', null, services.get('title') || 'Mūsu '),
+            h('span', { className: 'gold-text' }, services.get('subtitle') || 'Pakalpojumi')
+          ),
+          h('p', { className: 'services-desc' }, services.get('description')),
+          h('div', { className: 'services-grid' },
+            serviceItems.map(function(item, idx) {
+              return h('div', { key: idx, className: 'service-box' },
+                h('span', { className: 'box-number' }, '0' + (idx + 1)),
+                h('h4', null, item.get('title')),
+                h('p', null, item.get('desc'))
+              );
+            })
+          )
+        ) : null
+      );
+    };
+
+    // Reģistrējam veidnes
+    CMS.registerPreviewTemplate("custom_pages_collection", PagePreview);
+    CMS.registerPreviewTemplate("articles_collection", ArticlesPreview);
+    CMS.registerPreviewTemplate("translations", TranslationsPreview);
   </script>
 </body>
 </html>

@@ -1,95 +1,442 @@
 /* CMS Preview Style to match Avenue Group visual identity */
 @import url('https://fonts.googleapis.com/css2?family=Offside&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
+/* Base Styles */
 body {
   background-color: #141414 !important;
   color: #ffffff !important;
   font-family: "Space Grotesk", sans-serif !important;
-  padding: 2rem !important;
+  padding: 1.5rem !important;
+  margin: 0 !important;
 }
 
-/* Ensure container itself has correct color */
-div[id^="nc-root"] {
+/* Ensure Decap preview panel canvas has dark background */
+.nc-previewPane-frame, div[id^="nc-root"] {
   background-color: #141414 !important;
 }
 
+/* Typography styles */
 h1, h2, h3, h4, h5, h6 {
-  color: #ffffff !important;
   font-family: "Offside", system-ui, sans-serif !important;
-  letter-spacing: -0.025em;
-  margin-top: 1.5rem !important;
-  margin-bottom: 1rem !important;
-  border-bottom: 1px solid #333;
-  padding-bottom: 0.5rem;
-}
-
-h1 {
-  font-size: 2rem !important;
-  color: #b38207 !important;
-}
-
-h2 {
-  font-size: 1.5rem !important;
+  color: #ffffff !important;
+  margin-top: 0 !important;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 p {
-  color: #ebebeb !important;
-  line-height: 1.7 !important;
-  margin-bottom: 1.25rem !important;
-  font-size: 1rem !important;
+  color: #a1a1aa !important;
+  line-height: 1.6 !important;
+  font-size: 0.95rem !important;
 }
 
-a {
+.gold-text {
   color: #b38207 !important;
-  text-decoration: underline !important;
+  -webkit-text-stroke: 0.5px #b38207;
 }
 
-img {
-  border-radius: 0.5rem !important;
-  border: 1px solid #b38207 !important;
-  max-width: 100% !important;
-  height: auto !important;
-  margin: 1.5rem 0 !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+/* 1. Mock Navigation Header */
+.mock-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(179, 130, 7, 0.2);
+  margin-bottom: 2.5rem;
 }
 
-ul, ol {
-  margin-left: 1.5rem !important;
-  margin-bottom: 1.25rem !important;
-  color: #ebebeb !important;
+.mock-header .logo {
+  font-family: "Offside", sans-serif;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
 }
 
-li {
+.mock-header nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.mock-header nav span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* 2. Mock Hero Section */
+.mock-hero {
+  padding: 3rem 1.5rem;
+  background: linear-gradient(135deg, #18181b 0%, #111113 100%);
+  border: 1px solid rgba(179, 130, 7, 0.15);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.mock-hero h1 {
+  font-size: 2.25rem !important;
+  line-height: 1.2 !important;
+  margin-bottom: 1rem !important;
+}
+
+.mock-hero .hero-desc {
+  max-width: 600px;
+  margin: 0 auto 2rem auto !important;
+  font-size: 1rem !important;
+  color: #d4d4d8 !important;
+}
+
+.mock-hero .hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.gold-btn {
+  background-color: #b38207 !important;
+  color: #141414 !important;
+  border: none !important;
+  padding: 0.75rem 1.5rem !important;
+  font-family: "Offside", sans-serif !important;
+  font-size: 0.75rem !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+}
+
+.outline-btn {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 0.75rem 1.5rem !important;
+  font-family: "Offside", sans-serif !important;
+  font-size: 0.75rem !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+}
+
+/* 3. Mock About Section */
+.mock-about {
+  padding: 2.5rem 0;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #27272a;
+}
+
+.section-title-wrap {
+  margin-bottom: 2rem;
+}
+
+.section-title-wrap h2 {
+  font-size: 1.75rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.section-subtitle {
+  color: #b38207 !important;
+  font-size: 0.8rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-text-side p {
+  margin-bottom: 1rem !important;
+}
+
+.about-highlight {
+  font-size: 1.1rem !important;
+  color: #ffffff !important;
+  font-style: italic;
+  border-left: 3px solid #b38207;
+  padding-left: 1rem;
+  margin-bottom: 1.5rem !important;
+}
+
+.about-decor-side {
+  background: #18181b;
+  border: 1px solid rgba(179, 130, 7, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  position: relative;
+}
+
+.decor-badge {
+  text-align: center;
+  font-family: "Offside", sans-serif;
+  font-size: 1.25rem;
+  border: 1px solid #b38207;
+  padding: 1.5rem;
+  background: #141414;
+}
+
+.decor-badge span {
+  display: block;
+}
+
+/* 4. Mock Benefits Section */
+.mock-benefits {
+  padding: 2.5rem 0;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #27272a;
+}
+
+.mock-benefits h2 {
+  font-size: 1.75rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.benefits-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .benefits-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.benefit-card {
+  background: #18181b;
+  border: 1px solid #27272a;
+  padding: 1.5rem;
+}
+
+.benefit-card h4 {
+  color: #b38207 !important;
+  font-size: 1rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+/* 5. Mock Services Section */
+.mock-services {
+  padding: 2.5rem 0;
+  margin-bottom: 3rem;
+}
+
+.mock-services h2 {
+  font-size: 1.75rem !important;
   margin-bottom: 0.5rem !important;
 }
 
-blockquote {
-  border-left: 4px solid #b38207 !important;
-  padding-left: 1rem !important;
-  color: #a1a1aa !important;
-  font-style: italic !important;
-  margin: 1.5rem 0 !important;
+.services-desc {
+  max-width: 600px;
+  margin-bottom: 2rem !important;
 }
 
-/* Specific styling for list items widget, tables, etc */
-table {
-  width: 100% !important;
-  border-collapse: collapse !important;
-  margin: 1.5rem 0 !important;
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
 }
 
-th, td {
-  border: 1px solid #333 !important;
-  padding: 0.75rem !important;
-  text-align: left !important;
+.service-box {
+  background: #18181b;
+  border: 1px solid #27272a;
+  padding: 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-th {
-  background-color: #222 !important;
+.service-box:hover {
+  border-color: #b38207;
+}
+
+.box-number {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: "Offside", sans-serif;
+  color: rgba(179, 130, 7, 0.2);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.service-box h4 {
+  font-size: 1rem !important;
+  margin-bottom: 0.75rem !important;
+  color: #ffffff !important;
+  margin-top: 1rem !important;
+}
+
+/* 6. Dynamic Custom Pages Preview */
+.pages-preview-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.custom-page-card {
+  background: #18181b;
+  border: 1px solid rgba(179, 130, 7, 0.15);
+  padding: 2rem;
+}
+
+.page-header {
+  border-bottom: 1px solid #27272a;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-badge {
+  display: inline-block;
+  background: rgba(179, 130, 7, 0.15);
+  color: #b38207;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.page-header h1 {
+  font-size: 1.75rem !important;
+  color: #ffffff !important;
+  margin: 0.25rem 0 !important;
+}
+
+.page-slug {
+  font-family: monospace;
+  color: #b38207;
+  font-size: 0.8rem;
+}
+
+.page-content-wrapper {
+  margin-bottom: 2rem;
+}
+
+.page-content-text {
+  color: #d4d4d8 !important;
+  line-height: 1.7 !important;
+  font-size: 0.95rem !important;
+}
+
+.gallery-section {
+  border-top: 1px solid #27272a;
+  padding-top: 1.5rem;
+}
+
+.gallery-section h3 {
+  font-size: 1.1rem !important;
+  margin-bottom: 1rem !important;
   color: #b38207 !important;
 }
 
-/* Dark theme overrides for standard decap container classes */
-.nc-previewPane-frame {
-  background-color: #141414 !important;
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gallery-item {
+  background: #141414;
+  border: 1px solid #27272a;
+  padding: 0.5rem;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 150px;
+  object-cover: fit;
+  border: 1px solid rgba(179, 130, 7, 0.2) !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+.image-caption {
+  font-size: 0.75rem !important;
+  color: #a1a1aa !important;
+  text-align: center;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0 !important;
+  font-style: italic;
+}
+
+/* 7. Articles (Blogs) Preview */
+.articles-preview-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.article-card {
+  background: #18181b;
+  border: 1px solid #27272a;
+  padding: 2rem;
+}
+
+.article-header-grid {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 1.5rem;
+  border-bottom: 1px solid #27272a;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .article-header-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.article-img-wrapper img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid #b38207 !important;
+  margin: 0 !important;
+}
+
+.article-meta h2 {
+  font-size: 1.5rem !important;
+  margin: 0.5rem 0 !important;
+  color: #ffffff !important;
+}
+
+.article-badge {
+  font-size: 0.7rem;
+  color: #b38207;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.article-excerpt {
+  font-size: 0.9rem !important;
+  color: #a1a1aa !important;
+  margin: 0 !important;
+  font-style: italic;
+}
+
+.article-body p {
+  margin-bottom: 1rem !important;
+  line-height: 1.6 !important;
+  color: #d4d4d8 !important;
 }
