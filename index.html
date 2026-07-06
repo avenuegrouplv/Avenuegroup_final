@@ -33,6 +33,23 @@
     <meta name="twitter:description" content="Nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi komercīpašumiem un privātīpašumiem Latvijā." />
     <meta name="twitter:image" content="/images/logo_share.png?v=6" />
 
+    <!-- LocalStorage Cache-Busting Script -->
+    <script>
+      (function() {
+        var CURRENT_VERSION = 'avenuegroup-list-v25';
+        var storedVersion = localStorage.getItem('avenuegroup-version');
+        if (storedVersion !== CURRENT_VERSION) {
+          for (var key in localStorage) {
+            if (localStorage.hasOwnProperty(key) && key !== 'avenue_group_cookies_accepted_v2') {
+              localStorage.removeItem(key);
+            }
+          }
+          localStorage.setItem('avenuegroup-version', CURRENT_VERSION);
+          console.log('LocalStorage cache cleared/updated to ' + CURRENT_VERSION);
+        }
+      })();
+    </script>
+
     <!-- Google & Meta Analytics Lazy Initialization (pārvietots zemāk, lai netraucētu robotiem nolasīt meta tagus) -->
     <script>
       (function() {
