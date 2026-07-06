@@ -4,36 +4,222 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Avenue Group CMS - Satura pārvaldības sistēma</title>
+  <!-- Norādām precīzu un absolūtu konfigurācijas faila atrašanās vietu -->
+  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
   <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Offside&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Custom Login Page Styling */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #141414;
+      font-family: "Space Grotesk", sans-serif;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    #custom-login-container {
+      display: none;
+      width: 100%;
+      height: 100vh;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #141414;
+      background-image: radial-gradient(circle at 50% 50%, #1e1e1e 0%, #141414 100%);
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    body.cms-logged-out #custom-login-container {
+      display: flex !important;
+    }
+
+    body.cms-logged-out #nc-root {
+      display: none !important;
+    }
+
+    .login-card {
+      background-color: #1c1c1e;
+      border: 1px solid rgba(179, 130, 7, 0.3);
+      padding: 3rem 2.5rem;
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background-color: #b38207;
+    }
+
+    .login-logo {
+      font-family: "Offside", sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    .login-logo span {
+      color: #b38207;
+    }
+
+    .login-subtitle {
+      font-size: 0.85rem;
+      color: #a1a1aa;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 2.5rem;
+      font-weight: 500;
+    }
+
+    .login-welcome {
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .login-desc {
+      font-size: 0.85rem;
+      color: #71717a;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-login {
+      background-color: #b38207;
+      color: #141414;
+      border: none;
+      width: 100%;
+      padding: 1rem;
+      font-family: "Offside", sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(179, 130, 7, 0.2);
+    }
+
+    .btn-login:hover {
+      background-color: #d49c12;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(179, 130, 7, 0.3);
+    }
+
+    .login-footer {
+      margin-top: 3rem;
+      font-size: 0.75rem;
+      color: #52525b;
+    }
+
+    /* Netlify Widget Iframe Custom Overrides to fit styling */
+    #netlify-identity-widget {
+      z-index: 99999 !important;
+    }
+  </style>
 </head>
-<body>
+<body class="cms-logged-out">
+
+  <!-- Custom Beautiful Login Screen -->
+  <div id="custom-login-container">
+    <div class="login-card">
+      <div class="login-logo">AVENUE <span>GROUP</span></div>
+      <div class="login-subtitle">Satura Pārvaldības Sistēma</div>
+      
+      <div class="login-welcome">Sveicināti administrācijas panelī!</div>
+      <div class="login-desc">
+        Lai piekļūtu mājaslapas satura, pakalpojumu, rakstu un līgumu paraugu labošanas rīkiem, lūdzu, autorizējieties ar savu e-pastu un paroli.
+      </div>
+      
+      <button id="custom-login-btn" class="btn-login">Pieslēgties sistēmai</button>
+      
+      <div class="login-footer">
+        © 2026 Avenue Group. Visas tiesības aizsargātas.
+      </div>
+    </div>
+  </div>
+
+  <!-- Decap CMS UI Root -->
+  <div id="nc-root"></div>
+
   <!-- Decap CMS Script CDN -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
     // Register custom CSS for visual style in preview pane
     CMS.registerPreviewStyle("/admin/preview-style.css");
 
+    // Dynamic state check for login/logout to hide/show UI elements cleanly
+    function checkAuthState() {
+      const user = localStorage.getItem("gotrue.user");
+      if (!user) {
+        document.body.classList.add("cms-logged-out");
+      } else {
+        document.body.classList.remove("cms-logged-out");
+      }
+    }
+
+    // Run check immediately
+    checkAuthState();
+
+    // Set interval to catch localStorage changes or state shifts
+    setInterval(checkAuthState, 200);
+
+    // Setup click handler for custom login button
+    document.getElementById("custom-login-btn").addEventListener("click", function() {
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.open("login");
+      }
+    });
+
     // Handle Netlify Identity authentication states cleanly
     if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", function(user) {
+        if (!user) {
+          document.body.classList.add("cms-logged-out");
+        } else {
+          document.body.classList.remove("cms-logged-out");
+        }
+      });
+
       window.netlifyIdentity.on("logout", function() {
         console.log("Izlogošanās konstatēta. Tīra interfeisa sagatavošana...");
-        // Paslēpjam CMS elementu, lai nekas nepaliktu fonā
+        document.body.classList.add("cms-logged-out");
+        
+        // Paslēpjam CMS elementu
         var ncRoot = document.getElementById("nc-root");
         if (ncRoot) {
           ncRoot.style.display = "none";
         }
+        
         // Pārlādējam lapu, lai nodrošinātu drošu un tīru autorizācijas loga stāvokli
         setTimeout(function() {
           document.location.reload();
-        }, 150);
+        }, 100);
       });
 
-      window.netlifyIdentity.on("login", function() {
+      window.netlifyIdentity.on("login", function(user) {
         console.log("Ielogošanās veiksmīga, ielādē interfeisu...");
+        document.body.classList.remove("cms-logged-out");
         setTimeout(function() {
           document.location.reload();
-        }, 150);
+        }, 100);
       });
     }
 
