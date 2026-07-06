@@ -77,46 +77,37 @@ export default function KeystaticAdminPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-950 text-white font-sans p-6">
-        <div className="w-10 h-10 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-        <p className="text-sm uppercase tracking-widest text-zinc-400">Pārbauda autorizāciju...</p>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-50 text-zinc-900 font-sans p-6">
+        <div className="w-8 h-8 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Pārbauda autorizāciju...</p>
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-950 text-white font-sans p-6 relative overflow-hidden">
-        {/* Subtle decorative grid background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30"></div>
-        
-        <div className="w-full max-w-md bg-zinc-900 border border-zinc-800 rounded-xl p-8 shadow-2xl relative z-10">
-          <div className="flex flex-col items-center text-center mb-8">
-            <div className="w-16 h-16 bg-yellow-500/10 border border-yellow-500/20 rounded-full flex items-center justify-center mb-4">
-              <Lock className="w-8 h-8 text-yellow-500" />
+      <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-50 text-zinc-900 font-sans p-6">
+        <div className="w-full max-w-sm bg-white border border-zinc-200 rounded-lg p-6 shadow-sm">
+          <div className="flex flex-col items-center text-center mb-6">
+            <div className="w-12 h-12 bg-zinc-100 border border-zinc-200 rounded-full flex items-center justify-center mb-3">
+              <Lock className="w-5 h-5 text-zinc-600" />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-white mb-2">Avenue Group</h1>
-            <p className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">Administrācijas panelis</p>
+            <h1 className="text-xl font-semibold tracking-tight text-zinc-900">Satura pārvaldības sistēma</h1>
+            <p className="text-xs text-zinc-500 mt-1">Autorizācija nepieciešama, lai veiktu izmaiņas</p>
           </div>
 
-          <div className="space-y-6">
-            <div className="bg-zinc-800/40 border border-zinc-800/80 rounded-lg p-4 text-center">
-              <p className="text-sm text-zinc-300 leading-relaxed">
-                Sistēmas piekļuve ir ierobežota. Lai veiktu izmaiņas mājaslapas saturā, lūdzu, autorizējieties.
-              </p>
-            </div>
-
+          <div className="space-y-4">
             <button
               onClick={handleOpenLogin}
-              className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-yellow-500 text-zinc-950 font-semibold rounded-lg hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-zinc-900 transition-all duration-200 cursor-pointer text-sm tracking-wide uppercase"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-zinc-950 hover:bg-zinc-800 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 transition-all duration-200 cursor-pointer text-sm"
             >
               Pieslēgties ar e-pastu un paroli
             </button>
 
-            <div className="pt-4 border-t border-zinc-800/60 flex justify-center">
+            <div className="pt-4 border-t border-zinc-100 flex justify-center">
               <a 
                 href="/" 
-                className="inline-flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-800 transition-colors"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 Atgriezties mājaslapā
@@ -139,10 +130,10 @@ export default function KeystaticAdminPage() {
             (window as any).netlifyIdentity?.logout();
           }
         }}
-        className="fixed top-3 right-4 z-[9999] flex items-center gap-2 px-3 py-1.5 text-xs font-medium tracking-wide bg-zinc-800 border border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-700 rounded-md shadow-md transition-all duration-200"
+        className="fixed top-3 right-4 z-[9999] flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium tracking-wide bg-white border border-zinc-200 text-zinc-700 hover:text-zinc-900 hover:bg-zinc-50 rounded-md shadow-sm transition-all duration-200"
       >
         <LogOut className="w-3.5 h-3.5" />
-        Izrakstīties ({user.email})
+        Izrakstīties
       </button>
 
       <Keystatic config={keystaticConfig as any} />

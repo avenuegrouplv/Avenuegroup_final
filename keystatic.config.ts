@@ -211,10 +211,18 @@ const makeLanguageFields = () => ({
   }, { label: 'Sīkdatņu Politika' })
 });
 
+const isProd = process.env.NODE_ENV === 'production';
+const repoEnv = process.env.KEYSTATIC_GITHUB_REPO || 'AvenueGroupLV/avenue-group';
+
 export default config({
-  storage: {
-    kind: 'local',
-  },
+  storage: isProd
+    ? {
+        kind: 'github',
+        repo: repoEnv as any,
+      }
+    : {
+        kind: 'local',
+      },
   collections: {},
   singletons: {
     translations: singleton({
