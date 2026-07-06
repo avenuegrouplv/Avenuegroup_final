@@ -140,7 +140,7 @@ collections:
                   { label: "ID", name: "id", widget: "number" },
                   { label: "Virsraksts", name: "title", widget: "string" },
                   { label: "Ievads", name: "intro", widget: "text" },
-                  { label: "Saraksta punkti", name: "points", widget: "list", field: { widget: "string" } },
+                  { label: "Saraksta punkti", name: "points", widget: "list", field: { label: "Punkts", name: "value", widget: "string" } },
                   { label: "Nobeigums", name: "outro", widget: "text", required: false },
                   { label: "Cenu sadaļas virsraksts", name: "costTitle", widget: "string" },
                   { label: "Cenas teksts", name: "costText", widget: "text" }
@@ -156,7 +156,7 @@ collections:
               - { label: "Virsraksts (daļa 2)", name: "subtitle", widget: "string" }
               - { label: "Ievada apraksts", name: "description", widget: "text" }
               - { label: "Soļu sadaļas virsraksts", name: "stepsTitle", widget: "string" }
-              - { label: "Sadarbības soļi", name: "steps", widget: "list", field: { widget: "string" } }
+              - { label: "Sadarbības soļi", name: "steps", widget: "list", field: { label: "Solis", name: "value", widget: "string" } }
               - { label: "Pakalpojuma veidu virsraksts", name: "optionsTitle", widget: "string" }
               - { label: "Pakalpojuma veidu apakšvirsraksts", name: "optionsSubtitle", widget: "string" }
               - label: "Modelis A"
@@ -288,7 +288,7 @@ collections:
               - { label: "Attēls (webp)", name: "image", widget: "image" }
               - { label: "Nosaukums", name: "title", widget: "string" }
               - { label: "Īss izvilkums (Sarakstam)", name: "excerpt", widget: "text" }
-              - { label: "Rindkopu saturs", name: "content", widget: "list", field: { label: "Rindkopa", widget: "text" } }
+              - { label: "Rindkopu saturs", name: "content", widget: "list", field: { label: "Rindkopa", name: "value", widget: "text" } }
 
   # 3. Documents (Līgumu paraugi)
   - name: "documents_collection"
