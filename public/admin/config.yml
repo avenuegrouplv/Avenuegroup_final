@@ -118,7 +118,7 @@ collections:
               - { label: "Virsraksts (daļa 2)", name: "subtitle", widget: "string" }
               - { label: "Apraksts", name: "description", widget: "text" }
               - { label: "Pogas Teksts", name: "learnMore", widget: "string" }
-              - label: "Pakalpojumu saraksts", name: "items", widget: "list", fields: [
+              - { label: "Pakalpojumu saraksts", name: "items", widget: "list", fields: [
                   { label: "ID", name: "id", widget: "number" },
                   { label: "Virsraksts", name: "title", widget: "string" },
                   { label: "Apraksts", name: "desc", widget: "text" }
@@ -136,7 +136,7 @@ collections:
               - { label: "Apraksta etiķete", name: "descriptionLabel", widget: "string" }
               - { label: "Pogas Lasīt vairāk teksts", name: "learnMore", widget: "string" }
               - { label: "PVN Norāde", name: "vatText", widget: "string" }
-              - label: "Pakalpojumi", name: "items", widget: "list", fields: [
+              - { label: "Pakalpojumi", name: "items", widget: "list", fields: [
                   { label: "ID", name: "id", widget: "number" },
                   { label: "Virsraksts", name: "title", widget: "string" },
                   { label: "Ievads", name: "intro", widget: "text" },
@@ -201,7 +201,7 @@ collections:
               - { label: "Virsraksts (daļa 1)", name: "title", widget: "string" }
               - { label: "Virsraksts (daļa 2)", name: "subtitle", widget: "string" }
               - { label: "Ievada apraksts", name: "desc", widget: "text" }
-              - label: "Soļi", name: "items", widget: "list", fields: [
+              - { label: "Soļi", name: "items", widget: "list", fields: [
                   { label: "Solis", name: "title", widget: "string" },
                   { label: "Apraksts", name: "desc", widget: "text" }
                 ] }
@@ -254,12 +254,10 @@ collections:
               - { label: "Virsraksts", name: "title", widget: "string" }
               - { label: "Apakšvirsraksts", name: "subtitle", widget: "string" }
               - { label: "Pēdējo reizi atjaunots", name: "lastUpdated", widget: "string" }
-              - label: "Sadaļas"
-                name: "sections"
-                widget: "list"
-                fields:
-                  - { label: "Sadaļas virsraksts", name: "title", widget: "string" }
-                  - { label: "Saturs", name: "content", widget: "text" }
+              - { label: "Sadaļas", name: "sections", widget: "list", fields: [
+                  { label: "Sadaļas virsraksts", name: "title", widget: "string" },
+                  { label: "Saturs", name: "content", widget: "text" }
+                ] }
           - label: "Sīkdatņu Politika"
             name: "cookies"
             widget: "object"
@@ -267,12 +265,10 @@ collections:
               - { label: "Virsraksts", name: "title", widget: "string" }
               - { label: "Apakšvirsraksts", name: "subtitle", widget: "string" }
               - { label: "Pēdējo reizi atjaunots", name: "lastUpdated", widget: "string" }
-              - label: "Sadaļas"
-                name: "sections"
-                widget: "list"
-                fields:
-                  - { label: "Sadaļas virsraksts", name: "title", widget: "string" }
-                  - { label: "Saturs", name: "content", widget: "text" }
+              - { label: "Sadaļas", name: "sections", widget: "list", fields: [
+                  { label: "Sadaļas virsraksts", name: "title", widget: "string" },
+                  { label: "Saturs", name: "content", widget: "text" }
+                ] }
 
   # 2. Articles (Noderīgi / Blogs)
   - name: "articles_collection"
@@ -308,12 +304,10 @@ collections:
             widget: "list"
             fields:
               - { label: "Kods / ID (piem: telpu-ires-ligums)", name: "id", widget: "string" }
-              - label: "Nosaukums"
-                name: "title"
-                widget: "object"
-                fields:
-                  - { label: "Latviski", name: "lv", widget: "string" }
-                  - { label: "English", name: "en", widget: "string" }
-                  - { label: "Русский", name: "ru", widget: "string" }
+              - { label: "Nosaukums", name: "title", widget: "object", fields: [
+                  { label: "Latviski", name: "lv", widget: "string" },
+                  { label: "English", name: "en", widget: "string" },
+                  { label: "Русский", name: "ru", widget: "string" }
+                ] }
               - { label: "Cena (Eiro centos vai eiro, piem: 15 vai 15.00)", name: "price", widget: "number", value_type: "float" }
               - { label: "Vai tas ir pakalpojums (Service)?", name: "isService", widget: "boolean", default: false, required: false }
