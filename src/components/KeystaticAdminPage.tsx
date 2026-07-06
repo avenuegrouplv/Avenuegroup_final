@@ -77,37 +77,40 @@ export default function KeystaticAdminPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-50 text-zinc-900 font-sans p-6">
-        <div className="w-8 h-8 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin mb-4"></div>
-        <p className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Pārbauda autorizāciju...</p>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-950 text-zinc-200 font-sans p-6">
+        <div className="w-8 h-8 border-2 border-zinc-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p className="text-xs uppercase tracking-wider text-zinc-400 font-medium">Pārbauda autorizāciju...</p>
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-50 text-zinc-900 font-sans p-6">
-        <div className="w-full max-w-sm bg-white border border-zinc-200 rounded-lg p-6 shadow-sm">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-950 text-zinc-100 font-sans p-6 relative overflow-hidden">
+        {/* Subtle grid pattern background for technical clean depth, not tied to brand colors */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20"></div>
+
+        <div className="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-lg p-7 shadow-xl relative z-10">
           <div className="flex flex-col items-center text-center mb-6">
-            <div className="w-12 h-12 bg-zinc-100 border border-zinc-200 rounded-full flex items-center justify-center mb-3">
-              <Lock className="w-5 h-5 text-zinc-600" />
+            <div className="w-12 h-12 bg-zinc-800 border border-zinc-700 rounded-full flex items-center justify-center mb-4">
+              <Lock className="w-5 h-5 text-zinc-300" />
             </div>
-            <h1 className="text-xl font-semibold tracking-tight text-zinc-900">Satura pārvaldības sistēma</h1>
-            <p className="text-xs text-zinc-500 mt-1">Autorizācija nepieciešama, lai veiktu izmaiņas</p>
+            <h1 className="text-lg font-semibold tracking-tight text-white">Satura pārvaldības sistēma</h1>
+            <p className="text-xs text-zinc-400 mt-1">Autorizācija nepieciešama, lai veiktu izmaiņas</p>
           </div>
 
           <div className="space-y-4">
             <button
               onClick={handleOpenLogin}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-zinc-950 hover:bg-zinc-800 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2 transition-all duration-200 cursor-pointer text-sm"
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white hover:bg-zinc-200 text-zinc-950 font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-zinc-900 transition-all duration-200 cursor-pointer text-sm"
             >
               Pieslēgties ar e-pastu un paroli
             </button>
 
-            <div className="pt-4 border-t border-zinc-100 flex justify-center">
+            <div className="pt-4 border-t border-zinc-800/80 flex justify-center">
               <a 
                 href="/" 
-                className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-800 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-200 transition-colors"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 Atgriezties mājaslapā

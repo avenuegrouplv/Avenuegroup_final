@@ -5,8 +5,37 @@ import { createServer as createViteServer } from "vite";
 import { makeGenericAPIRouteHandler } from '@keystatic/core/api/generic';
 import keystaticConfig from './keystatic.config';
 
+import { exec } from "child_process";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Asynchronous helper to push changes to GitHub
+function triggerGitSync() {
+  if (process.env.GIT_SYNC === 'false') {
+    return;
+  }
+
+  const repo = process.env.KEYSTATIC_GITHUB_REPO || 'AvenueGroupLV/avenue-group';
+  const token = process.env.GITHUB_PAT || process.env.KEYSTATIC_GITHUB_TOKEN || process.env.KEYSTATIC_GITHUB_CLIENT_SECRET;
+
+  console.log('CMS mutation detected. Triggering Git Sync...');
+
+  let gitCommand = '';
+  if (token) {
+    gitCommand = `git remote set-url origin https://${token}@github.com/${repo}.git && `;
+  }
+
+  gitCommand += `git add . && git commit -m "CMS satura atjauninājums [skip ci]" && git push origin main`;
+
+  exec(gitCommand, { cwd: process.cwd() }, (error, stdout, stderr) => {
+    if (error) {
+      console.error('Git sync failed:', error.message);
+      return;
+    }
+    console.log('Git sync completed successfully.');
+  });
+}
 
 async function startServer() {
   const app = express();
@@ -64,6 +93,16 @@ async function startServer() {
         res.send(Buffer.from(response.body));
       } else {
         res.end();
+      }
+
+      // If this is a mutation (creation/update/deletion), push changes to GitHub asynchronously
+      const isMutation = req.method !== 'GET' && req.method !== 'HEAD';
+      const isSuccess = (response.status || 200) >= 200 && (response.status || 200) < 300;
+      if (isMutation && isSuccess) {
+        // Debounce Git Sync slightly so Keystatic completes writing files
+        setTimeout(() => {
+          triggerGitSync();
+        }, 1000);
       }
     } catch (error) {
       console.error('Keystatic API error:', error);
