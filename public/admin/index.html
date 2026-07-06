@@ -159,11 +159,374 @@
   <!-- Decap CMS UI Root -->
   <div id="nc-root"></div>
 
+  <!-- JS-YAML to parse inline configuration without network requests -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Embedded CMS Configuration directly inside HTML to bypass NetworkError/CORS/proxy blocks entirely -->
+  <script type="text/yaml" id="cms-config">
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: simple
+media_folder: "public/images"
+public_folder: "/images"
+
+# Internationalization settings matching the site's locales
+i18n:
+  structure: single_file
+  locales: [lv, en, ru]
+  default_locale: lv
+
+collections:
+  # 1. Site translations & copy
+  - name: "translations"
+    label: "Mājaslapas Saturs un Teksti"
+    i18n: true
+    files:
+      - name: "site_texts"
+        label: "Visi Mājaslapas Teksti"
+        file: "src/data/translations.json"
+        fields:
+          # Navigation
+          - label: "Navigācijas Izvēlne"
+            name: "nav"
+            widget: "object"
+            fields:
+              - { label: "Sākums", name: "home", widget: "string" }
+              - { label: "Par mums", name: "about", widget: "string" }
+              - { label: "Pakalpojumi", name: "services", widget: "string" }
+              - { label: "Līgumu paraugi", name: "templates", widget: "string" }
+              - { label: "BUJ (FAQ)", name: "faq", widget: "string" }
+              - { label: "Kontakti", name: "contact", widget: "string" }
+
+          # Hero section
+          - label: "Galvenā (Hero) Sadaļa"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Virsraksts (Rinda 1)", name: "title", widget: "string" }
+              - { label: "Virsraksts (Rinda 2)", name: "subtitle", widget: "string" }
+              - { label: "Apraksts", name: "description", widget: "text" }
+              - { label: "Pogas Teksts - Kontakti", name: "contactBtn", widget: "string" }
+              - { label: "Pogas Teksts - Pakalpojumi", name: "servicesBtn", widget: "string" }
+
+          # Footer section
+          - label: "Kājene (Footer)"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Par Mums Virsraksts", name: "aboutTitle", widget: "string" }
+              - { label: "Sekojiet Mums Virsraksts", name: "followTitle", widget: "string" }
+              - { label: "Kontaktu Virsraksts", name: "contactTitle", widget: "string" }
+              - { label: "Adreses etiķete", name: "addressLabel", widget: "string" }
+              - { label: "Autortiesību teksts", name: "rights", widget: "string" }
+              - { label: "Privātuma politika saite", name: "privacy", widget: "string" }
+              - { label: "Sīkdatņu politika saite", name: "cookies", widget: "string" }
+
+          # About us section
+          - label: "Par Mums (About Us)"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Poga Atpakaļ", name: "backBtn", widget: "string" }
+              - { label: "Virsraksts", name: "title", widget: "string" }
+              - { label: "Apakšvirsraksts", name: "subtitle", widget: "string" }
+              - { label: "Izceltais teksts", name: "highlight", widget: "text" }
+              - { label: "Rindkopa 1", name: "p1", widget: "text" }
+              - { label: "Rindkopa 2", name: "p2", widget: "text" }
+              - { label: "Rindkopa 3", name: "p3", widget: "text" }
+              - { label: "Rindkopa 4", name: "p4", widget: "text" }
+              - { label: "Rindkopa 5", name: "p5", widget: "text" }
+              - { label: "Attēla 1 Tagline Rinda 1", name: "imageTaglineLine1", widget: "string", required: false }
+              - { label: "Attēla 1 Tagline Rinda 2", name: "imageTaglineLine2", widget: "string", required: false }
+              - { label: "Attēla 2 Tagline Rinda 1", name: "image3TaglineLine1", widget: "string", required: false }
+              - { label: "Attēla 2 Tagline Rinda 2", name: "image3TaglineLine2", widget: "string", required: false }
+              - { label: "Attēla 3 Tagline Rinda 1", name: "image4TaglineLine1", widget: "string", required: false }
+              - { label: "Attēla 3 Tagline Rinda 2", name: "image4TaglineLine2", widget: "string", required: false }
+
+          # Benefits section
+          - label: "Ieguvumi (Kāpēc Izvēlēties Mūs)"
+            name: "benefits"
+            widget: "object"
+            fields:
+              - label: "Jautājums 1 - Piemērotība"
+                name: "q1"
+                widget: "object"
+                fields:
+                  - { label: "Virsraksts (daļa 1)", name: "title", widget: "string" }
+                  - { label: "Virsraksts (daļa 2)", name: "subtitle", widget: "string" }
+                  - { label: "Punkti", name: "items", widget: "list", fields: [
+                      { label: "Virsraksts", name: "title", widget: "string" },
+                      { label: "Apraksts", name: "desc", widget: "text" }
+                    ] }
+              - label: "Jautājums 2 - Priekšrocības"
+                name: "q2"
+                widget: "object"
+                fields:
+                  - { label: "Virsraksts (daļa 1)", name: "title", widget: "string" }
+                  - { label: "Virsraksts (daļa 2)", name: "subtitle", widget: "string" }
+                  - { label: "Virsraksts (daļa 3)", name: "suffix", widget: "string" }
+                  - { label: "Virsraksts (daļa 4)", name: "suffix2", widget: "string" }
+                  - { label: "Kopsavilkums", name: "desc", widget: "text" }
+                  - { label: "Saraksta Ievads", name: "listPrefix", widget: "string" }
+                  - { label: "Priekšrocības", name: "items", widget: "list", fields: [
+                      { label: "Nosaukums", name: "title", widget: "string" },
+                      { label: "Apraksts", name: "desc", widget: "text" }
+                    ] }
+
+          # Services summary on Homepage
+          - label: "Pakalpojumu Kopsavilkums"
+            name: "services"
+            widget: "object"
+            fields:
+              - { label: "Virsraksts (daļa 1)", name: "title", widget: "string" }
+              - { label: "Virsraksts (daļa 2)", name: "subtitle", widget: "string" }
+              - { label: "Apraksts", name: "description", widget: "text" }
+              - { label: "Pogas Teksts", name: "learnMore", widget: "string" }
+              - { label: "Pakalpojumu saraksts", name: "items", widget: "list", fields: [
+                  { label: "ID", name: "id", widget: "number" },
+                  { label: "Virsraksts", name: "title", widget: "string" },
+                  { label: "Apraksts", name: "desc", widget: "text" }
+                ] }
+
+          # Detailed Services page
+          - label: "Pakalpojumu Detalizētā Lapa"
+            name: "servicesPage"
+            widget: "object"
+            fields:
+              - { label: "Poga Atpakaļ", name: "backBtn", widget: "string" }
+              - { label: "Virsraksts", name: "title", widget: "string" }
+              - { label: "Apakšvirsraksts", name: "subtitle", widget: "string" }
+              - { label: "Kopējais apraksts", name: "description", widget: "text" }
+              - { label: "Apraksta etiķete", name: "descriptionLabel", widget: "string" }
+              - { label: "Pogas Lasīt vairāk teksts", name: "learnMore", widget: "string" }
+              - { label: "PVN Norāde", name: "vatText", widget: "string" }
+              - { label: "Pakalpojumi", name: "items", widget: "list", fields: [
+                  { label: "ID", name: "id", widget: "number" },
+                  { label: "Virsraksts", name: "title", widget: "string" },
+                  { label: "Ievads", name: "intro", widget: "text" },
+                  { label: "Saraksta punkti", name: "points", widget: "list", field: { label: "Punkts", name: "value", widget: "string" } },
+                  { label: "Nobeigums", name: "outro", widget: "text", required: false },
+                  { label: "Cenu sadaļas virsraksts", name: "costTitle", widget: "string" },
+                  { label: "Cenas teksts", name: "costText", widget: "text" }
+                ] }
+
+          # Pricing page
+          - label: "Sadarbības un Cenu Lapa"
+            name: "pricingPage"
+            widget: "object"
+            fields:
+              - { label: "Poga Atpakaļ", name: "backBtn", widget: "string" }
+              - { label: "Virsraksts (daļa 1)", name: "title", widget: "string" }
+              - { label: "Virsraksts (daļa 2)", name: "subtitle", widget: "string" }
+              - { label: "Ievada apraksts", name: "description", widget: "text" }
+              - { label: "Soļu sadaļas virsraksts", name: "stepsTitle", widget: "string" }
+              - { label: "Sadarbības soļi", name: "steps", widget: "list", field: { label: "Solis", name: "value", widget: "string" } }
+              - { label: "Pakalpojuma veidu virsraksts", name: "optionsTitle", widget: "string" }
+              - { label: "Pakalpojuma veidu apakšvirsraksts", name: "optionsSubtitle", widget: "string" }
+              - label: "Modelis A"
+                name: "modelA"
+                widget: "object"
+                fields:
+                  - { label: "Sadaļas nosaukums", name: "label", widget: "string" }
+                  - { label: "Izcēlums (Badge)", name: "badge", widget: "string" }
+                  - { label: "Virsraksts", name: "title", widget: "string" }
+                  - { label: "Apraksts", name: "desc", widget: "text" }
+                  - { label: "Pogas teksts", name: "btn", widget: "string" }
+              - label: "Modelis B"
+                name: "modelB"
+                widget: "object"
+                fields:
+                  - { label: "Sadaļas nosaukums", name: "label", widget: "string" }
+                  - { label: "Virsraksts", name: "title", widget: "string" }
+                  - { label: "Apraksts", name: "desc", widget: "text" }
+                  - { label: "Pogas teksts", name: "btn", widget: "string" }
+
+          # FAQ page
+          - label: "BUJ (Biežāk Uzdotie Jautājumi)"
+            name: "faq"
+            widget: "object"
+            fields:
+              - { label: "Poga Atpakaļ", name: "backBtn", widget: "string" }
+              - { label: "Virsraksts (daļa 1)", name: "title", widget: "string" }
+              - { label: "Virsraksts (daļa 2)", name: "subtitle", widget: "string" }
+              - { label: "Poga Skatīt visas atbildes", name: "viewAll", widget: "string" }
+              - label: "Jautājumi un Atbildes"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Jautājums", name: "q", widget: "string" }
+                  - { label: "Atbilde (Viena teksta rindkopa vai saraksts)", name: "a", widget: "text" }
+
+          # Cooperation process
+          - label: "Sadarbības Process (mājaslapā)"
+            name: "process"
+            widget: "object"
+            fields:
+              - { label: "Virsraksts (daļa 1)", name: "title", widget: "string" }
+              - { label: "Virsraksts (daļa 2)", name: "subtitle", widget: "string" }
+              - { label: "Ievada apraksts", name: "desc", widget: "text" }
+              - { label: "Soļi", name: "items", widget: "list", fields: [
+                  { label: "Solis", name: "title", widget: "string" },
+                  { label: "Apraksts", name: "desc", widget: "text" }
+                ] }
+
+          # Cookie banner
+          - label: "Sīkdatņu Paziņojums"
+            name: "cookieBanner"
+            widget: "object"
+            fields:
+              - { label: "Virsraksts", name: "title", widget: "string" }
+              - { label: "Paziņojuma teksts", name: "description", widget: "text" }
+              - { label: "Poga - Apstiprināt visu", name: "acceptBtn", widget: "string" }
+              - { label: "Poga - Noraidīt", name: "rejectBtn", widget: "string" }
+              - { label: "Poga - Pielāgot izvēli", name: "settingsBtn", widget: "string" }
+
+          # Contact page and business info
+          - label: "Kontakti un Biznesa Informācija"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Poga Atpakaļ", name: "backBtn", widget: "string" }
+              - { label: "Melnā banera Virsraksts", name: "title", widget: "string" }
+              - { label: "Melnā banera Apakšvirsraksts", name: "subtitle", widget: "string" }
+              - { label: "Sazināties Virsraksts", name: "formTitle", widget: "string" }
+              - { label: "Sazināties Apakšvirsraksts", name: "formSubtitle", widget: "string" }
+              - { label: "Formas Rāmja Virsraksts", name: "formBoxTitle", widget: "string" }
+              - { label: "Lauks: Vārds, Uzvārds", name: "labelName", widget: "string" }
+              - { label: "Lauks: Uzņēmums", name: "labelCompany", widget: "string" }
+              - { label: "Lauks: E-pasts", name: "labelEmail", widget: "string" }
+              - { label: "Lauks: Telefons", name: "labelPhone", widget: "string" }
+              - { label: "Lauks: Ziņojums", name: "labelMessage", widget: "string" }
+              - { label: "Datu apstrādes piekrišana (ievads)", name: "consentText", widget: "string" }
+              - { label: "Datu apstrādes saites teksts", name: "privacyLink", widget: "string" }
+              - { label: "Pogas teksts - Nosūtīt", name: "submitBtn", widget: "string" }
+              - { label: "Pogas teksts - Sūta", name: "submitting", widget: "string" }
+              - { label: "Pateicības loga virsraksts", name: "successTitle", widget: "string" }
+              - { label: "Pateicības ziņojums", name: "successMessage", widget: "string" }
+              - { label: "Poga Nosūtīt jaunu", name: "newRequestBtn", widget: "string" }
+              - { label: "Sānu rāmja virsraksts", name: "infoTitle", widget: "string" }
+              - { label: "Sānu rāmja apakšvirsraksts", name: "infoSubtitle", widget: "string" }
+              - { label: "Etiķete: Zvaniet", name: "callUs", widget: "string" }
+              - { label: "Etiķete: Rakstiet", name: "writeUs", widget: "string" }
+              - { label: "Galvenā navigācijas poga", name: "contactBtn", widget: "string" }
+
+          # Policies
+          - label: "Privātuma Politika"
+            name: "privacy"
+            widget: "object"
+            fields:
+              - { label: "Virsraksts", name: "title", widget: "string" }
+              - { label: "Apakšvirsraksts", name: "subtitle", widget: "string" }
+              - { label: "Pēdējo reizi atjaunots", name: "lastUpdated", widget: "string" }
+              - { label: "Sadaļas", name: "sections", widget: "list", fields: [
+                  { label: "Sadaļas virsraksts", name: "title", widget: "string" },
+                  { label: "Saturs", name: "content", widget: "text" }
+                ] }
+          - label: "Sīkdatņu Politika"
+            name: "cookies"
+            widget: "object"
+            fields:
+              - { label: "Virsraksts", name: "title", widget: "string" }
+              - { label: "Apakšvirsraksts", name: "subtitle", widget: "string" }
+              - { label: "Pēdējo reizi atjaunots", name: "lastUpdated", widget: "string" }
+              - { label: "Sadaļas", name: "sections", widget: "list", fields: [
+                  { label: "Sadaļas virsraksts", name: "title", widget: "string" },
+                  { label: "Saturs", name: "content", widget: "text" }
+                ] }
+
+  # 2. Articles (Noderīgi / Blogs)
+  - name: "articles_collection"
+    label: "Raksti (Noderīgi)"
+    i18n: false
+    files:
+      - name: "articles"
+        label: "Visi Raksti"
+        file: "src/data/articles.json"
+        fields:
+          - label: "Saraksts ar Rakstiem"
+            name: "articles"
+            widget: "list"
+            fields:
+              - { label: "ID (secīgs skaitlis)", name: "id", widget: "number" }
+              - { label: "Slug (Unikāla saite, piem: jaunumi-2025)", name: "slug", widget: "string" }
+              - { label: "Attēls (webp)", name: "image", widget: "image" }
+              - { label: "Nosaukums", name: "title", widget: "string" }
+              - { label: "Īss izvilkums (Sarakstam)", name: "excerpt", widget: "text" }
+              - { label: "Rindkopu saturs", name: "content", widget: "list", field: { label: "Rindkopa", name: "value", widget: "text" } }
+
+  # 3. Documents (Līgumu paraugi)
+  - name: "documents_collection"
+    label: "Līgumu Paraugi"
+    i18n: false
+    files:
+      - name: "documents"
+        label: "Visi Līgumi"
+        file: "src/data/documents.json"
+        fields:
+          - label: "Līgumu paraugu saraksts"
+            name: "documents"
+            widget: "list"
+            fields:
+              - { label: "Kods / ID (piem: telpu-ires-ligums)", name: "id", widget: "string" }
+              - { label: "Nosaukums", name: "title", widget: "object", fields: [
+                  { label: "Latviski", name: "lv", widget: "string" },
+                  { label: "English", name: "en", widget: "string" },
+                  { label: "Русский", name: "ru", widget: "string" }
+                ] }
+              - { label: "Cena (Eiro centos vai eiro, piem: 15 vai 15.00)", name: "price", widget: "number", value_type: "float" }
+              - { label: "Vai tas ir pakalpojums (Service)?", name: "isService", widget: "boolean", default: false, required: false }
+
+  # 4. Custom Pages (Dinamiskās lapas)
+  - name: "custom_pages_collection"
+    label: "Dinamiskās Lapas"
+    i18n: false
+    files:
+      - name: "pages"
+        label: "Visas Lapas"
+        file: "src/data/pages.json"
+        fields:
+          - label: "Lapu saraksts"
+            name: "pages"
+            widget: "list"
+            fields:
+              - { label: "Slug (Saites adrese, piem: galerijas)", name: "slug", widget: "string" }
+              - { label: "Nosaukums / Virsraksts", name: "title", widget: "string" }
+              - { label: "Saturs (Apraksts)", name: "content", widget: "markdown" }
+              - label: "Attēlu galerija"
+                name: "images"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Attēls", name: "image", widget: "image" }
+                  - { label: "Attēla paraksts", name: "caption", widget: "string", required: false }
+  </script>
+
+  <script>
+    // Tell Decap CMS to wait for our manual configuration initialization
+    window.CMS_MANUAL_INIT = true;
+  </script>
+
   <!-- Decap CMS Script CDN -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
     // Register custom CSS for visual style in preview pane
     CMS.registerPreviewStyle("/admin/preview-style.css");
+
+    // Initialize CMS using the robust inline configuration parsed via jsyaml
+    try {
+      const yamlContent = document.getElementById('cms-config').textContent;
+      const config = jsyaml.load(yamlContent);
+      CMS.init({ config });
+      console.log("CMS veiksmīgi inicializēts ar iebūvēto konfigurāciju!");
+    } catch (e) {
+      console.error("Kļūda, ielādējot iebūvēto CMS konfigurāciju:", e);
+      // Fallback in case of parsing failures
+      if (typeof CMS !== 'undefined') {
+        CMS.init();
+      }
+    }
 
     // Dynamic state check for login/logout to hide/show UI elements cleanly
     function checkAuthState() {
