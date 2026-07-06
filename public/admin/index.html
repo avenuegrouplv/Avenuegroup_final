@@ -502,9 +502,13 @@ collections:
       }
     }
 
+    // Track manual login actions to reload only when the user explicitly clicks the login button and completes it
+    let isManualLogin = false;
+
     // Setup click handler for custom login button
     document.getElementById("custom-login-btn").addEventListener("click", function() {
       if (window.netlifyIdentity) {
+        isManualLogin = true;
         window.netlifyIdentity.open("login");
       }
     });
@@ -520,9 +524,13 @@ collections:
       });
 
       window.netlifyIdentity.on("login", function(user) {
-        // Reload only if we were previously logged out, preventing duplicate loads
-        if (document.body.classList.contains("cms-logged-out")) {
-          document.body.classList.remove("cms-logged-out");
+        document.body.classList.remove("cms-logged-out");
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.close();
+        }
+        // Only trigger document reload if the user manually logged in, preventing infinite loops on initial load session restore!
+        if (isManualLogin) {
+          isManualLogin = false;
           setTimeout(function() {
             document.location.reload();
           }, 100);
@@ -530,17 +538,14 @@ collections:
       });
 
       window.netlifyIdentity.on("logout", function() {
-        // Reload only if we were previously logged in, completely avoiding infinite startup reload loops
-        if (!document.body.classList.contains("cms-logged-out")) {
-          document.body.classList.add("cms-logged-out");
-          var ncRoot = document.getElementById("nc-root");
-          if (ncRoot) {
-            ncRoot.style.display = "none";
-          }
-          setTimeout(function() {
-            document.location.reload();
-          }, 100);
+        document.body.classList.add("cms-logged-out");
+        var ncRoot = document.getElementById("nc-root");
+        if (ncRoot) {
+          ncRoot.style.display = "none";
         }
+        setTimeout(function() {
+          document.location.reload();
+        }, 100);
       });
     }
 
