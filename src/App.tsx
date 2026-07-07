@@ -79,7 +79,9 @@ const AppContent: React.FC = () => {
 
     if ((window as any).netlifyIdentity && !(window as any)._netlifyIdentityInitialized) {
       try {
-        (window as any).netlifyIdentity.init();
+        (window as any).netlifyIdentity.init({
+          APIUrl: 'https://avenuegroup.lv/.netlify/identity'
+        });
         (window as any)._netlifyIdentityInitialized = true;
       } catch (e) {
         console.log('Netlify Identity init error', e);

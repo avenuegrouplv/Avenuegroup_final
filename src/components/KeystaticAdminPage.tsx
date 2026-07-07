@@ -53,12 +53,15 @@ export default function KeystaticAdminPage() {
     }
 
     // Restore the hash to the URL if it was saved in sessionStorage but cleared from URL
-    if (identityHash && !window.location.hash) {
-      try {
-        window.location.hash = identityHash;
-        console.log('[KeystaticAdminPage] Restored identity hash to URL:', identityHash);
-      } catch (e) {
-        console.error('[KeystaticAdminPage] Failed to restore hash:', e);
+    if (identityHash) {
+      const cleanHash = identityHash.startsWith('#') ? identityHash : '#' + identityHash;
+      if (window.location.hash !== cleanHash) {
+        try {
+          window.history.replaceState(null, '', window.location.pathname + cleanHash);
+          console.log('[KeystaticAdminPage] Restored clean identity hash via replaceState:', cleanHash);
+        } catch (e) {
+          console.error('[KeystaticAdminPage] Failed to restore clean hash:', e);
+        }
       }
     }
 
@@ -86,7 +89,9 @@ export default function KeystaticAdminPage() {
     function initIdentity(instance: any) {
       if (!(window as any)._netlifyIdentityInitialized) {
         try {
-          instance.init();
+          instance.init({
+            APIUrl: 'https://avenuegroup.lv/.netlify/identity'
+          });
           (window as any)._netlifyIdentityInitialized = true;
         } catch (e) {
           console.log('Netlify Identity already initialized', e);
@@ -116,8 +121,18 @@ export default function KeystaticAdminPage() {
       } else {
         setUser(null);
         setLoading(false);
-        // Auto-open login dialog for user convenience so they don't have to wait or click
-        if (!isIdentityAction) {
+        // Auto-open login/recovery dialog for user convenience so they don't have to wait or click
+        if (isIdentityAction) {
+          console.log('[KeystaticAdminPage] Identity action is active. Explicitly calling instance.open() to force the recovery/invite modal.');
+          setTimeout(() => {
+            try {
+              // Open without parameters so the widget can parse the hash and show the correct recovery/confirmation/invite modal
+              instance.open();
+            } catch (err) {
+              console.error('[KeystaticAdminPage] Failed to open identity action modal:', err);
+            }
+          }, 400);
+        } else {
           setTimeout(() => {
             try {
               instance.open('login');
@@ -125,11 +140,6 @@ export default function KeystaticAdminPage() {
               console.error(err);
             }
           }, 300);
-        } else {
-          // If there is an identity hash (e.g. recovery), we MUST NOT call instance.open() manually.
-          // instance.init() automatically handles recovery/confirmation modals flawlessly as long as
-          // the hash is present in the URL.
-          console.log('[KeystaticAdminPage] Identity action is active, letting instance.init() open the correct modal.');
         }
       }
 
