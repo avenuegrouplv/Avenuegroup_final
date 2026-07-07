@@ -13,15 +13,15 @@ export default function KeystaticAdminPage() {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  // Check if we are running in development preview or localhost where Netlify Identity shouldn't block
-  // We only bypass on localhost and 127.0.0.1 and .run.app to let users test Netlify Identity on Cloud Run preview URLs,
-  // and we NEVER bypass if there is an identity hash in the URL (e.g. password recovery).
-  const hasIdentityHash = window.location.hash && (
-    window.location.hash.includes('recovery_token=') ||
-    window.location.hash.includes('invite_token=') ||
-    window.location.hash.includes('confirmation_token=') ||
-    window.location.hash.includes('email_change_token=')
-  );
+  const savedHash = sessionStorage.getItem('netlify_identity_hash') || '';
+  const currentHash = window.location.hash || '';
+  const hash = currentHash || savedHash;
+  const hasIdentityHash = !!(hash && (
+    hash.includes('recovery_token=') ||
+    hash.includes('invite_token=') ||
+    hash.includes('confirmation_token=') ||
+    hash.includes('email_change_token=')
+  ));
 
   const isDevPreview = 
     !hasIdentityHash && (
@@ -93,7 +93,6 @@ export default function KeystaticAdminPage() {
         setUser(null);
         setLoading(false);
         // Auto-open login dialog for user convenience so they don't have to wait or click
-        // BUT ONLY IF we are not currently processing a Netlify Identity recovery or confirmation hash!
         if (!hasIdentityHash) {
           setTimeout(() => {
             try {
@@ -102,6 +101,17 @@ export default function KeystaticAdminPage() {
               console.error(err);
             }
           }, 300);
+        } else {
+          // If there is an identity hash (e.g. recovery), we MUST open the widget to trigger the recovery/reset modal!
+          setTimeout(() => {
+            try {
+              instance.open();
+              // Clear saved hash so we don't keep opening it on subsequent re-renders
+              sessionStorage.removeItem('netlify_identity_hash');
+            } catch (err) {
+              console.error('Failed to open Netlify Identity widget for recovery:', err);
+            }
+          }, 400);
         }
       }
 

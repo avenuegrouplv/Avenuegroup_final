@@ -101,6 +101,34 @@
       })();
     </script>
 
+    <!-- Netlify Identity Hash Saver & Immediate Redirector -->
+    <script type="text/javascript">
+      (function() {
+        var hash = window.location.hash;
+        if (hash && (
+          hash.indexOf('recovery_token=') !== -1 ||
+          hash.indexOf('invite_token=') !== -1 ||
+          hash.indexOf('confirmation_token=') !== -1 ||
+          hash.indexOf('email_change_token=') !== -1
+        )) {
+          // Save the hash securely in sessionStorage before any library can strip it
+          try {
+            sessionStorage.setItem('netlify_identity_hash', hash);
+            console.log('[Netlify Identity Hash Saver] Saved hash:', hash);
+          } catch (e) {
+            console.error('[Netlify Identity Hash Saver] Failed to save hash:', e);
+          }
+
+          // If we are not on /keystatic or /admin, immediately redirect to /keystatic preserving the hash
+          var path = window.location.pathname;
+          if (!path.startsWith('/keystatic') && !path.startsWith('/admin')) {
+            console.log('[Netlify Identity Hash Saver] Redirecting immediately to /keystatic' + hash);
+            window.location.replace('/keystatic' + hash);
+          }
+        }
+      })();
+    </script>
+
     <!-- Netlify Identity Widget -->
     <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 

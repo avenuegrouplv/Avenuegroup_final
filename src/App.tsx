@@ -62,7 +62,9 @@ const AppContent: React.FC = () => {
 
   useEffect(() => {
     // If we land on any page with a Netlify Identity hash, redirect immediately to /keystatic preserving the hash
-    const hash = window.location.hash;
+    const savedHash = sessionStorage.getItem('netlify_identity_hash') || '';
+    const currentHash = window.location.hash || '';
+    const hash = currentHash || savedHash;
     if (hash && (
       hash.includes('recovery_token=') || 
       hash.includes('invite_token=') || 
@@ -271,7 +273,17 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => {
-  const isCms = window.location.pathname.startsWith('/keystatic') || window.location.pathname.startsWith('/admin');
+  const savedHash = sessionStorage.getItem('netlify_identity_hash') || '';
+  const currentHash = window.location.hash || '';
+  const hash = currentHash || savedHash;
+  const hasIdentityHash = !!(hash && (
+    hash.includes('recovery_token=') ||
+    hash.includes('invite_token=') ||
+    hash.includes('confirmation_token=') ||
+    hash.includes('email_change_token=')
+  ));
+
+  const isCms = window.location.pathname.startsWith('/keystatic') || window.location.pathname.startsWith('/admin') || hasIdentityHash;
 
   if (isCms) {
     return (
