@@ -61,8 +61,13 @@ const AppContent: React.FC = () => {
   const isSpecialPage = !isHomePage && !isCmsPage;
 
   useEffect(() => {
-    if ((window as any).netlifyIdentity) {
-      (window as any).netlifyIdentity.init();
+    if ((window as any).netlifyIdentity && !(window as any)._netlifyIdentityInitialized) {
+      try {
+        (window as any).netlifyIdentity.init();
+        (window as any)._netlifyIdentityInitialized = true;
+      } catch (e) {
+        console.log('Netlify Identity init error', e);
+      }
     }
   }, []);
 
@@ -212,29 +217,10 @@ const AppContent: React.FC = () => {
     }
   }, [location.pathname, language]);
 
-  if (isCmsPage) {
-    return (
-      <div className="min-h-screen bg-zinc-900 text-white">
-        <React.Suspense fallback={
-          <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-900 text-white font-sans p-6">
-            <div className="w-10 h-10 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-            <div className="font-bold tracking-widest text-xs uppercase text-zinc-400">Ielādē CMS...</div>
-          </div>
-        }>
-          <Routes>
-            <Route path="/admin" element={<Navigate to="/keystatic" replace />} />
-            <Route path="/admin/*" element={<Navigate to="/keystatic" replace />} />
-            <Route path="/keystatic/*" element={<KeystaticAdminPage />} />
-          </Routes>
-        </React.Suspense>
-      </div>
-    );
-  }
-
   return (
-    <div id="top" className="min-h-screen selection:bg-yellow-200 selection:text-zinc-900 bg-[#ebebeb] text-zinc-900">
-      <Header />
-      <main className={isSpecialPage ? 'pt-[175px] md:pt-[215px]' : 'pt-0'}>
+    <div id="top" className={isCmsPage ? "min-h-screen" : "min-h-screen selection:bg-yellow-200 selection:text-zinc-900 bg-[#ebebeb] text-zinc-900"}>
+      {!isCmsPage && <Header />}
+      <main className={isCmsPage ? 'pt-0' : (isSpecialPage ? 'pt-[175px] md:pt-[215px]' : 'pt-0')}>
         <React.Suspense fallback={
           <div className="min-h-[50vh] flex flex-col items-center justify-center bg-[#ebebeb] text-zinc-900 font-sans p-6">
             <div className="w-10 h-10 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4"></div>
@@ -242,6 +228,12 @@ const AppContent: React.FC = () => {
           </div>
         }>
           <Routes>
+            {/* CMS / Admin Routes */}
+            <Route path="/admin" element={<Navigate to="/keystatic" replace />} />
+            <Route path="/admin/*" element={<Navigate to="/keystatic" replace />} />
+            <Route path="/keystatic/*" element={<KeystaticAdminPage />} />
+
+            {/* Public Site Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/sakums" element={<Navigate to="/" replace />} />
             <Route path="/pakalpojumi" element={<ServicesPage />} />
@@ -258,8 +250,8 @@ const AppContent: React.FC = () => {
           </Routes>
         </React.Suspense>
       </main>
-      <Footer />
-      <CookieBanner />
+      {!isCmsPage && <Footer />}
+      {!isCmsPage && <CookieBanner />}
     </div>
   );
 };

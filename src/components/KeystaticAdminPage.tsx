@@ -44,19 +44,38 @@ export default function KeystaticAdminPage() {
     }
 
     function initIdentity(instance: any) {
-      try {
-        if (!instance._initialized) {
+      if (!(window as any)._netlifyIdentityInitialized) {
+        try {
           instance.init();
-          instance._initialized = true;
+          (window as any)._netlifyIdentityInitialized = true;
+        } catch (e) {
+          console.log('Netlify Identity already initialized', e);
         }
-      } catch (e) {
-        console.log('Netlify Identity already initialized', e);
       }
       
       const currentUser = instance.currentUser();
       if (currentUser) {
-        setUser(currentUser);
+        // Validate and refresh the token to make sure the session is active
+        currentUser.jwt()
+          .then((token: string) => {
+            if (token) {
+              setUser(currentUser);
+              setLoading(false);
+            } else {
+              try { instance.logout(); } catch (e) {}
+              setUser(null);
+              setLoading(false);
+            }
+          })
+          .catch((err: any) => {
+            console.error('Failed to validate token:', err);
+            try { instance.logout(); } catch (e) {}
+            setUser(null);
+            setLoading(false);
+          });
       } else {
+        setUser(null);
+        setLoading(false);
         // Auto-open login dialog for user convenience so they don't have to wait or click
         setTimeout(() => {
           try {
@@ -66,7 +85,6 @@ export default function KeystaticAdminPage() {
           }
         }, 300);
       }
-      setLoading(false);
 
       const handleLogin = (loggedUser: any) => {
         setUser(loggedUser);
