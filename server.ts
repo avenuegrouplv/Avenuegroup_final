@@ -1,14 +1,18 @@
 import express from "express";
 import path from "path";
-import { fileURLToPath } from "url";
-import { createServer as createViteServer } from "vite";
 import { makeGenericAPIRouteHandler } from '@keystatic/core/api/generic';
 import keystaticConfig from './keystatic.config';
 
 import { exec } from "child_process";
+import dotenv from "dotenv";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Load environment variables from .env file if present
+dotenv.config();
+
+// Ensure NODE_ENV defaults to production for compiled bundle or production run stability
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = "production";
+}
 
 // Asynchronous helper to push changes to GitHub
 function triggerGitSync() {
@@ -112,6 +116,7 @@ async function startServer() {
 
   // Vite middleware for development or fallback for production assets
   if (process.env.NODE_ENV !== "production") {
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
@@ -130,4 +135,7 @@ async function startServer() {
   });
 }
 
-startServer();
+startServer().catch((error) => {
+  console.error("Failed to start server:", error);
+  process.exit(1);
+});

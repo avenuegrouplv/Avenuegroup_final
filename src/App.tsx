@@ -61,6 +61,20 @@ const AppContent: React.FC = () => {
   const isSpecialPage = !isHomePage && !isCmsPage;
 
   useEffect(() => {
+    // If we land on any page with a Netlify Identity hash, redirect immediately to /keystatic preserving the hash
+    const hash = window.location.hash;
+    if (hash && (
+      hash.includes('recovery_token=') || 
+      hash.includes('invite_token=') || 
+      hash.includes('confirmation_token=') || 
+      hash.includes('email_change_token=')
+    )) {
+      if (!location.pathname.startsWith('/keystatic')) {
+        window.location.replace('/keystatic' + hash);
+        return;
+      }
+    }
+
     if ((window as any).netlifyIdentity && !(window as any)._netlifyIdentityInitialized) {
       try {
         (window as any).netlifyIdentity.init();
@@ -69,7 +83,7 @@ const AppContent: React.FC = () => {
         console.log('Netlify Identity init error', e);
       }
     }
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     // Dynamic SEO Metadata for Avenue Group routes based on language and pathname

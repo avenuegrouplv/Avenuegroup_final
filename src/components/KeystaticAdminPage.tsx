@@ -8,11 +8,20 @@ export default function KeystaticAdminPage() {
   const [loading, setLoading] = useState(true);
 
   // Check if we are running in development preview or localhost where Netlify Identity shouldn't block
+  // We only bypass on localhost and 127.0.0.1 to let users test Netlify Identity on Cloud Run preview URLs,
+  // and we NEVER bypass if there is an identity hash in the URL (e.g. password recovery).
+  const hasIdentityHash = window.location.hash && (
+    window.location.hash.includes('recovery_token=') ||
+    window.location.hash.includes('invite_token=') ||
+    window.location.hash.includes('confirmation_token=') ||
+    window.location.hash.includes('email_change_token=')
+  );
+
   const isDevPreview = 
-    window.location.hostname === 'localhost' || 
-    window.location.hostname === '127.0.0.1' || 
-    window.location.hostname.includes('.run.app') || 
-    window.location.hostname.includes('gitpod.io');
+    !hasIdentityHash && (
+      window.location.hostname === 'localhost' || 
+      window.location.hostname === '127.0.0.1'
+    );
 
   useEffect(() => {
     // If in development preview, we automatically set a mock user to bypass
@@ -159,7 +168,7 @@ export default function KeystaticAdminPage() {
   }
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen bg-zinc-50 text-zinc-900 font-sans">
       {/* Dynamic floating logout utility */}
       <button
         onClick={() => {
