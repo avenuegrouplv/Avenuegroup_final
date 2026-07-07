@@ -13,18 +13,32 @@ export default function KeystaticAdminPage() {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  const savedHash = sessionStorage.getItem('netlify_identity_hash') || '';
-  const currentHash = window.location.hash || '';
-  const hash = currentHash || savedHash;
-  const hasIdentityHash = !!(hash && (
-    hash.includes('recovery_token=') ||
-    hash.includes('invite_token=') ||
-    hash.includes('confirmation_token=') ||
-    hash.includes('email_change_token=')
-  ));
+  const [isIdentityAction] = useState(() => {
+    const savedHash = sessionStorage.getItem('netlify_identity_hash') || '';
+    const currentHash = window.location.hash || '';
+    const hash = currentHash || savedHash;
+    return !!(hash && (
+      hash.includes('recovery_token=') ||
+      hash.includes('invite_token=') ||
+      hash.includes('confirmation_token=') ||
+      hash.includes('email_change_token=')
+    ));
+  });
+
+  const [identityHash] = useState(() => {
+    const savedHash = sessionStorage.getItem('netlify_identity_hash') || '';
+    const currentHash = window.location.hash || '';
+    const hash = currentHash || savedHash;
+    return (hash && (
+      hash.includes('recovery_token=') ||
+      hash.includes('invite_token=') ||
+      hash.includes('confirmation_token=') ||
+      hash.includes('email_change_token=')
+    )) ? hash : '';
+  });
 
   const isDevPreview = 
-    !hasIdentityHash && (
+    !isIdentityAction && (
       window.location.hostname === 'localhost' || 
       window.location.hostname === '127.0.0.1' ||
       window.location.hostname.includes('.run.app')
@@ -36,6 +50,16 @@ export default function KeystaticAdminPage() {
       setUser({ email: 'dev@avenuegroup.lv', user_metadata: { full_name: 'Developer Preview' } });
       setLoading(false);
       return;
+    }
+
+    // Restore the hash to the URL if it was saved in sessionStorage but cleared from URL
+    if (identityHash && !window.location.hash) {
+      try {
+        window.location.hash = identityHash;
+        console.log('[KeystaticAdminPage] Restored identity hash to URL:', identityHash);
+      } catch (e) {
+        console.error('[KeystaticAdminPage] Failed to restore hash:', e);
+      }
     }
 
     const ni = (window as any).netlifyIdentity;
@@ -93,7 +117,7 @@ export default function KeystaticAdminPage() {
         setUser(null);
         setLoading(false);
         // Auto-open login dialog for user convenience so they don't have to wait or click
-        if (!hasIdentityHash) {
+        if (!isIdentityAction) {
           setTimeout(() => {
             try {
               instance.open('login');
@@ -102,21 +126,21 @@ export default function KeystaticAdminPage() {
             }
           }, 300);
         } else {
-          // If there is an identity hash (e.g. recovery), we MUST open the widget to trigger the recovery/reset modal!
-          setTimeout(() => {
-            try {
-              instance.open();
-              // Clear saved hash so we don't keep opening it on subsequent re-renders
-              sessionStorage.removeItem('netlify_identity_hash');
-            } catch (err) {
-              console.error('Failed to open Netlify Identity widget for recovery:', err);
-            }
-          }, 400);
+          // If there is an identity hash (e.g. recovery), we MUST NOT call instance.open() manually.
+          // instance.init() automatically handles recovery/confirmation modals flawlessly as long as
+          // the hash is present in the URL.
+          console.log('[KeystaticAdminPage] Identity action is active, letting instance.init() open the correct modal.');
         }
       }
 
       const handleLogin = (loggedUser: any) => {
         setUser(loggedUser);
+        try {
+          sessionStorage.removeItem('netlify_identity_hash');
+          if (window.location.hash) {
+            window.history.replaceState(null, '', window.location.pathname);
+          }
+        } catch (e) {}
         instance.close();
       };
 
@@ -124,15 +148,27 @@ export default function KeystaticAdminPage() {
         setUser(null);
       };
 
+      const handleClose = () => {
+        // If the user closed the widget during an identity action (e.g. recovery), clear the hash
+        try {
+          sessionStorage.removeItem('netlify_identity_hash');
+          if (window.location.hash) {
+            window.history.replaceState(null, '', window.location.pathname);
+          }
+        } catch (e) {}
+      };
+
       instance.on('login', handleLogin);
       instance.on('logout', handleLogout);
+      instance.on('close', handleClose);
 
       return () => {
         instance.off('login', handleLogin);
         instance.off('logout', handleLogout);
+        instance.off('close', handleClose);
       };
     }
-  }, [isDevPreview]);
+  }, [isDevPreview, identityHash, isIdentityAction]);
 
   const handleOpenLogin = () => {
     const ni = (window as any).netlifyIdentity;
