@@ -222,8 +222,9 @@ const AppContent: React.FC = () => {
           </div>
         }>
           <Routes>
-            <Route path="/admin/*" element={<KeystaticAdminPage />} />
-            <Route path="/keystatic/*" element={<Navigate to="/admin" replace />} />
+            <Route path="/admin" element={<Navigate to="/keystatic" replace />} />
+            <Route path="/admin/*" element={<Navigate to="/keystatic" replace />} />
+            <Route path="/keystatic/*" element={<KeystaticAdminPage />} />
           </Routes>
         </React.Suspense>
       </div>
