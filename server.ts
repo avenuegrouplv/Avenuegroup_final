@@ -43,7 +43,7 @@ function triggerGitSync() {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
   // Initialize Keystatic API Handler
   const keystaticHandler = makeGenericAPIRouteHandler({
@@ -57,16 +57,38 @@ async function startServer() {
   // Keystatic UI communicates via endpoints like /api/keystatic/tree, /api/keystatic/blob/...
   app.all('/api/keystatic/*', express.raw({ type: '*/*', limit: '50mb' }), async (req, res) => {
     try {
-      const protocol = req.protocol;
-      const host = req.get('host');
-      const fullUrl = `${protocol}://${host}${req.originalUrl}`;
+      // Keystatic's local mode API is designed to only accept requests on localhost/127.0.0.1.
+      // To run Keystatic in a custom authenticated production setup, we bypass this hostname
+      // restriction by rewriting the URL's host to '127.0.0.1:3000' before passing it to the handler.
+      const fullUrl = `http://127.0.0.1:3000${req.originalUrl}`;
       
       const keystaticReq = {
         method: req.method,
         url: fullUrl,
         headers: {
           get(name: string) {
-            const val = req.headers[name.toLowerCase()];
+            const lowerName = name.toLowerCase();
+            if (lowerName === 'host') {
+              return '127.0.0.1:3000';
+            }
+            if (lowerName === 'origin') {
+              return 'http://127.0.0.1:3000';
+            }
+            if (lowerName === 'referer') {
+              const ref = req.headers['referer'];
+              if (ref) {
+                try {
+                  const url = new URL(ref);
+                  url.host = '127.0.0.1:3000';
+                  url.protocol = 'http:';
+                  return url.toString();
+                } catch (e) {
+                  return 'http://127.0.0.1:3000/keystatic';
+                }
+              }
+              return 'http://127.0.0.1:3000/keystatic';
+            }
+            const val = req.headers[lowerName];
             return Array.isArray(val) ? val[0] : (val || null);
           }
         },
