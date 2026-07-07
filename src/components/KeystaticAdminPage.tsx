@@ -4,11 +4,17 @@ import keystaticConfig from '../../keystatic.config';
 import { LogOut, Lock, ArrowLeft } from 'lucide-react';
 
 export default function KeystaticAdminPage() {
+  // Redirect /admin to /keystatic immediately (since React Router is bypassed)
+  if (window.location.pathname.startsWith('/admin')) {
+    window.location.replace('/keystatic' + window.location.hash);
+    return null;
+  }
+
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   // Check if we are running in development preview or localhost where Netlify Identity shouldn't block
-  // We only bypass on localhost and 127.0.0.1 to let users test Netlify Identity on Cloud Run preview URLs,
+  // We only bypass on localhost and 127.0.0.1 and .run.app to let users test Netlify Identity on Cloud Run preview URLs,
   // and we NEVER bypass if there is an identity hash in the URL (e.g. password recovery).
   const hasIdentityHash = window.location.hash && (
     window.location.hash.includes('recovery_token=') ||
@@ -20,7 +26,8 @@ export default function KeystaticAdminPage() {
   const isDevPreview = 
     !hasIdentityHash && (
       window.location.hostname === 'localhost' || 
-      window.location.hostname === '127.0.0.1'
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname.includes('.run.app')
     );
 
   useEffect(() => {
@@ -86,13 +93,16 @@ export default function KeystaticAdminPage() {
         setUser(null);
         setLoading(false);
         // Auto-open login dialog for user convenience so they don't have to wait or click
-        setTimeout(() => {
-          try {
-            instance.open('login');
-          } catch (err) {
-            console.error(err);
-          }
-        }, 300);
+        // BUT ONLY IF we are not currently processing a Netlify Identity recovery or confirmation hash!
+        if (!hasIdentityHash) {
+          setTimeout(() => {
+            try {
+              instance.open('login');
+            } catch (err) {
+              console.error(err);
+            }
+          }, 300);
+        }
       }
 
       const handleLogin = (loggedUser: any) => {

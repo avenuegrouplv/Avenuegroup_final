@@ -271,6 +271,23 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  const isCms = window.location.pathname.startsWith('/keystatic') || window.location.pathname.startsWith('/admin');
+
+  if (isCms) {
+    return (
+      <LanguageProvider>
+        <React.Suspense fallback={
+          <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-100 text-zinc-900 font-sans p-6">
+            <div className="w-8 h-8 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Ielādē vadības paneli...</p>
+          </div>
+        }>
+          <KeystaticAdminPage />
+        </React.Suspense>
+      </LanguageProvider>
+    );
+  }
+
   return (
     <LanguageProvider>
       <Router>
