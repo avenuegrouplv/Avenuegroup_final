@@ -74,7 +74,10 @@ export const AdminCMS: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then((res) => {
-          if (!res.ok) throw new Error("Session expired");
+          const contentType = res.headers.get("content-type");
+          if (!res.ok || !contentType || !contentType.includes("application/json")) {
+            throw new Error("Session expired or invalid response");
+          }
           return res.json();
         })
         .then((data) => {
@@ -102,7 +105,13 @@ export const AdminCMS: React.FC = () => {
     fetch("/api/cms/config", {
       headers: { Authorization: `Bearer ${authToken}` }
     })
-      .then((res) => res.json())
+      .then((res) => {
+        const contentType = res.headers.get("content-type");
+        if (!res.ok || !contentType || !contentType.includes("application/json")) {
+          throw new Error("Invalid CMS configuration response");
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.sections) {
           setConfig(data);
@@ -122,6 +131,13 @@ export const AdminCMS: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
       });
+
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error(
+          "CMS serveris šajā vidē nav pieejams. CMS sistēmai ir nepieciešams aktīvs Node.js serveris (lietotāju un melnrakstu pārvaldībai), kas nedarbojas tieši Netlify statiskajā hostingā.\n\nLai rediģētu saturu, lūdzu, izmantojiet savu AI Studio priekšskatījuma / izstrādes saiti (Development/Shared App URL). Tur veiktās izmaiņas un nospiežot 'Publicēt Izmaiņas', CMS automātiski nosūtīs jaunos datus uz Jūsu GitHub repozitoriju, kas iedarbinās Netlify lapas pārbūvi un atjaunināšanu."
+        );
+      }
 
       const data = await res.json();
       if (!res.ok) {
@@ -200,10 +216,6 @@ export const AdminCMS: React.FC = () => {
 
         <div className="w-full max-w-md bg-[#121215] border border-zinc-800 p-8 rounded-3xl shadow-2xl relative space-y-6">
           <div className="text-center space-y-2">
-            <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/20 px-3 py-1 rounded-full text-yellow-500 font-bold font-mono text-[10px] tracking-widest uppercase">
-              <Database className="w-3.5 h-3.5" />
-              Avenue Group CMS
-            </div>
             <h1 className="text-2.5xl font-black text-white tracking-tight font-sans">
               Pieslēgties CMS
             </h1>
@@ -213,7 +225,7 @@ export const AdminCMS: React.FC = () => {
           </div>
 
           {authError && (
-            <div className="bg-red-950/40 border border-red-900/60 p-4 rounded-xl text-red-400 text-xs font-semibold flex items-start gap-2.5 leading-relaxed font-sans animate-shake">
+            <div className="bg-red-950/40 border border-red-900/60 p-4 rounded-xl text-red-400 text-xs font-semibold flex items-start gap-2.5 leading-relaxed font-sans animate-shake whitespace-pre-line">
               <AlertCircle className="w-4.5 h-4.5 shrink-0 mt-0.5" />
               <span>{authError}</span>
             </div>
