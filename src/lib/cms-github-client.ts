@@ -52,6 +52,51 @@ async function getGithubJSON(path: string, defaultValue: any = null): Promise<{ 
   try {
     const res = await githubFetch(path);
     if (res.status === 404) {
+      // Provide robust fallback defaults if the files are not yet created in GitHub repository
+      if (path === "src/data/cms-users.json") {
+        return {
+          data: [
+            {
+              email: "admin@avenuegroup.lv",
+              passwordHash: "7724910c50c6d587163e74c38699587bba1504c2a95b70c554674767b71fb857", // SHA256 of AvenueAdmin2026!
+              role: "admin",
+              createdAt: new Date().toISOString()
+            },
+            {
+              email: "client@avenuegroup.lv",
+              passwordHash: "285eb3e257a8c7404e42affedf027569a75120389eb69e5adf18061b0a700a96", // SHA256 of AvenueClient2026!
+              role: "client",
+              createdAt: new Date().toISOString()
+            }
+          ],
+          sha: ""
+        };
+      }
+      if (path === "src/data/cms-config.json") {
+        return {
+          data: {
+            sections: {
+              texts: true,
+              destinations: true,
+              blogs: true,
+              reviews: true,
+              galleries: true,
+              seo: true,
+              contacts: true,
+              menus: true,
+              footer: true,
+              allJson: true
+            }
+          },
+          sha: ""
+        };
+      }
+      if (path === "src/data/cms-drafts.json") {
+        return { data: { drafts: {} }, sha: "" };
+      }
+      if (path === "src/data/cms-logs.json") {
+        return { data: [], sha: "" };
+      }
       return { data: defaultValue, sha: "" };
     }
     if (!res.ok) {
