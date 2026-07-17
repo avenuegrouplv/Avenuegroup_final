@@ -1,5 +1,58 @@
 import React, { useState, useEffect } from "react";
-import { List, Code, Plus, Trash2, ArrowUp, ArrowDown, Save, FileJson, AlertCircle, CheckCircle, Search, Link as LinkIcon, Image as ImageIcon, MessageSquare, Sparkles, Share2 } from "lucide-react";
+import { List, Code, Plus, Trash2, ArrowUp, ArrowDown, Save, FileJson, AlertCircle, CheckCircle, Search, Link as LinkIcon, Image as ImageIcon, MessageSquare, Sparkles, Share2, Upload } from "lucide-react";
+
+// Stable form input elements to avoid losing focus during heavy parent re-renders
+interface CMSInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> {
+  value: string;
+  onChange: (val: string) => void;
+}
+
+const CMSInput: React.FC<CMSInputProps> = ({ value, onChange, ...props }) => {
+  const [localVal, setLocalVal] = useState(value);
+
+  useEffect(() => {
+    setLocalVal(value);
+  }, [value]);
+
+  return (
+    <input
+      {...props}
+      value={localVal}
+      onChange={(e) => setLocalVal(e.target.value)}
+      onBlur={() => {
+        if (localVal !== value) {
+          onChange(localVal);
+        }
+      }}
+    />
+  );
+};
+
+interface CMSTextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange"> {
+  value: string;
+  onChange: (val: string) => void;
+}
+
+const CMSTextarea: React.FC<CMSTextareaProps> = ({ value, onChange, ...props }) => {
+  const [localVal, setLocalVal] = useState(value);
+
+  useEffect(() => {
+    setLocalVal(value);
+  }, [value]);
+
+  return (
+    <textarea
+      {...props}
+      value={localVal}
+      onChange={(e) => setLocalVal(e.target.value)}
+      onBlur={() => {
+        if (localVal !== value) {
+          onChange(localVal);
+        }
+      }}
+    />
+  );
+};
 
 interface AdminJSONEditorProps {
   token: string;
@@ -29,6 +82,111 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token, default
   const [collectionKey, setCollectionKey] = useState<string | null>(null); // e.g. "articles"
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>(-1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [imageUploading, setImageUploading] = useState<string | null>(null);
+
+  // Client-side WebP converter & optimizer
+  const uploadAndOptimizeImage = async (file: File): Promise<string | null> => {
+    return new Promise((resolve) => {
+      if (file.type === "application/pdf") {
+        resolve(null);
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const fileDataUrl = event.target?.result as string;
+
+        const fallbackRawBase64 = async () => {
+          try {
+            const base64 = fileDataUrl.split(",")[1];
+            const originalNameWithoutExt = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
+            const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
+            const cleanName = originalNameWithoutExt
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .replace(/[^a-z0-9]/g, "-") + "." + ext;
+
+            const res = await fetch("/api/cms/upload", {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ name: cleanName, data: base64, type: "image" })
+            });
+            if (res.ok) {
+              const resData = await res.json();
+              resolve(resData.url);
+            } else {
+              resolve(null);
+            }
+          } catch (e) {
+            resolve(null);
+          }
+        };
+
+        const img = new Image();
+        img.src = fileDataUrl;
+        img.onload = async () => {
+          try {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            if (!ctx) {
+              await fallbackRawBase64();
+              return;
+            }
+
+            const MAX_WIDTH = 1920;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > MAX_WIDTH) {
+              height = Math.round((height * MAX_WIDTH) / width);
+              width = MAX_WIDTH;
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const webpDataUrl = canvas.toDataURL("image/webp", 0.85);
+            const base64 = webpDataUrl.split(",")[1];
+            
+            const originalNameWithoutExt = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
+            const cleanName = originalNameWithoutExt
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .replace(/[^a-z0-9]/g, "-") + ".webp";
+
+            const res = await fetch("/api/cms/upload", {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ name: cleanName, data: base64, type: "image" })
+            });
+
+            if (res.ok) {
+              const resData = await res.json();
+              resolve(resData.url);
+            } else {
+              await fallbackRawBase64();
+            }
+          } catch (canvasErr) {
+            await fallbackRawBase64();
+          }
+        };
+        img.onerror = async () => {
+          await fallbackRawBase64();
+        };
+      };
+      reader.onerror = () => resolve(null);
+    });
+  };
 
   const fetchFiles = async () => {
     try {
@@ -295,11 +453,11 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token, default
             </div>
             {val.map((paragraph, pIdx) => (
               <div key={pIdx} className="flex gap-2 items-start bg-zinc-900/30 p-2.5 rounded-xl border border-zinc-800/40">
-                <textarea
+                <CMSTextarea
                   value={paragraph}
-                  onChange={(e) => {
+                  onChange={(newText) => {
                     const newVal = [...val];
-                    newVal[pIdx] = e.target.value;
+                    newVal[pIdx] = newText;
                     handleFieldChange(fieldPath, newVal);
                   }}
                   rows={2}
@@ -775,13 +933,13 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token, default
                   <div className="space-y-3">
                     <div className="space-y-1 font-sans">
                       <label className="text-[10px] font-bold text-zinc-500 uppercase">Bloka Virsraksts (Nav obligāts)</label>
-                      <input
+                      <CMSInput
                         type="text"
                         value={block.title || ""}
                         placeholder="Ievadiet bloka virsrakstu..."
-                        onChange={(e) => {
+                        onChange={(newVal) => {
                           const updated = [...val];
-                          updated[idx] = { ...updated[idx], title: e.target.value };
+                          updated[idx] = { ...updated[idx], title: newVal };
                           handleFieldChange(fieldPath, updated);
                         }}
                         className="w-full bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200"
@@ -791,13 +949,13 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token, default
                     {block.type === "text_block" && (
                       <div className="space-y-1 font-sans">
                         <label className="text-[10px] font-bold text-zinc-500 uppercase">Bloka Saturs (Atbalsta Markdown)</label>
-                        <textarea
+                        <CMSTextarea
                           value={block.content || ""}
                           placeholder="Ievadiet teksta saturu..."
                           rows={6}
-                          onChange={(e) => {
+                          onChange={(newVal) => {
                             const updated = [...val];
-                            updated[idx] = { ...updated[idx], content: e.target.value };
+                            updated[idx] = { ...updated[idx], content: newVal };
                             handleFieldChange(fieldPath, updated);
                           }}
                           className="w-full bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200 leading-relaxed resize-y"
@@ -842,13 +1000,13 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token, default
                     {block.type === "contact_form_block" && (
                       <div className="space-y-1 font-sans">
                         <label className="text-[10px] font-bold text-zinc-500 uppercase">Formas apraksts / paskaidrojums</label>
-                        <textarea
+                        <CMSTextarea
                           value={block.description || ""}
                           placeholder="Sazinieties ar mums, aizpildot šo formu..."
                           rows={2}
-                          onChange={(e) => {
+                          onChange={(newVal) => {
                             const updated = [...val];
-                            updated[idx] = { ...updated[idx], description: e.target.value };
+                            updated[idx] = { ...updated[idx], description: newVal };
                             handleFieldChange(fieldPath, updated);
                           }}
                           className="w-full bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200 resize-y"
@@ -886,11 +1044,11 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token, default
             </div>
             {val.map((paragraph, pIdx) => (
               <div key={pIdx} className="flex gap-2 items-start bg-zinc-900/30 p-2.5 rounded-xl border border-zinc-800/40">
-                <textarea
+                <CMSTextarea
                   value={paragraph}
-                  onChange={(e) => {
+                  onChange={(newText) => {
                     const newVal = [...val];
-                    newVal[pIdx] = e.target.value;
+                    newVal[pIdx] = newText;
                     handleFieldChange(fieldPath, newVal);
                   }}
                   rows={2}
@@ -942,41 +1100,93 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token, default
       }
 
       // Check if value is path to image
-      const isImagePath = typeof val === "string" && (val.startsWith("/") || val.includes(".webp") || val.includes(".jpg") || val.includes(".png"));
+      const isImagePath = typeof val === "string" && (
+        val.startsWith("/") || 
+        val.includes(".webp") || 
+        val.includes(".jpg") || 
+        val.includes(".png") ||
+        key.toLowerCase().includes("image") ||
+        key.toLowerCase().includes("logo") ||
+        key.toLowerCase().includes("img") ||
+        key.toLowerCase().includes("photo") ||
+        key.toLowerCase().includes("banner")
+      );
 
       return (
         <div key={key} className="space-y-1.5">
           <label className="text-xs font-sans uppercase tracking-wider font-bold text-zinc-400 flex items-center justify-between">
             <span>{label}</span>
-            {isImagePath && <span className="text-[10px] text-yellow-500/80 font-mono font-medium">Attēla ceļš</span>}
+            {isImagePath && <span className="text-[10px] text-yellow-500/80 font-mono font-medium">Sadaļas Attēls</span>}
           </label>
           <div className="relative">
             {isImagePath ? (
-              <div className="flex gap-3">
-                <input
-                  type="text"
-                  value={val}
-                  onChange={(e) => handleFieldChange(fieldPath, e.target.value)}
-                  className="flex-1 bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500 focus:outline-none p-3 rounded-xl text-sm text-zinc-100 font-sans transition"
-                />
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex-1 space-y-2">
+                  <CMSInput
+                    type="text"
+                    value={val}
+                    onChange={(newVal) => handleFieldChange(fieldPath, newVal)}
+                    placeholder="Ievadiet attēla ceļu vai augšupielādējiet"
+                    className="w-full bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500 focus:outline-none p-3 rounded-xl text-sm text-zinc-100 font-sans transition"
+                  />
+                  <div className="flex items-center gap-2">
+                    <label className="flex items-center justify-center gap-1.5 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 active:scale-95 text-zinc-950 font-bold text-xs rounded-xl cursor-pointer transition select-none shrink-0">
+                      <Upload className="w-3.5 h-3.5" />
+                      {imageUploading === fieldPath.join(".") ? "Augšupielādē..." : "Izvēlēties un Augšupielādēt attēlu"}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        disabled={imageUploading !== null}
+                        className="hidden"
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const pId = fieldPath.join(".");
+                          setImageUploading(pId);
+                          try {
+                            const url = await uploadAndOptimizeImage(file);
+                            if (url) {
+                              handleFieldChange(fieldPath, url);
+                            } else {
+                              alert("Neizdevās augšupielādēt attēlu.");
+                            }
+                          } catch (err) {
+                            console.error(err);
+                          } finally {
+                            setImageUploading(null);
+                          }
+                        }}
+                      />
+                    </label>
+                    {val && (
+                      <button
+                        type="button"
+                        onClick={() => handleFieldChange(fieldPath, "")}
+                        className="px-3 py-2 bg-red-950/40 hover:bg-red-900 text-red-400 text-xs font-bold rounded-xl border border-red-900/30 transition"
+                      >
+                        Noņemt attēlu
+                      </button>
+                    )}
+                  </div>
+                </div>
                 {val && (
-                  <div className="w-12 h-12 bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden shrink-0 flex items-center justify-center">
+                  <div className="w-20 h-20 bg-zinc-950 border border-zinc-850 rounded-xl overflow-hidden shrink-0 flex items-center justify-center relative self-start">
                     <img src={val} alt="Preview" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                   </div>
                 )}
               </div>
             ) : typeof val === "string" && val.length > 80 ? (
-              <textarea
+              <CMSTextarea
                 value={val}
-                onChange={(e) => handleFieldChange(fieldPath, e.target.value)}
+                onChange={(newVal) => handleFieldChange(fieldPath, newVal)}
                 rows={4}
                 className="w-full bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500 focus:outline-none p-3.5 rounded-xl text-sm text-zinc-100 resize-y transition font-sans leading-relaxed"
               />
             ) : (
-              <input
+              <CMSInput
                 type="text"
-                value={val}
-                onChange={(e) => handleFieldChange(fieldPath, e.target.value)}
+                value={String(val)}
+                onChange={(newVal) => handleFieldChange(fieldPath, newVal)}
                 className="w-full bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500 focus:outline-none p-3 rounded-xl text-sm text-zinc-100 font-sans transition"
               />
             )}
@@ -1035,8 +1245,8 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token, default
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
             <div>
               <h2 className="text-xl font-bold text-white font-sans">
-                {selectedFile === "pages.json" && "Mājaslapas Lapas & Bloki"}
-                {selectedFile === "articles.json" && "Emuāru un Rakstu Sadaļa"}
+                {selectedFile === "pages.json" && "Mājaslapas Saturs"}
+                {selectedFile === "articles.json" && "Bloga Ieraksti"}
                 {selectedFile === "documents.json" && "Lejupielāžu Dokumentu Bibliotēka"}
                 {!["pages.json", "articles.json", "documents.json"].includes(selectedFile) && `Satura redaktors: ${selectedFile}`}
               </h2>
@@ -1088,33 +1298,8 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token, default
         </div>
       ) : editedData ? (
         <div className="space-y-4">
-          {/* Editor Mode Tabs */}
-          <div className="flex border-b border-zinc-800/80">
-            <button
-              onClick={() => setActiveTab("form")}
-              className={`flex items-center gap-2 px-6 py-3.5 text-sm font-bold border-b-2 transition duration-150 ${
-                activeTab === "form"
-                  ? "border-yellow-500 text-white"
-                  : "border-transparent text-zinc-500 hover:text-zinc-300"
-              }`}
-            >
-              <List className="w-4 h-4" />
-              Vizualizēts Formu Redaktors
-            </button>
-            <button
-              onClick={() => setActiveTab("raw")}
-              className={`flex items-center gap-2 px-6 py-3.5 text-sm font-bold border-b-2 transition duration-150 ${
-                activeTab === "raw"
-                  ? "border-yellow-500 text-white"
-                  : "border-transparent text-zinc-500 hover:text-zinc-300"
-              }`}
-            >
-              <Code className="w-4 h-4" />
-              Raw JSON Kods
-            </button>
-          </div>
-
-          {activeTab === "form" ? (
+          {/* Visual editor content directly */}
+          {true ? (
             collectionKey ? (
               /* COLLECTION MASTER-DETAIL LAYOUT */
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 align-top">
@@ -1225,17 +1410,7 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token, default
                 {renderFormFields(editedData, [])}
               </div>
             )
-          ) : (
-            /* RAW JSON EDITOR TAB */
-            <div className="bg-zinc-900 rounded-2xl border border-zinc-800 p-4 space-y-3">
-              <textarea
-                value={rawText}
-                onChange={(e) => setRawText(e.target.value)}
-                rows={22}
-                className="w-full bg-zinc-950 border border-zinc-850 focus:border-yellow-500 focus:outline-none p-4 rounded-xl text-xs text-zinc-300 font-mono leading-relaxed"
-              />
-            </div>
-          )}
+          ) : null}
         </div>
       ) : (
         <div className="text-center py-20 bg-zinc-900 rounded-2xl border border-zinc-800 text-zinc-500 text-sm flex flex-col items-center justify-center gap-3">

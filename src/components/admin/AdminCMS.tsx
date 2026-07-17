@@ -458,7 +458,7 @@ export const AdminCMS: React.FC = () => {
               }`}
             >
               <FolderOpen className="w-4 h-4" />
-              Lapas un Bloki
+              Mājaslapas Saturs
             </button>
 
             <button
@@ -473,7 +473,7 @@ export const AdminCMS: React.FC = () => {
               }`}
             >
               <FileJson className="w-4 h-4" />
-              Emuāri un Raksti
+              Bloga Ieraksti
             </button>
 
             <button
