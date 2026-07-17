@@ -114,13 +114,13 @@ export const AdminPublish: React.FC<AdminPublishProps> = ({ token }) => {
       } else {
         setMessage({
           type: "error",
-          text: `Dati saglabāti lokāli, bet neizdevās sinhronizēt ar GitHub: ${result.message}. Pārliecinieties par Developer Settings konfigurāciju un zaru saderību.`
+          text: `Dati saglabāti, bet sinhronizācija ar tiešsaistes sistēmu neizdevās: ${result.message}.`
         });
       }
     } catch (err: any) {
       setMessage({
         type: "error",
-        text: `Kļūda publicējot: ${err.message || err}. Konstatēts iespējams sinhronizācijas konflikts ar attālo repozitoriju. Lūdzu, mēģiniet vēlreiz vai sinhronizējiet datus Developer Settings.`
+        text: `Kļūda publicējot: ${err.message || err}. Lūdzu, mēģiniet vēlreiz vai sazinieties ar administratoru.`
       });
     } finally {
       setPublishing(false);
@@ -306,14 +306,13 @@ export const AdminPublish: React.FC<AdminPublishProps> = ({ token }) => {
 
       {/* Deploy Target Information */}
       <div className="bg-zinc-900 border border-zinc-800 p-5 rounded-2xl flex items-center gap-4 text-zinc-400">
-        <Github className="w-9 h-9 stroke-1 text-zinc-500 shrink-0" />
+        <Send className="w-9 h-9 stroke-1 text-yellow-500 shrink-0" />
         <div className="space-y-1">
           <p className="text-xs font-bold text-zinc-200 flex items-center gap-1.5">
-            <GitBranch className="w-3.5 h-3.5 text-yellow-500" />
-            GitHub Integrācija
+            Mājaslapas sinhronizācija
           </p>
           <p className="text-[11px] leading-relaxed">
-            Pēc pogas <strong>Publicēt Izmaiņas</strong> nospiešanas saturs tiks pārrakstīts vietējā direktorijā un, ja iestatīta GitHub konfigurācija (<strong>{githubRepo || "Nav iestatīta"}</strong>, zars <strong>{githubBranch || "main"}</strong>), tas tiks nosūtīts uz repozitoriju, kas automātiski iedarbinās mājaslapas atjaunināšanu caur Netlify.
+            Pēc pogas <strong>Publicēt Izmaiņas</strong> nospiešanas visas sagatavotās izmaiņas tiks apvienotas un automātiski atspoguļotas tiešsaistes mājaslapā dažu minūšu laikā.
           </p>
         </div>
       </div>

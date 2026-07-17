@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { List, Code, Plus, Trash2, ArrowUp, ArrowDown, Save, FileJson, AlertCircle, CheckCircle, Search, Link as LinkIcon, Image as ImageIcon } from "lucide-react";
+import { List, Code, Plus, Trash2, ArrowUp, ArrowDown, Save, FileJson, AlertCircle, CheckCircle, Search, Link as LinkIcon, Image as ImageIcon, MessageSquare, Sparkles, Share2 } from "lucide-react";
 
 interface AdminJSONEditorProps {
   token: string;
@@ -263,6 +263,597 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token }) => {
               Sistēmas ID (Automātisks)
             </span>
             <div className="text-zinc-400 font-mono text-sm">{val}</div>
+          </div>
+        );
+      }
+
+      // If field is array of paragraphs (like "content" in blog articles)
+      if (key === "content" && Array.isArray(val) && (val.length === 0 || typeof val[0] === "string")) {
+        return (
+          <div key={key} className="space-y-3 bg-zinc-950/25 p-5 rounded-2xl border border-zinc-800/80">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
+              <span className="text-[11px] font-sans uppercase tracking-wider font-bold text-yellow-500">
+                Satura Rindkopas ({key})
+              </span>
+              <button
+                onClick={() => handleFieldChange(fieldPath, [...val, ""])}
+                className="flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs px-2.5 py-1.5 rounded-lg border border-zinc-700 transition"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Pievienot Rindkopu
+              </button>
+            </div>
+            {val.map((paragraph, pIdx) => (
+              <div key={pIdx} className="flex gap-2 items-start bg-zinc-900/30 p-2.5 rounded-xl border border-zinc-800/40">
+                <textarea
+                  value={paragraph}
+                  onChange={(e) => {
+                    const newVal = [...val];
+                    newVal[pIdx] = e.target.value;
+                    handleFieldChange(fieldPath, newVal);
+                  }}
+                  rows={2}
+                  placeholder={`Rindkopa #${pIdx + 1}`}
+                  className="flex-1 bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2.5 rounded-lg text-sm text-zinc-100 resize-y transition font-sans leading-relaxed"
+                />
+                <button
+                  onClick={() => {
+                    const newVal = val.filter((_, i) => i !== pIdx);
+                    handleFieldChange(fieldPath, newVal);
+                  }}
+                  className="p-2 bg-red-950/40 hover:bg-red-900 text-red-400 rounded-lg border border-red-900/40 transition"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      // Special Sub-Editor: Images array
+      if (key === "images" && Array.isArray(val)) {
+        return (
+          <div key={key} className="space-y-4 bg-zinc-950/25 p-5 rounded-2xl border border-zinc-800/80">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-2.5">
+              <span className="text-xs font-sans uppercase tracking-wider font-bold text-yellow-500 flex items-center gap-2">
+                <ImageIcon className="w-4 h-4" />
+                Attēlu saraksts / Galerija ({key})
+              </span>
+              <button
+                onClick={() => handleFieldChange(fieldPath, [...val, { image: "", caption: "" }])}
+                className="flex items-center gap-1.5 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-500 text-xs px-2.5 py-1.5 rounded-lg border border-yellow-500/20 transition font-bold"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Pievienot attēlu
+              </button>
+            </div>
+            {val.map((imgObj: any, idx: number) => (
+              <div key={idx} className="flex flex-col sm:flex-row gap-4 bg-zinc-900/30 p-4 rounded-xl border border-zinc-800/40 relative">
+                {/* Control toolbar on top right */}
+                <div className="absolute top-3 right-3 flex items-center gap-1">
+                  <button
+                    disabled={idx === 0}
+                    onClick={() => {
+                      const updated = [...val];
+                      const temp = updated[idx];
+                      updated[idx] = updated[idx - 1];
+                      updated[idx - 1] = temp;
+                      handleFieldChange(fieldPath, updated);
+                    }}
+                    className="p-1 bg-zinc-950/50 hover:bg-zinc-850 text-zinc-400 hover:text-zinc-200 rounded disabled:opacity-30 border border-zinc-850 transition"
+                  >
+                    <ArrowUp className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    disabled={idx === val.length - 1}
+                    onClick={() => {
+                      const updated = [...val];
+                      const temp = updated[idx];
+                      updated[idx] = updated[idx + 1];
+                      updated[idx + 1] = temp;
+                      handleFieldChange(fieldPath, updated);
+                    }}
+                    className="p-1 bg-zinc-950/50 hover:bg-zinc-850 text-zinc-400 hover:text-zinc-200 rounded disabled:opacity-30 border border-zinc-850 transition"
+                  >
+                    <ArrowDown className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      const updated = val.filter((_: any, i: number) => i !== idx);
+                      handleFieldChange(fieldPath, updated);
+                    }}
+                    className="p-1 bg-red-950/40 hover:bg-red-900 text-red-400 hover:text-red-300 rounded border border-red-900/30 transition"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                {/* Left Thumbnail Preview */}
+                <div className="w-20 h-20 bg-zinc-950 border border-zinc-850 rounded-xl overflow-hidden shrink-0 flex items-center justify-center relative">
+                  {imgObj.image ? (
+                    <img src={imgObj.image} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  ) : (
+                    <ImageIcon className="w-6 h-6 text-zinc-600" />
+                  )}
+                </div>
+
+                {/* Fields details */}
+                <div className="flex-1 grid grid-cols-1 gap-3 pr-16">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Attēla URL / Ceļš</label>
+                    <input
+                      type="text"
+                      value={imgObj.image || ""}
+                      placeholder="/images/uploads/name.webp vai iekopēta saite"
+                      onChange={(e) => {
+                        const updated = [...val];
+                        updated[idx] = { ...updated[idx], image: e.target.value };
+                        handleFieldChange(fieldPath, updated);
+                      }}
+                      className="w-full bg-zinc-950/60 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Paraksts / Apraksts</label>
+                    <input
+                      type="text"
+                      value={imgObj.caption || ""}
+                      placeholder="Attēla paraksts..."
+                      onChange={(e) => {
+                        const updated = [...val];
+                        updated[idx] = { ...updated[idx], caption: e.target.value };
+                        handleFieldChange(fieldPath, updated);
+                      }}
+                      className="w-full bg-zinc-950/60 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+            {val.length === 0 && (
+              <div className="text-center py-6 text-zinc-600 text-xs">
+                Nav pievienots neviens attēls. Noklikšķiniet "Pievienot attēlu", lai sāktu.
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      // Special Sub-Editor: Testimonials array
+      if (key === "testimonials" && Array.isArray(val)) {
+        return (
+          <div key={key} className="space-y-4 bg-zinc-950/25 p-5 rounded-2xl border border-zinc-800/80">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-2.5">
+              <span className="text-xs font-sans uppercase tracking-wider font-bold text-yellow-500 flex items-center gap-2">
+                <MessageSquare className="w-4 h-4" />
+                Atsauksmes / Rekomendācijas ({key})
+              </span>
+              <button
+                onClick={() => handleFieldChange(fieldPath, [...val, { author: "", company: "", rating: 5, text: "" }])}
+                className="flex items-center gap-1.5 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-500 text-xs px-2.5 py-1.5 rounded-lg border border-yellow-500/20 transition font-bold"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Pievienot atsauksmi
+              </button>
+            </div>
+            {val.map((testi: any, idx: number) => (
+              <div key={idx} className="flex flex-col gap-3 bg-zinc-900/30 p-4 rounded-xl border border-zinc-800/40 relative">
+                {/* Control toolbar on top right */}
+                <div className="absolute top-3 right-3 flex items-center gap-1">
+                  <button
+                    disabled={idx === 0}
+                    onClick={() => {
+                      const updated = [...val];
+                      const temp = updated[idx];
+                      updated[idx] = updated[idx - 1];
+                      updated[idx - 1] = temp;
+                      handleFieldChange(fieldPath, updated);
+                    }}
+                    className="p-1 bg-zinc-950/50 hover:bg-zinc-850 text-zinc-400 hover:text-zinc-200 rounded disabled:opacity-30 border border-zinc-850 transition"
+                  >
+                    <ArrowUp className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    disabled={idx === val.length - 1}
+                    onClick={() => {
+                      const updated = [...val];
+                      const temp = updated[idx];
+                      updated[idx] = updated[idx + 1];
+                      updated[idx + 1] = temp;
+                      handleFieldChange(fieldPath, updated);
+                    }}
+                    className="p-1 bg-zinc-950/50 hover:bg-zinc-850 text-zinc-400 hover:text-zinc-200 rounded disabled:opacity-30 border border-zinc-850 transition"
+                  >
+                    <ArrowDown className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      const updated = val.filter((_: any, i: number) => i !== idx);
+                      handleFieldChange(fieldPath, updated);
+                    }}
+                    className="p-1 bg-red-950/40 hover:bg-red-900 text-red-400 hover:text-red-300 rounded border border-red-900/30 transition"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                {/* Fields details */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pr-16">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Autors / Vārds</label>
+                    <input
+                      type="text"
+                      value={testi.author || ""}
+                      placeholder="Jānis Bērziņš"
+                      onChange={(e) => {
+                        const updated = [...val];
+                        updated[idx] = { ...updated[idx], author: e.target.value };
+                        handleFieldChange(fieldPath, updated);
+                      }}
+                      className="w-full bg-zinc-950/60 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Uzņēmums / Amats</label>
+                    <input
+                      type="text"
+                      value={testi.company || ""}
+                      placeholder="SIA 'Avenue Group'"
+                      onChange={(e) => {
+                        const updated = [...val];
+                        updated[idx] = { ...updated[idx], company: e.target.value };
+                        handleFieldChange(fieldPath, updated);
+                      }}
+                      className="w-full bg-zinc-950/60 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Vērtējums (Zvaigznes 1-5)</label>
+                    <select
+                      value={testi.rating || 5}
+                      onChange={(e) => {
+                        const updated = [...val];
+                        updated[idx] = { ...updated[idx], rating: Number(e.target.value) };
+                        handleFieldChange(fieldPath, updated);
+                      }}
+                      className="w-24 bg-zinc-950/60 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200 cursor-pointer"
+                    >
+                      <option value="5">★★★★★ (5)</option>
+                      <option value="4">★★★★☆ (4)</option>
+                      <option value="3">★★★☆☆ (3)</option>
+                      <option value="2">★★☆☆☆ (2)</option>
+                      <option value="1">★☆☆☆☆ (1)</option>
+                    </select>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Atsauksmes teksts</label>
+                    <textarea
+                      value={testi.text || ""}
+                      placeholder="Atsauksmes saturs..."
+                      rows={2}
+                      onChange={(e) => {
+                        const updated = [...val];
+                        updated[idx] = { ...updated[idx], text: e.target.value };
+                        handleFieldChange(fieldPath, updated);
+                      }}
+                      className="w-full bg-zinc-950/60 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+            {val.length === 0 && (
+              <div className="text-center py-6 text-zinc-600 text-xs">
+                Nav pievienota neviena atsauksme. Noklikšķiniet "Pievienot atsauksmi", lai sāktu.
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      // Special Sub-Editor: Social posts array
+      if (key === "posts" && Array.isArray(val)) {
+        return (
+          <div key={key} className="space-y-4 bg-zinc-950/25 p-5 rounded-2xl border border-zinc-800/80">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-2.5">
+              <span className="text-xs font-sans uppercase tracking-wider font-bold text-yellow-500 flex items-center gap-2">
+                <Share2 className="w-4 h-4" />
+                Sociālo tīklu ieraksti ({key})
+              </span>
+              <button
+                onClick={() => handleFieldChange(fieldPath, [...val, { platform: "Instagram", url: "", embed_code: "" }])}
+                className="flex items-center gap-1.5 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-500 text-xs px-2.5 py-1.5 rounded-lg border border-yellow-500/20 transition font-bold"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Pievienot ierakstu
+              </button>
+            </div>
+            {val.map((post: any, idx: number) => (
+              <div key={idx} className="flex flex-col gap-3 bg-zinc-900/30 p-4 rounded-xl border border-zinc-800/40 relative">
+                {/* Control toolbar on top right */}
+                <div className="absolute top-3 right-3 flex items-center gap-1">
+                  <button
+                    disabled={idx === 0}
+                    onClick={() => {
+                      const updated = [...val];
+                      const temp = updated[idx];
+                      updated[idx] = updated[idx - 1];
+                      updated[idx - 1] = temp;
+                      handleFieldChange(fieldPath, updated);
+                    }}
+                    className="p-1 bg-zinc-950/50 hover:bg-zinc-850 text-zinc-400 hover:text-zinc-200 rounded disabled:opacity-30 border border-zinc-850 transition"
+                  >
+                    <ArrowUp className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    disabled={idx === val.length - 1}
+                    onClick={() => {
+                      const updated = [...val];
+                      const temp = updated[idx];
+                      updated[idx] = updated[idx + 1];
+                      updated[idx + 1] = temp;
+                      handleFieldChange(fieldPath, updated);
+                    }}
+                    className="p-1 bg-zinc-950/50 hover:bg-zinc-850 text-zinc-400 hover:text-zinc-200 rounded disabled:opacity-30 border border-zinc-850 transition"
+                  >
+                    <ArrowDown className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      const updated = val.filter((_: any, i: number) => i !== idx);
+                      handleFieldChange(fieldPath, updated);
+                    }}
+                    className="p-1 bg-red-950/40 hover:bg-red-900 text-red-400 hover:text-red-300 rounded border border-red-900/30 transition"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pr-16">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Platforma</label>
+                    <select
+                      value={post.platform || "Instagram"}
+                      onChange={(e) => {
+                        const updated = [...val];
+                        updated[idx] = { ...updated[idx], platform: e.target.value };
+                        handleFieldChange(fieldPath, updated);
+                      }}
+                      className="w-full bg-zinc-950/60 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200 cursor-pointer"
+                    >
+                      <option value="Instagram">Instagram</option>
+                      <option value="Facebook">Facebook</option>
+                      <option value="LinkedIn">LinkedIn</option>
+                      <option value="TikTok">TikTok</option>
+                      <option value="YouTube">YouTube</option>
+                    </select>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Saites adrese (URL)</label>
+                    <input
+                      type="text"
+                      value={post.url || ""}
+                      placeholder="https://..."
+                      onChange={(e) => {
+                        const updated = [...val];
+                        updated[idx] = { ...updated[idx], url: e.target.value };
+                        handleFieldChange(fieldPath, updated);
+                      }}
+                      className="w-full bg-zinc-950/60 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      // Special Sub-Editor: Blocks list
+      if (key === "blocks" && Array.isArray(val)) {
+        return (
+          <div key={key} className="space-y-4 bg-zinc-950/20 p-5 rounded-2xl border border-zinc-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-zinc-800 pb-3 gap-3">
+              <span className="text-xs font-sans uppercase tracking-wider font-bold text-yellow-500 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-yellow-500 animate-pulse" />
+                Modulārie lapas bloki ({val.length})
+              </span>
+              
+              <div className="flex items-center gap-2 font-sans">
+                <span className="text-[11px] text-zinc-400 font-bold">Pievienot bloku:</span>
+                <select
+                  value=""
+                  onChange={(e) => {
+                    const blockType = e.target.value;
+                    if (!blockType) return;
+                    let newBlock: any = { type: blockType, title: "" };
+                    if (blockType === "text_block") {
+                      newBlock.content = "";
+                    } else if (blockType === "gallery_block") {
+                      newBlock.images = [];
+                    } else if (blockType === "testimonials_block") {
+                      newBlock.testimonials = [];
+                    } else if (blockType === "social_block") {
+                      newBlock.posts = [];
+                    } else if (blockType === "blog_posts_block") {
+                      newBlock.count = 3;
+                    } else if (blockType === "contact_form_block") {
+                      newBlock.description = "";
+                    }
+                    handleFieldChange(fieldPath, [...val, newBlock]);
+                    e.target.value = ""; // reset dropdown
+                  }}
+                  className="bg-zinc-950 border border-zinc-800 focus:border-yellow-500 focus:outline-none px-2.5 py-1.5 rounded-lg text-xs text-zinc-100 cursor-pointer"
+                >
+                  <option value="">-- Izvēlēties bloka tipu --</option>
+                  <option value="text_block">Teksta bloks</option>
+                  <option value="gallery_block">Attēlu galerija</option>
+                  <option value="testimonials_block">Atsauksmju bloks</option>
+                  <option value="social_block">Sociālo tīklu bloks</option>
+                  <option value="blog_posts_block">Emuāru saraksts</option>
+                  <option value="contact_form_block">Saziņas forma</option>
+                </select>
+              </div>
+            </div>
+
+            {val.map((block: any, idx: number) => {
+              const blockTitle = block.title || `Bez virsraksta`;
+              let blockTypeName = "Nezināms bloks";
+              if (block.type === "text_block") blockTypeName = "Teksta bloks";
+              else if (block.type === "gallery_block") blockTypeName = "Attēlu galerija";
+              else if (block.type === "testimonials_block") blockTypeName = "Atsauksmju bloks";
+              else if (block.type === "social_block") blockTypeName = "Sociālo tīklu bloks";
+              else if (block.type === "blog_posts_block") blockTypeName = "Emuāru saraksts";
+              else if (block.type === "contact_form_block") blockTypeName = "Saziņas forma";
+
+              return (
+                <div key={idx} className="bg-zinc-900/50 border border-zinc-800/80 rounded-xl p-4 space-y-4 relative">
+                  {/* Block Header with operations */}
+                  <div className="flex items-center justify-between border-b border-zinc-800/60 pb-2 pr-16">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider bg-zinc-950 text-yellow-500 font-mono">
+                        {blockTypeName}
+                      </span>
+                      <span className="text-xs font-bold text-zinc-300 font-sans">{blockTitle}</span>
+                    </div>
+
+                    <div className="absolute top-3 right-3 flex items-center gap-1">
+                      <button
+                        disabled={idx === 0}
+                        onClick={() => {
+                          const updated = [...val];
+                          const temp = updated[idx];
+                          updated[idx] = updated[idx - 1];
+                          updated[idx - 1] = temp;
+                          handleFieldChange(fieldPath, updated);
+                        }}
+                        className="p-1 bg-zinc-950/50 hover:bg-zinc-850 text-zinc-400 hover:text-zinc-200 rounded disabled:opacity-30 border border-zinc-850 transition"
+                      >
+                        <ArrowUp className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        disabled={idx === val.length - 1}
+                        onClick={() => {
+                          const updated = [...val];
+                          const temp = updated[idx];
+                          updated[idx] = updated[idx + 1];
+                          updated[idx + 1] = temp;
+                          handleFieldChange(fieldPath, updated);
+                        }}
+                        className="p-1 bg-zinc-950/50 hover:bg-zinc-850 text-zinc-400 hover:text-zinc-200 rounded disabled:opacity-30 border border-zinc-850 transition"
+                      >
+                        <ArrowDown className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (!window.confirm("Vai tiešām dzēst šo bloku?")) return;
+                          const updated = val.filter((_: any, i: number) => i !== idx);
+                          handleFieldChange(fieldPath, updated);
+                        }}
+                        className="p-1 bg-red-950/40 hover:bg-red-900 text-red-400 hover:text-red-300 rounded border border-red-900/30 transition"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Block Content fields */}
+                  <div className="space-y-3">
+                    <div className="space-y-1 font-sans">
+                      <label className="text-[10px] font-bold text-zinc-500 uppercase">Bloka Virsraksts (Nav obligāts)</label>
+                      <input
+                        type="text"
+                        value={block.title || ""}
+                        placeholder="Ievadiet bloka virsrakstu..."
+                        onChange={(e) => {
+                          const updated = [...val];
+                          updated[idx] = { ...updated[idx], title: e.target.value };
+                          handleFieldChange(fieldPath, updated);
+                        }}
+                        className="w-full bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200"
+                      />
+                    </div>
+
+                    {block.type === "text_block" && (
+                      <div className="space-y-1 font-sans">
+                        <label className="text-[10px] font-bold text-zinc-500 uppercase">Bloka Saturs (Atbalsta Markdown)</label>
+                        <textarea
+                          value={block.content || ""}
+                          placeholder="Ievadiet teksta saturu..."
+                          rows={6}
+                          onChange={(e) => {
+                            const updated = [...val];
+                            updated[idx] = { ...updated[idx], content: e.target.value };
+                            handleFieldChange(fieldPath, updated);
+                          }}
+                          className="w-full bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200 leading-relaxed resize-y"
+                        />
+                      </div>
+                    )}
+
+                    {block.type === "gallery_block" && (
+                      <div className="pt-2">
+                        {renderFormFields({ images: block.images || [] }, [...fieldPath, String(idx)])}
+                      </div>
+                    )}
+
+                    {block.type === "testimonials_block" && (
+                      <div className="pt-2">
+                        {renderFormFields({ testimonials: block.testimonials || [] }, [...fieldPath, String(idx)])}
+                      </div>
+                    )}
+
+                    {block.type === "social_block" && (
+                      <div className="pt-2">
+                        {renderFormFields({ posts: block.posts || [] }, [...fieldPath, String(idx)])}
+                      </div>
+                    )}
+
+                    {block.type === "blog_posts_block" && (
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-zinc-500 uppercase">Rakstu skaits, ko attēlot</label>
+                        <input
+                          type="number"
+                          value={block.count || 3}
+                          onChange={(e) => {
+                            const updated = [...val];
+                            updated[idx] = { ...updated[idx], count: Number(e.target.value) };
+                            handleFieldChange(fieldPath, updated);
+                          }}
+                          className="w-full bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200 font-mono"
+                        />
+                      </div>
+                    )}
+
+                    {block.type === "contact_form_block" && (
+                      <div className="space-y-1 font-sans">
+                        <label className="text-[10px] font-bold text-zinc-500 uppercase">Formas apraksts / paskaidrojums</label>
+                        <textarea
+                          value={block.description || ""}
+                          placeholder="Sazinieties ar mums, aizpildot šo formu..."
+                          rows={2}
+                          onChange={(e) => {
+                            const updated = [...val];
+                            updated[idx] = { ...updated[idx], description: e.target.value };
+                            handleFieldChange(fieldPath, updated);
+                          }}
+                          className="w-full bg-zinc-950/40 border border-zinc-800 focus:border-yellow-500/60 focus:outline-none p-2 rounded-lg text-xs text-zinc-200 resize-y"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+            {val.length === 0 && (
+              <div className="text-center py-8 text-zinc-600 text-xs italic font-sans">
+                Sadaļā nav neviena bloka. Lūdzu, izmantojiet labo izvēlni, lai pievienotu blokus (tekstus, galerijas, atsauksmes u.c.).
+              </div>
+            )}
           </div>
         );
       }

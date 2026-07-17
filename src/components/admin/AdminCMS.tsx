@@ -135,7 +135,7 @@ export const AdminCMS: React.FC = () => {
       const contentType = res.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
         throw new Error(
-          "CMS serveris šajā vidē nav pieejams. CMS sistēmai ir nepieciešams aktīvs Node.js serveris (lietotāju un melnrakstu pārvaldībai), kas nedarbojas tieši Netlify statiskajā hostingā.\n\nLai rediģētu saturu, lūdzu, izmantojiet savu AI Studio priekšskatījuma / izstrādes saiti (Development/Shared App URL). Tur veiktās izmaiņas un nospiežot 'Publicēt Izmaiņas', CMS automātiski nosūtīs jaunos datus uz Jūsu GitHub repozitoriju, kas iedarbinās Netlify lapas pārbūvi un atjaunināšanu."
+          "CMS serveris šajā vidē nav pieejams. Satura rediģēšanai, lūdzu, izmantojiet savu izstrādes/priekšskatījuma saiti (Development/Shared App URL), kurā visas izmaiņas tiks saglabātas un automātiski sinhronizētas."
         );
       }
 
@@ -328,34 +328,34 @@ export const AdminCMS: React.FC = () => {
             <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl space-y-4 relative">
               <h3 className="text-base font-bold text-white font-sans flex items-center gap-1.5">
                 <Shield className="w-5 h-5 text-red-500 animate-pulse" />
-                Slēptā Sadaļa: Developer Settings
+                Sistēmas savienojuma iestatījumi
               </h3>
               <p className="text-xs text-zinc-500 leading-relaxed font-sans">
-                Šie dati tiek glabāti <strong>tikai un vienīgi Jūsu pārlūka atmiņā</strong> un nekad nav redzami Klientiem. Tie nepieciešami tiešai publicēšanai GitHub repozitorijā.
+                Šie dati tiek droši saglabāti <strong>tikai un vienīgi Jūsu pārlūka atmiņā</strong> un nekad netiek rādīti parastajiem lietotājiem. Tie nepieciešami tiešai satura sinhronizācijai ar tiešsaistes lapu.
               </p>
 
               {devSettingsSaved && (
                 <div className="bg-emerald-950/40 border border-emerald-800 p-3.5 rounded-xl text-emerald-400 text-xs font-semibold flex items-center gap-2 font-sans">
                   <CheckCircle className="w-4.5 h-4.5" />
-                  GitHub konfigurācija saglabāta lokāli!
+                  Sinhronizācijas iestatījumi saglabāti lokāli!
                 </div>
               )}
 
               <form onSubmit={saveDeveloperSettings} className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans font-bold text-zinc-400">GitHub Repozitorijs</label>
+                  <label className="text-xs font-sans font-bold text-zinc-400">Sinhronizācijas Ceļš (Repo)</label>
                   <input
                     type="text"
                     value={savedSettings.githubRepo}
                     onChange={(e) => setSavedSettings({ ...savedSettings, githubRepo: e.target.value })}
-                    placeholder="user/repo"
+                    placeholder="lietotajs/krātuve"
                     className="w-full bg-zinc-950 border border-zinc-800 focus:border-yellow-500 focus:outline-none p-2.5 rounded-xl text-xs text-zinc-100 font-mono transition"
                     required
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans font-bold text-zinc-400">GitHub Zars</label>
+                  <label className="text-xs font-sans font-bold text-zinc-400">Sinhronizācijas Kanāls</label>
                   <input
                     type="text"
                     value={savedSettings.githubBranch}
@@ -367,12 +367,12 @@ export const AdminCMS: React.FC = () => {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-sans font-bold text-zinc-400">Personal Access Token</label>
+                  <label className="text-xs font-sans font-bold text-zinc-400">Sistēmas piekļuves atslēga</label>
                   <input
                     type="password"
                     value={savedSettings.githubToken}
                     onChange={(e) => setSavedSettings({ ...savedSettings, githubToken: e.target.value })}
-                    placeholder="ghp_••••••••••••••••••••••••"
+                    placeholder="atslega_••••••••••••••••••••••••"
                     className="w-full bg-zinc-950 border border-zinc-800 focus:border-yellow-500 focus:outline-none p-2.5 rounded-xl text-xs text-zinc-100 font-mono transition"
                     required
                   />

@@ -106,8 +106,9 @@ export const AdminMedia: React.FC<AdminMediaProps> = ({ token }) => {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      const isImage = file.type.startsWith("image/");
-      const isPDF = file.type === "application/pdf";
+      const fileExt = file.name.split(".").pop()?.toLowerCase() || "";
+      const isImage = file.type.startsWith("image/") || ["jpg", "jpeg", "png", "webp", "gif", "svg"].includes(fileExt);
+      const isPDF = file.type === "application/pdf" || fileExt === "pdf";
 
       if (!isImage && !isPDF) {
         failCount++;
