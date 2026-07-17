@@ -22,7 +22,6 @@ const CheckoutPage = React.lazy(() => import('./components/CheckoutPage'));
 const TermsOfServicePage = React.lazy(() => import('./components/TermsOfServicePage'));
 const ContractTemplatesPage = React.lazy(() => import('./components/ContractTemplatesPage').then(module => ({ default: module.ContractTemplatesPage })));
 const CustomDynamicPage = React.lazy(() => import('./components/CustomDynamicPage').then(module => ({ default: module.CustomDynamicPage })));
-const KeystaticAdminPage = React.lazy(() => import('./components/KeystaticAdminPage'));
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -56,38 +55,8 @@ const Home: React.FC = () => {
 const AppContent: React.FC = () => {
   const location = useLocation();
   const { language } = useLanguage();
-  const isCmsPage = location.pathname.startsWith('/admin') || location.pathname.startsWith('/keystatic');
   const isHomePage = location.pathname === '/' || location.pathname === '/sakums';
-  const isSpecialPage = !isHomePage && !isCmsPage;
-
-  useEffect(() => {
-    // If we land on any page with a Netlify Identity hash, redirect immediately to /keystatic preserving the hash
-    const savedHash = sessionStorage.getItem('netlify_identity_hash') || '';
-    const currentHash = window.location.hash || '';
-    const hash = currentHash || savedHash;
-    if (hash && (
-      hash.includes('recovery_token=') || 
-      hash.includes('invite_token=') || 
-      hash.includes('confirmation_token=') || 
-      hash.includes('email_change_token=')
-    )) {
-      if (!location.pathname.startsWith('/keystatic')) {
-        window.location.replace('/keystatic' + hash);
-        return;
-      }
-    }
-
-    if ((window as any).netlifyIdentity && !(window as any)._netlifyIdentityInitialized) {
-      try {
-        (window as any).netlifyIdentity.init({
-          APIUrl: 'https://avenuegroup.lv/.netlify/identity'
-        });
-        (window as any)._netlifyIdentityInitialized = true;
-      } catch (e) {
-        console.log('Netlify Identity init error', e);
-      }
-    }
-  }, [location.pathname]);
+  const isSpecialPage = !isHomePage;
 
   useEffect(() => {
     // Dynamic SEO Metadata for Avenue Group routes based on language and pathname
@@ -236,9 +205,9 @@ const AppContent: React.FC = () => {
   }, [location.pathname, language]);
 
   return (
-    <div id="top" className={isCmsPage ? "min-h-screen" : "min-h-screen selection:bg-yellow-200 selection:text-zinc-900 bg-[#ebebeb] text-zinc-900"}>
-      {!isCmsPage && <Header />}
-      <main className={isCmsPage ? 'pt-0' : (isSpecialPage ? 'pt-[175px] md:pt-[215px]' : 'pt-0')}>
+    <div id="top" className="min-h-screen selection:bg-yellow-200 selection:text-zinc-900 bg-[#ebebeb] text-zinc-900">
+      <Header />
+      <main className={isSpecialPage ? 'pt-[175px] md:pt-[215px]' : 'pt-0'}>
         <React.Suspense fallback={
           <div className="min-h-[50vh] flex flex-col items-center justify-center bg-[#ebebeb] text-zinc-900 font-sans p-6">
             <div className="w-10 h-10 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4"></div>
@@ -246,11 +215,6 @@ const AppContent: React.FC = () => {
           </div>
         }>
           <Routes>
-            {/* CMS / Admin Routes */}
-            <Route path="/admin" element={<Navigate to="/keystatic" replace />} />
-            <Route path="/admin/*" element={<Navigate to="/keystatic" replace />} />
-            <Route path="/keystatic/*" element={<KeystaticAdminPage />} />
-
             {/* Public Site Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/sakums" element={<Navigate to="/" replace />} />
@@ -268,40 +232,13 @@ const AppContent: React.FC = () => {
           </Routes>
         </React.Suspense>
       </main>
-      {!isCmsPage && <Footer />}
-      {!isCmsPage && <CookieBanner />}
+      <Footer />
+      <CookieBanner />
     </div>
   );
 };
 
 const App: React.FC = () => {
-  const savedHash = sessionStorage.getItem('netlify_identity_hash') || '';
-  const currentHash = window.location.hash || '';
-  const hash = currentHash || savedHash;
-  const hasIdentityHash = !!(hash && (
-    hash.includes('recovery_token=') ||
-    hash.includes('invite_token=') ||
-    hash.includes('confirmation_token=') ||
-    hash.includes('email_change_token=')
-  ));
-
-  const isCms = window.location.pathname.startsWith('/keystatic') || window.location.pathname.startsWith('/admin') || hasIdentityHash;
-
-  if (isCms) {
-    return (
-      <LanguageProvider>
-        <React.Suspense fallback={
-          <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-100 text-zinc-900 font-sans p-6">
-            <div className="w-8 h-8 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin mb-4"></div>
-            <p className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Ielādē vadības paneli...</p>
-          </div>
-        }>
-          <KeystaticAdminPage />
-        </React.Suspense>
-      </LanguageProvider>
-    );
-  }
-
   return (
     <LanguageProvider>
       <Router>
