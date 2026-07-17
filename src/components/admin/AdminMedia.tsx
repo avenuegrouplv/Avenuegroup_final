@@ -41,7 +41,7 @@ export const AdminMedia: React.FC<AdminMediaProps> = ({ token }) => {
     fetchMedia();
   }, [token]);
 
-  // Convert File to WebP client-side using Canvas
+  // Convert File to WebP client-side using Canvas, with robust fallback to direct Base64 reading
   const optimizeAndConvertToWebP = (file: File): Promise<{ base64: string; name: string }> => {
     return new Promise((resolve, reject) => {
       if (file.type === "application/pdf") {
@@ -57,42 +57,77 @@ export const AdminMedia: React.FC<AdminMediaProps> = ({ token }) => {
         return;
       }
 
-      // Images are optimized
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (event) => {
-        const img = new Image();
-        img.src = event.target?.result as string;
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-          if (!ctx) return reject(new Error("Failed to get canvas context"));
+        const fileDataUrl = event.target?.result as string;
 
-          // Responsive image scaling if extremely large (optional, let's keep max 1920px width)
-          const MAX_WIDTH = 1920;
-          let width = img.width;
-          let height = img.height;
+        // Define fallback helper to read original file directly as Base64 if image rendering fails
+        const fallbackRawBase64 = () => {
+          try {
+            const base64 = fileDataUrl.split(",")[1];
+            // Normalize filename characters (remove Latvian diacritics, keep letters/numbers/dots/hyphens)
+            const originalNameWithoutExt = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
+            const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
+            const cleanName = originalNameWithoutExt
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .replace(/[^a-z0-9]/g, "-") + "." + ext;
 
-          if (width > MAX_WIDTH) {
-            height = Math.round((height * MAX_WIDTH) / width);
-            width = MAX_WIDTH;
+            resolve({ base64, name: cleanName });
+          } catch (e) {
+            reject(new Error("Failed to read raw file base64"));
           }
-
-          canvas.width = width;
-          canvas.height = height;
-          ctx.drawImage(img, 0, 0, width, height);
-
-          // Get optimized webp binary as base64 string
-          const webpDataUrl = canvas.toDataURL("image/webp", 0.82); // 0.82 quality compression
-          const base64 = webpDataUrl.split(",")[1];
-          
-          // Generate new WebP name
-          const originalNameWithoutExt = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
-          const cleanName = originalNameWithoutExt.toLowerCase().replace(/[^a-z0-9]/g, "-") + ".webp";
-
-          resolve({ base64, name: cleanName });
         };
-        img.onerror = (err) => reject(err);
+
+        const img = new Image();
+        img.src = fileDataUrl;
+        img.onload = () => {
+          try {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            if (!ctx) {
+              fallbackRawBase64();
+              return;
+            }
+
+            // Responsive image scaling if extremely large
+            const MAX_WIDTH = 1920;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > MAX_WIDTH) {
+              height = Math.round((height * MAX_WIDTH) / width);
+              width = MAX_WIDTH;
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Get optimized webp binary as base64 string
+            const webpDataUrl = canvas.toDataURL("image/webp", 0.82); // 0.82 quality compression
+            const base64 = webpDataUrl.split(",")[1];
+            
+            // Generate new WebP name with normalization
+            const originalNameWithoutExt = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
+            const cleanName = originalNameWithoutExt
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .replace(/[^a-z0-9]/g, "-") + ".webp";
+
+            resolve({ base64, name: cleanName });
+          } catch (canvasErr) {
+            console.warn("Canvas conversion failed, falling back to original file:", canvasErr);
+            fallbackRawBase64();
+          }
+        };
+        img.onerror = (err) => {
+          console.warn("Image load failed, falling back to original file:", err);
+          fallbackRawBase64();
+        };
       };
       reader.onerror = (err) => reject(err);
     });

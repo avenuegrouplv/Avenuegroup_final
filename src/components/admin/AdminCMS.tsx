@@ -17,7 +17,8 @@ import {
   CheckCircle,
   AlertCircle,
   Globe,
-  Database
+  Database,
+  FileJson
 } from "lucide-react";
 
 import { AdminTranslations } from "./AdminTranslations";
@@ -27,7 +28,7 @@ import { AdminPublish } from "./AdminPublish";
 import { AdminUsers } from "./AdminUsers";
 import { AdminLogs } from "./AdminLogs";
 
-type CMSView = "json" | "translations" | "media" | "publish" | "users" | "logs" | "settings";
+type CMSView = "pages" | "articles" | "documents" | "json" | "translations" | "media" | "publish" | "users" | "logs" | "settings";
 
 export const AdminCMS: React.FC = () => {
   const [token, setToken] = useState<string | null>(sessionStorage.getItem("cms_auth_token"));
@@ -41,7 +42,7 @@ export const AdminCMS: React.FC = () => {
   const [loggingIn, setLoggingIn] = useState(false);
 
   // App State
-  const [currentView, setCurrentView] = useState<CMSView>("json");
+  const [currentView, setCurrentView] = useState<CMSView>("pages");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [config, setConfig] = useState<any>({
     sections: {
@@ -281,19 +282,30 @@ export const AdminCMS: React.FC = () => {
 
   // Active view dispatcher helper
   const renderActiveView = () => {
+    // If client tries to access admin-only view, bypass and force pages
+    if (userRole !== "admin" && ["json", "users", "logs", "settings"].includes(currentView)) {
+      return <AdminJSONEditor token={token!} defaultFile="pages.json" hideSelector={true} />;
+    }
+
     switch (currentView) {
+      case "pages":
+        return <AdminJSONEditor token={token!} defaultFile="pages.json" hideSelector={true} />;
+      case "articles":
+        return <AdminJSONEditor token={token!} defaultFile="articles.json" hideSelector={true} />;
+      case "documents":
+        return <AdminJSONEditor token={token!} defaultFile="documents.json" hideSelector={true} />;
       case "json":
-        return <AdminJSONEditor token={token} />;
+        return <AdminJSONEditor token={token!} />;
       case "translations":
-        return <AdminTranslations token={token} onLogAction={() => {}} />;
+        return <AdminTranslations token={token!} onLogAction={() => {}} />;
       case "media":
-        return <AdminMedia token={token} />;
+        return <AdminMedia token={token!} />;
       case "publish":
-        return <AdminPublish token={token} />;
+        return <AdminPublish token={token!} />;
       case "users":
-        return <AdminUsers token={token} currentUserEmail={userEmail || ""} />;
+        return <AdminUsers token={token!} currentUserEmail={userEmail || ""} />;
       case "logs":
-        return <AdminLogs token={token} />;
+        return <AdminLogs token={token!} />;
       case "settings":
         return (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 align-top">
@@ -434,22 +446,52 @@ export const AdminCMS: React.FC = () => {
 
           {/* Navigation Items */}
           <nav className="flex-1 px-3 space-y-1 overflow-y-auto">
-            {config.sections.allJson && (
-              <button
-                onClick={() => {
-                  setCurrentView("json");
-                  setMobileMenuOpen(false);
-                }}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition duration-150 ${
-                  currentView === "json"
-                    ? "bg-yellow-500/10 border border-yellow-500/20 text-yellow-500"
-                    : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/20 border border-transparent"
-                }`}
-              >
-                <FolderOpen className="w-4 h-4" />
-                Satura Faili (.JSON)
-              </button>
-            )}
+            <button
+              onClick={() => {
+                setCurrentView("pages");
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition duration-150 ${
+                currentView === "pages"
+                  ? "bg-yellow-500/10 border border-yellow-500/20 text-yellow-500"
+                  : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/20 border border-transparent"
+              }`}
+            >
+              <FolderOpen className="w-4 h-4" />
+              Lapas un Bloki
+            </button>
+
+            <button
+              onClick={() => {
+                setCurrentView("articles");
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition duration-150 ${
+                currentView === "articles"
+                  ? "bg-yellow-500/10 border border-yellow-500/20 text-yellow-500"
+                  : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/20 border border-transparent"
+              }`}
+            >
+              <FileJson className="w-4 h-4" />
+              Emuāri un Raksti
+            </button>
+
+            <button
+              onClick={() => {
+                setCurrentView("documents");
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition duration-150 ${
+                currentView === "documents"
+                  ? "bg-yellow-500/10 border border-yellow-500/20 text-yellow-500"
+                  : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/20 border border-transparent"
+              }`}
+            >
+              <Compass className="w-4 h-4" />
+              Līgumi un Dokumenti
+            </button>
+
+            <div className="h-px bg-zinc-850/60 my-2.5 mx-3" />
 
             {config.sections.texts && (
               <button
@@ -502,6 +544,24 @@ export const AdminCMS: React.FC = () => {
             {userRole === "admin" && (
               <>
                 <div className="h-px bg-zinc-850 my-3 mx-3" />
+
+                {config.sections.allJson && (
+                  <button
+                    onClick={() => {
+                      setCurrentView("json");
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition duration-150 ${
+                      currentView === "json"
+                        ? "bg-yellow-500/10 border border-yellow-500/20 text-yellow-500"
+                        : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/20 border border-transparent"
+                    }`}
+                  >
+                    <Database className="w-4 h-4 text-purple-500" />
+                    Uzlabotais JSON Redaktors
+                  </button>
+                )}
+
                 <button
                   onClick={() => {
                     setCurrentView("users");

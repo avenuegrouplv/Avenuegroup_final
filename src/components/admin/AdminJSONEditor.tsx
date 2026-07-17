@@ -3,6 +3,8 @@ import { List, Code, Plus, Trash2, ArrowUp, ArrowDown, Save, FileJson, AlertCirc
 
 interface AdminJSONEditorProps {
   token: string;
+  defaultFile?: string;
+  hideSelector?: boolean;
 }
 
 interface ContentFileInfo {
@@ -12,9 +14,9 @@ interface ContentFileInfo {
   hasDraft: boolean;
 }
 
-export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token }) => {
+export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token, defaultFile = "", hideSelector = false }) => {
   const [files, setFiles] = useState<ContentFileInfo[]>([]);
-  const [selectedFile, setSelectedFile] = useState<string>("");
+  const [selectedFile, setSelectedFile] = useState<string>(defaultFile);
   const [originalData, setOriginalData] = useState<any>(null);
   const [editedData, setEditedData] = useState<any>(null);
   const [activeTab, setActiveTab] = useState<"form" | "raw">("form");
@@ -43,7 +45,15 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token }) => {
 
   useEffect(() => {
     fetchFiles();
-  }, [token]);
+    if (defaultFile) {
+      setSelectedFile(defaultFile);
+      loadFile(defaultFile);
+    } else {
+      setSelectedFile("");
+      setOriginalData(null);
+      setEditedData(null);
+    }
+  }, [token, defaultFile]);
 
   const loadFile = async (filename: string) => {
     if (!filename) {
@@ -979,46 +989,80 @@ export const AdminJSONEditor: React.FC<AdminJSONEditorProps> = ({ token }) => {
   return (
     <div id="admin-json-generic-editor" className="space-y-6">
       {/* File Selector Panel */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
-        <div className="space-y-2 flex-1">
-          <label className="text-xs uppercase tracking-widest font-mono font-bold text-zinc-500">
-            Satura fails
-          </label>
-          <div className="flex items-center gap-3">
-            <select
-              value={selectedFile}
-              onChange={handleFileChange}
-              className="bg-zinc-950 border border-zinc-800 focus:border-yellow-500 focus:outline-none px-4 py-3 rounded-xl text-sm text-zinc-100 font-sans cursor-pointer min-w-[200px]"
-            >
-              <option value="">-- Izvēlēties failu --</option>
-              {files.map((f) => (
-                <option key={f.filename} value={f.filename}>
-                  {f.filename} {f.hasDraft ? "🟡 (Melnraksts)" : ""}
-                </option>
-              ))}
-            </select>
+      {!hideSelector ? (
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+          <div className="space-y-2 flex-1">
+            <label className="text-xs uppercase tracking-widest font-mono font-bold text-zinc-500">
+              Satura fails
+            </label>
+            <div className="flex items-center gap-3">
+              <select
+                value={selectedFile}
+                onChange={handleFileChange}
+                className="bg-zinc-950 border border-zinc-800 focus:border-yellow-500 focus:outline-none px-4 py-3 rounded-xl text-sm text-zinc-100 font-sans cursor-pointer min-w-[200px]"
+              >
+                <option value="">-- Izvēlēties failu --</option>
+                {files.map((f) => (
+                  <option key={f.filename} value={f.filename}>
+                    {f.filename} {f.hasDraft ? "🟡 (Melnraksts)" : ""}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
 
-        {selectedFile && (
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handleDiscard}
-              className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white px-4 py-2.5 rounded-xl border border-zinc-700 transition duration-150 text-sm font-semibold"
-            >
-              Atcelt Melnrakstu
-            </button>
-            <button
-              onClick={handleSave}
-              disabled={saving}
-              className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 disabled:bg-zinc-700 disabled:text-zinc-500 text-zinc-950 px-5 py-2.5 rounded-xl transition duration-150 text-sm font-bold shadow-md shadow-yellow-500/10"
-            >
-              <Save className="w-4 h-4" />
-              {saving ? "Saglabā..." : "Saglabāt Melnrakstā"}
-            </button>
+          {selectedFile && (
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleDiscard}
+                className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white px-4 py-2.5 rounded-xl border border-zinc-700 transition duration-150 text-sm font-semibold"
+              >
+                Atcelt Melnrakstu
+              </button>
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 disabled:bg-zinc-700 disabled:text-zinc-500 text-zinc-950 px-5 py-2.5 rounded-xl transition duration-150 text-sm font-bold shadow-md shadow-yellow-500/10"
+              >
+                <Save className="w-4 h-4" />
+                {saving ? "Saglabā..." : "Saglabāt Melnrakstā"}
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        selectedFile && (
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+            <div>
+              <h2 className="text-xl font-bold text-white font-sans">
+                {selectedFile === "pages.json" && "Mājaslapas Lapas & Bloki"}
+                {selectedFile === "articles.json" && "Emuāru un Rakstu Sadaļa"}
+                {selectedFile === "documents.json" && "Lejupielāžu Dokumentu Bibliotēka"}
+                {!["pages.json", "articles.json", "documents.json"].includes(selectedFile) && `Satura redaktors: ${selectedFile}`}
+              </h2>
+              <p className="text-xs text-zinc-400 mt-1 font-sans">
+                Veiciet nepieciešamās satura, teksta vai attēlu izmaiņas zemāk esošajā formu redaktorā un saglabājiet tās melnrakstā.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 shrink-0">
+              <button
+                onClick={handleDiscard}
+                className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white px-4 py-2.5 rounded-xl border border-zinc-700 transition duration-150 text-sm font-semibold"
+              >
+                Atcelt Melnrakstu
+              </button>
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 disabled:bg-zinc-700 disabled:text-zinc-500 text-zinc-950 px-5 py-2.5 rounded-xl transition duration-150 text-sm font-bold shadow-md shadow-yellow-500/10"
+              >
+                <Save className="w-4 h-4" />
+                {saving ? "Saglabā..." : "Saglabāt Melnrakstā"}
+              </button>
+            </div>
           </div>
-        )}
-      </div>
+        )
+      )}
 
       {message && (
         <div
