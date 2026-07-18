@@ -140,6 +140,14 @@ export const AdminCMS: React.FC = () => {
   const [netlifyProgress, setNetlifyProgress] = useState(0);
   const [netlifyLogs, setNetlifyLogs] = useState<string[]>([]);
 
+  // Live Database & System Stats
+  const [livePagesCount, setLivePagesCount] = useState<number>(0);
+  const [liveMediaCount, setLiveMediaCount] = useState<number>(0);
+  const [liveSubmissionsCount, setLiveSubmissionsCount] = useState<number>(0);
+  const [liveNewSubmissionsCount, setLiveNewSubmissionsCount] = useState<number>(0);
+  const [liveLogs, setLiveLogs] = useState<any[]>([]);
+  const [isLiveStatsLoading, setIsLiveStatsLoading] = useState<boolean>(true);
+
   // Developer/GitHub/Netlify Configuration in local storage / config sync
   const [githubRepo, setGithubRepo] = useState("");
   const [githubBranch, setGithubBranch] = useState("main");
@@ -185,6 +193,55 @@ export const AdminCMS: React.FC = () => {
       console.error("Error fetching publish history:", err);
     } finally {
       setIsHistoryLoading(false);
+    }
+  };
+
+  const fetchLiveStats = async () => {
+    if (!token) return;
+    setIsLiveStatsLoading(true);
+    try {
+      // Fetch pages count
+      const pagesRes = await fetch("/api/cms/content-file/pages.json", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (pagesRes.ok) {
+        const data = await pagesRes.json();
+        const pages = data.draft?.pages || data.original?.pages || [];
+        setLivePagesCount(pages.length);
+      }
+
+      // Fetch media count
+      const mediaRes = await fetch("/api/cms/media", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (mediaRes.ok) {
+        const data = await mediaRes.json();
+        setLiveMediaCount(Array.isArray(data) ? data.length : 0);
+      }
+
+      // Fetch submissions count
+      const subRes = await fetch("/api/cms/content-file/submissions.json", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (subRes.ok) {
+        const data = await subRes.json();
+        const subs = data.draft?.submissions || data.original?.submissions || [];
+        setLiveSubmissionsCount(subs.length);
+        setLiveNewSubmissionsCount(subs.filter((s: any) => s.status === "Jauns").length);
+      }
+
+      // Fetch audit logs
+      const logsRes = await fetch("/api/cms/logs", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (logsRes.ok) {
+        const data = await logsRes.json();
+        setLiveLogs(Array.isArray(data) ? data.slice(0, 5) : []);
+      }
+    } catch (err) {
+      console.error("Kļūda ielasot dzīvos datus:", err);
+    } finally {
+      setIsLiveStatsLoading(false);
     }
   };
 
@@ -424,6 +481,7 @@ export const AdminCMS: React.FC = () => {
     if (token) {
       fetchPublishStatus();
       fetchPublishHistory();
+      fetchLiveStats();
  
       // Load config fallbacks
       fetch("/api/cms/config", {
@@ -454,6 +512,9 @@ export const AdminCMS: React.FC = () => {
   useEffect(() => {
     if (token) {
       fetchPublishStatus();
+      if (activeSection === "Dashboard") {
+        fetchLiveStats();
+      }
     }
   }, [activeSection, token]);
 
@@ -559,10 +620,13 @@ export const AdminCMS: React.FC = () => {
   // Action: Refresh stats
   const handleRefreshStats = () => {
     setIsRefreshingStats(true);
-    setTimeout(() => {
+    fetchLiveStats().then(() => {
       setIsRefreshingStats(false);
       showToast("Statistikas dati veiksmīgi atjaunināti!", "success");
-    }, 800);
+    }).catch(() => {
+      setIsRefreshingStats(false);
+      showToast("Neizdevās atjaunināt statistikas datus.", "error");
+    });
   };
 
   // Filter sections by role
@@ -571,10 +635,6 @@ export const AdminCMS: React.FC = () => {
       { name: "Dashboard", icon: <LayoutDashboard className="w-4 h-4" />, group: "saturs" },
       { name: "Pages", icon: <FileText className="w-4 h-4" />, group: "saturs" },
       { name: "Media", icon: <ImageIcon className="w-4 h-4" />, group: "saturs" },
-      { name: "Blog", icon: <BookOpen className="w-4 h-4" />, group: "saturs" },
-      { name: "Gallery", icon: <Grid className="w-4 h-4" />, group: "saturs" },
-      { name: "Reviews", icon: <MessageSquare className="w-4 h-4" />, group: "saturs" },
-      { name: "Destinations", icon: <Compass className="w-4 h-4" />, group: "saturs" },
       { name: "FAQ", icon: <HelpCircle className="w-4 h-4" />, group: "saturs" },
       { name: "Menu", icon: <Layers className="w-4 h-4" />, group: "saturs" },
       { name: "Forms", icon: <Mail className="w-4 h-4" />, group: "saturs" },
@@ -672,12 +732,12 @@ export const AdminCMS: React.FC = () => {
                 </div>
                 <div className="mt-4">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-black text-white">12</span>
-                    <span className="text-xs text-emerald-400 font-bold font-sans">+2 šomēnes</span>
+                    <span className="text-2xl font-black text-white">{isLiveStatsLoading ? "..." : livePagesCount}</span>
+                    <span className="text-xs text-zinc-500 font-sans">Lapas pages.json</span>
                   </div>
                   <div className="mt-3 flex items-center gap-1.5">
                     <div className="w-full bg-zinc-900 h-1 rounded-full overflow-hidden">
-                      <div className="bg-yellow-500 h-1 w-3/4 rounded-full"></div>
+                      <div className="bg-yellow-500 h-1 w-full rounded-full"></div>
                     </div>
                   </div>
                 </div>
@@ -693,12 +753,12 @@ export const AdminCMS: React.FC = () => {
                 </div>
                 <div className="mt-4">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-black text-white">154</span>
-                    <span className="text-xs text-zinc-400 font-mono">48.2 MB</span>
+                    <span className="text-2xl font-black text-white">{isLiveStatsLoading ? "..." : liveMediaCount}</span>
+                    <span className="text-xs text-zinc-500 font-mono">Augšupielādes</span>
                   </div>
                   <div className="mt-3 flex items-center gap-1.5">
                     <div className="w-full bg-zinc-900 h-1 rounded-full overflow-hidden">
-                      <div className="bg-blue-500 h-1 w-2/5 rounded-full"></div>
+                      <div className="bg-blue-500 h-1 w-full rounded-full"></div>
                     </div>
                   </div>
                 </div>
@@ -707,19 +767,21 @@ export const AdminCMS: React.FC = () => {
               {/* Stat 3 */}
               <div className="bg-zinc-950/40 backdrop-blur-md border border-zinc-900 p-5 rounded-2.5xl flex flex-col justify-between hover:border-zinc-800/60 transition-all duration-300 group">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-zinc-500 font-sans">Jauni Pieteikumi</span>
+                  <span className="text-xs font-bold text-zinc-500 font-sans">Formu Pieteikumi</span>
                   <div className="w-8 h-8 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition duration-300">
                     <Mail className="w-4.5 h-4.5" />
                   </div>
                 </div>
                 <div className="mt-4">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-black text-white">48</span>
-                    <span className="text-xs text-purple-400 font-bold font-sans">8 jauni šodien</span>
+                    <span className="text-2xl font-black text-white">{isLiveStatsLoading ? "..." : liveSubmissionsCount}</span>
+                    <span className="text-xs text-purple-400 font-bold font-sans">
+                      {liveNewSubmissionsCount} jauni
+                    </span>
                   </div>
                   <div className="mt-3 flex items-center gap-1.5">
                     <div className="w-full bg-zinc-900 h-1 rounded-full overflow-hidden">
-                      <div className="bg-purple-500 h-1 w-[85%] rounded-full"></div>
+                      <div className="bg-purple-500 h-1 w-full rounded-full"></div>
                     </div>
                   </div>
                 </div>
@@ -728,19 +790,23 @@ export const AdminCMS: React.FC = () => {
               {/* Stat 4 */}
               <div className="bg-zinc-950/40 backdrop-blur-md border border-zinc-900 p-5 rounded-2.5xl flex flex-col justify-between hover:border-zinc-800/60 transition-all duration-300 group">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-zinc-500 font-sans">Sistēmas Statuss</span>
+                  <span className="text-xs font-bold text-zinc-500 font-sans">Mana Sesija</span>
                   <div className="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition duration-300">
                     <Activity className="w-4.5 h-4.5" />
                   </div>
                 </div>
                 <div className="mt-4">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-black text-emerald-400">99.98%</span>
-                    <span className="text-xs text-zinc-400 font-sans font-medium">Uptime</span>
+                    <span className="text-sm font-black text-white truncate max-w-[120px]" title={userEmail || ""}>
+                      {userEmail?.split("@")[0]}
+                    </span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono font-bold uppercase">
+                      {userRole}
+                    </span>
                   </div>
                   <div className="mt-3 flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span className="text-[10px] text-zinc-500 font-bold tracking-wider uppercase font-mono">Visi mezgli tiešsaistē</span>
+                    <span className="text-[10px] text-zinc-500 font-bold tracking-wider uppercase font-mono">Darbības režīms</span>
                   </div>
                 </div>
               </div>
@@ -753,51 +819,44 @@ export const AdminCMS: React.FC = () => {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-base font-bold text-white">Pēdējie Labojumi</h3>
-                      <p className="text-xs text-zinc-500">Nesenās satura un failu modifikācijas sistēmā</p>
+                      <h3 className="text-base font-bold text-white">Sistēmas Auditēšanas Žurnāls</h3>
+                      <p className="text-xs text-zinc-500">Nesenās darbības un labojumi šajā CMS sistēmā</p>
                     </div>
-                    <span className="text-[10px] font-mono bg-zinc-800/50 border border-zinc-700/30 px-2 py-1 rounded-lg text-zinc-400 font-bold uppercase">Audit logs</span>
+                    <span className="text-[10px] font-mono bg-zinc-800/50 border border-zinc-700/30 px-2 py-1 rounded-lg text-zinc-400 font-bold uppercase">Reālie logs</span>
                   </div>
 
                   <div className="space-y-3.5 mt-4 divide-y divide-zinc-800/40">
-                    <div className="flex items-start gap-3 pt-3.5 first:pt-0">
-                      <div className="w-7 h-7 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0 mt-0.5 text-yellow-500">
-                        <FileText className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="min-w-0 flex-1 space-y-0.5">
-                        <div className="flex items-center justify-between gap-4">
-                          <p className="text-xs font-bold text-zinc-200 truncate">Sākumlapas satura atjaunināšana</p>
-                          <span className="text-[10px] font-mono text-zinc-500 shrink-0">Pirms 5 min</span>
-                        </div>
-                        <p className="text-[10px] text-zinc-500 truncate">Veica: <span className="text-zinc-400 font-medium">{userEmail}</span> • Valoda: LV</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 pt-3.5">
-                      <div className="w-7 h-7 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 mt-0.5 text-blue-400">
-                        <ImageIcon className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="min-w-0 flex-1 space-y-0.5">
-                        <div className="flex items-center justify-between gap-4">
-                          <p className="text-xs font-bold text-zinc-200 truncate">Augšupielādēts attēls "hero-banner-new.webp"</p>
-                          <span className="text-[10px] font-mono text-zinc-500 shrink-0">Pirms 2 stundām</span>
-                        </div>
-                        <p className="text-[10px] text-zinc-500 truncate">Veica: <span className="text-zinc-400 font-medium">client@avenuegroup.lv</span> • Izmērs: 1.2 MB</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 pt-3.5">
-                      <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 mt-0.5 text-emerald-400">
-                        <Mail className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="min-w-0 flex-1 space-y-0.5">
-                        <div className="flex items-center justify-between gap-4">
-                          <p className="text-xs font-bold text-zinc-200 truncate">Jauns pieteikums no Jānis Bērziņš</p>
-                          <span className="text-[10px] font-mono text-zinc-500 shrink-0">Pirms 4 stundām</span>
-                        </div>
-                        <p className="text-[10px] text-zinc-500 truncate">Statuss: <span className="text-emerald-400 font-medium">Saņemts</span> • Pakalpojums: Apsaimniekošana</p>
-                      </div>
-                    </div>
+                    {isLiveStatsLoading ? (
+                      <div className="text-zinc-500 text-xs py-4 text-center">Ielādē darbību vēsturi...</div>
+                    ) : liveLogs && liveLogs.length > 0 ? (
+                      liveLogs.map((log, index) => {
+                        const dateStr = log.timestamp ? new Date(log.timestamp).toLocaleString("lv-LV", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit"
+                        }) : "";
+                        return (
+                          <div key={index} className="flex items-start gap-3 pt-3.5 first:pt-0">
+                            <div className="w-7 h-7 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0 mt-0.5 text-yellow-500">
+                              <FileText className="w-3.5 h-3.5" />
+                            </div>
+                            <div className="min-w-0 flex-1 space-y-0.5">
+                              <div className="flex items-center justify-between gap-4">
+                                <p className="text-xs font-bold text-zinc-200 truncate">{log.action}</p>
+                                <span className="text-[10px] font-mono text-zinc-500 shrink-0">{dateStr}</span>
+                              </div>
+                              <p className="text-[10px] text-zinc-500 truncate">
+                                Veica: <span className="text-zinc-400 font-medium">{log.email}</span> • Objekts: {log.object || "Sistēma"}
+                              </p>
+                              <p className="text-[10px] text-zinc-400 italic mt-0.5">{log.details}</p>
+                            </div>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <div className="text-zinc-500 text-xs py-4 text-center">Nav reģistrētu darbību žurnālā.</div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -883,173 +942,6 @@ export const AdminCMS: React.FC = () => {
               <p className="text-xs text-zinc-500">Profesionāla WordPress tipa mediju un failu pārvaldība</p>
             </div>
             <AdminMedia token={token!} />
-          </div>
-        );
-
-      case "Blog":
-        return (
-          <div className="bg-zinc-900/30 border border-zinc-800/80 rounded-3xl p-6 space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-yellow-500" />
-                  Blog (Emuāri un Raksti)
-                </h2>
-                <p className="text-xs text-zinc-500">Mājaslapas bloga rakstu un ziņu pārvaldības sistēmas karkass</p>
-              </div>
-              <button 
-                onClick={() => showToast("Emuāru izveide tiks iespējota nākamajās daļās.", "info")}
-                className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 active:scale-95 text-zinc-950 font-bold text-xs rounded-xl transition cursor-pointer self-start sm:self-center"
-              >
-                Izveidot Rakstu
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-5 bg-zinc-950/40 border border-zinc-850 rounded-2xl space-y-2">
-                <div className="flex justify-between items-start">
-                  <span className="px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-bold rounded-lg text-[9px] uppercase tracking-wider font-mono">Publicēts</span>
-                  <span className="text-[10px] text-zinc-500">10.07.2026</span>
-                </div>
-                <h3 className="text-xs font-bold text-white">Komercīpašumu apsaimniekošanas tendences Latvijā</h3>
-                <p className="text-[11px] text-zinc-400 line-clamp-2">Kā izvēlēties piemērotāko apsaimniekotāju savam biroju kompleksam un ietaupīt energoresursus...</p>
-              </div>
-
-              <div className="p-5 bg-zinc-950/40 border border-zinc-850 rounded-2xl space-y-2">
-                <div className="flex justify-between items-start">
-                  <span className="px-2 py-0.5 bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 font-bold rounded-lg text-[9px] uppercase tracking-wider font-mono">Melnraksts</span>
-                  <span className="text-[10px] text-zinc-500">15.07.2026</span>
-                </div>
-                <h3 className="text-xs font-bold text-white">Liftu drošība un tehniskā apkope</h3>
-                <p className="text-[11px] text-zinc-400 line-clamp-2">Svarīgākie normatīvie akti un ieteikumi, lai nodrošinātu nepārtrauktu liftu darbību...</p>
-              </div>
-            </div>
-          </div>
-        );
-
-      case "Gallery":
-        return (
-          <div className="bg-zinc-900/30 border border-zinc-800/80 rounded-3xl p-6 space-y-6">
-            <div>
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <Grid className="w-5 h-5 text-yellow-500" />
-                Gallery (Galerija)
-              </h2>
-              <p className="text-xs text-zinc-500">Pabeigto projektu un objektu fotogalerijas modulis</p>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="aspect-square bg-zinc-950/40 border border-zinc-850 rounded-2xl flex flex-col items-center justify-center text-center p-4 space-y-2 group hover:border-yellow-500/20 transition">
-                <div className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-500 group-hover:text-yellow-500 transition">
-                  <Grid className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-zinc-300">Biroju Centrs</p>
-                  <p className="text-[9px] text-zinc-500">15 attēli</p>
-                </div>
-              </div>
-
-              <div className="aspect-square bg-zinc-950/40 border border-zinc-850 rounded-2xl flex flex-col items-center justify-center text-center p-4 space-y-2 group hover:border-yellow-500/20 transition">
-                <div className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-500 group-hover:text-yellow-500 transition">
-                  <Grid className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-zinc-300">Loģistikas Parks</p>
-                  <p className="text-[9px] text-zinc-500">8 attēli</p>
-                </div>
-              </div>
-
-              <div className="aspect-square bg-zinc-950/40 border border-zinc-850 rounded-2xl flex flex-col items-center justify-center text-center p-4 space-y-2 group hover:border-yellow-500/20 transition">
-                <div className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-500 group-hover:text-yellow-500 transition">
-                  <Grid className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-zinc-300">Dzīvojamais Nams</p>
-                  <p className="text-[9px] text-zinc-500">22 attēli</p>
-                </div>
-              </div>
-
-              <div className="aspect-square bg-zinc-950/40 border border-zinc-850 rounded-2xl border-dashed flex flex-col items-center justify-center text-center p-4 cursor-pointer hover:bg-zinc-900/10 transition group" onClick={() => showToast("Galeriju modulis tiks izveidots vēlāk.", "info")}>
-                <Plus className="w-6 h-6 text-zinc-600 group-hover:text-yellow-500 transition mb-1" />
-                <span className="text-[10px] font-bold text-zinc-500 group-hover:text-zinc-400">Jauna Galerija</span>
-              </div>
-            </div>
-          </div>
-        );
-
-      case "Reviews":
-        return (
-          <div className="bg-zinc-900/30 border border-zinc-800/80 rounded-3xl p-6 space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                  <MessageSquare className="w-5 h-5 text-yellow-500" />
-                  Reviews (Atsauksmes)
-                </h2>
-                <p className="text-xs text-zinc-500">Klientu un partneru atsauksmju un rekomendāciju modulis</p>
-              </div>
-              <button 
-                onClick={() => showToast("Funkcija būs pieejama vēlāk.", "info")}
-                className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-zinc-950 font-bold text-xs rounded-xl transition cursor-pointer self-start sm:self-center"
-              >
-                Pievienot Atsauksmi
-              </button>
-            </div>
-
-            <div className="space-y-3">
-              <div className="p-4 bg-zinc-950/40 border border-zinc-850 rounded-2xl space-y-2">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="text-xs font-bold text-white">SIA GreenOffice Baltic</h4>
-                    <span className="text-[10px] text-zinc-500 font-mono">Biroju kompleksa vadītājs</span>
-                  </div>
-                  <div className="flex text-yellow-500 text-xs">★★★★★</div>
-                </div>
-                <p className="text-xs text-zinc-400 italic">"Sadarbība ar Avenue Group ir pacēlusi mūsu ēkas apsaimniekošanas kvalitāti jaunā līmenī. Tehniskie jautājumi tiek risināti ātri un profesionāli."</p>
-              </div>
-
-              <div className="p-4 bg-zinc-950/40 border border-zinc-850 rounded-2xl space-y-2">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="text-xs font-bold text-white">Artūrs Kalniņš</h4>
-                    <span className="text-[10px] text-zinc-500 font-mono">Privātīpašnieks</span>
-                  </div>
-                  <div className="flex text-yellow-500 text-xs">★★★★★</div>
-                </div>
-                <p className="text-xs text-zinc-400 italic">"Ļoti uzticams partneris komercplatību juridiskajā pārvaldībā. Visi līgumi vienmēr sakārtoti laikā un bez liekas birokrātijas."</p>
-              </div>
-            </div>
-          </div>
-        );
-
-      case "Destinations":
-        return (
-          <div className="bg-zinc-900/30 border border-zinc-800/80 rounded-3xl p-6 space-y-6">
-            <div>
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <Compass className="w-5 h-5 text-yellow-500" />
-                Destinations (Apsaimniekošanas Galamērķi)
-              </h2>
-              <p className="text-xs text-zinc-500">Reģioni un galamērķi, kuros Avenue Group sniedz pakalpojumus</p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-4 bg-zinc-950/40 border border-zinc-850 rounded-2xl space-y-1.5">
-                <h3 className="text-xs font-bold text-white">Rīga un Pierīga</h3>
-                <p className="text-[10px] text-zinc-500">Mārupe, Ādaži, Babīte, Jūrmala</p>
-                <span className="inline-block text-[9px] px-1.5 py-0.5 bg-yellow-500/10 text-yellow-500 rounded font-mono font-bold">Galvenais Centrs</span>
-              </div>
-              <div className="p-4 bg-zinc-950/40 border border-zinc-850 rounded-2xl space-y-1.5">
-                <h3 className="text-xs font-bold text-white">Kurzeme</h3>
-                <p className="text-[10px] text-zinc-500">Ventspils, Liepāja, Kuldīga</p>
-                <span className="inline-block text-[9px] px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded font-mono font-bold">Reģionālā pārstāvniecība</span>
-              </div>
-              <div className="p-4 bg-zinc-950/40 border border-zinc-850 rounded-2xl space-y-1.5">
-                <h3 className="text-xs font-bold text-white">Vidzeme</h3>
-                <p className="text-[10px] text-zinc-500">Valmiera, Cēsis, Sigulda</p>
-                <span className="inline-block text-[9px] px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded font-mono font-bold">Aktīvs pārklājums</span>
-              </div>
-            </div>
           </div>
         );
 
