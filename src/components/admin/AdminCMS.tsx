@@ -1,49 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { AdminMedia } from "./AdminMedia";
 import { AdminPages } from "./AdminPages";
-import { AdminFAQ } from "./AdminFAQ";
-import { AdminMenuBuilder } from "./AdminMenuBuilder";
-import { AdminForms } from "./AdminForms";
-import { AdminSEO } from "./AdminSEO";
 import { AdminTranslations } from "./AdminTranslations";
-import { AdminFiles } from "./AdminFiles";
-import { AdminLogs } from "./AdminLogs";
 import { AdminUsers } from "./AdminUsers";
-import { AdminSettings } from "./AdminSettings";
-import { AdminDeveloper } from "./AdminDeveloper";
-import { AdminBackup } from "./AdminBackup";
 import { AdminProfile } from "./AdminProfile";
+import { AdminJSONEditor } from "./AdminJSONEditor";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  LayoutDashboard,
   FileText,
   Image as ImageIcon,
-  BookOpen,
-  Grid,
-  MessageSquare,
-  Compass,
-  HelpCircle,
-  Layers,
-  Mail,
-  Search,
   Languages,
-  Folder,
   Users,
-  Settings,
-  Code,
-  Lock,
   User,
   LogOut,
   Menu,
   X,
-  ChevronRight,
   Plus,
   Trash2,
   Edit,
   Shield,
   Activity,
-  Database,
-  Cpu,
   Clock,
   ExternalLink,
   RefreshCw,
@@ -52,6 +28,10 @@ import {
   CheckCircle,
   AlertCircle,
   Info,
+  ChevronRight,
+  Mail,
+  Cpu,
+  Database,
   Bell,
   Eye,
   ArrowRight,
@@ -59,28 +39,17 @@ import {
   EyeOff,
   TrendingUp,
   FileCode,
-  RotateCcw
+  RotateCcw,
+  Code
 } from "lucide-react";
 
 // Types for Navigation Sections
 type CMSSection =
-  | "Dashboard"
   | "Pages"
-  | "Media"
-  | "Blog"
-  | "Gallery"
-  | "Reviews"
-  | "Destinations"
-  | "FAQ"
-  | "Menu"
-  | "Forms"
-  | "SEO"
   | "Translations"
-  | "Files"
+  | "Media"
+  | "JSONEditor"
   | "Users"
-  | "Settings"
-  | "Developer"
-  | "Backup"
   | "Profile";
 
 interface Toast {
@@ -103,7 +72,7 @@ export const AdminCMS: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   // Layout States
-  const [activeSection, setActiveSection] = useState<CMSSection>("Dashboard");
+  const [activeSection, setActiveSection] = useState<CMSSection>("Pages");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sectionLoading, setSectionLoading] = useState(false);
   const [toasts, setToasts] = useState<Toast[]>([]);
@@ -512,9 +481,6 @@ export const AdminCMS: React.FC = () => {
   useEffect(() => {
     if (token) {
       fetchPublishStatus();
-      if (activeSection === "Dashboard") {
-        fetchLiveStats();
-      }
     }
   }, [activeSection, token]);
 
@@ -541,8 +507,8 @@ export const AdminCMS: React.FC = () => {
         sessionStorage.setItem("cms_user_email", data.email);
         sessionStorage.setItem("cms_user_role", data.role);
         
-        // Default to Dashboard
-        setActiveSection("Dashboard");
+        // Default to Pages
+        setActiveSection("Pages");
       } else {
         const data = await res.json().catch(() => ({}));
         throw new Error(data.error || "Nepareizs e-pasts vai parole.");
@@ -559,7 +525,7 @@ export const AdminCMS: React.FC = () => {
         sessionStorage.setItem("cms_auth_token", fallbackToken);
         sessionStorage.setItem("cms_user_email", "admin@avenuegroup.lv");
         sessionStorage.setItem("cms_user_role", "admin");
-        setActiveSection("Dashboard");
+        setActiveSection("Pages");
       } else if (lowerEmail === "client@avenuegroup.lv" && password === "AvenueClient2026!") {
         const fallbackToken = "mock_client_token_" + Math.random().toString(36).substr(2);
         setToken(fallbackToken);
@@ -568,7 +534,7 @@ export const AdminCMS: React.FC = () => {
         sessionStorage.setItem("cms_auth_token", fallbackToken);
         sessionStorage.setItem("cms_user_email", "client@avenuegroup.lv");
         sessionStorage.setItem("cms_user_role", "client");
-        setActiveSection("Dashboard");
+        setActiveSection("Pages");
       } else {
         setAuthError(err.message || "Nepareiza lietotāja informācija vai parole. Lūdzu mēģiniet vēlreiz.");
       }
@@ -629,27 +595,32 @@ export const AdminCMS: React.FC = () => {
     });
   };
 
+  const getSectionLabel = (secName: CMSSection): string => {
+    switch (secName) {
+      case "Pages": return "Sadaļas / Lapas";
+      case "Translations": return "Mājaslapas teksti & BUJ";
+      case "Media": return "Mediju bibliotēka";
+      case "JSONEditor": return "Papildu faili (JSON)";
+      case "Users": return "Lietotāji (Pieejas)";
+      case "Profile": return "Mans profils";
+      default: return secName;
+    }
+  };
+
   // Filter sections by role
   const getVisibleSections = (): { name: CMSSection; icon: React.ReactNode; group: "saturs" | "sistēma" }[] => {
     const list: { name: CMSSection; icon: React.ReactNode; group: "saturs" | "sistēma" }[] = [
-      { name: "Dashboard", icon: <LayoutDashboard className="w-4 h-4" />, group: "saturs" },
       { name: "Pages", icon: <FileText className="w-4 h-4" />, group: "saturs" },
-      { name: "Media", icon: <ImageIcon className="w-4 h-4" />, group: "saturs" },
-      { name: "FAQ", icon: <HelpCircle className="w-4 h-4" />, group: "saturs" },
-      { name: "Menu", icon: <Layers className="w-4 h-4" />, group: "saturs" },
-      { name: "Forms", icon: <Mail className="w-4 h-4" />, group: "saturs" },
-      { name: "SEO", icon: <Search className="w-4 h-4" />, group: "saturs" },
       { name: "Translations", icon: <Languages className="w-4 h-4" />, group: "saturs" },
-      { name: "Files", icon: <Folder className="w-4 h-4" />, group: "saturs" }
+      { name: "Media", icon: <ImageIcon className="w-4 h-4" />, group: "saturs" },
+      { name: "JSONEditor", icon: <Code className="w-4 h-4 text-yellow-500" />, group: "saturs" }
     ];
 
     // Administrators only sections
     if (userRole === "admin") {
       list.push(
         { name: "Users", icon: <Users className="w-4 h-4 text-amber-500" />, group: "sistēma" },
-        { name: "Settings", icon: <Settings className="w-4 h-4 text-zinc-400" />, group: "sistēma" },
-        { name: "Backup", icon: <Database className="w-4 h-4 text-emerald-400" />, group: "sistēma" },
-        { name: "Developer", icon: <Code className="w-4 h-4 text-indigo-400" />, group: "sistēma" }
+        { name: "Profile", icon: <User className="w-4 h-4 text-zinc-400" />, group: "sistēma" }
       );
     }
 
@@ -678,7 +649,7 @@ export const AdminCMS: React.FC = () => {
   // Render specific mock sections (High Fidelity empty states)
   const renderSectionContent = () => {
     switch (activeSection) {
-      case "Dashboard":
+      case "DisabledDashboard" as any:
         return (
           <div className="space-y-6">
             {/* Top Glass Welcome Card */}
@@ -945,35 +916,18 @@ export const AdminCMS: React.FC = () => {
           </div>
         );
 
-      case "FAQ":
-        return <AdminFAQ token={token!} showToast={showToast} />;
-
-      case "Menu":
-        return <AdminMenuBuilder token={token!} showToast={showToast} />;
-
-      case "Forms":
-        return <AdminForms token={token!} showToast={showToast} />;
-
-      case "SEO":
-        return <AdminSEO token={token!} showToast={showToast} />;
-
       case "Translations":
         return <AdminTranslations token={token!} showToast={showToast} />;
 
-      case "Files":
-        return <AdminFiles token={token!} showToast={showToast} />;
+      case "JSONEditor":
+        return (
+          <div className="bg-zinc-900/30 border border-zinc-800/80 rounded-3xl p-6 space-y-6">
+            <AdminJSONEditor token={token!} />
+          </div>
+        );
 
       case "Users":
         return <AdminUsers token={token!} currentUserEmail={userEmail!} />;
-
-      case "Settings":
-        return <AdminSettings token={token!} />;
-
-      case "Developer":
-        return <AdminDeveloper token={token!} />;
-
-      case "Backup":
-        return <AdminBackup token={token!} />;
 
       case "Profile":
         return <AdminProfile token={token!} />;
@@ -1034,7 +988,7 @@ export const AdminCMS: React.FC = () => {
                 Parole
               </label>
               <div className="relative">
-                <Lock className="absolute left-3.5 top-3.5 h-4 w-4 text-zinc-600" />
+                <Shield className="absolute left-3.5 top-3.5 h-4 w-4 text-zinc-600" />
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
@@ -1157,7 +1111,7 @@ export const AdminCMS: React.FC = () => {
                         }`}
                       >
                         {sec.icon}
-                        {sec.name}
+                        {getSectionLabel(sec.name)}
                       </button>
                     ))}
                   </div>
@@ -1177,7 +1131,7 @@ export const AdminCMS: React.FC = () => {
                           }`}
                         >
                           {sec.icon}
-                          {sec.name}
+                          {getSectionLabel(sec.name)}
                         </button>
                       ))}
                     </div>
@@ -1244,7 +1198,7 @@ export const AdminCMS: React.FC = () => {
                   }`}
                 >
                   {sec.icon}
-                  <span>{sec.name}</span>
+                  <span>{getSectionLabel(sec.name)}</span>
                 </button>
               ))}
             </div>
@@ -1264,7 +1218,7 @@ export const AdminCMS: React.FC = () => {
                     }`}
                   >
                     {sec.icon}
-                    <span>{sec.name}</span>
+                    <span>{getSectionLabel(sec.name)}</span>
                   </button>
                 ))}
               </div>
@@ -1318,23 +1272,11 @@ export const AdminCMS: React.FC = () => {
                 <span className="text-[10px] font-mono text-yellow-500 font-bold uppercase tracking-wider">{activeSection}</span>
               </div>
               <h2 className="text-sm font-extrabold text-white font-sans hidden sm:block">
-                {activeSection === "Dashboard" && "Galvenais pārskata panelis"}
                 {activeSection === "Pages" && "Lapas satura pārvaldnieks"}
                 {activeSection === "Media" && "Attēlu un mediju glabātuve"}
-                {activeSection === "Blog" && "Emuāru un rakstu izveide"}
-                {activeSection === "Gallery" && "Projektu galeriju modulis"}
-                {activeSection === "Reviews" && "Klientu atsauksmju logs"}
-                {activeSection === "Destinations" && "Galamērķu un reģionu saraksts"}
-                {activeSection === "FAQ" && "BUJ atbilžu saraksts"}
-                {activeSection === "Menu" && "Mājaslapas izvēlnes koks"}
-                {activeSection === "Forms" && "Lietotāju pieteikumi"}
-                {activeSection === "SEO" && "Meklētājprogrammu optimizācija"}
-                {activeSection === "Translations" && "Tulkošanas tabula"}
-                {activeSection === "Files" && "Dokumentu bibliotēka"}
+                {activeSection === "Translations" && "Mājaslapas tekstu un BUJ tulkošanas tabula"}
+                {activeSection === "JSONEditor" && "Papildu satura failu tiešais redaktors"}
                 {activeSection === "Users" && "Lietotāju kontu pārvaldība"}
-                {activeSection === "Settings" && "Platformas konfigurācija"}
-                {activeSection === "Developer" && "Izstrādātāju uzstādījumu centrs"}
-                {activeSection === "Backup" && "Datu bāzes dublējumi un atjaunošana"}
                 {activeSection === "Profile" && "Lietotāja profila pārvaldība"}
               </h2>
             </div>
