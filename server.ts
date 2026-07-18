@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import fs from "fs";
 import dotenv from "dotenv";
 import { setupCMS } from "./server-cms";
 
@@ -24,7 +25,11 @@ async function startServer() {
   });
 
   // Vite middleware for development or serving assets in production
-  if (process.env.NODE_ENV !== "production") {
+  const distPath = path.join(process.cwd(), 'dist');
+  const hasDist = fs.existsSync(distPath);
+
+  if (process.env.NODE_ENV !== "production" || !hasDist) {
+    console.log(`Starting in development/fallback mode. (hasDist: ${hasDist})`);
     const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
@@ -32,7 +37,7 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), 'dist');
+    console.log("Starting in production mode serving static dist files.");
     app.use(express.static(distPath));
     
     // Serve index.html for all other routes to support client-side routing

@@ -684,34 +684,40 @@ export function initStaticCmsInterceptor() {
   (window as any).__cms_interceptor_init = true;
   const originalFetch = window.fetch;
 
-  window.fetch = async function (input: RequestInfo | URL, init?: RequestInit) {
-    const url = typeof input === "string" ? input : (input as any).url || "";
+  try {
+    window.fetch = async function (input: RequestInfo | URL, init?: RequestInit) {
+      const url = typeof input === "string" ? input : (input as any).url || "";
 
-    // Intercept any relative `/api/cms/*` or absolute CMS requests
-    if (url.startsWith("/api/cms/") || url.includes("/api/cms/")) {
-      const cleanUrl = url.startsWith("/api/cms/") ? url : "/" + url.split("/api/")[1];
-      
-      // Determine if running statically (Netlify, production domain) or backend is missing
-      const isStatic = window.location.hostname !== "localhost" && 
-                       !window.location.hostname.includes("run.app") && 
-                       !window.location.hostname.includes("aistudio") &&
-                       !window.location.hostname.includes("gitpod");
+      // Intercept any relative `/api/cms/*` or absolute CMS requests
+      if (url.startsWith("/api/cms/") || url.includes("/api/cms/")) {
+        const cleanUrl = url.startsWith("/api/cms/") ? url : "/" + url.split("/api/")[1];
+        
+        // Determine if running statically (Netlify, production domain) or backend is missing
+        const isStatic = window.location.hostname !== "localhost" && 
+                         !window.location.hostname.includes("run.app") && 
+                         !window.location.hostname.includes("aistudio") &&
+                         !window.location.hostname.includes("gitpod");
 
-      if (isStatic) {
-        try {
-          return await handleStaticCmsFetch(cleanUrl, init);
-        } catch (err: any) {
-          console.error("Static CMS Interceptor Error:", err);
-          return new Response(JSON.stringify({ error: err.message || "Apstrādes kļūda, strādājot bez servera režīmā." }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" }
-          });
+        if (isStatic) {
+          try {
+            return await handleStaticCmsFetch(cleanUrl, init);
+          } catch (err: any) {
+            console.error("Static CMS Interceptor Error:", err);
+            return new Response(JSON.stringify({ error: err.message || "Apstrādes kļūda, strādājot bez servera režīmā." }), {
+              status: 500,
+              headers: { "Content-Type": "application/json" }
+            });
+          }
         }
       }
-    }
 
-    return originalFetch.apply(this, arguments as any);
-  };
-  
-  console.log("CMS Static GitHub Interceptor loaded successfully.");
+      return originalFetch.apply(this, arguments as any);
+    };
+    console.log("CMS Static GitHub Interceptor loaded successfully.");
+  } catch (err) {
+    console.warn(
+      "Could not intercept window.fetch. If you are running in a restricted sandbox or iframe, this is normal and the app will use the real backend server.",
+      err
+    );
+  }
 }
