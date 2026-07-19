@@ -45,7 +45,7 @@ const Home: React.FC = () => {
       <About />
       <Services />
       <AvenueBenefits />
-      <DocumentStore />
+      {/* <DocumentStore /> - Hidden for now */}
       <FAQPage isPreview={true} />
       <ContactPage isEmbedded={true} />
     </>

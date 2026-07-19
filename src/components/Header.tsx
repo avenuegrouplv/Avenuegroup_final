@@ -48,7 +48,7 @@ export const Header: React.FC = () => {
   const navLinks = [
     { id: 'home', name: t('nav.home'), href: '/' },
     { id: 'services', name: t('nav.services'), href: '/pakalpojumi' },
-    { id: 'templates', name: t('nav.templates'), href: '/ligumu-paraugi' },
+    // { id: 'templates', name: t('nav.templates'), href: '/ligumu-paraugi' }, // Hidden for now
     { id: 'useful', name: language === 'lv' ? 'Noderīgi' : language === 'en' ? 'Useful info' : 'Полезно', href: '/noderigi' },
     ...customNavLinks,
     { id: 'faq', name: t('nav.faq'), href: '/buj' },
