@@ -2,7 +2,6 @@ import express from "express";
 import path from "path";
 import fs from "fs";
 import dotenv from "dotenv";
-import { setupCMS } from "./server-cms";
 
 // Load environment variables from .env file if present
 dotenv.config();
@@ -15,9 +14,6 @@ if (!process.env.NODE_ENV) {
 async function startServer() {
   const app = express();
   const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-
-  // Setup our custom integrated CMS backend API
-  setupCMS(app);
 
   // Health check API endpoint
   app.get("/api/health", (req, res) => {

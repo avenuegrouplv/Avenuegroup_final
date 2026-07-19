@@ -12,7 +12,6 @@ import { Footer } from './components/Footer';
 import { CookieBanner } from './components/CookieBanner';
 import DocumentStore from './components/DocumentStore';
 import { LanguageProvider, useLanguage } from './LanguageContext';
-import { AdminCMS } from './components/admin/AdminCMS';
 
 // Sub-pages are lazy loaded to shrink initial bundle size and optimize FCP/LCP
 const ServicesPage = React.lazy(() => import('./components/ServicesPage').then(module => ({ default: module.ServicesPage })));
@@ -204,21 +203,6 @@ const AppContent: React.FC = () => {
       canonicalLink.setAttribute('href', `https://avenuegroup.lv${cleanPath || '/'}`);
     }
   }, [location.pathname, language]);
-
-  const isAdminPage = location.pathname.startsWith('/admin');
-
-  if (isAdminPage) {
-    return (
-      <React.Suspense fallback={
-        <div className="min-h-screen flex flex-col items-center justify-center bg-[#09090b] text-[#fafafa] font-sans p-6">
-          <div className="w-10 h-10 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-          <div className="font-bold tracking-widest text-xs uppercase text-zinc-500">Ielādē vadības paneli...</div>
-        </div>
-      }>
-        <AdminCMS />
-      </React.Suspense>
-    );
-  }
 
   return (
     <div id="top" className="min-h-screen selection:bg-yellow-200 selection:text-zinc-900 bg-[#ebebeb] text-zinc-900">
