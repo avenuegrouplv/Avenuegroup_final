@@ -2,39 +2,38 @@ import React, { useEffect } from 'react';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate, useLocation } from 'react-router-dom';
+import servicesData from '../data/content/services.json';
 
 export const ServicesPage: React.FC = () => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
   
   const queryParams = new URLSearchParams(location.search);
   const scrollToId = queryParams.get('id') ? parseInt(queryParams.get('id')!) : null;
 
-  const images = [
-    "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/7.%20Kas-isti-ir-komercipasuma-apsaimniekosana.png",
-    "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/13.%20Ka-samazinat-komercipasuma-uzturesanas-izmaksas.png",
-    "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/8.%20Komercipasuma-due-diligence.png",
-    "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=60&w=750"
-  ];
+  const content = servicesData.translations[language] || servicesData.translations['lv'];
+  const images = servicesData.images || [];
 
-  const services = (t('servicesPage.items') as unknown as any[]).map((item, index) => ({
+  const services = (content.items || []).map((item: any, index: number) => ({
     ...item,
-    image: images[index]
+    image: images[index] || ''
   }));
 
   React.useEffect(() => {
-    services.forEach(service => {
-      const img = new Image();
-      img.src = service.image;
+    services.forEach((service: any) => {
+      if (service.image) {
+        const img = new Image();
+        img.src = service.image;
+      }
     });
-  }, []);
+  }, [services]);
 
   useEffect(() => {
-    document.title = `${t('servicesPage.title')} ${t('servicesPage.subtitle')} | Avenue Group`;
+    document.title = `${content.title} ${content.subtitle} | Avenue Group`;
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
-      metaDesc.setAttribute('content', t('servicesPage.description') || 'Avenue Group piedāvā profesionālus nekustamo īpašumu apsaimniekošanas, pārvaldības un juridiskā atbalsta pakalpojumus Latvijā.');
+      metaDesc.setAttribute('content', content.description || 'Avenue Group piedāvā profesionālus nekustamo īpašumu apsaimniekošanas, pārvaldības un juridiskā atbalsta pakalpojumus Latvijā.');
     }
 
     if (scrollToId !== undefined && scrollToId !== null) {
@@ -57,7 +56,7 @@ export const ServicesPage: React.FC = () => {
         metaDesc.setAttribute('content', 'Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi komercīpašumiem un privātīpašumiem Latvijā. Profesionāls juridiskais atbalsts un individuāla pieeja.');
       }
     };
-  }, [scrollToId, t]);
+  }, [scrollToId, content]);
 
   return (
     <div id="pakalpojumi" className="bg-[#ebebeb] min-h-screen text-zinc-900 pb-20 relative overflow-hidden">
@@ -70,14 +69,14 @@ export const ServicesPage: React.FC = () => {
             className="group flex items-center gap-3 bg-white border border-zinc-200/80 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 mb-12 shadow-sm rounded-none cursor-pointer"
           >
             <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
-            <span>{t('servicesPage.backBtn')}</span>
+            <span>{content.backBtn}</span>
           </button>
           <h1 className="text-3xl md:text-5xl font-black italic leading-[1.1] tracking-tighter text-zinc-950 uppercase">
-            {t('servicesPage.title')} <span className="text-yellow-600">{t('servicesPage.subtitle')}</span>
+            {content.title} <span className="text-yellow-600">{content.subtitle}</span>
           </h1>
-          {t('servicesPage.description') && (
+          {content.description && (
             <p className="text-lg md:text-xl text-zinc-650 mt-8 max-w-3xl leading-relaxed italic font-medium">
-              {t('servicesPage.description')}
+              {content.description}
             </p>
           )}
         </div>
@@ -87,7 +86,7 @@ export const ServicesPage: React.FC = () => {
       <section className="py-20 relative z-10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col gap-24">
-            {services.map((service, index) => (
+            {services.map((service: any, index: number) => (
               <React.Fragment key={service.id}>
                 <div id={`service-${service.id}`} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start bg-white border border-zinc-200 p-6 md:p-12 shadow-sm">
                   
@@ -147,7 +146,7 @@ export const ServicesPage: React.FC = () => {
 
           <div className="mt-20 md:mt-28 flex flex-col items-start bg-white border border-zinc-200 p-6 md:p-8 shadow-sm">
              <div className="w-[10cm] h-[2px] bg-yellow-500 mb-6"></div>
-             <p className="text-zinc-500 text-xs md:text-sm italic leading-relaxed text-left font-bold">{t('servicesPage.vatText')}</p>
+             <p className="text-zinc-500 text-xs md:text-sm italic leading-relaxed text-left font-bold">{content.vatText}</p>
           </div>
         </div>
       </section>

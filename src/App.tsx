@@ -12,6 +12,7 @@ import { Footer } from './components/Footer';
 import { CookieBanner } from './components/CookieBanner';
 import DocumentStore from './components/DocumentStore';
 import { LanguageProvider, useLanguage } from './LanguageContext';
+import seoData from './data/content/seo.json';
 
 // Sub-pages are lazy loaded to shrink initial bundle size and optimize FCP/LCP
 const ServicesPage = React.lazy(() => import('./components/ServicesPage').then(module => ({ default: module.ServicesPage })));
@@ -65,16 +66,9 @@ const AppContent: React.FC = () => {
     let description = '';
 
     if (path === '/' || path === '/sakums') {
-      if (language === 'lv') {
-        title = 'Avenue Group | Komercīpašumu un privātīpašumu apsaimniekošana';
-        description = 'Avenue Group - nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumi komercīpašumiem un privātīpašumiem Latvijā. Profesionāls juridiskais atbalsts un individuāla pieeja.';
-      } else if (language === 'ru') {
-        title = 'Avenue Group | Управление коммерческой и частной недвижимостью';
-        description = 'Avenue Group - услуги по содержанию и управлению коммерческой и частной недвижимостью в Латвии. Профессиональная юридическая поддержка и индивидуальный подход.';
-      } else {
-        title = 'Avenue Group | Commercial and Private Property Management';
-        description = 'Avenue Group - professional real estate and property management services for commercial and residential properties in Latvia. Custom-tailored legal support.';
-      }
+      const seoContent = seoData.translations[language] || seoData.translations['lv'];
+      title = seoContent.title;
+      description = seoContent.description;
     } else if (path.startsWith('/pakalpojumi')) {
       if (language === 'lv') {
         title = 'Mūsu pakalpojumi | Avenue Group';

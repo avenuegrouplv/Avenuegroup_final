@@ -3,12 +3,14 @@ import { Menu, X } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { Link, useLocation } from 'react-router-dom';
 import { customPages } from '../data/pages';
+import navigationData from '../data/content/navigation.json';
+import siteSettings from '../data/content/site-settings.json';
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const location = useLocation();
 
   useEffect(() => {
@@ -43,17 +45,21 @@ export const Header: React.FC = () => {
       href: `/lapa/${page.slug}`
     }));
 
-  // Ordered strictly as requested, now with custom dynamic pages cleanly embedded:
-  // 1) home -> 2) services -> 3) templates -> 4) useful -> [custom pages] -> 5) faq -> 6) contact
+  const getNavLabel = (id: string) => {
+    const link = navigationData.links.find(l => l.id === id);
+    return link ? (link.translations[language] || link.translations['lv']) : '';
+  };
+
   const navLinks = [
-    { id: 'home', name: t('nav.home'), href: '/' },
-    { id: 'services', name: t('nav.services'), href: '/pakalpojumi' },
-    // { id: 'templates', name: t('nav.templates'), href: '/ligumu-paraugi' }, // Hidden for now
-    { id: 'useful', name: language === 'lv' ? 'Noderīgi' : language === 'en' ? 'Useful info' : 'Полезно', href: '/noderigi' },
+    { id: 'home', name: getNavLabel('home'), href: '/' },
+    { id: 'services', name: getNavLabel('services'), href: '/pakalpojumi' },
+    { id: 'useful', name: getNavLabel('useful'), href: '/noderigi' },
     ...customNavLinks,
-    { id: 'faq', name: t('nav.faq'), href: '/buj' },
-    { id: 'contact', name: t('nav.contact'), href: '/kontakti' },
+    { id: 'faq', name: getNavLabel('faq'), href: '/buj' },
+    { id: 'contact', name: getNavLabel('contact'), href: '/kontakti' },
   ];
+
+  const contactBtnText = navigationData.contactBtn[language] || navigationData.contactBtn['lv'];
 
   const handleLinkClick = () => {
     setIsMenuOpen(false);
@@ -76,7 +82,7 @@ export const Header: React.FC = () => {
           className="absolute left-4 md:left-[1.2cm] top-1/2 -translate-y-1/2"
         >
           <img
-            src="https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Logo%20PNG2.webp"
+            src={siteSettings.logo}
             alt="Avenue Group Logo"
             loading="eager"
             fetchPriority="high"
@@ -111,7 +117,7 @@ export const Header: React.FC = () => {
             onClick={handleLinkClick}
             className="bg-yellow-500 text-zinc-950 hover:bg-white hover:text-zinc-950 px-5 py-2.5 rounded-none font-black text-xs uppercase tracking-widest transition-colors shadow-sm"
           >
-            {t('contact.contactBtn')}
+            {contactBtnText}
           </Link>
 
           {/* Custom Language Dropdown on Far Right */}
@@ -209,7 +215,7 @@ export const Header: React.FC = () => {
             onClick={handleLinkClick}
             className="w-full bg-yellow-500 text-zinc-950 px-8 py-3 rounded-none text-center font-black text-xs tracking-widest uppercase hover:bg-white transition-colors"
           >
-            {t('contact.contactBtn')}
+            {contactBtnText}
           </Link>
           
           {/* Mobile Language Switcher inside Menu */}

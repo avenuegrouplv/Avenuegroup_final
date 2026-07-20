@@ -2,10 +2,12 @@ import React from 'react';
 import { Building2, Hammer, Gavel, ShieldCheck, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
+import servicesData from '../data/content/services.json';
 
 export const Services: React.FC = () => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const navigate = useNavigate();
+  const content = servicesData.translations[language] || servicesData.translations['lv'];
   
   const icons = [
     <Building2 className="w-12 h-12 text-yellow-600" />,
@@ -14,7 +16,7 @@ export const Services: React.FC = () => {
     <ShieldCheck className="w-12 h-12 text-yellow-600" />
   ];
 
-  const services = (t('services.items') as unknown as any[]).map((item, index) => ({
+  const services = (content.items || []).map((item, index) => ({
     ...item,
     icon: icons[index]
   }));
@@ -26,10 +28,10 @@ export const Services: React.FC = () => {
         <div className="flex flex-col items-center text-center mb-10 gap-4">
           <div className="max-w-3xl">
             <h2 className="text-3xl md:text-4xl font-black italic mb-6 text-zinc-950 tracking-tighter uppercase leading-none">
-              {t('services.title')} <span className="text-yellow-600">{t('services.subtitle')}</span>
+              {content.title} <span className="text-yellow-600">{content.subtitle}</span>
             </h2>
             <p className="text-zinc-650 text-base md:text-lg leading-relaxed italic font-medium">
-              {t('services.description')}
+              {content.description}
             </p>
           </div>
         </div>
@@ -63,7 +65,7 @@ export const Services: React.FC = () => {
               <div 
                 className="text-[10px] font-black tracking-widest text-zinc-950 flex items-center justify-center group-hover:text-yellow-600 transition-colors uppercase"
               >
-                {t('services.learnMore')} <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                {content.learnMore} <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
           ))}

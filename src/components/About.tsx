@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
+import aboutData from '../data/content/about.json';
 
 interface AboutProps {
   isStandalone?: boolean;
@@ -10,8 +11,10 @@ interface AboutProps {
 }
 
 export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactClick }) => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const navigate = useNavigate();
+  const content = aboutData.translations[language] || aboutData.translations['lv'];
+  const images = aboutData.images;
 
   return (
     <section id="par-mums" className={`bg-white border-y border-zinc-250 overflow-hidden relative ${isStandalone ? 'pt-8 md:pt-12 pb-12 lg:pb-16' : 'pt-12 pb-10 md:pt-16 md:pb-12 lg:pb-14'}`}>
@@ -22,7 +25,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
             onClick={() => navigate('/')}
             className="flex items-center text-yellow-600 font-bold tracking-widest text-xs mb-12 hover:text-zinc-950 transition-colors font-sans"
           >
-            <ArrowLeft size={18} className="mr-2" /> {t('about.backBtn')}
+            <ArrowLeft size={18} className="mr-2" /> {content.backBtn}
           </button>
         )}
         
@@ -35,26 +38,26 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
               transition={{ duration: 0.5 }}
             >
               <h2 className="text-3xl md:text-4xl font-black italic leading-none mb-10 text-zinc-950 uppercase tracking-tighter">
-                {t('about.title')} <span className="text-yellow-600">{t('about.subtitle')}</span>
+                {content.title} <span className="text-yellow-600">{content.subtitle}</span>
               </h2>
               <div className="space-y-6 text-zinc-600 text-sm md:text-base leading-relaxed">
                 <p className="text-zinc-900 font-bold italic border-l-4 border-yellow-500 pl-6 my-6 bg-zinc-50 py-4 pr-4">
-                  {t('about.highlight')}
+                  {content.highlight}
                 </p>
                 <p>
-                  {t('about.p1')}
+                  {content.p1}
                 </p>
                 <p>
-                  {t('about.p2')}
+                  {content.p2}
                 </p>
                 <p>
-                  {t('about.p3')}
+                  {content.p3}
                 </p>
                 <p>
-                  {t('about.p4')}
+                  {content.p4}
                 </p>
                 <p className="bg-zinc-50 p-6 border border-zinc-200 italic font-bold text-zinc-800 text-sm md:text-base">
-                  {t('about.p5')}
+                  {content.p5}
                 </p>
               </div>
             </motion.div>
@@ -73,7 +76,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 className="relative h-[280px] md:h-[320px] overflow-hidden group shadow-md border border-zinc-200"
               >
                 <img 
-                  src="https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/FB5.webp" 
+                  src={images.image1} 
                   alt="Avenue Group nekustamā īpašuma pārvaldības piemērs" 
                   className="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105"
                   referrerPolicy="no-referrer"
@@ -92,7 +95,7 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 className="relative h-[280px] md:h-[320px] overflow-hidden group shadow-md border border-zinc-200"
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=55&w=600" 
+                  src={images.image2} 
                   alt="Modernā arhitektūra un nekustamais īpašums Avenue Group" 
                   className="w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105"
                   referrerPolicy="no-referrer"
@@ -103,8 +106,8 @@ export const About: React.FC<AboutProps> = ({ isStandalone = false, onContactCli
                 <div className="absolute bottom-4 left-4 border-l-2 border-yellow-500 pl-3 max-w-[250px]">
                   <div className="text-sm md:text-base font-black italic text-yellow-400 mb-1 tracking-tighter">Avenue Group</div>
                   <div className="text-white text-xs md:text-sm font-medium italic leading-normal">
-                    <div className="mb-1">{t('about.imageTaglineLine1')}</div>
-                    <div>{t('about.imageTaglineLine2')}</div>
+                    <div className="mb-1">{content.imageTaglineLine1}</div>
+                    <div>{content.imageTaglineLine2}</div>
                   </div>
                 </div>
               </motion.div>

@@ -1,0 +1,42 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "author": "Jānis Bērziņš",
+      "company": "SIA \"Rīgas Biroji\"",
+      "translations": {
+        "lv": {
+          "role": "Komercobjekta īpašnieks",
+          "text": "Lieliska sadarbība un augsta līmeņa profesionālais atbalsts ikdienas komercīpašuma apsaimniekošanā un juridisko jautājumu risināšanā."
+        },
+        "en": {
+          "role": "Commercial property owner",
+          "text": "Excellent cooperation and high-level professional support in daily commercial property management and legal dispute resolution."
+        },
+        "ru": {
+          "role": "Владелец коммерческого объекта",
+          "text": "Отличное сотрудничество и профессиональная поддержка высокого уровня в ежедневном управлении недвижимостью и решении юридических вопросов."
+        }
+      }
+    },
+    {
+      "id": 2,
+      "author": "Elena Petrova",
+      "company": "Premium Residence Owner",
+      "translations": {
+        "lv": {
+          "role": "Privātīpašuma īpašniece",
+          "text": "Mūsu rezidence ir drošās rokās. Ļoti rūpīga un konfidenciāla attieksme pret katru tehnisko un saimniecisko darbu."
+        },
+        "en": {
+          "role": "Private property owner",
+          "text": "Our residence is in safe hands. Highly attentive and confidential approach to every technical and maintenance task."
+        },
+        "ru": {
+          "role": "Владелица частной резиденции",
+          "text": "Наша резиденция в надежных руках. Очень внимательное и конфиденциальное отношение к любой технической и хозяйственной задаче."
+        }
+      }
+    }
+  ]
+}

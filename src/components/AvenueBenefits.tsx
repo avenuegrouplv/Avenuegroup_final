@@ -1,9 +1,13 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
+import homepageData from '../data/content/homepage.json';
 
 export const AvenueBenefits: React.FC = () => {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
+  const content = homepageData.benefits;
+  const q1Content = content.q1.translations[language] || content.q1.translations['lv'];
+  const q2Content = content.q2.translations[language] || content.q2.translations['lv'];
   
   return (
     <section className="bg-[#e5e5e5] border-b border-zinc-200 py-12 md:py-16 overflow-hidden relative">
@@ -14,11 +18,11 @@ export const AvenueBenefits: React.FC = () => {
           {/* Question 1 */}
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-black italic leading-[1.1] tracking-tighter text-zinc-950 uppercase">
-              {t('benefits.q1.title')} <br />
-              <span className="text-yellow-600">{t('benefits.q1.subtitle')}</span>
+              {q1Content.title} <br />
+              <span className="text-yellow-600">{q1Content.subtitle}</span>
             </h2>
             <ul className="space-y-4">
-              {(t('benefits.q1.items') as unknown as {title: string, desc: string}[]).map((item, index) => (
+              {(q1Content.items || []).map((item: any, index: number) => (
                 <li key={index} className="flex items-start gap-4 group">
                   <CheckCircle2 className="text-yellow-600 shrink-0 mt-1" size={20} />
                   <div>
@@ -35,14 +39,14 @@ export const AvenueBenefits: React.FC = () => {
           {/* Question 2 */}
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-black italic leading-[1.1] tracking-tighter text-zinc-950 uppercase">
-              {t('benefits.q2.title')}<span className="text-yellow-600">{t('benefits.q2.subtitle')}</span>{t('benefits.q2.suffix')} <br />
-              {t('benefits.q2.suffix2')}
+              {q2Content.title}<span className="text-yellow-600">{q2Content.subtitle}</span>{q2Content.suffix} <br />
+              {q2Content.suffix2}
             </h2>
             <div className="space-y-4">
-              <p className="text-zinc-650 text-sm md:text-base leading-relaxed italic">{t('benefits.q2.desc')}</p>
-              <p className="text-zinc-900 text-sm md:text-base font-extrabold italic">{t('benefits.q2.listPrefix')}</p>
+              <p className="text-zinc-650 text-sm md:text-base leading-relaxed italic">{q2Content.desc}</p>
+              <p className="text-zinc-900 text-sm md:text-base font-extrabold italic">{q2Content.listPrefix}</p>
               <ul className="space-y-4">
-                {(t('benefits.q2.items') as unknown as {title: string, desc: string}[]).map((item, index) => (
+                {(q2Content.items || []).map((item: any, index: number) => (
                   <li key={index} className="flex items-start gap-4 group">
                     <CheckCircle2 className="text-yellow-600 shrink-0 mt-1" size={20} />
                     <div>

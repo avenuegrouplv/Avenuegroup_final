@@ -1,0 +1,20 @@
+{
+  "siteTitle": "Avenue Group | Nekustamo īpašumu pārvaldība",
+  "translations": {
+    "lv": {
+      "title": "Avenue Group | Nekustamo īpašumu apsaimniekošana un pārvaldība",
+      "description": "Profesionāla komercīpašumu un Premium segmenta privātīpašumu apsaimniekošana, pārvaldība un juridiskais atbalsts vienuviet.",
+      "keywords": "īpašumu apsaimniekošana, komercīpašumi, juridisks atbalsts, apsaimniekošana rīgā, avenue group"
+    },
+    "en": {
+      "title": "Avenue Group | Real Estate Management & Maintenance",
+      "description": "Professional commercial and premium private property maintenance, management, and legal support in one place.",
+      "keywords": "property management, commercial properties, legal support, maintenance riga, avenue group"
+    },
+    "ru": {
+      "title": "Avenue Group | Управление и обслуживание недвижимости",
+      "description": "Профессиональное обслуживание коммерческой недвижимости и частной собственности Premium класса, а также юридическая поддержка в одном месте.",
+      "keywords": "управление недвижимостью, коммерческая недвижимость, юридическая поддержка, обслуживание рига, avenue group"
+    }
+  }
+}

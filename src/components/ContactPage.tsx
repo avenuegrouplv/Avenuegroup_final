@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Send, Phone, Mail, ArrowLeft, Check } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
+import contactData from '../data/content/contact.json';
 
 interface ContactPageProps {
   isEmbedded?: boolean;
@@ -10,8 +11,10 @@ interface ContactPageProps {
 export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) => {
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const { t } = useLanguage();
+  const { language } = useLanguage();
   const navigate = useNavigate();
+  const content = contactData.translations[language] || contactData.translations['lv'];
+  
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -36,7 +39,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
-          'form-name': 'contact',
+          'form-name': contactData.netlifyFormName,
           ...formData
         }).toString()
       });
@@ -60,10 +63,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
             <Check size={48} className="text-zinc-950 stroke-[3px]" />
           </div>
           <h2 className="text-2xl md:text-3xl font-black italic mb-6 tracking-tighter text-zinc-950 uppercase leading-none">
-            {t('contact.successTitle')}
+            {content.successTitle}
           </h2>
           <p className="text-lg text-zinc-650 mb-12 font-bold italic leading-relaxed">
-            {t('contact.successMessage')}
+            {content.successMessage}
           </p>
           <button 
             onClick={() => {
@@ -73,7 +76,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
             }}
             className="text-yellow-600 font-black tracking-widest text-xs border-b-2 border-yellow-650 pb-1 hover:text-zinc-950 transition-colors"
           >
-            {t('contact.newRequestBtn')}
+            {content.newRequestBtn}
           </button>
         </div>
       </section>
@@ -90,19 +93,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
             className="group flex items-center gap-3 bg-white border border-zinc-200/80 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 mb-12 shadow-sm rounded-none cursor-pointer"
           >
             <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
-            <span>{t('contact.backBtn')}</span>
+            <span>{content.backBtn}</span>
           </button>
         )}
 
         {/* Centered Header Block */}
         <div className="max-w-4xl mb-12 text-center mx-auto">
           <h2 className="text-3xl md:text-4xl font-black italic leading-none mb-8 tracking-tighter text-zinc-950 uppercase">
-            <div className="mb-2">{t('contact.title')}</div>
-            <div className="text-yellow-600">{t('contact.subtitle')}</div>
+            <div className="mb-2">{content.title}</div>
+            <div className="text-yellow-600">{content.subtitle}</div>
           </h2>
           <div className="text-lg md:text-xl text-zinc-600 font-extrabold italic leading-snug max-w-3xl mx-auto">
-            <div>{t('contact.formTitle')}</div>
-            <div>{t('contact.formSubtitle')}</div>
+            <div>{content.formTitle}</div>
+            <div>{content.formSubtitle}</div>
           </div>
         </div>
 
@@ -110,19 +113,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
           <div className="w-full max-w-2xl">
             {/* Form Container with Premium Light Card style */}
             <div className="bg-white p-6 md:p-10 border border-zinc-250 shadow-md relative overflow-hidden rounded-none">
-              <h3 className="text-xl font-black italic mb-8 tracking-tighter relative z-10 text-zinc-900 text-center uppercase">{t('contact.formBoxTitle')}</h3>
+              <h3 className="text-xl font-black italic mb-8 tracking-tighter relative z-10 text-zinc-900 text-center uppercase">{content.formBoxTitle}</h3>
               
               <form 
-                name="contact"
+                name={contactData.netlifyFormName}
                 method="POST"
                 data-netlify="true"
                 onSubmit={handleSubmit} 
                 className="space-y-6 relative z-10"
               >
-                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="form-name" value={contactData.netlifyFormName} />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-1">
-                    <label htmlFor="contact-name" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelName')}</label>
+                    <label htmlFor="contact-name" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{content.labelName}</label>
                     <input 
                       id="contact-name"
                       type="text" 
@@ -134,7 +137,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                     />
                   </div>
                   <div className="space-y-1">
-                    <label htmlFor="contact-company" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelCompany')}</label>
+                    <label htmlFor="contact-company" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{content.labelCompany}</label>
                     <input 
                       id="contact-company"
                       type="text" 
@@ -148,7 +151,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-1">
-                    <label htmlFor="contact-email" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelEmail')}</label>
+                    <label htmlFor="contact-email" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{content.labelEmail}</label>
                     <input 
                       id="contact-email"
                       type="email" 
@@ -160,7 +163,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                     />
                   </div>
                   <div className="space-y-1">
-                    <label htmlFor="contact-phone" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelPhone')}</label>
+                    <label htmlFor="contact-phone" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{content.labelPhone}</label>
                     <input 
                       id="contact-phone"
                       type="tel" 
@@ -174,7 +177,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                 </div>
 
                 <div className="space-y-1">
-                  <label htmlFor="contact-message" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{t('contact.labelMessage')}</label>
+                  <label htmlFor="contact-message" className="block text-[10px] font-black tracking-widest text-zinc-500 uppercase italic transition-colors">{content.labelMessage}</label>
                   <textarea 
                     id="contact-message"
                     name="message"
@@ -191,7 +194,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                     role="checkbox"
                     aria-checked={consent}
                     id="consent-checkbox"
-                    aria-label={t('contact.consentText')}
+                    aria-label={content.consentText}
                     onClick={() => setConsent(!consent)}
                     className={`w-5 h-5 border-2 flex items-center justify-center shrink-0 transition-all mt-0.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-500 ${consent ? 'bg-yellow-500 border-yellow-500 shadow-sm' : 'border-zinc-300 bg-white group-hover/consent:border-zinc-500'}`}
                   >
@@ -199,7 +202,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                   </button>
                   <div className="text-[11px] text-zinc-650 font-semibold tracking-wide leading-relaxed select-none italic group-hover/consent:text-zinc-900 transition-colors">
                     <label htmlFor="consent-checkbox" className="cursor-pointer">
-                      {t('contact.consentText')}{' '}
+                      {content.consentText}{' '}
                     </label>
                     <button 
                       type="button"
@@ -209,7 +212,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                       }}
                       className="text-yellow-600 underline hover:text-zinc-900 transition-colors decoration-yellow-600/50 underline-offset-4"
                     >
-                      {t('contact.privacyLink')}
+                      {content.privacyLink}
                     </button>
                   </div>
                 </div>
@@ -225,10 +228,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      {t('contact.submitting')}
+                      {content.submitting}
                     </span>
                   ) : (
-                    <>{t('contact.submitBtn')} <Send size={16} className="ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></>
+                    <>{content.submitBtn} <Send size={16} className="ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></>
                   )}
                 </button>
               </form>
@@ -237,27 +240,27 @@ export const ContactPage: React.FC<ContactPageProps> = ({ isEmbedded = false }) 
 
           <div className="w-full max-w-4xl text-center">
             <h3 className="text-xl font-black italic leading-none mb-6 tracking-tighter text-zinc-950 uppercase">
-              {t('contact.infoTitle')} <span className="text-yellow-600">{t('contact.infoSubtitle')}</span>
+              {content.infoTitle} <span className="text-yellow-600">{content.infoSubtitle}</span>
             </h3>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 mx-auto w-fit">
-              <a href="tel:+37126739899" className="flex items-center space-x-6 group bg-white border border-zinc-200 p-4 md:px-8 shadow-sm hover:border-yellow-500 hover:shadow-md transition-all">
+              <a href={`tel:${contactData.phone.replace(/\s+/g, '')}`} className="flex items-center space-x-6 group bg-white border border-zinc-200 p-4 md:px-8 shadow-sm hover:border-yellow-500 hover:shadow-md transition-all">
                 <div className="w-14 h-14 bg-yellow-500 flex items-center justify-center shrink-0 group-hover:bg-zinc-950 transition-colors rounded-none shadow-sm">
                   <Phone className="text-zinc-950 group-hover:text-white transition-colors animate-pulse" size={24} />
                 </div>
                 <div className="text-left">
-                  <div className="text-[10px] tracking-widest text-zinc-400 font-black uppercase mb-1 italic">{t('contact.callUs')}</div>
-                  <div className="text-base sm:text-lg font-black italic text-zinc-950 group-hover:text-yellow-600 transition-colors">+371 26 739 899</div>
+                  <div className="text-[10px] tracking-widest text-zinc-400 font-black uppercase mb-1 italic">{content.callUs}</div>
+                  <div className="text-base sm:text-lg font-black italic text-zinc-950 group-hover:text-yellow-600 transition-colors">{contactData.phone}</div>
                 </div>
               </a>
 
-              <a href="mailto:services@avenuegroup.lv" className="flex items-center space-x-6 group bg-white border border-zinc-200 p-4 md:px-8 shadow-sm hover:border-yellow-500 hover:shadow-md transition-all">
+              <a href={`mailto:${contactData.email}`} className="flex items-center space-x-6 group bg-white border border-zinc-200 p-4 md:px-8 shadow-sm hover:border-yellow-500 hover:shadow-md transition-all">
                 <div className="w-14 h-14 bg-yellow-500 flex items-center justify-center shrink-0 group-hover:bg-zinc-950 transition-colors rounded-none shadow-sm">
                   <Mail className="text-zinc-950 group-hover:text-white transition-colors" size={24} />
                 </div>
                 <div className="text-left">
-                  <div className="text-[10px] tracking-widest text-zinc-400 font-black uppercase mb-1 italic">{t('contact.writeUs')}</div>
-                  <div className="text-base sm:text-lg font-black italic text-zinc-950 group-hover:text-yellow-600 transition-colors">services@avenuegroup.lv</div>
+                  <div className="text-[10px] tracking-widest text-zinc-400 font-black uppercase mb-1 italic">{content.writeUs}</div>
+                  <div className="text-base sm:text-lg font-black italic text-zinc-950 group-hover:text-yellow-600 transition-colors">{contactData.email}</div>
                 </div>
               </a>
             </div>

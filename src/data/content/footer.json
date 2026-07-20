@@ -1,0 +1,53 @@
+{
+  "logo": "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Logo%20PNG2.webp",
+  "facebook": "https://www.facebook.com/profile.php?id=61576913053177",
+  "instagram": "https://instagram.com",
+  "developer": {
+    "name": "SageOn",
+    "url": "https://www.facebook.com/profile.php?id=100088834779537"
+  },
+  "company": {
+    "name": "SIA \"Avenue Group\"",
+    "regNo": "40203647938",
+    "pvnNo": "LV40203647938",
+    "addressLine1": "Brīvības gatve 386 k-2-5A",
+    "addressLine2": "Rīga, LV-1024",
+    "email": "services@avenuegroup.lv",
+    "phone": "+371 26 739 899"
+  },
+  "translations": {
+    "lv": {
+      "aboutTitle": "Par mums",
+      "followTitle": "Sekojiet mums",
+      "contactTitle": "Kontaktinformācija",
+      "addressLabel": "Juridiskā adrese:",
+      "rights": "Visas tiesības aizsargātas",
+      "privacy": "Privātuma politika",
+      "cookies": "Sīkdatņu politika",
+      "terms": "Lietošanas noteikumi",
+      "developerLabel": "Izstrādātājs:"
+    },
+    "en": {
+      "aboutTitle": "About us",
+      "followTitle": "Follow us",
+      "contactTitle": "Contact info",
+      "addressLabel": "Legal address:",
+      "rights": "All rights reserved",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy",
+      "terms": "Terms of Service",
+      "developerLabel": "Developer:"
+    },
+    "ru": {
+      "aboutTitle": "О нас",
+      "followTitle": "Подписывайтесь на нас",
+      "contactTitle": "Контактная информация",
+      "addressLabel": "Юридический адрес:",
+      "rights": "Все права защищены",
+      "privacy": "Политика конфиденциальности",
+      "cookies": "Политика использования файлов cookie",
+      "terms": "Правила",
+      "developerLabel": "Разработчик:"
+    }
+  }
+}

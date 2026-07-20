@@ -1,0 +1,256 @@
+{
+  "images": [
+    "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/7.%20Kas-isti-ir-komercipasuma-apsaimniekosana.png",
+    "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/13.%20Ka-samazinat-komercipasuma-uzturesanas-izmaksas.png",
+    "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/8.%20Komercipasuma-due-diligence.png",
+    "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=60&w=750"
+  ],
+  "translations": {
+    "lv": {
+      "backBtn": "Atpakaļ",
+      "title": "Mūsu",
+      "subtitle": "Pakalpojumi",
+      "description": "Mēs piedāvājam gan ikdienas nekustamo īpašumu apsaimniekošanu un pārvaldību, gan arī atsevišķu vai vienreizēju pakalpojumu sniegšanu, atbilstoši katra klienta vēlmēm un vajadzībām.",
+      "learnMore": "Uzzināt Vairāk",
+      "vatText": "Visām iepriekš norādītajām pakalpojuma cenām, ja to paredz LR normatīvie akti, tiek piemērots PVN.",
+      "items": [
+        {
+          "id": 1,
+          "title": "1. Ikdienas administratīvā pārvaldība",
+          "desc": "Šis pakalpojums nodrošina strukturētu un nepārtrauktu nekustamā īpašuma pārvaldību, kas ļauj tā īpašniekam koncentrēties uz saviem galvenajiem biznesa attīstības vai investīciju mērķiem, saglabājot pārskatāmību pār īpašumu.",
+          "intro": "Šī ir fiksēta mēneša maksa par īpašuma nepārtrauktu vai regulāru administratīvo pārvaldību. Šis pakalpojums tiek sniegts mazā un vidējā segmenta īpašumiem, un tas ietver:",
+          "points": [
+            "nekustamā īpašuma ikdienas vai regulāru administratīvo pārvaldību",
+            "komunikāciju ar īpašuma nomniekiem un sadarbības partneriem",
+            "nomnieku vai īrnieku piesaisti, un ilgstspējīgas sadarbības veidošanu",
+            "pārstāvību attiecībās ar valsts/pašvaldību iestādēm un trešajām personām",
+            "nepieciešamo tehnisko jautājumu organizēšanu un izpildes uzraudzību",
+            "īpašuma teritorijas vai iekštelpu uzturēšanas darbu koordinēšanu",
+            "citu operatīvo situāciju koordinēšanu īpašumā pēc vienošanās"
+          ],
+          "outro": "Šis pakalpojums nodrošina strukturētu un nepārtrauktu nekustamā īpašuma pārvaldību, kas ļauj tā īpašniekam koncentrēties uz saviem galvenajiem biznesa attīstības vai investīciju mērķiem, saglabājot pilnīgu pārskatāmību un kontroli pār visiem procesos.",
+          "costTitle": "Administratīvās pārvaldības pakalpojuma izmaksas",
+          "costText": "Ikdienas administratīvās pārvaldības maksa tiek noteikta individuāli, ņemot vērā īpašuma veidu, izmēru un pārvaldības intensitāti. Praksē šāda pakalpojuma maksa mazā segmenta komercobjektiem parasti tiek noteikta, sākot no 250 € mēnesī, savukārt vidējā segmenta vai sarežģītākiem komercobjektiem tā tiek saskaņota individuāli."
+        },
+        {
+          "id": 2,
+          "title": "2. Uzturēšanas budžets tehniskajiem darbiem (depozīts)",
+          "desc": "Iepriekš izveidots finanšu fonds, kas paredzēts īpašuma tehnisko jautājumu un uzturēšanas darbu operatīvai risināšanai. Tas nodrošina iespēju ātri organizēt nepieciešamos darbus, neradot administratīvu kavēšanos.",
+          "intro": "Lai nodrošinātu ātru un efektīvu tehnisko jautājumu risināšanu īpašumā, tiek izmantots uzturēšanas depozīts. Tas ir iepriekš īpašnieka iemaksāts uzturēšanas budžets, no kura tiek segtas izmaksas par īpašuma tehniskās uzturēšanas darbiem, nelieliem remontdarbiem un tiek risināti citi ar īpašumu saistīti tehniskie jautājumi.\n\nŠī sistēma nodrošina iespēju nekavējoties reaģēt uz negaidītiem tehniskiem jautājumiem, uzturēšanas darbiem vai iekārtu apkopi īpašumā, neradot kavēšanos papildu pārskaitījumu vai saskaņošanas dēļ.\n\nUzturēšanas depozīts var tikt izmantots:",
+          "points": [
+            "nelielu vai neplānotu remontdarbu izmaksu segšanai",
+            "ārkārtas situācijās cilvēku vai īpašuma drošības nodrošināšanai",
+            "speciālistu izsaukšanai neparedzētos vai avārijas gadījumos",
+            "tehnisko bojājumu vai sistēmu pārbaužu izmaksu segšanai",
+            "teritorijas uzturēšanas darbu izmaksu segšanai",
+            "nelielu, steidzamu materiālu iegādei",
+            "citu operatīvo uzturēšanas darbu izmaksu segšanai"
+          ],
+          "outro": "(šis saraksts nav izsmeļošs un katrā gadījumā tiek saskaņots individuāli)\n\nVisi izdevumi tiek dokumentēti un atspoguļoti atskaitē, kas tiek izsniegta īpašniekam iepriekš saskaņotos termiņos, nodrošinot pilnīgu finanšu caurspīdīgumu. Kad depozīta atlikums sasniedz noteiktu minimālo robežu, īpašnieks tiek informēts par nepieciešamību to papildināt.\n\nŠāda struktūra ļauj nodrošināt operatīvu jautājumu risināšanu, nepārtrauktu īpašuma uzturēšanu kārtībā, kā arī budžeta līdzekļu izmantošanas caurspīdīgumu.",
+          "costTitle": "Uzturēšanas depozīta apmērs",
+          "costText": "Uzturēšanas depozīta apmērs tiek noteikts individuāli, ņemot vērā īpašuma izmēru, tehnisko stāvokli un paredzamo uzturēšanas vai remontdarbu apjomu. Praksē depozīta summa parasti sākas no 800-1000 €, bet lielākiem īpašumiem ar intensīvāku tehnisko uzturēšanu tā var būt daudz lielāka. Par tehnisko darbu organizēšanu, koordinēšanu vai uzraudzību īpašumā var tikt piemērota projektu vadības vai administrēšanas maksa, kas katrā gadījumā tiek saskaņota individuāli."
+        },
+        {
+          "id": 3,
+          "title": "3. Papildus pakalpojumi",
+          "desc": "Specializēti administratīvie, juridiskie un projektu vadības pakalpojumi, kas palīdz risināt sarežģītākas situācijas vai īstenot īpašuma attīstības ieceres. Tie tiek sniegti kopā ar ikdienas pārvaldības pakalpojumiem, vai kā atsevišķi projekti atbilstoši klienta vajadzībām.",
+          "intro": "Papildus ikdienas pārvaldības pakalpojumiem mēs piedāvājam specializētus juridiskos, korporatīvos un administratīvos pakalpojumus, kas palīdz risināt specifiskas situācijas vai īstenot noteiktus projektus saistībā ar Jūsu nekustamo īpašumu. Šie pakalpojumi ietver:",
+          "points": [
+            "nomas, īres, remontdarbu un citu līgumu sagatavošana un administrēšana",
+            "nomas vai īres līgumu juridisko risku analīze un to pielāgošana klienta interesēm",
+            "klienta pārstāvniecība sarežģītākās sarunās ar nomniekiem, pircējiem vai partneriem",
+            "juridiskais un administratīvais atbalsts nekustamo īpašumu pirkšanas vai pārdošanas darījumos",
+            "remontdarbu, renovācijas vai citu attīstības projektu vadība un uzraudzība",
+            "īpašuma juridisko un tehnisko dokumentu sakārtošana (Due Diligence)",
+            "konsultācijas nekustamā īpašuma pārvaldības un attīstības jautājumos"
+          ],
+          "outro": "Šie pakalpojumi ļauj Jums saņemt profesionālu atbalstu tieši tajos brīžos, kad tas ir visvairāk nepieciešams, nodrošinot augstu tiesisko drošību un profesionālu pieeju nestandarta situāciju risināšanā.",
+          "costTitle": "Papildu pakalpojumu izmaksas",
+          "costText": "Papildu juridisko, administratīvo un projektu vadības pakalpojumu izmaksas tiek noteiktas individuāli par katru konkrēto uzdevumu vai projektu, vienojoties par stundu likmi vai fiksētu maksu par visa uzdevuma izpildi. Šāda pieeja nodrošina to, ka klients maksā tikai par faktiski paveikto darbu un sasniegtajiem rezultātiem."
+        },
+        {
+          "id": 4,
+          "title": "4. Premium īpašumu pārvaldība",
+          "desc": "Individuāli pielāgota pārvaldība privātiem un augstas vērtības īpašumiem, kur nepieciešama īpaši rūpīga organizācija un uzturēšana. Pakalpojums nodrošina, ka īpašums tiek profesionāli pārvaldīts arī laikā, kad īpašnieks tajā neuzturas.",
+          "intro": "Premium segmenta privātīpašumiem (savrupmājām, villām, dzīvokļu rezidencēm) ir nepieciešama īpaši rūpīga, konfidenciāla un profesionāla pārvaldība. Mēs piedāvājam individuāli pielāgotus risinājumus, lai Jūsu privātais īpašums tiktu uzturēts visaugstākajā līmenī un būtu gatavs Jūsu ierašanās brīdim. Šis pakalpojums ietver:",
+          "points": [
+            "regulāru īpašuma tehnisko stāvokļa pārbaudi un uzraudzību",
+            "uzturēšanas un nepieciešamo remontdarbu plānošanu un koordinēšanu",
+            "dārznieku, uzkopšanas dienestu un citu pakalpojumu sniedzēju darba uzraudzību",
+            "komunālo un citu ar īpašumu saistīto rēķinu administrēšanu",
+            "saziņu ar apsardzes dienestiem un drošības sistēmu pārraudzību",
+            "īpašuma sagatavošanu īpašnieku vai viesu ierašanās brīdim",
+            "pilnu konfidencialitāti un uzticamu partnerību visos jautājumos"
+          ],
+          "outro": "Mēs darbojamies kā Jūsu uzticamais pārstāvis uz vietas, kas nodrošina, ka visi uzturēšanas un saimnieciskie jautājumi tiek risināti profesionāli un savlaicīgi, pilnībā atbrīvojot Jūs no ikdienas rūpēm par īpašumu.",
+          "costTitle": "Premium pārvaldības izmaksas",
+          "costText": "Premium privātīpašumu pārvaldības maksa tiek noteikta katram objektam individuāli, ņemot vērā tā platību, tehnisko sarežģītību, nepieciešamo apmeklējumu biežumu un sniedzamo pakalpojumu klāstu. Mēs sagatavojam individuālu piedāvājumu pēc detalizētas iepazīšanās ar īpašumu un klienta vēlmēm."
+        }
+      ]
+    },
+    "en": {
+      "backBtn": "Back",
+      "title": "Our",
+      "subtitle": "Services",
+      "description": "We offer both daily real estate management and maintenance, as well as individual or one-time services according to each client's wishes and needs.",
+      "learnMore": "Learn More",
+      "vatText": "All prices listed above are subject to VAT if provided by the regulations of the Republic of Latvia.",
+      "items": [
+        {
+          "id": 1,
+          "title": "1. Daily administrative management",
+          "desc": "This service provides structured and continuous real estate management, allowing its owner to focus on their main business development or investment goals, maintaining full transparency.",
+          "intro": "This is a fixed monthly fee for continuous or regular administrative management of the property. This service is provided for small and medium segment properties and includes:",
+          "points": [
+            "daily or regular administrative management of real estate",
+            "communication with property tenants and partners",
+            "attracting tenants and building sustainable cooperation",
+            "representation in relations with state/municipal institutions and third parties",
+            "organizing necessary technical issues and supervising execution",
+            "coordinating maintenance of the property territory or premises",
+            "coordinating other operational situations in the property by agreement"
+          ],
+          "outro": "This service provides structured and continuous real estate management, allowing its owner to focus on their main business development or investment goals while maintaining complete transparency and control over all processes.",
+          "costTitle": "Administrative management service costs",
+          "costText": "The daily administrative management fee is determined individually, taking into account the type, size, and management intensity of the property. In practice, the fee for such a service for small segment commercial objects is usually determined starting from 250 € per month, while for medium segment or more complex commercial objects it is agreed upon individually."
+        },
+        {
+          "id": 2,
+          "title": "2. Maintenance budget for technical works (deposit)",
+          "desc": "A pre-established financial fund designed for the prompt resolution of property technical issues and maintenance works. It provides the opportunity to quickly organize necessary works without causing administrative delays.",
+          "intro": "To ensure quick and effective resolution of technical issues in the property, a maintenance deposit is used. This is a maintenance budget pre-paid by the owner, from which costs for property technical maintenance, small repairs, and other property-related technical issues are covered.\n\nThis system provides the opportunity to immediately respond to unexpected technical issues, maintenance works, or equipment maintenance on the property, without causing delays due to additional transfers or separate approvals.\n\nThe maintenance deposit can be used for:",
+          "points": [
+            "covering the costs of small or unplanned repair works",
+            "emergency situations to ensure safety of people or property",
+            "calling specialists in unforeseen or emergency cases",
+            "covering costs for technical damage or system checks",
+            "covering costs of territory maintenance works",
+            "purchasing small, urgent materials",
+            "covering costs of other operational maintenance works"
+          ],
+          "outro": "(this list is not exhaustive and is agreed individually in each case)\n\nAll expenses are documented and reflected in a report issued to the owner at pre-agreed times, ensuring complete financial transparency. When the deposit balance reaches a certain minimum limit, the owner is informed of the need to replenish it.\n\nSuch a structure allows to ensure prompt resolution of issues, continuous maintenance of the property in order, as well as transparency in the use of budget funds.",
+          "costTitle": "Maintenance deposit amount",
+          "costText": "The maintenance deposit amount is determined individually, considering the property size, technical condition, and expected volume of maintenance or repair works. In practice, the deposit amount usually starts from 800-1000 €, but for larger properties with more intensive technical maintenance, it can be much larger. A project management or administration fee may be applied for organizing, coordinating, or supervising technical works on the property, which is agreed upon individually in each case."
+        },
+        {
+          "id": 3,
+          "title": "3. Additional services",
+          "desc": "Specialized administrative, legal, and project management services that help solve more complex situations or implement property development plans. They are provided together with daily management services or as separate projects.",
+          "intro": "In addition to daily management services, we offer specialized legal, corporate, and administrative services to help solve specific situations or implement certain projects related to your real estate. These services include:",
+          "points": [
+            "preparation and administration of lease, tenancy, repair works, and other contracts",
+            "analysis of legal risks of lease or tenancy agreements and their alignment with the client's interests",
+            "representation of the client in complex negotiations with tenants, buyers, or partners",
+            "legal and administrative support in real estate buying or selling transactions",
+            "management and supervision of repair works, renovation, or other development projects",
+            "organizing property legal and technical documents (Due Diligence)",
+            "consultations on real estate management and development issues"
+          ],
+          "outro": "These services allow you to receive professional support exactly when it is most needed, ensuring high legal certainty and a professional approach to solving non-standard situations.",
+          "costTitle": "Additional service costs",
+          "costText": "The costs of additional legal, administrative, and project management services are determined individually for each specific task or project, agreeing on an hourly rate or a fixed fee for the execution of the entire task. This approach ensures that the client only pays for actually performed work and achieved results."
+        },
+        {
+          "id": 4,
+          "title": "4. Premium property management",
+          "desc": "Individually tailored management for private and high-value properties where particularly careful organization and maintenance is required. The service ensures that the property is professionally managed also when the owner is away.",
+          "intro": "Premium segment private properties (detached houses, villas, apartment residences) require particularly careful, confidential, and professional management. We offer individually tailored solutions so that your private property is maintained at the highest level and is ready for your arrival. This service includes:",
+          "points": [
+            "regular check and supervision of the property's technical condition",
+            "planning and coordinating maintenance and necessary repair works",
+            "supervising gardeners, cleaning services, and other service providers",
+            "administering utility and other property-related bills",
+            "communication with security services and supervision of security systems",
+            "preparing the property for the arrival of owners or guests",
+            "full confidentiality and trusted partnership in all matters"
+          ],
+          "outro": "We act as your reliable representative on-site, ensuring that all maintenance and management issues are resolved professionally and on time, completely freeing you from daily property concerns.",
+          "costTitle": "Premium management costs",
+          "costText": "The premium private property management fee is determined for each object individually, taking into account its area, technical complexity, the frequency of required visits, and the range of services to be provided. We prepare an individual proposal after a detailed acquaintance with the property and the client's wishes."
+        }
+      ]
+    },
+    "ru": {
+      "backBtn": "Назад",
+      "title": "Наши",
+      "subtitle": "Услуги",
+      "description": "Мы предлагаем как повседневное управление и обслуживание недвижимости, так и предоставление отдельных или разовых услуг в соответствии с пожеланиями и потребностями каждого клиента.",
+      "learnMore": "Узнать Больше",
+      "vatText": "Ко всем вышеуказанным ценам на услуги, если это предусмотрено нормативными актами ЛР, применяется НДС.",
+      "items": [
+        {
+          "id": 1,
+          "title": "1. Повседневное административное управление",
+          "desc": "Эта услуга обеспечивает структурированное и непрерывное управление недвижимостью, позволяя ее владельцу сосредоточиться на своих основных целях развития бизнеса или инвестиций.",
+          "intro": "Это фиксированная ежемесячная плата за непрерывное или регулярное административное управление недвижимостью. Эта услуга предоставляется для недвижимости малого и среднего сегмента и включает в себя:",
+          "points": [
+            "повседневное или регулярное административное управление недвижимостью",
+            "коммуникацию с арендаторами недвижимости и партнерами по сотрудничеству",
+            "привлечение арендаторов и выстраивание устойчивого сотрудничества",
+            "представительство в отношениях с государственными/муниципальными учреждениями и третьими лицами",
+            "организацию необходимых технических вопросов и надзор за их выполнением",
+            "координацию работ по содержанию территории или внутренних помещений недвижимости",
+            "координацию других оперативных ситуаций на объекте недвижимости по договоренности"
+          ],
+          "outro": "Эта услуга обеспечивает структурированное и непрерывное управление недвижимостью, что позволяет ее владельцу сосредоточиться на своих основных целях развития бизнеса или инвестиций.",
+          "costTitle": "Стоимость услуги административного управления",
+          "costText": "Плата за повседневное административное управление устанавливается индивидуально, с учетом типа недвижимости, размера и интенсивности управления. На практике плата за такую услугу для коммерческих объектов малого сегмента обычно устанавливается от 250 € в месяц, в то время как для объектов среднего сегмента или более сложных коммерческих объектов она согласовывается индивидуально."
+        },
+        {
+          "id": 2,
+          "title": "2. Бюджет на техническое обслуживание (депозит)",
+          "desc": "Заранее созданный финансовый фонд, предназначенный для оперативного решения технических вопросов и работ по техническому обслуживанию недвижимости. Это дает возможность быстро организовать необходимые работы, не создавая административных задержек.",
+          "intro": "Для обеспечения быстрого и эффективного решения технических вопросов на объекте недвижимости используется депозит на техническое обслуживание. Это заранее внесенный владельцем недвижимости бюджет на техническое обслуживание, из которого покрываются расходы на работы по техническому обслуживанию недвижимости, мелкие ремонтные работы и решаются другие технические вопросы, связанные с недвижимостью.\n\nЭта система позволяет немедленно реагировать на непредвиденные технические вопросы на объекте недвижимости, работы по техническому обслуживанию или обслуживанию оборудования на объекте недвижимости, не создавая задержек из-за дополнительных перечислений или отдельного утверждения для их решения.\n\nБюджет на техническое обслуживание может быть использован для:",
+          "points": [
+            "покрытия расходов на мелкие или незапланированные ремонтные работы",
+            "в чрезвычайных ситуациях для обеспечения безопасности людей или имущества",
+            "вызова специалистов в непредвиденных или аварийных случаях",
+            "покрытия расходов на проверку технических повреждений или систем",
+            "покрытия расходов на работы по содержанию территории",
+            "приобретения небольших срочных материалов",
+            "покрытия расходов на другие оперативные работы по техническому обслуживанию"
+          ],
+          "outro": "(этот перечень не является исчерпывающим и согласовывается индивидуально в каждом случае)\n\nВсе расходы документируются и отражаются в отчете, который выдается владельцу в заранее оговоренные сроки, обеспечивая полную финансовую прозрачность. Когда остаток депозита достигает установленного минимального уровня, владелец информируется о необходимости его пополнения.\n\nТакая структура позволяет обеспечить оперативное решение вопросов, непрерывное содержание недвижимости в порядке, а также прозрачность использования бюджетных средств.",
+          "costTitle": "Размер бюджета на техническое обслуживание",
+          "costText": "Размер депозита на техническое обслуживание определяется индивидуально с учетом размера недвижимости, технического состояния и предполагаемого объема работ по техническому обслуживанию или ремонту. На практике сумма депозита обычно начинается от 800-1000 €, но для более крупной недвижимости с более интенсивным техническим обслуживанием она может быть намного больше. За организацию, координацию или надзор за техническими работами на объекте недвижимости может взиматься плата за управление проектом или администрирование, которая в каждом случае согласовывается индивидуально."
+        },
+        {
+          "id": 3,
+          "title": "3. Дополнительные услуги",
+          "desc": "Специализированные административные, юридические услуги и услуги по управлению проектами, которые помогают в решении более сложных ситуаций или реализации планов развития недвижимости. Они предоставляются вместе с услугами повседневного управления или как отдельные проекты.",
+          "intro": "В дополнение к услугам повседневного управления мы предлагаем специализированные юридические, корпоративные и административные услуги, которые помогают в решении конкретных ситуаций или реализации определенных проектов, связанных с вашей недвижимостью. Эти услуги включают:",
+          "points": [
+            "подготовка и администрирование договоров аренды, найма, ремонтных работ и других соглашений",
+            "анализ юридических рисков договоров аренды или найма и их согласование с интересами клиента",
+            "представительство клиента в сложных переговорах с арендаторами, покупателями или партнерами",
+            "юридическое и административное сопровождение сделок купли-продажи недвижимости",
+            "управление и надзор за ремонтными работами, реновацией или другими девелоперскими проектами",
+            "упорядочивание юридических и технических документов на недвижимость (Due Diligence)",
+            "консультации по вопросам управления и развития недвижимости"
+          ],
+          "outro": "Эти услуги позволяют вам получить профессиональную поддержку именно тогда, когда она больше всего нужна, обеспечивая высокую правовую безопасность и профессиональный подход к решению нестандартных ситуаций.",
+          "costTitle": "Стоимость дополнительных услуг",
+          "costText": "Стоимость дополнительных юридических, административных услуг и услуг по управлению проектами определяется индивидуально для каждой конкретной задачи или проекта путем согласования почасовой ставки или фиксированной платы за выполнение всей задачи. Такой подход гарантирует, что клиент платит только за фактически выполненную работу и достигнутые результаты."
+        },
+        {
+          "id": 4,
+          "title": "4. Управление Premium недвижимостью",
+          "desc": "Индивидуально адаптированное управление частной и дорогостоящей недвижимостью, где требуется особенно тщательная организация и обслуживание. Услуга гарантирует, что недвижимость будет профессионально управляться даже тогда, когда владелец в ней не проживает.",
+          "intro": "Частная недвижимость премиум-сегмента (особняки, виллы, апартаменты) требует особо тщательного, конфиденциального и профессионального управления. Мы предлагаем индивидуально адаптированные решения, чтобы ваша частная собственность содержалась на самом высоком уровне и была готова к вашему приезду. Эта услуга включает:",
+          "points": [
+            "регулярную проверку и надзор за техническим состоянием недвижимости",
+            "планирование и координацию работ по содержанию и необходимому ремонту",
+            "надзор за работой садовников, клининговых служб и других поставщиков услуг",
+            "администрирование коммунальных и других счетов, связанных с недвижимостью",
+            "связь со службами охраны и надзор за системами безопасности",
+            "подготовку недвижимости к приезду владельцев или гостей",
+            "полную конфиденциальность и доверительное партнерство во всех вопросах"
+          ],
+          "outro": "Мы действуем как ваш надежный представитель на месте, обеспечивая профессиональное и своевременное решение всех вопросов содержания и управления, полностью освобождая вас от повседневных забот о недвижимости.",
+          "costTitle": "Стоимость Premium управления",
+          "costText": "Плата за управление частной недвижимостью премиум-класса определяется для каждого объекта индивидуально с учетом его площади, технической сложности, частоты необходимых визитов и спектра предоставляемых услуг. Мы готовим индивидуальное предложение после детального ознакомления с недвижимостью и пожеланиями клиента."
+        }
+      ]
+    }
+  }
+}

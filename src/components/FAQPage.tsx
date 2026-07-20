@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
-import { useLanguage, translations } from '../LanguageContext';
+import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
+import faqData from '../data/content/faq.json';
 
 interface FAQPageProps {
   isPreview?: boolean;
@@ -9,14 +10,15 @@ interface FAQPageProps {
 
 export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const navigate = useNavigate();
+  const content = faqData.translations[language] || faqData.translations['lv'];
 
-  const faqs = translations[language].faq.items;
+  const faqs = content.items || [];
 
   React.useEffect(() => {
     if (!isPreview) {
-      document.title = `${t('faq.title')} ${t('faq.subtitle')} | Avenue Group`;
+      document.title = `${content.title} ${content.subtitle} | Avenue Group`;
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
         metaDesc.setAttribute('content', 'Biežāk uzdotie jautājumi par nekustamo īpašumu apsaimniekošanu, pārvaldību un juridisko atbalstu Avenue Group.');
@@ -33,7 +35,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
         }
       }
     };
-  }, [isPreview, t]);
+  }, [isPreview, content]);
 
   return (
     <section id="buj" className={`bg-[#ebebeb] border-y border-zinc-200 relative overflow-hidden ${isPreview ? 'py-12 md:py-16' : 'min-h-screen pb-16'}`}>
@@ -45,13 +47,13 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
             className="group flex items-center gap-3 bg-white border border-zinc-200/80 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 mb-12 shadow-sm rounded-none cursor-pointer"
           >
             <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform" />
-            <span>{t('faq.backBtn')}</span>
+            <span>{content.backBtn}</span>
           </button>
         )}
 
         <div className="mb-10 text-center">
           <h2 className="text-3xl md:text-4xl font-black italic tracking-tighter text-zinc-950 uppercase leading-none">
-            {t('faq.title')} <span className="text-yellow-600">{t('faq.subtitle')}</span>
+            {content.title} <span className="text-yellow-600">{content.subtitle}</span>
           </h2>
         </div>
 
@@ -115,7 +117,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
               onClick={() => navigate('/buj')}
               className="group inline-flex items-center gap-3 bg-white border border-zinc-250 px-6 py-2.5 font-bold text-xs uppercase tracking-widest hover:bg-zinc-950 hover:text-white transition-all duration-300 shadow-sm rounded-none mx-auto cursor-pointer"
             >
-              <span>{t('faq.viewAll')}</span> <HelpCircle className="text-yellow-600 group-hover:text-yellow-400 transition-colors" size={15} />
+              <span>{content.viewAll}</span> <HelpCircle className="text-yellow-600 group-hover:text-yellow-400 transition-colors" size={15} />
             </button>
           </div>
         )}

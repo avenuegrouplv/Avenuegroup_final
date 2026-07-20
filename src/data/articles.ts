@@ -1,4 +1,4 @@
-import articlesData from './articles.json';
+import articlesData from './content/blog-posts.json';
 
 export interface Article {
   id: number;

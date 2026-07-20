@@ -4,7 +4,7 @@ import { ArrowLeft, FileText, Image as ImageIcon, Sparkles, MessageSquare, Share
 import ReactMarkdown from 'react-markdown';
 import { useLanguage } from '../LanguageContext';
 import { customPages } from '../data/pages';
-import articlesData from '../data/articles.json';
+import articlesData from '../data/content/blog-posts.json';
 
 export const CustomDynamicPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
