@@ -268,6 +268,12 @@ content:
           - name: image2
             label: Attēls 2 (URL vai ceļš)
             type: text
+          - name: image3
+            label: Attēls 3 (URL vai ceļš)
+            type: text
+          - name: image4
+            label: Attēls 4 (URL vai ceļš)
+            type: text
       - name: translations
         label: Tulkojumi
         type: object
@@ -428,9 +434,7 @@ content:
       - name: images
         label: Pakalpojumu attēli (URL vai ceļi)
         type: list
-        field:
-          type: text
-          label: Attēla URL vai ceļš
+        field: text
       - name: translations
         label: Tulkojumi
         type: object
@@ -476,9 +480,7 @@ content:
                   - name: points
                     label: Punkti / Bullet points
                     type: list
-                    field:
-                      type: text
-                      label: Punkts
+                    field: text
                   - name: outro
                     label: Nobeiguma teksts
                     type: textarea
@@ -529,9 +531,7 @@ content:
                   - name: points
                     label: Points / Bullet points
                     type: list
-                    field:
-                      type: text
-                      label: Point
+                    field: text
                   - name: outro
                     label: Outro text
                     type: textarea
@@ -582,9 +582,7 @@ content:
                   - name: points
                     label: Пункты / Bullet points
                     type: list
-                    field:
-                      type: text
-                      label: Пункт
+                    field: text
                   - name: outro
                     label: Заключительный текст
                     type: textarea
@@ -964,9 +962,7 @@ content:
               - name: services
                 label: Pakalpojumi (Saraksts)
                 type: list
-                field:
-                  type: text
-                  label: Pakalpojums
+                field: text
               - name: companyLinks
                 label: Uzņēmuma saites (Saraksts)
                 type: list
@@ -999,9 +995,7 @@ content:
               - name: services
                 label: Services list
                 type: list
-                field:
-                  type: text
-                  label: Service
+                field: text
               - name: companyLinks
                 label: Company links
                 type: list
@@ -1034,9 +1028,7 @@ content:
               - name: services
                 label: Список услуг
                 type: list
-                field:
-                  type: text
-                  label: Услуга
+                field: text
               - name: companyLinks
                 label: Ссылки компании
                 type: list
@@ -1117,6 +1109,4 @@ content:
           - name: content
             label: Saturs (Rindkopu saraksts)
             type: list
-            field:
-              type: textarea
-              label: Rindkopa
+            field: textarea
