@@ -627,6 +627,16 @@ content:
                   - name: q
                     label: Jautājums
                     type: text
+                  - name: a
+                    label: Atbilde / Punkti (Saraksts)
+                    type: list
+                    fields:
+                      - name: title
+                        label: Virsraksts (ja nepieciešams)
+                        type: text
+                      - name: desc
+                        label: Teksts / Apraksts
+                        type: textarea
           - name: en
             label: English
             type: object
@@ -650,6 +660,16 @@ content:
                   - name: q
                     label: Question
                     type: text
+                  - name: a
+                    label: Answer / Points (List)
+                    type: list
+                    fields:
+                      - name: title
+                        label: Title (optional)
+                        type: text
+                      - name: desc
+                        label: Text / Description
+                        type: textarea
           - name: ru
             label: Русский
             type: object
@@ -673,6 +693,16 @@ content:
                   - name: q
                     label: Вопрос
                     type: text
+                  - name: a
+                    label: Ответ / Пункты (Список)
+                    type: list
+                    fields:
+                      - name: title
+                        label: Заголовок (если есть)
+                        type: text
+                      - name: desc
+                        label: Текст / Описание
+                        type: textarea
 
   - name: contact
     label: Kontakti
@@ -1059,3 +1089,34 @@ content:
               - name: ru
                 label: Русский
                 type: text
+
+  - name: blog-posts
+    label: Bloga raksti
+    type: file
+    path: content/blog-posts.json
+    fields:
+      - name: articles
+        label: Raksti
+        type: list
+        fields:
+          - name: id
+            label: ID
+            type: number
+          - name: slug
+            label: Saites daļa (slug)
+            type: text
+          - name: image
+            label: Attēls (R2 URL vai vietējais ceļš)
+            type: text
+          - name: title
+            label: Virsraksts
+            type: text
+          - name: excerpt
+            label: Izvilkums / Īss apraksts
+            type: textarea
+          - name: content
+            label: Saturs (Rindkopu saraksts)
+            type: list
+            field:
+              type: textarea
+              label: Rindkopa
