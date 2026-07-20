@@ -7,6 +7,251 @@ content:
     label: Sākumlapa
     type: file
     path: content/homepage.json
+    fields:
+      - name: hero
+        label: Hero sadaļa
+        type: object
+        fields:
+          - name: image
+            label: Hero bilde
+            type: image
+          - name: translations
+            label: Tulkojumi
+            type: object
+            fields:
+              - name: lv
+                label: Latviešu valoda
+                type: object
+                fields:
+                  - name: title
+                    label: Virsraksts
+                    type: text
+                  - name: subtitle
+                    label: Apakšvirsraksts
+                    type: text
+                  - name: description
+                    label: Apraksts
+                    type: textarea
+                  - name: contactBtn
+                    label: Kontakta poga
+                    type: text
+                  - name: servicesBtn
+                    label: Pakalpojumu poga
+                    type: text
+              - name: en
+                label: English
+                type: object
+                fields:
+                  - name: title
+                    label: Title
+                    type: text
+                  - name: subtitle
+                    label: Subtitle
+                    type: text
+                  - name: description
+                    label: Description
+                    type: textarea
+                  - name: contactBtn
+                    label: Contact button
+                    type: text
+                  - name: servicesBtn
+                    label: Services button
+                    type: text
+              - name: ru
+                label: Русский
+                type: object
+                fields:
+                  - name: title
+                    label: Заголовок
+                    type: text
+                  - name: subtitle
+                    label: Подзаголовок
+                    type: text
+                  - name: description
+                    label: Описание
+                    type: textarea
+                  - name: contactBtn
+                    label: Кнопка контакта
+                    type: text
+                  - name: servicesBtn
+                    label: Кнопка услуг
+                    type: text
+      - name: benefits
+        label: Ieguvumu sadaļa
+        type: object
+        fields:
+          - name: q1
+            label: Kam mūsu pakalpojumi ir īpaši piemēroti? (Q1)
+            type: object
+            fields:
+              - name: translations
+                label: Tulkojumi
+                type: object
+                fields:
+                  - name: lv
+                    label: Latviešu valoda
+                    type: object
+                    fields:
+                      - name: title
+                        label: Virsraksts (Title)
+                        type: text
+                      - name: subtitle
+                        label: Apakšvirsraksts (Subtitle)
+                        type: text
+                      - name: items
+                        label: Saraksta punkti
+                        type: list
+                        fields:
+                          - name: title
+                            label: Virsraksts
+                            type: text
+                          - name: desc
+                            label: Apraksts
+                            type: textarea
+                  - name: en
+                    label: English
+                    type: object
+                    fields:
+                      - name: title
+                        label: Title
+                        type: text
+                      - name: subtitle
+                        label: Subtitle
+                        type: text
+                      - name: items
+                        label: List items
+                        type: list
+                        fields:
+                          - name: title
+                            label: Title
+                            type: text
+                          - name: desc
+                            label: Description
+                            type: textarea
+                  - name: ru
+                    label: Русский
+                    type: object
+                    fields:
+                      - name: title
+                        label: Заголовок
+                        type: text
+                      - name: subtitle
+                        label: Подзаголовок
+                        type: text
+                      - name: items
+                        label: Пункты списка
+                        type: list
+                        fields:
+                          - name: title
+                            label: Заголовок
+                            type: text
+                          - name: desc
+                            label: Описание
+                            type: textarea
+          - name: q2
+            label: Kādas priekšrocības iegūst klienti? (Q2)
+            type: object
+            fields:
+              - name: translations
+                label: Tulkojumi
+                type: object
+                fields:
+                  - name: lv
+                    label: Latviešu valoda
+                    type: object
+                    fields:
+                      - name: title
+                        label: Virsraksts pirms akcentētā vārda
+                        type: text
+                      - name: subtitle
+                        label: Akcentētais vārds
+                        type: text
+                      - name: suffix
+                        label: Sufikss 1
+                        type: text
+                      - name: suffix2
+                        label: Sufikss 2
+                        type: text
+                      - name: desc
+                        label: Apraksts
+                        type: textarea
+                      - name: listPrefix
+                        label: Saraksta ievads
+                        type: text
+                      - name: items
+                        label: Saraksta punkti
+                        type: list
+                        fields:
+                          - name: title
+                            label: Virsraksts
+                            type: text
+                          - name: desc
+                            label: Apraksts
+                            type: textarea
+                  - name: en
+                    label: English
+                    type: object
+                    fields:
+                      - name: title
+                        label: Title before highlight
+                        type: text
+                      - name: subtitle
+                        label: Highlighted word
+                        type: text
+                      - name: suffix
+                        label: Suffix 1
+                        type: text
+                      - name: suffix2
+                        label: Suffix 2
+                        type: text
+                      - name: desc
+                        label: Description
+                        type: textarea
+                      - name: listPrefix
+                        label: List prefix
+                        type: text
+                      - name: items
+                        label: List items
+                        type: list
+                        fields:
+                          - name: title
+                            label: Title
+                            type: text
+                          - name: desc
+                            label: Description
+                            type: textarea
+                  - name: ru
+                    label: Русский
+                    type: object
+                    fields:
+                      - name: title
+                        label: Заголовок до выделенного слова
+                        type: text
+                      - name: subtitle
+                        label: Выделенное слово
+                        type: text
+                      - name: suffix
+                        label: Суффикс 1
+                        type: text
+                      - name: suffix2
+                        label: Суффикс 2
+                        type: text
+                      - name: desc
+                        label: Описание
+                        type: textarea
+                      - name: listPrefix
+                        label: Вводная фраза списка
+                        type: text
+                      - name: items
+                        label: Пункты списка
+                        type: list
+                        fields:
+                          - name: title
+                            label: Заголовок
+                            type: text
+                          - name: desc
+                            label: Описание
+                            type: textarea
 
   - name: about
     label: Par mums
