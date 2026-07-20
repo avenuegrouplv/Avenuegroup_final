@@ -14,7 +14,7 @@ content:
         fields:
           - name: image
             label: Hero bilde (URL vai ceļš)
-            type: text
+            type: image
           - name: translations
             label: Tulkojumi
             type: object
@@ -264,16 +264,16 @@ content:
         fields:
           - name: image1
             label: Attēls 1 (URL vai ceļš)
-            type: text
+            type: image
           - name: image2
             label: Attēls 2 (URL vai ceļš)
-            type: text
+            type: image
           - name: image3
             label: Attēls 3 (URL vai ceļš)
-            type: text
+            type: image
           - name: image4
             label: Attēls 4 (URL vai ceļš)
-            type: text
+            type: image
       - name: translations
         label: Tulkojumi
         type: object
@@ -434,7 +434,7 @@ content:
       - name: images
         label: Pakalpojumu attēli (URL vai ceļi)
         type: list
-        field: text
+        field: image
       - name: translations
         label: Tulkojumi
         type: object
@@ -626,14 +626,14 @@ content:
                     label: Jautājums
                     type: text
                   - name: a
-                    label: Atbilde / Punkti (Saraksts)
+                    label: Atbildes punkti
                     type: list
                     fields:
                       - name: title
-                        label: Virsraksts (ja nepieciešams)
+                        label: Virsraksts (pēc izvēles)
                         type: text
                       - name: desc
-                        label: Teksts / Apraksts
+                        label: Apraksts / Teksts
                         type: textarea
           - name: en
             label: English
@@ -659,14 +659,14 @@ content:
                     label: Question
                     type: text
                   - name: a
-                    label: Answer / Points (List)
+                    label: Answer points
                     type: list
                     fields:
                       - name: title
                         label: Title (optional)
                         type: text
                       - name: desc
-                        label: Text / Description
+                        label: Description / Text
                         type: textarea
           - name: ru
             label: Русский
@@ -692,14 +692,14 @@ content:
                     label: Вопрос
                     type: text
                   - name: a
-                    label: Ответ / Пункты (Список)
+                    label: Пункты ответа
                     type: list
                     fields:
                       - name: title
-                        label: Заголовок (если есть)
+                        label: Заголовок (необязательно)
                         type: text
                       - name: desc
-                        label: Текст / Описание
+                        label: Описание / Текст
                         type: textarea
 
   - name: contact
@@ -712,9 +712,6 @@ content:
         type: text
       - name: phone
         label: Tālrunis
-        type: text
-      - name: netlifyFormName
-        label: Netlify formas nosaukums
         type: text
       - name: translations
         label: Tulkojumi
@@ -1099,7 +1096,7 @@ content:
             type: text
           - name: image
             label: Attēls (R2 URL vai vietējais ceļš)
-            type: text
+            type: image
           - name: title
             label: Virsraksts
             type: text

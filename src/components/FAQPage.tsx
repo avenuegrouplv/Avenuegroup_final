@@ -93,8 +93,14 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
                             <span>{item}</span>
                           ) : (
                             <div className="flex flex-col">
-                              <span className="text-zinc-950 font-black italic mb-0.5">• {item.title}</span>
-                              <span className="text-zinc-650 pl-4">{item.desc}</span>
+                              {item.title ? (
+                                <>
+                                  <span className="text-zinc-950 font-black italic mb-0.5">• {item.title}</span>
+                                  <span className="text-zinc-650 pl-4">{item.desc}</span>
+                                </>
+                              ) : (
+                                <span className="text-zinc-650">{item.desc}</span>
+                              )}
                             </div>
                           )}
                         </li>

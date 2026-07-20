@@ -9,26 +9,56 @@
         {
           "q": "Ar kādiem īpašumiem Jūs strādājiet un kā Jūs variet palīdzēt saviem klientiem?",
           "a": [
-            "Komercīpašumu apsaimniekošanā viens no būtiskākajiem aspektiem ir ar īpašumu saistītās dokumentācijas sakārtošana un efektīva pārvaldība. Praksē darbs ar komercīpašuma dokumentiem bieži vien ir viens no sarežģītākajiem uzdevumiem, ar ko saskaras īpašnieki, un nereti tas prasa arī juridisko ārpakalpojumu piesaisti. Tāpēc mēs nodrošinām pilnu juridisko un korporatīvo atbalstu, kas nepieciešams komercīpašuma sakārtošanai, pārvaldībai un ilgtermiņa attīstībai.",
-            "Mūsu uzņēmums sniedz nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumus mazā un vidējā segmenta komercīpašumos, kā arī Premium segmenta privātīpašumos. Mēs strādājam ar dažāda veida īpašumiem, tostarp:",
-            "• komercobjektiem, biroju ēkām, jaukta tipa ēkām, saloniem, noliktavām un citiem īpašumiem",
-            "• īres namiem, īres dzīvokļiem un citiem investīciju objektiem",
-            "• lauku rezidencēm, brīvdienu mājām un viesu namiem",
-            "• savrupmājām, villām, vasarnīcām un viensētām",
-            "",
-            "Mēs specializējamies darbā ar mazā un vidējā segmenta komercīpašumiem, piedāvājot klientiem gan to profesionālu apsaimniekošanu, gan arī visaptverošu juridisko pārvaldību un korporatīvo atbalstu, tajā skaitā:",
-            "• Ar komercīpašumu saistītās dokumentācijas juridisko analīzi",
-            "• Nomas un citu līgumu sagatavošanu, grozīšanu un saskaņošanu ar darījuma dalībniekiem",
-            "• Ilgtspējīgu un profesionālu attiecību veidošanu ar nomniekiem un sadarbības partneriem",
-            "• Komercīpašnieku pārstāvību attiecībās ar valsts un pašvaldību iestādēm, bankām, apdrošinātājiem un citām iesaistītajām pusēm",
-            "• Komercīpašnieku pārstāvību strīdu situācijās ar nomniekiem vai īrniekiem",
-            "• Juridiskās konsultācijas nomas tiesību un komercīpašumu pārvaldības jautājumos"
+            {
+              "desc": "Komercīpašumu apsaimniekošanā viens no būtiskākajiem aspektiem ir ar īpašumu saistītās dokumentācijas sakārtošana un efektīva pārvaldība. Praksē darbs ar komercīpašuma dokumentiem bieži vien ir viens no sarežģītākajiem uzdevumiem, ar ko saskaras īpašnieki, un nereti tas prasa arī juridisko ārpakalpojumu piesaisti. Tāpēc mēs nodrošinām pilnu juridisko un korporatīvo atbalstu, kas nepieciešams komercīpašuma sakārtošanai, pārvaldībai un ilgtermiņa attīstībai."
+            },
+            {
+              "desc": "Mūsu uzņēmums sniedz nekustamo īpašumu apsaimniekošanas un pārvaldības pakalpojumus mazā un vidējā segmenta komercīpašumos, kā arī Premium segmenta privātīpašumos. Mēs strādājam ar dažāda veida īpašumiem, tostarp:"
+            },
+            {
+              "desc": "• komercobjektiem, biroju ēkām, jaukta tipa ēkām, saloniem, noliktavām un citiem īpašumiem"
+            },
+            {
+              "desc": "• īres namiem, īres dzīvokļiem un citiem investīciju objektiem"
+            },
+            {
+              "desc": "• lauku rezidencēm, brīvdienu mājām un viesu namiem"
+            },
+            {
+              "desc": "• savrupmājām, villām, vasarnīcām un viensētām"
+            },
+            {
+              "desc": ""
+            },
+            {
+              "desc": "Mēs specializējamies darbā ar mazā un vidējā segmenta komercīpašumiem, piedāvājot klientiem gan to profesionālu apsaimniekošanu, gan arī visaptverošu juridisko pārvaldību un korporatīvo atbalstu, tajā skaitā:"
+            },
+            {
+              "desc": "• Ar komercīpašumu saistītās dokumentācijas juridisko analīzi"
+            },
+            {
+              "desc": "• Nomas un citu līgumu sagatavošanu, grozīšanu un saskaņošanu ar darījuma dalībniekiem"
+            },
+            {
+              "desc": "• Ilgtspējīgu un profesionālu attiecību veidošanu ar nomniekiem un sadarbības partneriem"
+            },
+            {
+              "desc": "• Komercīpašnieku pārstāvību attiecībās ar valsts un pašvaldību iestādēm, bankām, apdrošinātājiem un citām iesaistītajām pusēm"
+            },
+            {
+              "desc": "• Komercīpašnieku pārstāvību strīdu situācijās ar nomniekiem vai īrniekiem"
+            },
+            {
+              "desc": "• Juridiskās konsultācijas nomas tiesību un komercīpašumu pārvaldības jautājumos"
+            }
           ]
         },
         {
           "q": "Kādas priekšrocības iegūs klienti, uzsākot sadarbību ar Jums?",
           "a": [
-            "Sadarbojoties ar mums, klienti iegūst vairākas būtiskas priekšrocības:",
+            {
+              "desc": "Sadarbojoties ar mums, klienti iegūst vairākas būtiskas priekšrocības:"
+            },
             {
               "title": "Kompleksa pieeja vienuviet",
               "desc": "Mēs nodrošinām gan nekustamā īpašuma pārvaldību un apsaimniekošanu, gan juridisko un korporatīvo atbalstu ar īpašumu saistītajos jautājumos, tādējādi klientam nav nepieciešams koordinēt jautājumus starp vairākiem pakalpojumu sniedzējiem."
@@ -57,11 +87,19 @@
         },
         {
           "q": "Kā tiek nodrošināta klientu datu apstrāde un konfidencialitāte?",
-          "a": "Visa komerciālā un privātā informācija par īpašumu, tā īpašnieku un nomniekiem tiek apstrādāta, ievērojot augstus profesionālos standartus un konfidencialitāti. Mūsu klientu identificējošā informācija var tikt atklāta tikai LR normatīvajos aktos noteiktajos gadījumos, vai saņemot klientu piekrišanu."
+          "a": [
+            {
+              "desc": "Visa komerciālā un privātā informācija par īpašumu, tā īpašnieku un nomniekiem tiek apstrādāta, ievērojot augstus profesionālos standartus un konfidencialitāti. Mūsu klientu identificējošā informācija var tikt atklāta tikai LR normatīvajos aktos noteiktajos gadījumos, vai saņemot klientu piekrišanu."
+            }
+          ]
         },
         {
           "q": "Kādos Latvijas reģionos Jūs strādājiet?",
-          "a": "Mēs esam jauna kompānija un šobrīd galvenokārt strādājam Rīgā, Rīgas rajonā, Jūrmalā un Saulkrastos. Tuvākajā nākotnē plānojam arī Siguldu un Cēsis. Bet mēs esam atvērti izvērtēt sadarbības iespējas arī citos reģionos pēc individuālas vienošanās."
+          "a": [
+            {
+              "desc": "Mēs esam jauna kompānija un šobrīd galvenokārt strādājam Rīgā, Rīgas rajonā, Jūrmalā un Saulkrastos. Tuvākajā nākotnē plānojam arī Siguldu un Cēsis. Bet mēs esam atvērti izvērtēt sadarbības iespējas arī citos reģionos pēc individuālas vienošanās."
+            }
+          ]
         }
       ]
     },
@@ -74,27 +112,59 @@
         {
           "q": "What types of properties do you work with and how can you help your clients?",
           "a": [
-            "Our company provides real estate maintenance and management services in small and medium segment commercial properties, as well as Premium segment private properties. We work with various types of properties, including:",
-            "• commercial objects, office buildings, mixed-use buildings, salons, warehouses, and other properties",
-            "• apartment buildings, rental apartments, and other investment objects",
-            "• country residences, holiday homes, and guest houses",
-            "• detached houses, villas, summer houses, and farmsteads",
-            "",
-            "We specialize in working with small and medium segment commercial properties, offering clients both professional management and comprehensive legal management and corporate support, including:",
-            "• Legal analysis of documentation related to commercial property",
-            "• Preparation, amendment, and coordination of lease and other agreements with transaction participants",
-            "• Building sustainable and professional relationships with tenants and cooperation partners",
-            "• Representation of commercial property owners in relations with state and municipal institutions, banks, insurers, and other involved parties",
-            "• Representation of commercial property owners in dispute situations with tenants or lessees",
-            "• Legal consultations on lease rights and commercial property management issues",
-            "It is important to note that in the management of commercial properties, one of the most critical aspects is the organization and effective management of documentation related to the property. In practice, working with commercial property documents is often one of the most complex tasks faced by owners, and it often requires the involvement of legal outsourcing.",
-            "Therefore, we provide full legal and corporate support necessary for the organization, management, and long-term development of commercial property."
+            {
+              "desc": "Our company provides real estate maintenance and management services in small and medium segment commercial properties, as well as Premium segment private properties. We work with various types of properties, including:"
+            },
+            {
+              "desc": "• commercial objects, office buildings, mixed-use buildings, salons, warehouses, and other properties"
+            },
+            {
+              "desc": "• apartment buildings, rental apartments, and other investment objects"
+            },
+            {
+              "desc": "• country residences, holiday homes, and guest houses"
+            },
+            {
+              "desc": "• detached houses, villas, summer houses, and farmsteads"
+            },
+            {
+              "desc": ""
+            },
+            {
+              "desc": "We specialize in working with small and medium segment commercial properties, offering clients both professional management and comprehensive legal management and corporate support, including:"
+            },
+            {
+              "desc": "• Legal analysis of documentation related to commercial property"
+            },
+            {
+              "desc": "• Preparation, amendment, and coordination of lease and other agreements with transaction participants"
+            },
+            {
+              "desc": "• Building sustainable and professional relationships with tenants and cooperation partners"
+            },
+            {
+              "desc": "• Representation of commercial property owners in relations with state and municipal institutions, banks, insurers, and other involved parties"
+            },
+            {
+              "desc": "• Representation of commercial property owners in dispute situations with tenants or lessees"
+            },
+            {
+              "desc": "• Legal consultations on lease rights and commercial property management issues"
+            },
+            {
+              "desc": "It is important to note that in the management of commercial properties, one of the most critical aspects is the organization and effective management of documentation related to the property. In practice, working with commercial property documents is often one of the most complex tasks faced by owners, and it often requires the involvement of legal outsourcing."
+            },
+            {
+              "desc": "Therefore, we provide full legal and corporate support necessary for the organization, management, and long-term development of commercial property."
+            }
           ]
         },
         {
           "q": "What advantages will clients gain by starting cooperation with you?",
           "a": [
-            "By cooperating with us, clients gain several significant advantages:",
+            {
+              "desc": "By cooperating with us, clients gain several significant advantages:"
+            },
             {
               "title": "A comprehensive approach in one place",
               "desc": "We provide both real estate management and maintenance, as well as legal and corporate support on property-related issues, thus the client does not need to coordinate issues between multiple service providers."
@@ -123,11 +193,19 @@
         },
         {
           "q": "How is client data processing and confidentiality ensured?",
-          "a": "All commercial and private information about the property, its owner, and tenants is processed in compliance with high professional standards and confidentiality. Information identifying our clients can only be disclosed in cases specified by the regulatory acts of the Republic of Latvia or upon receiving client consent."
+          "a": [
+            {
+              "desc": "All commercial and private information about the property, its owner, and tenants is processed in compliance with high professional standards and confidentiality. Information identifying our clients can only be disclosed in cases specified by the regulatory acts of the Republic of Latvia or upon receiving client consent."
+            }
+          ]
         },
         {
           "q": "In which regions of Latvia do you work?",
-          "a": "We are a young company and currently work mainly in Riga, Riga district, Jurmala, and Saulkrasti. In the near future, we also plan to expand to Sigulda and Cesis. However, we are open to evaluating cooperation opportunities in other regions by individual agreement."
+          "a": [
+            {
+              "desc": "We are a young company and currently work mainly in Riga, Riga district, Jurmala, and Saulkrasti. In the near future, we also plan to expand to Sigulda and Cesis. However, we are open to evaluating cooperation opportunities in other regions by individual agreement."
+            }
+          ]
         }
       ]
     },
@@ -140,27 +218,59 @@
         {
           "q": "С какой недвижимостью вы работаете и как вы можете помочь своим клиентам?",
           "a": [
-            "Наша компания предоставляет услуги по обслуживанию и управлению недвижимостью коммерческой недвижимости малого и среднего сегмента, а также частной недвижимости Premium сегмента. Мы работаем с различными видами недвижимости, в том числе:",
-            "• коммерческими объектами, офисными зданиями, многофункциональными зданиями, салонами, складами и другой недвижимостью",
-            "• доходными домами, арендными квартирами и другими инвестиционными объектами",
-            "• загородными резиденциями, домами для отдыха и гостевыми домами",
-            "• особняками, виллами, дачами и хуторами",
-            "",
-            "Мы специализируемся на работе с коммерческой недвижимостью малого и среднего сегмента, предлагая клиентам как профессиональное управление, так и всестороннее юридическое сопровождение и корпоративную поддержку, в том числе:",
-            "• Юридический анализ документации, связанной с коммерческой недвижимостью",
-            "• Подготовка, изменение и согласование договоров аренды и других соглашений с участниками сделки",
-            "• Формирование устойчивых и профессиональных отношений с арендаторами и партнерами по сотрудничеству",
-            "• Представительство владельцев коммерческой недвижимости в отношениях с государственными и муниципальными учреждениями, банками, страховщиками и другими вовлеченными сторонами",
-            "• Представительство владельцев коммерческой недвижимости в спорных ситуациях с арендаторами или нанимателями",
-            "• Юридические консультации по вопросам арендного права и управления коммерческой недвижимостью",
-            "Важно учитывать, что в управлении коммерческой недвижимостью одним из наиболее существенных аспектов является приведение в порядок и эффективное управление документацией, связанной с объектом. На практике работа с документами на коммерческую недвижимость часто является одной из самых сложных задач, с которыми сталкиваются владельцы, и нередко это требует привлечения внешних юридических услуг.",
-            "Поэтому мы обеспечиваем полную юридическую и корпоративную поддержку, необходимую для упорядочивания, управления и долгосрочного развития коммерческой недвижимости."
+            {
+              "desc": "Наша компания предоставляет услуги по обслуживанию и управлению недвижимостью коммерческой недвижимости малого и среднего сегмента, а также частной недвижимости Premium сегмента. Мы работаем с различными видами недвижимости, в том числе:"
+            },
+            {
+              "desc": "• коммерческими объектами, офисными зданиями, многофункциональными зданиями, салонами, складами и другой недвижимостью"
+            },
+            {
+              "desc": "• доходными домами, арендными квартирами и другими инвестиционными объектами"
+            },
+            {
+              "desc": "• загородными резиденциями, домами для отдыха и гостевыми домами"
+            },
+            {
+              "desc": "• особняками, виллами, дачами и хуторами"
+            },
+            {
+              "desc": ""
+            },
+            {
+              "desc": "Мы специализируемся на работе с коммерческой недвижимостью малого и среднего сегмента, предлагая клиентам как профессиональное управление, так и всестороннее юридическое сопровождение и корпоративную поддержку, в том числе:"
+            },
+            {
+              "desc": "• Юридический анализ документации, связанной с коммерческой недвижимостью"
+            },
+            {
+              "desc": "• Подготовка, изменение и согласование договоров аренды и других соглашений с участниками сделки"
+            },
+            {
+              "desc": "• Формирование устойчивых и профессиональных отношений с арендаторами и партнерами по сотрудничеству"
+            },
+            {
+              "desc": "• Представительство владельцев коммерческой недвижимости в отношениях с государственными и муниципальными учреждениями, банками, страховщиками и другими вовлеченными сторонами"
+            },
+            {
+              "desc": "• Представительство владельцев коммерческой недвижимости в спорных ситуациях с арендаторами или нанимателями"
+            },
+            {
+              "desc": "• Юридические консультации по вопросам арендного права и управления коммерческой недвижимостью"
+            },
+            {
+              "desc": "Важно учитывать, что в управлении коммерческой недвижимостью одним из наиболее существенных аспектов является приведение в порядок и эффективное управление документацией, связанной с объектом. На практике работа с документами на коммерческую недвижимость часто является одной из самых сложных задач, с которыми сталкиваются владельцы, и нередко это требует привлечения внешних юридических услуг."
+            },
+            {
+              "desc": "Поэтому мы обеспечиваем полную юридическую и корпоративную поддержку, необходимую для упорядочивания, управления и долгосрочного развития коммерческой недвижимости."
+            }
           ]
         },
         {
           "q": "Какие преимущества получают клиенты, начиная сотрудничество с вами?",
           "a": [
-            "Сотрудничая с нами, клиенты получают ряд существенных преимуществ:",
+            {
+              "desc": "Сотрудничая с нами, клиенты получают ряд существенных преимуществ:"
+            },
             {
               "title": "Комплексный подход в одном месте",
               "desc": "Мы обеспечиваем как управление и обслуживание недвижимости, так и юридическую и корпоративную поддержку по связанным с недвижимостью вопросам, таким образом клиенту не нужно координировать вопросы между несколькими поставщиками услуг."
@@ -189,11 +299,19 @@
         },
         {
           "q": "Как обеспечивается обработка данных клиентов и конфиденциальность?",
-          "a": "Вся коммерческая и частная информация о недвижимости, ее владельце и арендаторах обрабатывается с соблюдением высоких профессиональных стандартов и конфиденциальности. Информация, идентифицирующая наших клиентов, может быть раскрыта только в случаях, установленных нормативными актами ЛР, или при получении согласия клиентов."
+          "a": [
+            {
+              "desc": "Вся коммерческая и частная информация о недвижимости, ее владельце и арендаторах обрабатывается с соблюдением высоких профессиональных стандартов и конфиденциальности. Информация, идентифицирующая наших клиентов, может быть раскрыта только в случаях, установленных нормативными актами ЛР, или при получении согласия клиентов."
+            }
+          ]
         },
         {
           "q": "В каких регионах Латвии вы работаете?",
-          "a": "Мы - новая компания и в настоящее время в основном работаем в Риге, Рижском районе, Юрмале и Саулкрасты. В ближайшем будущем планируем также Сигулду и Цесис. Но мы открыты для оценки возможностей сотрудничества и в других регионах по индивидуальной договоренности."
+          "a": [
+            {
+              "desc": "Мы - новая компания и в настоящее время в основном работаем в Риге, Рижском районе, Юрмале и Саулкрасты. В ближайшем будущем планируем также Сигулду и Цесис. Но мы открыты для оценки возможностей сотрудничества и в других регионах по индивидуальной договоренности."
+            }
+          ]
         }
       ]
     }
