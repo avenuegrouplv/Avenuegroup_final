@@ -1,0 +1,39 @@
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: homepage
+    label: Sākumlapa
+    type: file
+    path: content/homepage.json
+
+  - name: about
+    label: Par mums
+    type: file
+    path: content/about.json
+
+  - name: services
+    label: Pakalpojumi
+    type: file
+    path: content/services.json
+
+  - name: faq
+    label: Biežāk uzdotie jautājumi
+    type: file
+    path: content/faq.json
+
+  - name: contact
+    label: Kontakti
+    type: file
+    path: content/contact.json
+
+  - name: footer
+    label: Kājene
+    type: file
+    path: content/footer.json
+
+  - name: navigation
+    label: Navigācija
+    type: file
+    path: content/navigation.json
