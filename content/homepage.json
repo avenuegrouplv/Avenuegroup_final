@@ -1,0 +1,206 @@
+{
+  "hero": {
+    "image": "https://pub-48235835e18a4f87b5cf7fb2a1bca3b5.r2.dev/Background1.webp",
+    "translations": {
+      "lv": {
+        "title": "Tavs ceļš uz",
+        "subtitle": "sakārtotu īpašumu",
+        "description": "Mēs specializējamies mazā un vidējā segmenta komercīpašumu un privātīpašumu apsaimniekošanā, nodrošinot pārskatāmu un juridiski korektu pārvaldību",
+        "contactBtn": "SAZINĀTIES AR MUMS",
+        "servicesBtn": "MŪSU PAKALPOJUMI"
+      },
+      "en": {
+        "title": "Your path to",
+        "subtitle": "an organized property",
+        "description": "We specialize in the management of small and medium segment commercial and private properties, ensuring transparent and legally correct management",
+        "contactBtn": "CONTACT US",
+        "servicesBtn": "OUR SERVICES"
+      },
+      "ru": {
+        "title": "Ваш путь к",
+        "subtitle": "упорядоченной недвижимости",
+        "description": "Мы специализируемся на управлении коммерческой и частной недвижимостью малого и среднего сегмента, обеспечивая прозрачное и юридически корректное управление",
+        "contactBtn": "СВЯЗАТЬСЯ С НАМИ",
+        "servicesBtn": "НАШИ УСЛУГИ"
+      }
+    }
+  },
+  "benefits": {
+    "q1": {
+      "translations": {
+        "lv": {
+          "title": "Kam mūsu pakalpojumi ir īpaši",
+          "subtitle": "piemēroti?",
+          "items": [
+            {
+              "title": "Biroja ēku, īres namu un citu komercobjektu (mazais un vidējais segments) īpašniekiem",
+              "desc": "Komercīpašumu, tajā skaitā - biroju un jaukta tipa ēku, īres namu un citu īpašumu pārvaldība bieži ietver regulāru komunikāciju ar nomniekiem, tehnisko jautājumu risināšanu, pakalpojumu sniedzēju koordinēšanu, kā arī saziņu ar dažādām valsts un pašvaldību iestādēm. Mēs saviem klientiem palīdzam strukturēt visus šos procesus un nodrošināt stabilu un efektīvu īpašuma pārvaldību."
+            },
+            {
+              "title": "Vietējiem un ārvalstu investoriem ar vairākiem īpašumiem",
+              "desc": "Profesionāla pārvaldība ir īpaši svarīga investoriem un uzņēmējiem, kuriem Latvijā pieder vairāki nekustamie īpašumi vai investīciju objekti (komercobjekti, īres dzīvokļi). Visu īpašumu strukturēta pārvaldība vienuviet palīdz nodrošar savlaicīgu administratīvo jautājumu risināšanu, koordinētu finanšu plūsmu, kā arī ilgtermiņā nodrošina to vērtības saglabāšanu un palielināšanu."
+            },
+            {
+              "title": "Savrupmāju un citu privāto rezidenču īpašniekiem",
+              "desc": "Savrupmāju, villu, vasarnīcu, viesu namu un viensētu īpašumu īpašniekiem bieži ir nepieciešams uzticams partneris, kas nodrošina regulāru īpašuma uzraudzību un administrēšanu viņu vietā, kā arī vajadzības gadījumā koordinē tajā nepieciešamos darbus. Tas ir īpaši aktuāli gadījumos, kad šo īpašumu īpašnieki dzīvo citā pilsētā vai ārpus Latvijas, un regulāra uzturēšanās savā īpašumā nav iespējama."
+            },
+            {
+              "title": "Jebkuru īpašumu īpašniekiem ar juridiski risināmiem jautājumiem",
+              "desc": "Viens no būtiskākajiem aspektiem, ar kuriem saskaras daudzi nekustamo īpašumu īpašnieki, ir ar nekustamo īpašumu saistītās dokumentācijas sakārtošana un pārvaldība. Praksē darbs ar nekustamā īpašuma dokumentiem bieži vien ir viens no sarežģītākajiem uzdevumiem, ar ko saskaras īpašnieki, jo nereti šie jautājumi nav risināti gadiem ilgi. Mēs saviem klientiem varam nodrošināt ne tikai komercīpašumu un privātīpašumu apsaimniekošanu, bet arī visu ar to saistīto juridisko jautājumu pārvaldību."
+            }
+          ]
+        },
+        "en": {
+          "title": "Who are our services",
+          "subtitle": "tailored for?",
+          "items": [
+            {
+              "title": "Owners of office buildings, rental houses, and other commercial objects (small and medium segment)",
+              "desc": "Management of commercial real estate, including office and mixed-use buildings, rental houses, and other properties, often involves regular communication with tenants, resolving technical issues, coordinating service providers, as well as communication with various state and municipal institutions. We help our clients structure all these processes and ensure stable and efficient property management."
+            },
+            {
+              "title": "Local and foreign investors with multiple properties",
+              "desc": "Professional management is especially important for investors and entrepreneurs who own several real estate properties or investment objects (commercial objects, rental apartments) in Latvia. Structured management of all properties in one place helps ensure timely resolution of administrative issues, coordinated financial flow, and ensures the preservation and increase of their value in the long term."
+            },
+            {
+              "title": "Owners of detached houses, villas, summer houses, guest houses, and farmsteads",
+              "desc": "Owners of detached houses, villas, summer houses, guest houses, and farmsteads often need a reliable partner to provide regular supervision and administration of the property on their behalf, as well as coordinate necessary works when needed. This is especially true when the owners of these properties live in another city or outside Latvia, and regular presence in their property is not possible."
+            },
+            {
+              "title": "Property owners with pending legal issues",
+              "desc": "One of the most important aspects faced by many real estate owners is organizing and managing property-related documentation. In practice, working with property documents is often one of the most complex tasks, as these issues have often remained unresolved for years. We can provide our clients with both commercial and private property management, and the management of all related legal issues in one place."
+            }
+          ]
+        },
+        "ru": {
+          "title": "Кому наши услуги",
+          "subtitle": "особенно подходят?",
+          "items": [
+            {
+              "title": "Владельцам офисных зданий, доходных домов и других коммерческих объектов (малый и средний сегмент)",
+              "desc": "Управление коммерческой недвижимостью, в том числе офисными и многофункциональными зданиями, доходными домами и другой недвижимостью, часто включает регулярную коммуникацию с арендаторами, решение технических вопросов, координацию поставщиков услуг, а также общение с различными государственными и муниципальными учреждениями. Мы помогаем своим клиентам структурировать эти процессы и обеспечить стабильное и эффективное управление недвижимостью."
+            },
+            {
+              "title": "Местным и иностранным инвесторам с несколькими объектами недвижимости",
+              "desc": "Профессиональное управление особенно важно для инвесторов и предпринимателей, которым в Латвии принадлежит несколько объектов недвижимости или инвестиционных объектов (коммерческие объекты, арендные квартиры). Структурированное управление всей недвижимостью в одном месте помогает обеспечить своевременное решение административных вопросов, скоординированный финансовый поток, а также в долгосрочной перспективе обеспечивает сохранение и увеличение их стоимости."
+            },
+            {
+              "title": "Владельцам особняков и других частных резиденций",
+              "desc": "Владельцам особняков, вилл, дач, гостевых домов и хуторов часто необходим надежный партнер, который обеспечивает регулярный надзор и администрирование недвижимости от их имени, а также при необходимости координирует в ней необходимые работы. Это особенно актуально в случаях, когда владельцы этой недвижимости живут в другом городе или за пределами Латвии, и регулярное пребывание в своей недвижимости невозможно."
+            },
+            {
+              "title": "Любому владельцу коммерческих объектов и частной собственности",
+              "desc": "Одним из наиболее важных аспектов в управлении коммерческой недвижимостью является упорядочивание и эффективное управление документацией, связанной с собственностью. На практике работа с документами коммерческой недвижимости часто является одной из самых сложных задач, с которыми сталкиваются владельцы, и нередко это требует привлечения юридического аутсорсинга. Мы можем обеспечить нашим клиентам как управление коммерческой и частной недвижимостью, так и управление всеми связанными с этим юридическими вопросами в одном месте."
+            }
+          ]
+        }
+      }
+    },
+    "q2": {
+      "translations": {
+        "lv": {
+          "title": "Kādas ",
+          "subtitle": "priekšrocības",
+          "suffix": " iegūst klienti,",
+          "suffix2": "uzsākot sadarbību ar mums?",
+          "desc": "Sadarbība ar mums nodrošina strukturētu, caurskatāmu un atbildīgu pieeju nekustamā īpašuma pārvaldībai, ar to saistītajiem juridiskajiem un administratīvajiem jautājumiem, un īpašuma attīstībai. Mūsu mērķis ir nodrošināt klientiem efektīvu pakalpojumu kopumu, no kā ir atkarīga ne vien īpašuma finansiālā atdeve, bet arī tā vērtības saglabāšana ilgtermiņā.",
+          "listPrefix": "Sadarbojoties ar mums, klienti iegūst vairākas būtiskas priekšrocības:",
+          "items": [
+            {
+              "title": "Kompleksa pieeja vienuviet",
+              "desc": "Mēs nodrošinām gan nekustamā īpašuma pārvaldību un apsaimniekošanu, gan juridisko un korporatīvo atbalstu ar īpašumu saistītajos jautājumos, tādējādi klientam nav nepieciešams koordinēt jautājumus starp vairākiem pakalpojumu sniedzējiem."
+            },
+            {
+              "title": "Efektīva izmaksu optimizācija",
+              "desc": "Klientiem nav nepieciešams algot atsevišķu nekustamā īpašuma pārvaldnieku vai piesaistīt vairākus ārpakalpojumu sniedzējus juridiskajiem, administratīvajiem vai organizatoriskajiem jautājumiem. Šāda pieeja nodrošina labāku pārskatāmību, prognozējamas izmaksas un efektīvāku ar īpašumu saistīto procesu pārvaldību."
+            },
+            {
+              "title": "Nekustamā īpašuma dokumentācijas sakārtošana un juridiska izvērtēšana",
+              "desc": "Pēc nepieciešamības mēs veicam arī īpašuma dokumentācijas pārskatīšanu, juridisko analīzi un risku izvērtējumu, kas palīdz identificēt potenciālās problēmas un tās savlaicīgi novērst. Tas ļauj īpašuma īpašniekam pieņemt pārdomātus lēmumus un nodrošināt stabilu juridisko pamatu turpmākai īpašuma pārvaldībai un attīstībai."
+            },
+            {
+              "title": "Viena atbildīgā kontaktpersona",
+              "desc": "Klienti iegūst vienu kontaktpersonu, kura pārzina visus ar konkrēto īpašumu saistītos administratīvos, juridiskos un organizatoriskos jautājumus, un koordinē visus īpašumā nepieciešamos procesus."
+            },
+            {
+              "title": "Individuāla pieeja un elastīgi risinājumi",
+              "desc": "Atšķirībā no lielām nekustamo īpašumu kompānijām, mēs nodrošinām individuālu pieeju katram klientam, strādājam ar sarežģītākiem vai nestandarta jautājumiem, kas bieži vien netiek iekļauti klasiskajos apsaimniekošanas pakalpojumos."
+            },
+            {
+              "title": "Augsti profesionālie un konfidencialitātes standarti",
+              "desc": "Strādājot ar klientu īpašumiem, privāto un biznesa informāciju, kas nonāk mūsu rīcībā, mēs ievērojam visaugstākos profesionālās ētikas, konfidencialitātes un atbildīgas sadarbības principus."
+            }
+          ]
+        },
+        "en": {
+          "title": "What ",
+          "subtitle": "benefits",
+          "suffix": " do clients get",
+          "suffix2": "by partnering with us?",
+          "desc": "Cooperation with us ensures a structured, transparent, and responsible approach to real estate management, related legal and administrative issues, and property development. Our goal is to provide clients with an effective set of services on which not only the financial return of the property depends, but also the preservation of its value in the long term.",
+          "listPrefix": "By partnering with us, clients gain several key advantages:",
+          "items": [
+            {
+              "title": "All-in-one comprehensive approach",
+              "desc": "We provide both property management/maintenance and legal/corporate support on property-related issues, eliminating the need for the client to coordinate between multiple service providers."
+            },
+            {
+              "title": "Effective cost optimization",
+              "desc": "Clients do not need to hire a separate real estate manager or attract several outsourced service providers for legal, administrative, or organizational issues. This approach provides better transparency, predictable costs, and more efficient management of property-related processes."
+            },
+            {
+              "title": "Property documentation audit and legal analysis",
+              "desc": "If necessary, we also review property documentation, perform legal analysis and risk assessment, which helps identify potential problems and eliminate them in a timely manner. This allows the property owner to make thoughtful decisions and ensure a stable legal basis for further property management and development."
+            },
+            {
+              "title": "Single point of contact",
+              "desc": "Clients get one contact person who knows all the administrative, legal, and organizational issues related to the specific property, and coordinates all necessary processes in the property."
+            },
+            {
+              "title": "Personalized approach and flexible solutions",
+              "desc": "Unlike large real estate corporations, we provide an individual approach to each client, handling complex or custom requests that are often omitted in traditional maintenance packages."
+            },
+            {
+              "title": "High professional and confidentiality standards",
+              "desc": "When managing client assets, private, and business information that comes into our possession, we adhere to the highest standards of professional ethics, confidentiality, and responsible cooperation."
+            }
+          ]
+        },
+        "ru": {
+          "title": "Какие ",
+          "subtitle": "преимущества",
+          "suffix": " получают клиенты,",
+          "suffix2": "начиная сотрудничество с нами?",
+          "desc": "Сотрудничество с нами обеспечивает структурированный, прозрачный и ответственный подход к управлению недвижимостью, связанным с этим юридическим и административным вопросам, и развитию недвижимости. Наша цель - предоставить клиентам эффективный комплекс услуг, от которого зависит не только финансовая отдача недвижимости, но и сохранение ее стоимости в долгосрочной перспективе.",
+          "listPrefix": "Сотрудничая с нами, клиенты получают ряд существенных преимуществ:",
+          "items": [
+            {
+              "title": "Комплексный подход в одном месте",
+              "desc": "Мы обеспечиваем как управление и обслуживание недвижимости, так и юридическую и корпоративную поддержку по связанным с недвижимостью вопросам, таким образом клиенту не нужно координировать вопросы между несколькими поставщиками услуг."
+            },
+            {
+              "title": "Эффективная оптимизация затрат",
+              "desc": "Клиентам не нужно нанимать отдельного управляющего недвижимостью или привлекать нескольких поставщиков внешних услуг для юридических, административных или организационных вопросов. Такой подход обеспечивает лучшую прозрачность, прогнозируемые расходы и более эффективное управление связанными с недвижимостью процессами."
+            },
+            {
+              "title": "Приведение в порядок документации на недвижимость и юридическая оценка",
+              "desc": "По необходимости мы также проводим пересмотр документации на недвижимость, юридический анализ и оценку рисков, что помогает выявить потенциальные проблемы и своевременно их устранить. Это позволяет владельцу недвижимости принимать продуманные решения и обеспечить стабильную юридическую основу для дальнейшего управления и развития недвижимости."
+            },
+            {
+              "title": "Одно ответственное контактное лицо",
+              "desc": "Клиенты получают одно контактное лицо, которое знает все административные, юридические и организационные вопросы, связанные с конкретным объектом недвижимости, и координирует все необходимые в недвижимости процессы."
+            },
+            {
+              "title": "Индивидуальный подход и гибкие решения",
+              "desc": "В отличие от крупных компаний по недвижимости, мы обеспечиваем индивидуальный подход к каждому клиенту, работаем с более сложными или нестандартными вопросами, которые часто не включаются в классические услуги по обслуживанию."
+            },
+            {
+              "title": "Высокие профессиональные стандарты и стандарты конфиденциальности",
+              "desc": "Работая с недвижимостью клиентов, личной и деловой информацией, которая поступает в наше распоряжение, мы соблюдаем самые высокие принципы профессиональной этики, конфиденциальности и ответственного сотрудничества."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

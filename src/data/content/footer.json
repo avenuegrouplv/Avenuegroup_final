@@ -17,11 +17,6 @@
   },
   "translations": {
     "lv": {
-      "desc": "Avenue Group nodrošina profesionālu nekustamo īpašumu apsaimniekošanu, pārvaldību un juridisko atbalstu mazā un vidējā segmenta komercīpašumiem, kā arī Premium segmenta privātīpašumiem.",
-      "servicesTitle": "Pakalpojumi",
-      "companyTitle": "Uzņēmums",
-      "privacyText": "Privātuma politika",
-      "rightsText": "Visas tiesības aizsargātas.",
       "aboutTitle": "Par mums",
       "followTitle": "Sekojiet mums",
       "contactTitle": "Kontaktinformācija",
@@ -30,42 +25,9 @@
       "privacy": "Privātuma politika",
       "cookies": "Sīkdatņu politika",
       "terms": "Lietošanas noteikumi",
-      "developerLabel": "Izstrādātājs:",
-      "services": [
-        "Ikdienas administratīvā pārvaldība",
-        "Tehniskā un inženiertehniskā uzraudzība",
-        "Liftu un eskalatoru uzturēšana",
-        "Juridiskais atbalsts un korporatīvie pakalpojumi"
-      ],
-      "companyLinks": [
-        {
-          "label": "Sākums",
-          "href": "/"
-        },
-        {
-          "label": "Par mums",
-          "href": "/par-mums"
-        },
-        {
-          "label": "Noderīgi",
-          "href": "/noderigi"
-        },
-        {
-          "label": "BUJ",
-          "href": "/buj"
-        },
-        {
-          "label": "Kontakti",
-          "href": "/kontakti"
-        }
-      ]
+      "developerLabel": "Izstrādātājs:"
     },
     "en": {
-      "desc": "Avenue Group provides professional real estate maintenance, management, and legal support for small and medium-segment commercial properties, as well as premium-segment private properties.",
-      "servicesTitle": "Services",
-      "companyTitle": "Company",
-      "privacyText": "Privacy Policy",
-      "rightsText": "All rights reserved.",
       "aboutTitle": "About us",
       "followTitle": "Follow us",
       "contactTitle": "Contact info",
@@ -74,42 +36,9 @@
       "privacy": "Privacy Policy",
       "cookies": "Cookie Policy",
       "terms": "Terms of Service",
-      "developerLabel": "Developer:",
-      "services": [
-        "Daily administrative management",
-        "Technical and engineering maintenance",
-        "Elevator and escalator service",
-        "Legal support and corporate services"
-      ],
-      "companyLinks": [
-        {
-          "label": "Home",
-          "href": "/"
-        },
-        {
-          "label": "About us",
-          "href": "/par-mums"
-        },
-        {
-          "label": "Useful info",
-          "href": "/noderigi"
-        },
-        {
-          "label": "FAQ",
-          "href": "/buj"
-        },
-        {
-          "label": "Contacts",
-          "href": "/kontakti"
-        }
-      ]
+      "developerLabel": "Developer:"
     },
     "ru": {
-      "desc": "Avenue Group обеспечивает профессиональное обслуживание, управление и юридическую поддержку малого и среднего сегмента коммерческой недвижимости, а также частной недвижимости Premium сегмента.",
-      "servicesTitle": "Услуги",
-      "companyTitle": "Компания",
-      "privacyText": "Политика конфиденциальности",
-      "rightsText": "Все права защищены.",
       "aboutTitle": "О нас",
       "followTitle": "Подписывайтесь на нас",
       "contactTitle": "Контактная информация",
@@ -118,35 +47,7 @@
       "privacy": "Политика конфиденциальности",
       "cookies": "Политика использования файлов cookie",
       "terms": "Правила",
-      "developerLabel": "Разработчик:",
-      "services": [
-        "Повседневное административное управление",
-        "Технический и инженерный надзор",
-        "Обслуживание лифтов и эскалаторов",
-        "Юридическая поддержка и корпоративные услуги"
-      ],
-      "companyLinks": [
-        {
-          "label": "Главная",
-          "href": "/"
-        },
-        {
-          "label": "О нас",
-          "href": "/par-mums"
-        },
-        {
-          "label": "Полезно",
-          "href": "/noderigi"
-        },
-        {
-          "label": "FAQ",
-          "href": "/buj"
-        },
-        {
-          "label": "Контакты",
-          "href": "/kontakti"
-        }
-      ]
+      "developerLabel": "Разработчик:"
     }
   }
 }

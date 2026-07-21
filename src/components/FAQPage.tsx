@@ -88,17 +88,21 @@ export const FAQPage: React.FC<FAQPageProps> = ({ isPreview = false }) => {
                   {Array.isArray(faq.a) ? (
                     <ul className="space-y-2 pt-4">
                       {faq.a.map((item: any, idx: number) => (
-                        <li key={idx} className={item.title ? 'mb-2' : ''}>
-                          <div className="flex flex-col">
-                            {item.title ? (
-                              <>
-                                <span className="text-zinc-950 font-black italic mb-0.5">• {item.title}</span>
-                                <span className="text-zinc-650 pl-4">{item.text || item.desc}</span>
-                              </>
-                            ) : (
-                              <span className="text-zinc-650">{item.text || item.desc}</span>
-                            )}
-                          </div>
+                        <li key={idx} className={typeof item === 'object' ? 'mb-2' : ''}>
+                          {typeof item === 'string' ? (
+                            <span>{item}</span>
+                          ) : (
+                            <div className="flex flex-col">
+                              {item.title ? (
+                                <>
+                                  <span className="text-zinc-950 font-black italic mb-0.5">• {item.title}</span>
+                                  <span className="text-zinc-650 pl-4">{item.desc}</span>
+                                </>
+                              ) : (
+                                <span className="text-zinc-650">{item.desc}</span>
+                              )}
+                            </div>
+                          )}
                         </li>
                       ))}
                     </ul>
