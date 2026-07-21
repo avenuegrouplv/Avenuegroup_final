@@ -3,1107 +3,1004 @@ media:
   output: /images
 
 content:
+
+  ##########################################################################
+  # HOMEPAGE
+  ##########################################################################
+
   - name: homepage
     label: Sākumlapa
     type: file
     path: content/homepage.json
+
     fields:
+
+      ####################################################################
+      # HERO
+      ####################################################################
+
       - name: hero
         label: Hero sadaļa
         type: object
+
         fields:
+
           - name: image
-            label: Hero bilde (URL vai ceļš)
+            label: Hero attēls
             type: image
+
           - name: translations
             label: Tulkojumi
             type: object
+
             fields:
+
               - name: lv
-                label: Latviešu valoda
+                label: Latvian
                 type: object
+
                 fields:
-                  - name: title
-                    label: Virsraksts
-                    type: text
-                  - name: subtitle
-                    label: Apakšvirsraksts
-                    type: text
-                  - name: description
-                    label: Apraksts
-                    type: textarea
-                  - name: contactBtn
-                    label: Kontakta poga
-                    type: text
-                  - name: servicesBtn
-                    label: Pakalpojumu poga
-                    type: text
+                  - { name: title, label: Virsraksts, type: text }
+                  - { name: subtitle, label: Apakšvirsraksts, type: text }
+                  - { name: description, label: Apraksts, type: textarea }
+                  - { name: contactBtn, label: Kontakta poga, type: text }
+                  - { name: servicesBtn, label: Pakalpojumu poga, type: text }
+
               - name: en
                 label: English
                 type: object
+
                 fields:
-                  - name: title
-                    label: Title
-                    type: text
-                  - name: subtitle
-                    label: Subtitle
-                    type: text
-                  - name: description
-                    label: Description
-                    type: textarea
-                  - name: contactBtn
-                    label: Contact button
-                    type: text
-                  - name: servicesBtn
-                    label: Services button
-                    type: text
+                  - { name: title, label: Title, type: text }
+                  - { name: subtitle, label: Subtitle, type: text }
+                  - { name: description, label: Description, type: textarea }
+                  - { name: contactBtn, label: Contact button, type: text }
+                  - { name: servicesBtn, label: Services button, type: text }
+
               - name: ru
-                label: Русский
+                label: Russian
                 type: object
+
                 fields:
-                  - name: title
-                    label: Заголовок
-                    type: text
-                  - name: subtitle
-                    label: Подзаголовок
-                    type: text
-                  - name: description
-                    label: Описание
-                    type: textarea
-                  - name: contactBtn
-                    label: Кнопка контакта
-                    type: text
-                  - name: servicesBtn
-                    label: Кнопка услуг
-                    type: text
+                  - { name: title, label: Заголовок, type: text }
+                  - { name: subtitle, label: Подзаголовок, type: text }
+                  - { name: description, label: Описание, type: textarea }
+                  - { name: contactBtn, label: Кнопка контакта, type: text }
+                  - { name: servicesBtn, label: Кнопка услуг, type: text }
+
+      ####################################################################
+      # BENEFITS
+      ####################################################################
+
       - name: benefits
-        label: Ieguvumu sadaļa
+        label: Ieguvumi un Priekšrocības
         type: object
+
         fields:
+
           - name: q1
-            label: Kam mūsu pakalpojumi ir īpaši piemēroti? (Q1)
+            label: "Sadaļa 1: Kam mūsu pakalpojumi ir īpaši piemēroti?"
             type: object
+
             fields:
+
               - name: translations
                 label: Tulkojumi
                 type: object
+
                 fields:
+
                   - name: lv
-                    label: Latviešu valoda
+                    label: Latvian
                     type: object
                     fields:
-                      - name: title
-                        label: Virsraksts (Title)
-                        type: text
-                      - name: subtitle
-                        label: Apakšvirsraksts (Subtitle)
-                        type: text
+                      - { name: title, label: Virsraksts, type: text }
+                      - { name: subtitle, label: Apakšvirsraksts, type: text }
                       - name: items
-                        label: Saraksta punkti
+                        label: Ieguvumu punkti
                         type: list
                         fields:
-                          - name: title
-                            label: Virsraksts
-                            type: text
-                          - name: desc
-                            label: Apraksts
-                            type: textarea
+                          - { name: title, label: Virsraksts, type: text }
+                          - { name: desc, label: Apraksts, type: textarea }
+
                   - name: en
                     label: English
                     type: object
                     fields:
-                      - name: title
-                        label: Title
-                        type: text
-                      - name: subtitle
-                        label: Subtitle
-                        type: text
+                      - { name: title, label: Title, type: text }
+                      - { name: subtitle, label: Subtitle, type: text }
                       - name: items
-                        label: List items
+                        label: Benefit points
                         type: list
                         fields:
-                          - name: title
-                            label: Title
-                            type: text
-                          - name: desc
-                            label: Description
-                            type: textarea
+                          - { name: title, label: Title, type: text }
+                          - { name: desc, label: Description, type: textarea }
+
                   - name: ru
-                    label: Русский
+                    label: Russian
                     type: object
                     fields:
-                      - name: title
-                        label: Заголовок
-                        type: text
-                      - name: subtitle
-                        label: Подзаголовок
-                        type: text
+                      - { name: title, label: Заголовок, type: text }
+                      - { name: subtitle, label: Подзаголовок, type: text }
                       - name: items
-                        label: Пункты списка
+                        label: Пункты выгоды
                         type: list
                         fields:
-                          - name: title
-                            label: Заголовок
-                            type: text
-                          - name: desc
-                            label: Описание
-                            type: textarea
+                          - { name: title, label: Заголовок, type: text }
+                          - { name: desc, label: Описание, type: textarea }
+
           - name: q2
-            label: Kādas priekšrocības iegūst klienti? (Q2)
+            label: "Sadaļa 2: Kādas priekšrocības iegūst klienti?"
             type: object
+
             fields:
+
               - name: translations
                 label: Tulkojumi
                 type: object
+
                 fields:
+
                   - name: lv
-                    label: Latviešu valoda
+                    label: Latvian
                     type: object
                     fields:
-                      - name: title
-                        label: Virsraksts pirms akcentētā vārda
-                        type: text
-                      - name: subtitle
-                        label: Akcentētais vārds
-                        type: text
-                      - name: suffix
-                        label: Sufikss 1
-                        type: text
-                      - name: suffix2
-                        label: Sufikss 2
-                        type: text
-                      - name: desc
-                        label: Apraksts
-                        type: textarea
-                      - name: listPrefix
-                        label: Saraksta ievads
-                        type: text
+                      - { name: title, label: Virsraksts, type: text }
+                      - { name: subtitle, label: Apakšvirsraksts, type: text }
+                      - { name: suffix, label: Suffix, type: text }
+                      - { name: suffix2, label: Suffix 2, type: text }
+                      - { name: desc, label: Apraksts, type: textarea }
+                      - { name: listPrefix, label: Saraksta ievads, type: text }
                       - name: items
-                        label: Saraksta punkti
+                        label: Priekšrocību punkti
                         type: list
                         fields:
-                          - name: title
-                            label: Virsraksts
-                            type: text
-                          - name: desc
-                            label: Apraksts
-                            type: textarea
+                          - { name: title, label: Virsraksts, type: text }
+                          - { name: desc, label: Apraksts, type: textarea }
+
                   - name: en
                     label: English
                     type: object
                     fields:
-                      - name: title
-                        label: Title before highlight
-                        type: text
-                      - name: subtitle
-                        label: Highlighted word
-                        type: text
-                      - name: suffix
-                        label: Suffix 1
-                        type: text
-                      - name: suffix2
-                        label: Suffix 2
-                        type: text
-                      - name: desc
-                        label: Description
-                        type: textarea
-                      - name: listPrefix
-                        label: List prefix
-                        type: text
+                      - { name: title, label: Title, type: text }
+                      - { name: subtitle, label: Subtitle, type: text }
+                      - { name: suffix, label: Suffix, type: text }
+                      - { name: suffix2, label: Suffix 2, type: text }
+                      - { name: desc, label: Description, type: textarea }
+                      - { name: listPrefix, label: List Prefix, type: text }
                       - name: items
-                        label: List items
+                        label: Advantage points
                         type: list
                         fields:
-                          - name: title
-                            label: Title
-                            type: text
-                          - name: desc
-                            label: Description
-                            type: textarea
+                          - { name: title, label: Title, type: text }
+                          - { name: desc, label: Description, type: textarea }
+
                   - name: ru
-                    label: Русский
+                    label: Russian
                     type: object
                     fields:
-                      - name: title
-                        label: Заголовок до выделенного слова
-                        type: text
-                      - name: subtitle
-                        label: Выделенное слово
-                        type: text
-                      - name: suffix
-                        label: Суффикс 1
-                        type: text
-                      - name: suffix2
-                        label: Суффикс 2
-                        type: text
-                      - name: desc
-                        label: Описание
-                        type: textarea
-                      - name: listPrefix
-                        label: Вводная фраза списка
-                        type: text
+                      - { name: title, label: Заголовок, type: text }
+                      - { name: subtitle, label: Подзаголовок, type: text }
+                      - { name: suffix, label: Suffix, type: text }
+                      - { name: suffix2, label: Suffix 2, type: text }
+                      - { name: desc, label: Описание, type: textarea }
+                      - { name: listPrefix, label: Префикс списка, type: text }
                       - name: items
-                        label: Пункты списка
+                        label: Пункты преимуществ
                         type: list
                         fields:
-                          - name: title
-                            label: Заголовок
-                            type: text
-                          - name: desc
-                            label: Описание
-                            type: textarea
+                          - { name: title, label: Заголовок, type: text }
+                          - { name: desc, label: Описание, type: textarea }
+
+  ##########################################################################
+  # ABOUT
+  ##########################################################################
 
   - name: about
     label: Par mums
     type: file
     path: content/about.json
+
     fields:
+
       - name: images
         label: Attēli
         type: object
         fields:
-          - name: image1
-            label: Attēls 1 (URL vai ceļš)
-            type: image
-          - name: image2
-            label: Attēls 2 (URL vai ceļš)
-            type: image
-          - name: image3
-            label: Attēls 3 (URL vai ceļš)
-            type: image
-          - name: image4
-            label: Attēls 4 (URL vai ceļš)
-            type: image
+          - { name: image1, label: Attēls 1, type: image }
+          - { name: image2, label: Attēls 2, type: image }
+          - { name: image3, label: Attēls 3, type: image }
+          - { name: image4, label: Attēls 4, type: image }
+
       - name: translations
         label: Tulkojumi
         type: object
         fields:
+
           - name: lv
-            label: Latviešu valoda
+            label: Latvian
             type: object
             fields:
-              - name: backBtn
-                label: Atpakaļ poga
-                type: text
-              - name: title
-                label: Virsraksts
-                type: text
-              - name: subtitle
-                label: Apakšvirsraksts
-                type: text
-              - name: highlight
-                label: Izceltais teksts
-                type: textarea
-              - name: p1
-                label: Paragrāfs 1
-                type: textarea
-              - name: p2
-                label: Paragrāfs 2
-                type: textarea
-              - name: p3
-                label: Paragrāfs 3
-                type: textarea
-              - name: p4
-                label: Paragrāfs 4
-                type: textarea
-              - name: p5
-                label: Paragrāfs 5
-                type: textarea
-              - name: imageTaglineLine1
-                label: Attēla paraksts 1 - Rinda 1
-                type: text
-              - name: imageTaglineLine2
-                label: Attēla paraksts 1 - Rinda 2
-                type: text
-              - name: image3TaglineLine1
-                label: Attēla paraksts 2 - Rinda 1
-                type: text
-              - name: image3TaglineLine2
-                label: Attēla paraksts 2 - Rinda 2
-                type: text
-              - name: image4TaglineLine1
-                label: Attēla paraksts 3 - Rinda 1
-                type: text
-              - name: image4TaglineLine2
-                label: Attēla paraksts 3 - Rinda 2
-                type: text
+              - { name: backBtn, label: Atpakaļ poga, type: text }
+              - { name: title, label: Virsraksts, type: text }
+              - { name: subtitle, label: Apakšvirsraksts, type: text }
+              - { name: highlight, label: Izceltais teksts, type: textarea }
+              - { name: p1, label: Paragrāfs 1, type: textarea }
+              - { name: p2, label: Paragrāfs 2, type: textarea }
+              - { name: p3, label: Paragrāfs 3, type: textarea }
+              - { name: p4, label: Paragrāfs 4, type: textarea }
+              - { name: p5, label: Paragrāfs 5, type: textarea }
+              - { name: imageTaglineLine1, label: Attēla sauklis 1. rinda, type: text }
+              - { name: imageTaglineLine2, label: Attēla sauklis 2. rinda, type: text }
+              - { name: image3TaglineLine1, label: Attēla 3 sauklis 1. rinda, type: text }
+              - { name: image3TaglineLine2, label: Attēla 3 sauklis 2. rinda, type: text }
+              - { name: image4TaglineLine1, label: Attēla 4 sauklis 1. rinda, type: text }
+              - { name: image4TaglineLine2, label: Attēla 4 sauklis 2. rinda, type: text }
+
           - name: en
             label: English
             type: object
             fields:
-              - name: backBtn
-                label: Back button
-                type: text
-              - name: title
-                label: Title
-                type: text
-              - name: subtitle
-                label: Subtitle
-                type: text
-              - name: highlight
-                label: Highlighted text
-                type: textarea
-              - name: p1
-                label: Paragraph 1
-                type: textarea
-              - name: p2
-                label: Paragraph 2
-                type: textarea
-              - name: p3
-                label: Paragraph 3
-                type: textarea
-              - name: p4
-                label: Paragraph 4
-                type: textarea
-              - name: p5
-                label: Paragraph 5
-                type: textarea
-              - name: imageTaglineLine1
-                label: Image tagline 1 - Line 1
-                type: text
-              - name: imageTaglineLine2
-                label: Image tagline 1 - Line 2
-                type: text
-              - name: image3TaglineLine1
-                label: Image tagline 2 - Line 1
-                type: text
-              - name: image3TaglineLine2
-                label: Image tagline 2 - Line 2
-                type: text
-              - name: image4TaglineLine1
-                label: Image tagline 3 - Line 1
-                type: text
-              - name: image4TaglineLine2
-                label: Image tagline 3 - Line 2
-                type: text
+              - { name: backBtn, label: Back Button, type: text }
+              - { name: title, label: Title, type: text }
+              - { name: subtitle, label: Subtitle, type: text }
+              - { name: highlight, label: Highlight text, type: textarea }
+              - { name: p1, label: Paragraph 1, type: textarea }
+              - { name: p2, label: Paragraph 2, type: textarea }
+              - { name: p3, label: Paragraph 3, type: textarea }
+              - { name: p4, label: Paragraph 4, type: textarea }
+              - { name: p5, label: Paragraph 5, type: textarea }
+              - { name: imageTaglineLine1, label: Image tagline line 1, type: text }
+              - { name: imageTaglineLine2, label: Image tagline line 2, type: text }
+              - { name: image3TaglineLine1, label: Image 3 tagline line 1, type: text }
+              - { name: image3TaglineLine2, label: Image 3 tagline line 2, type: text }
+              - { name: image4TaglineLine1, label: Image 4 tagline line 1, type: text }
+              - { name: image4TaglineLine2, label: Image 4 tagline line 2, type: text }
+
           - name: ru
-            label: Русский
+            label: Russian
             type: object
             fields:
-              - name: backBtn
-                label: Кнопка назад
-                type: text
-              - name: title
-                label: Заголовок
-                type: text
-              - name: subtitle
-                label: Подзаголовок
-                type: text
-              - name: highlight
-                label: Выделенный текст
-                type: textarea
-              - name: p1
-                label: Абзац 1
-                type: textarea
-              - name: p2
-                label: Абзац 2
-                type: textarea
-              - name: p3
-                label: Абзац 3
-                type: textarea
-              - name: p4
-                label: Абзац 4
-                type: textarea
-              - name: p5
-                label: Абзац 5
-                type: textarea
-              - name: imageTaglineLine1
-                label: Подпись к изображению 1 - Строка 1
-                type: text
-              - name: imageTaglineLine2
-                label: Подпись к изображению 1 - Строка 2
-                type: text
-              - name: image3TaglineLine1
-                label: Подпись к изображению 2 - Строка 1
-                type: text
-              - name: image3TaglineLine2
-                label: Подпись к изображению 2 - Строка 2
-                type: text
-              - name: image4TaglineLine1
-                label: Подпись к изображению 3 - Строка 1
-                type: text
-              - name: image4TaglineLine2
-                label: Подпись к изображению 3 - Строка 2
-                type: text
+              - { name: backBtn, label: Кнопка назад, type: text }
+              - { name: title, label: Заголовок, type: text }
+              - { name: subtitle, label: Подзаголовок, type: text }
+              - { name: highlight, label: Выделенный текст, type: textarea }
+              - { name: p1, label: Абзац 1, type: textarea }
+              - { name: p2, label: Абзац 2, type: textarea }
+              - { name: p3, label: Абзац 3, type: textarea }
+              - { name: p4, label: Абзац 4, type: textarea }
+              - { name: p5, label: Абзац 5, type: textarea }
+              - { name: imageTaglineLine1, label: Слоган изображения строка 1, type: text }
+              - { name: imageTaglineLine2, label: Слоган изображения строка 2, type: text }
+              - { name: image3TaglineLine1, label: Слоган изображения 3 строка 1, type: text }
+              - { name: image3TaglineLine2, label: Слоган изображения 3 строка 2, type: text }
+              - { name: image4TaglineLine1, label: Слоган изображения 4 строка 1, type: text }
+              - { name: image4TaglineLine2, label: Слоган изображения 4 строка 2, type: text }
+
+  ##########################################################################
+  # SERVICES
+  ##########################################################################
 
   - name: services
     label: Pakalpojumi
     type: file
     path: content/services.json
+
     fields:
+
       - name: images
-        label: Pakalpojumu attēli (URL vai ceļi)
+        label: Attēli
         type: list
-        field: image
+        field:
+          type: image
+
       - name: translations
         label: Tulkojumi
         type: object
         fields:
+
           - name: lv
-            label: Latviešu valoda
+            label: Latvian
             type: object
             fields:
-              - name: backBtn
-                label: Atpakaļ poga
-                type: text
-              - name: title
-                label: Virsraksts
-                type: text
-              - name: subtitle
-                label: Apakšvirsraksts
-                type: text
-              - name: description
-                label: Apraksts
-                type: textarea
-              - name: learnMore
-                label: Uzzināt vairāk poga
-                type: text
-              - name: vatText
-                label: PVN teksts
-                type: text
+              - { name: backBtn, label: Atpakaļ poga, type: text }
+              - { name: title, label: Virsraksts, type: text }
+              - { name: subtitle, label: Apakšvirsraksts, type: text }
+              - { name: description, label: Apraksts, type: textarea }
+              - { name: learnMore, label: Uzzināt vairāk, type: text }
+              - { name: vatText, label: PVN teksts, type: text }
               - name: items
                 label: Pakalpojumu saraksts
                 type: list
                 fields:
-                  - name: id
-                    label: ID
-                    type: number
-                  - name: title
-                    label: Virsraksts
-                    type: text
-                  - name: desc
-                    label: Īss apraksts
-                    type: textarea
-                  - name: intro
-                    label: Ievada teksts
-                    type: textarea
+                  - { name: id, label: ID, type: number }
+                  - { name: title, label: Nosaukums, type: text }
+                  - { name: desc, label: Īss apraksts (desc), type: textarea }
+                  - { name: intro, label: Ievads, type: textarea }
                   - name: points
-                    label: Punkti / Bullet points
+                    label: Punkti
                     type: list
-                    field: text
-                  - name: outro
-                    label: Nobeiguma teksts
-                    type: textarea
-                  - name: costTitle
-                    label: Cenas virsraksts
-                    type: text
-                  - name: costText
-                    label: Cenas teksts
-                    type: textarea
+                    field:
+                      type: text
+                  - { name: outro, label: Nobeigums, type: textarea }
+                  - { name: costTitle, label: Cenas virsraksts, type: text }
+                  - { name: costText, label: Cenas apraksts, type: textarea }
+
           - name: en
             label: English
             type: object
             fields:
-              - name: backBtn
-                label: Back button
-                type: text
-              - name: title
-                label: Title
-                type: text
-              - name: subtitle
-                label: Subtitle
-                type: text
-              - name: description
-                label: Description
-                type: textarea
-              - name: learnMore
-                label: Learn more button
-                type: text
-              - name: vatText
-                label: VAT text
-                type: text
+              - { name: backBtn, label: Back Button, type: text }
+              - { name: title, label: Title, type: text }
+              - { name: subtitle, label: Subtitle, type: text }
+              - { name: description, label: Description, type: textarea }
+              - { name: learnMore, label: Learn More, type: text }
+              - { name: vatText, label: VAT Text, type: text }
               - name: items
-                label: Services list
+                label: Services List
                 type: list
                 fields:
-                  - name: id
-                    label: ID
-                    type: number
-                  - name: title
-                    label: Title
-                    type: text
-                  - name: desc
-                    label: Short description
-                    type: textarea
-                  - name: intro
-                    label: Intro text
-                    type: textarea
+                  - { name: id, label: ID, type: number }
+                  - { name: title, label: Title, type: text }
+                  - { name: desc, label: Short Description (desc), type: textarea }
+                  - { name: intro, label: Intro, type: textarea }
                   - name: points
-                    label: Points / Bullet points
+                    label: Points
                     type: list
-                    field: text
-                  - name: outro
-                    label: Outro text
-                    type: textarea
-                  - name: costTitle
-                    label: Cost title
-                    type: text
-                  - name: costText
-                    label: Cost text
-                    type: textarea
+                    field:
+                      type: text
+                  - { name: outro, label: Outro, type: textarea }
+                  - { name: costTitle, label: Cost Title, type: text }
+                  - { name: costText, label: Cost Text, type: textarea }
+
           - name: ru
-            label: Русский
+            label: Russian
             type: object
             fields:
-              - name: backBtn
-                label: Кнопка назад
-                type: text
-              - name: title
-                label: Заголовок
-                type: text
-              - name: subtitle
-                label: Подзаголовок
-                type: text
-              - name: description
-                label: Описание
-                type: textarea
-              - name: learnMore
-                label: Кнопка узнать больше
-                type: text
-              - name: vatText
-                label: Текст об НДС
-                type: text
+              - { name: backBtn, label: Кнопка назад, type: text }
+              - { name: title, label: Заголовок, type: text }
+              - { name: subtitle, label: Подзаголовок, type: text }
+              - { name: description, label: Описание, type: textarea }
+              - { name: learnMore, label: Узнать больше, type: text }
+              - { name: vatText, label: Текст о НДС, type: text }
               - name: items
                 label: Список услуг
                 type: list
                 fields:
-                  - name: id
-                    label: ID
-                    type: number
-                  - name: title
-                    label: Заголовок
-                    type: text
-                  - name: desc
-                    label: Краткое описание
-                    type: textarea
-                  - name: intro
-                    label: Вводный текст
-                    type: textarea
+                  - { name: id, label: ID, type: number }
+                  - { name: title, label: Название, type: text }
+                  - { name: desc, label: Краткое описание (desc), type: textarea }
+                  - { name: intro, label: Введение, type: textarea }
                   - name: points
-                    label: Пункты / Bullet points
+                    label: Пункты
                     type: list
-                    field: text
-                  - name: outro
-                    label: Заключительный текст
-                    type: textarea
-                  - name: costTitle
-                    label: Заголовок стоимости
-                    type: text
-                  - name: costText
-                    label: Текст стоимости
-                    type: textarea
+                    field:
+                      type: text
+                  - { name: outro, label: Заключение, type: textarea }
+                  - { name: costTitle, label: Заголовок стоимости, type: text }
+                  - { name: costText, label: Описание стоимости, type: textarea }
 
-  - name: faq
-    label: Biežāk uzdotie jautājumi
-    type: file
-    path: content/faq.json
-    fields:
-      - name: translations
-        label: Tulkojumi
-        type: object
-        fields:
-          - name: lv
-            label: Latviešu valoda
-            type: object
-            fields:
-              - name: backBtn
-                label: Atpakaļ poga
-                type: text
-              - name: title
-                label: Virsraksts
-                type: text
-              - name: subtitle
-                label: Apakšvirsraksts
-                type: text
-              - name: viewAll
-                label: Skatīt visas atbildes poga
-                type: text
-              - name: items
-                label: Jautājumi un atbildes
-                type: list
-                fields:
-                  - name: q
-                    label: Jautājums
-                    type: text
-                  - name: a
-                    label: Atbildes punkti
-                    type: list
-                    fields:
-                      - name: title
-                        label: Virsraksts (pēc izvēles)
-                        type: text
-                      - name: desc
-                        label: Apraksts / Teksts
-                        type: textarea
-          - name: en
-            label: English
-            type: object
-            fields:
-              - name: backBtn
-                label: Back button
-                type: text
-              - name: title
-                label: Title
-                type: text
-              - name: subtitle
-                label: Subtitle
-                type: text
-              - name: viewAll
-                label: View all answers button
-                type: text
-              - name: items
-                label: Questions and answers
-                type: list
-                fields:
-                  - name: q
-                    label: Question
-                    type: text
-                  - name: a
-                    label: Answer points
-                    type: list
-                    fields:
-                      - name: title
-                        label: Title (optional)
-                        type: text
-                      - name: desc
-                        label: Description / Text
-                        type: textarea
-          - name: ru
-            label: Русский
-            type: object
-            fields:
-              - name: backBtn
-                label: Кнопка назад
-                type: text
-              - name: title
-                label: Заголовок
-                type: text
-              - name: subtitle
-                label: Подзаголовок
-                type: text
-              - name: viewAll
-                label: Кнопка посмотреть все ответы
-                type: text
-              - name: items
-                label: Вопросы и ответы
-                type: list
-                fields:
-                  - name: q
-                    label: Вопрос
-                    type: text
-                  - name: a
-                    label: Пункты ответа
-                    type: list
-                    fields:
-                      - name: title
-                        label: Заголовок (необязательно)
-                        type: text
-                      - name: desc
-                        label: Описание / Текст
-                        type: textarea
+  ##########################################################################
+  # CONTACT
+  ##########################################################################
 
   - name: contact
     label: Kontakti
     type: file
     path: content/contact.json
+
     fields:
-      - name: email
-        label: E-pasts
-        type: text
-      - name: phone
-        label: Tālrunis
-        type: text
+
+      - { name: email, label: E-pasts, type: text }
+      - { name: phone, label: Tālrunis, type: text }
+      - { name: netlifyFormName, label: Netlify formas nosaukums, type: text }
+
       - name: translations
         label: Tulkojumi
         type: object
         fields:
+
           - name: lv
-            label: Latviešu valoda
+            label: Latvian
             type: object
             fields:
-              - name: backBtn
-                label: Atpakaļ poga
-                type: text
-              - name: title
-                label: Virsraksts
-                type: text
-              - name: subtitle
-                label: Apakšvirsraksts
-                type: text
-              - name: formTitle
-                label: Formas virsraksts
-                type: text
-              - name: formSubtitle
-                label: Formas apakšvirsraksts
-                type: text
-              - name: formBoxTitle
-                label: Formas kastes virsraksts
-                type: text
-              - name: labelName
-                label: Lauks: Vārds
-                type: text
-              - name: labelCompany
-                label: Lauks: Uzņēmums
-                type: text
-              - name: labelEmail
-                label: Lauks: E-pasts
-                type: text
-              - name: labelPhone
-                label: Lauks: Tālrunis
-                type: text
-              - name: labelMessage
-                label: Lauks: Ziņojums
-                type: text
-              - name: consentText
-                label: Piekrišanas teksts
-                type: text
-              - name: privacyLink
-                label: Privātuma politikas saite
-                type: text
-              - name: submitBtn
-                label: Nosūtīt poga
-                type: text
-              - name: submitting
-                label: Nosūtīšanas teksts
-                type: text
-              - name: successTitle
-                label: Veiksmes virsraksts
-                type: text
-              - name: successMessage
-                label: Veiksmes ziņojums
-                type: textarea
-              - name: newRequestBtn
-                label: Jauns pieteikums poga
-                type: text
-              - name: infoTitle
-                label: Info virsraksts
-                type: text
-              - name: infoSubtitle
-                label: Info apakšvirsraksts
-                type: text
-              - name: callUs
-                label: Zvaniet mums teksts
-                type: text
-              - name: writeUs
-                label: Rakstiet mums teksts
-                type: text
+              - { name: backBtn, label: Atpakaļ poga, type: text }
+              - { name: title, label: Virsraksts, type: text }
+              - { name: subtitle, label: Apakšvirsraksts, type: text }
+              - { name: formTitle, label: Formas virsraksts, type: text }
+              - { name: formSubtitle, label: Formas apakšvirsraksts, type: textarea }
+              - { name: formBoxTitle, label: Formas kastes virsraksts, type: text }
+              - { name: labelName, label: Vārda lauks, type: text }
+              - { name: labelCompany, label: Uzņēmuma lauks, type: text }
+              - { name: labelEmail, label: E-pasta lauks, type: text }
+              - { name: labelPhone, label: Tālruņa lauks, type: text }
+              - { name: labelMessage, label: Ziņojuma lauks, type: text }
+              - { name: consentText, label: Piekrišanas teksts, type: textarea }
+              - { name: privacyLink, label: Privātuma saite, type: text }
+              - { name: submitBtn, label: Iesniegšanas poga, type: text }
+              - { name: submitting, label: Iesniegšanas stāvoklis, type: text }
+              - { name: successTitle, label: Veiksmes virsraksts, type: text }
+              - { name: successMessage, label: Veiksmes ziņojums, type: textarea }
+              - { name: newRequestBtn, label: Jauna pieteikuma poga, type: text }
+              - { name: infoTitle, label: Info virsraksts, type: text }
+              - { name: infoSubtitle, label: Info apakšvirsraksts, type: text }
+              - { name: callUs, label: Zvaniet mums, type: text }
+              - { name: writeUs, label: Rakstiet mums, type: text }
+
           - name: en
             label: English
             type: object
             fields:
-              - name: backBtn
-                label: Back button
-                type: text
-              - name: title
-                label: Title
-                type: text
-              - name: subtitle
-                label: Subtitle
-                type: text
-              - name: formTitle
-                label: Form title
-                type: text
-              - name: formSubtitle
-                label: Form subtitle
-                type: text
-              - name: formBoxTitle
-                label: Form box title
-                type: text
-              - name: labelName
-                label: Field: Name
-                type: text
-              - name: labelCompany
-                label: Field: Company
-                type: text
-              - name: labelEmail
-                label: Field: Email
-                type: text
-              - name: labelPhone
-                label: Field: Phone
-                type: text
-              - name: labelMessage
-                label: Field: Message
-                type: text
-              - name: consentText
-                label: Consent text
-                type: text
-              - name: privacyLink
-                label: Privacy link
-                type: text
-              - name: submitBtn
-                label: Submit button
-                type: text
-              - name: submitting
-                label: Submitting text
-                type: text
-              - name: successTitle
-                label: Success title
-                type: text
-              - name: successMessage
-                label: Success message
-                type: textarea
-              - name: newRequestBtn
-                label: New request button
-                type: text
-              - name: infoTitle
-                label: Info title
-                type: text
-              - name: infoSubtitle
-                label: Info subtitle
-                type: text
-              - name: callUs
-                label: Call us text
-                type: text
-              - name: writeUs
-                label: Write us text
-                type: text
+              - { name: backBtn, label: Back Button, type: text }
+              - { name: title, label: Title, type: text }
+              - { name: subtitle, label: Subtitle, type: text }
+              - { name: formTitle, label: Form Title, type: text }
+              - { name: formSubtitle, label: Form Subtitle, type: textarea }
+              - { name: formBoxTitle, label: Form Box Title, type: text }
+              - { name: labelName, label: Name Label, type: text }
+              - { name: labelCompany, label: Company Label, type: text }
+              - { name: labelEmail, label: Email Label, type: text }
+              - { name: labelPhone, label: Phone Label, type: text }
+              - { name: labelMessage, label: Message Label, type: text }
+              - { name: consentText, label: Consent Text, type: textarea }
+              - { name: privacyLink, label: Privacy Link Text, type: text }
+              - { name: submitBtn, label: Submit Button, type: text }
+              - { name: submitting, label: Submitting State, type: text }
+              - { name: successTitle, label: Success Title, type: text }
+              - { name: successMessage, label: Success Message, type: textarea }
+              - { name: newRequestBtn, label: New Request Button, type: text }
+              - { name: infoTitle, label: Info Title, type: text }
+              - { name: infoSubtitle, label: Info Subtitle, type: text }
+              - { name: callUs, label: Call Us, type: text }
+              - { name: writeUs, label: Write to Us, type: text }
+
           - name: ru
-            label: Русский
+            label: Russian
             type: object
             fields:
-              - name: backBtn
-                label: Кнопка назад
-                type: text
-              - name: title
-                label: Заголовок
-                type: text
-              - name: subtitle
-                label: Подзаголовок
-                type: text
-              - name: formTitle
-                label: Заголовок формы
-                type: text
-              - name: formSubtitle
-                label: Подзаголовок формы
-                type: text
-              - name: formBoxTitle
-                label: Заголовок блока формы
-                type: text
-              - name: labelName
-                label: Поле: Имя
-                type: text
-              - name: labelCompany
-                label: Поле: Компания
-                type: text
-              - name: labelEmail
-                label: Поле: Email
-                type: text
-              - name: labelPhone
-                label: Поле: Телефон
-                type: text
-              - name: labelMessage
-                label: Поле: Сообщение
-                type: text
-              - name: consentText
-                label: Текст согласия
-                type: text
-              - name: privacyLink
-                label: Ссылка на политику
-                type: text
-              - name: submitBtn
-                label: Кнопка отправки
-                type: text
-              - name: submitting
-                label: Текст отправки
-                type: text
-              - name: successTitle
-                label: Заголовок успеха
-                type: text
-              - name: successMessage
-                label: Сообщение успеха
-                type: textarea
-              - name: newRequestBtn
-                label: Кнопка новой заявки
-                type: text
-              - name: infoTitle
-                label: Заголовок инфо
-                type: text
-              - name: infoSubtitle
-                label: Подзаголовок инфо
-                type: text
-              - name: callUs
-                label: Текст звонка
-                type: text
-              - name: writeUs
-                label: Текст письма
-                type: text
+              - { name: backBtn, label: Кнопка назад, type: text }
+              - { name: title, label: Заголовок, type: text }
+              - { name: subtitle, label: Подзаголовок, type: text }
+              - { name: formTitle, label: Заголовок формы, type: text }
+              - { name: formSubtitle, label: Подзаголовок формы, type: textarea }
+              - { name: formBoxTitle, label: Заголовок бокса формы, type: text }
+              - { name: labelName, label: Поле имени, type: text }
+              - { name: labelCompany, label: Поле компании, type: text }
+              - { name: labelEmail, label: Поле почты, type: text }
+              - { name: labelPhone, label: Поле телефона, type: text }
+              - { name: labelMessage, label: Поле сообщения, type: text }
+              - { name: consentText, label: Текст согласия, type: textarea }
+              - { name: privacyLink, label: Ссылка на приватность, type: text }
+              - { name: submitBtn, label: Кнопка отправки, type: text }
+              - { name: submitting, label: Состояние отправки, type: text }
+              - { name: successTitle, label: Заголовок успеха, type: text }
+              - { name: successMessage, label: Сообщение успеха, type: textarea }
+              - { name: newRequestBtn, label: Кнопка новой заявки, type: text }
+              - { name: infoTitle, label: Инфо заголовок, type: text }
+              - { name: infoSubtitle, label: Инфо подзаголовок, type: text }
+              - { name: callUs, label: Позвоните нам, type: text }
+              - { name: writeUs, label: Напишите нам, type: text }
+
+  ##########################################################################
+  # FOOTER
+  ##########################################################################
 
   - name: footer
     label: Kājene
     type: file
     path: content/footer.json
+
+    fields:
+
+      - { name: logo, label: Logo attēls, type: image }
+      - { name: facebook, label: Facebook saite, type: text }
+      - { name: instagram, label: Instagram saite, type: text }
+      - name: developer
+        label: Izstrādātājs
+        type: object
+        fields:
+          - { name: name, label: Nosaukums, type: text }
+          - { name: url, label: Saite, type: text }
+      - name: company
+        label: Uzņēmuma informācija
+        type: object
+        fields:
+          - { name: name, label: Nosaukums, type: text }
+          - { name: regNo, label: Reģistrācijas numurs, type: text }
+          - { name: pvnNo, label: PVN numurs, type: text }
+          - { name: addressLine1, label: Adreses 1. rinda, type: text }
+          - { name: addressLine2, label: Adreses 2. rinda, type: text }
+          - { name: email, label: E-pasts, type: text }
+          - { name: phone, label: Tālrunis, type: text }
+
+      - name: translations
+        label: Tulkojumi
+        type: object
+        fields:
+
+          - name: lv
+            label: Latvian
+            type: object
+            fields:
+              - { name: desc, label: Apraksts, type: textarea }
+              - { name: servicesTitle, label: Pakalpojumu sadaļas virsraksts, type: text }
+              - { name: companyTitle, label: Uzņēmuma sadaļas virsraksts, type: text }
+              - { name: privacyText, label: Privātuma politikas teksts, type: text }
+              - { name: rightsText, label: Autortiesību teksts, type: text }
+              - { name: aboutTitle, label: Par mums virsraksts, type: text }
+              - { name: followTitle, label: Sekojiet mums virsraksts, type: text }
+              - { name: contactTitle, label: Kontaktinformācijas virsraksts, type: text }
+              - { name: addressLabel, label: Adreses etiķete, type: text }
+              - { name: rights, label: Autortiesības (īsais), type: text }
+              - { name: privacy, label: Privātums (īsais), type: text }
+              - { name: cookies, label: Sīkdatnes (īsais), type: text }
+              - { name: terms, label: Noteikumi (īsais), type: text }
+              - { name: developerLabel, label: Izstrādātāja etiķete, type: text }
+              - name: services
+                label: Pakalpojumu saraksts
+                type: list
+                field:
+                  type: text
+              - name: companyLinks
+                label: Uzņēmuma saites
+                type: list
+                fields:
+                  - { name: label, label: Nosaukums, type: text }
+                  - { name: href, label: Saite, type: text }
+
+          - name: en
+            label: English
+            type: object
+            fields:
+              - { name: desc, label: Description, type: textarea }
+              - { name: servicesTitle, label: Services Section Title, type: text }
+              - { name: companyTitle, label: Company Section Title, type: text }
+              - { name: privacyText, label: Privacy Policy Text, type: text }
+              - { name: rightsText, label: Rights Text, type: text }
+              - { name: aboutTitle, label: About Us Title, type: text }
+              - { name: followTitle, label: Follow Us Title, type: text }
+              - { name: contactTitle, label: Contact Info Title, type: text }
+              - { name: addressLabel, label: Address Label, type: text }
+              - { name: rights, label: Rights (short), type: text }
+              - { name: privacy, label: Privacy (short), type: text }
+              - { name: cookies, label: Cookies (short), type: text }
+              - { name: terms, label: Terms (short), type: text }
+              - { name: developerLabel, label: Developer Label, type: text }
+              - name: services
+                label: Services List
+                type: list
+                field:
+                  type: text
+              - name: companyLinks
+                label: Company Links
+                type: list
+                fields:
+                  - { name: label, label: Label, type: text }
+                  - { name: href, label: Link, type: text }
+
+          - name: ru
+            label: Russian
+            type: object
+            fields:
+              - { name: desc, label: Описание, type: textarea }
+              - { name: servicesTitle, label: Заголовок раздела услуг, type: text }
+              - { name: companyTitle, label: Заголовок раздела компании, type: text }
+              - { name: privacyText, label: Текст политики конфиденциальности, type: text }
+              - { name: rightsText, label: Текст копирайта, type: text }
+              - { name: aboutTitle, label: Заголовок О нас, type: text }
+              - { name: followTitle, label: Заголовок Подписывайтесь, type: text }
+              - { name: contactTitle, label: Заголовок Контакты, type: text }
+              - { name: addressLabel, label: Метка адреса, type: text }
+              - { name: rights, label: Авторские права (короткий), type: text }
+              - { name: privacy, label: Приватность (короткий), type: text }
+              - { name: cookies, label: Куки (короткий), type: text }
+              - { name: terms, label: Правила (короткий), type: text }
+              - { name: developerLabel, label: Метка разработчика, type: text }
+              - name: services
+                label: Список услуг
+                type: list
+                field:
+                  type: text
+              - name: companyLinks
+                label: Ссылки компании
+                type: list
+                fields:
+                  - { name: label, label: Название, type: text }
+                  - { name: href, label: Ссылка, type: text }
+
+  ##########################################################################
+  # NAVIGATION
+  ##########################################################################
+
+  - name: navigation
+    label: Navigācija
+    type: file
+    path: content/navigation.json
+
+    fields:
+
+      - name: contactBtn
+        label: Saziņas poga
+        type: object
+        fields:
+          - { name: lv, label: Latvian, type: text }
+          - { name: en, label: English, type: text }
+          - { name: ru, label: Russian, type: text }
+
+      - name: links
+        label: Navigācijas saites
+        type: list
+        fields:
+          - { name: id, label: ID, type: text }
+          - { name: href, label: Saite, type: text }
+          - name: translations
+            label: Tulkojumi
+            type: object
+            fields:
+              - { name: lv, label: Latvian, type: text }
+              - { name: en, label: English, type: text }
+              - { name: ru, label: Russian, type: text }
+
+  ##########################################################################
+  # FAQ (BUJ)
+  ##########################################################################
+
+  - name: faq
+    label: Biežāk uzdotie jautājumi
+    type: file
+    path: content/faq.json
+
+    fields:
+
+      - name: translations
+        label: Tulkojumi
+        type: object
+        fields:
+
+          - name: lv
+            label: Latvian
+            type: object
+            fields:
+              - { name: backBtn, label: Atpakaļ poga, type: text }
+              - { name: title, label: Virsraksts, type: text }
+              - { name: subtitle, label: Apakšvirsraksts, type: text }
+              - { name: viewAll, label: Skatīt visas atbildes, type: text }
+              - name: items
+                label: Jautājumi un atbildes
+                type: list
+                fields:
+                  - { name: q, label: Jautājums, type: text }
+                  - name: a
+                    label: Atbildes daļas
+                    type: list
+                    fields:
+                      - { name: title, label: Virsraksts (pēc izvēles), type: text }
+                      - { name: text, label: Teksts, type: textarea }
+
+          - name: en
+            label: English
+            type: object
+            fields:
+              - { name: backBtn, label: Back Button, type: text }
+              - { name: title, label: Title, type: text }
+              - { name: subtitle, label: Subtitle, type: text }
+              - { name: viewAll, label: View All, type: text }
+              - name: items
+                label: Questions and Answers
+                type: list
+                fields:
+                  - { name: q, label: Question, type: text }
+                  - name: a
+                    label: Answer paragraphs
+                    type: list
+                    fields:
+                      - { name: title, label: Title (optional), type: text }
+                      - { name: text, label: Text, type: textarea }
+
+          - name: ru
+            label: Russian
+            type: object
+            fields:
+              - { name: backBtn, label: Кнопка назад, type: text }
+              - { name: title, label: Заголовок, type: text }
+              - { name: subtitle, label: Подзаголовок, type: text }
+              - { name: viewAll, label: Показать все, type: text }
+              - name: items
+                label: Вопросы и ответы
+                type: list
+                fields:
+                  - { name: q, label: Вопрос, type: text }
+                  - name: a
+                    label: Части ответа
+                    type: list
+                    fields:
+                      - { name: title, label: Заголовок (опционально), type: text }
+                      - { name: text, label: Текст, type: textarea }
+
+  ##########################################################################
+  # BLOG (EMUĀRS / RAKSTI)
+  ##########################################################################
+
+  - name: blog
+    label: Blogs
+    type: folder
+    path: content/blog
+    format: json
+
+    fields:
+      - { name: id, label: ID, type: number }
+      - { name: slug, label: Slug, type: text }
+      - { name: date, label: Datums, type: date }
+      - { name: author, label: Autors, type: text }
+      - { name: category, label: Kategorija, type: text }
+      - { name: featuredImage, label: Attēls (featuredImage), type: image }
+      - { name: title, label: Virsraksts, type: text }
+      - { name: excerpt, label: Izvilkums, type: textarea }
+      - name: content
+        label: Saturs (paragrāfi)
+        type: list
+        fields:
+          - { name: paragraph, label: Paragrāfs, type: textarea }
+
+  ##########################################################################
+  # PRIVACY POLICY (PRIVĀTUMA POLITIKA)
+  ##########################################################################
+
+  - name: privacy
+    label: Privātuma politika
+    type: file
+    path: content/privacy.json
+
     fields:
       - name: translations
         label: Tulkojumi
         type: object
         fields:
           - name: lv
-            label: Latviešu valoda
+            label: Latvian
             type: object
             fields:
-              - name: desc
-                label: Apraksts
-                type: textarea
-              - name: servicesTitle
-                label: Pakalpojumu virsraksts
-                type: text
-              - name: companyTitle
-                label: Uzņēmuma virsraksts
-                type: text
-              - name: privacyText
-                label: Privātuma politikas teksts
-                type: text
-              - name: rightsText
-                label: Autortiesību teksts
-                type: text
-              - name: services
-                label: Pakalpojumi (Saraksts)
-                type: list
-                field: text
-              - name: companyLinks
-                label: Uzņēmuma saites (Saraksts)
+              - { name: title, label: Virsraksts, type: text }
+              - { name: subtitle, label: Apakšvirsraksts, type: text }
+              - { name: lastUpdated, label: Atjaunots, type: text }
+              - name: sections
+                label: Sekcijas
                 type: list
                 fields:
-                  - name: label
-                    label: Nosaukums
-                    type: text
-                  - name: href
-                    label: Saite
-                    type: text
+                  - { name: title, label: Virsraksts, type: text }
+                  - { name: content, label: Saturs, type: textarea }
           - name: en
             label: English
             type: object
             fields:
-              - name: desc
-                label: Description
-                type: textarea
-              - name: servicesTitle
-                label: Services title
-                type: text
-              - name: companyTitle
-                label: Company title
-                type: text
-              - name: privacyText
-                label: Privacy policy text
-                type: text
-              - name: rightsText
-                label: Rights text
-                type: text
-              - name: services
-                label: Services list
-                type: list
-                field: text
-              - name: companyLinks
-                label: Company links
+              - { name: title, label: Title, type: text }
+              - { name: subtitle, label: Subtitle, type: text }
+              - { name: lastUpdated, label: Last Updated, type: text }
+              - name: sections
+                label: Sections
                 type: list
                 fields:
-                  - name: label
-                    label: Label
-                    type: text
-                  - name: href
-                    label: Href
-                    type: text
+                  - { name: title, label: Title, type: text }
+                  - { name: content, label: Content, type: textarea }
           - name: ru
-            label: Русский
+            label: Russian
             type: object
             fields:
-              - name: desc
-                label: Описание
-                type: textarea
-              - name: servicesTitle
-                label: Заголовок услуг
-                type: text
-              - name: companyTitle
-                label: Заголовок компании
-                type: text
-              - name: privacyText
-                label: Текст политики
-                type: text
-              - name: rightsText
-                label: Текст авторских прав
-                type: text
-              - name: services
-                label: Список услуг
-                type: list
-                field: text
-              - name: companyLinks
-                label: Ссылки компании
+              - { name: title, label: Заголовок, type: text }
+              - { name: subtitle, label: Подзаголовок, type: text }
+              - { name: lastUpdated, label: Обновлено, type: text }
+              - name: sections
+                label: Секции
                 type: list
                 fields:
-                  - name: label
-                    label: Название
-                    type: text
-                  - name: href
-                    label: Ссылка
-                    type: text
+                  - { name: title, label: Заголовок, type: text }
+                  - { name: content, label: Содержимое, type: textarea }
 
-  - name: navigation
-    label: Navigācija
+  ##########################################################################
+  # COOKIE POLICY (SĪKDATŅU POLITIKA)
+  ##########################################################################
+
+  - name: cookies
+    label: Sīkdatņu politika
     type: file
-    path: content/navigation.json
+    path: content/cookies.json
+
     fields:
-      - name: contactBtn
-        label: Sazināties poga
+      - name: translations
+        label: Tulkojumi
         type: object
         fields:
           - name: lv
-            label: Latviešu
-            type: text
+            label: Latvian
+            type: object
+            fields:
+              - { name: title, label: Virsraksts, type: text }
+              - { name: subtitle, label: Apakšvirsraksts, type: text }
+              - { name: lastUpdated, label: Atjaunots, type: text }
+              - name: sections
+                label: Sekcijas
+                type: list
+                fields:
+                  - { name: title, label: Virsraksts, type: text }
+                  - { name: content, label: Saturs, type: textarea }
           - name: en
             label: English
-            type: text
+            type: object
+            fields:
+              - { name: title, label: Title, type: text }
+              - { name: subtitle, label: Subtitle, type: text }
+              - { name: lastUpdated, label: Last Updated, type: text }
+              - name: sections
+                label: Sections
+                type: list
+                fields:
+                  - { name: title, label: Title, type: text }
+                  - { name: content, label: Content, type: textarea }
           - name: ru
-            label: Русский
-            type: text
-      - name: links
-        label: Navigācijas saites (Saraksts)
+            label: Russian
+            type: object
+            fields:
+              - { name: title, label: Заголовок, type: text }
+              - { name: subtitle, label: Подзаголовок, type: text }
+              - { name: lastUpdated, label: Обновлено, type: text }
+              - name: sections
+                label: Секции
+                type: list
+                fields:
+                  - { name: title, label: Заголовок, type: text }
+                  - { name: content, label: Содержимое, type: textarea }
+
+  ##########################################################################
+  # TERMS OF SERVICE (LIETOŠANAS NOTEIKUMI)
+  ##########################################################################
+
+  - name: terms
+    label: Lietošanas noteikumi
+    type: file
+    path: content/terms.json
+
+    fields:
+      - name: translations
+        label: Tulkojumi
+        type: object
+        fields:
+          - name: lv
+            label: Latvian
+            type: object
+            fields:
+              - { name: title, label: Virsraksts, type: text }
+              - { name: subtitle, label: Apakšvirsraksts, type: text }
+              - { name: lastUpdated, label: Atjaunots, type: text }
+              - name: sections
+                label: Sekcijas
+                type: list
+                fields:
+                  - { name: title, label: Virsraksts, type: text }
+                  - { name: content, label: Saturs, type: textarea }
+          - name: en
+            label: English
+            type: object
+            fields:
+              - { name: title, label: Title, type: text }
+              - { name: subtitle, label: Subtitle, type: text }
+              - { name: lastUpdated, label: Last Updated, type: text }
+              - name: sections
+                label: Sections
+                type: list
+                fields:
+                  - { name: title, label: Title, type: text }
+                  - { name: content, label: Content, type: textarea }
+          - name: ru
+            label: Russian
+            type: object
+            fields:
+              - { name: title, label: Заголовок, type: text }
+              - { name: subtitle, label: Подзаголовок, type: text }
+              - { name: lastUpdated, label: Обновлено, type: text }
+              - name: sections
+                label: Секции
+                type: list
+                fields:
+                  - { name: title, label: Заголовок, type: text }
+                  - { name: content, label: Содержимое, type: textarea }
+
+  ##########################################################################
+  # TESTIMONIALS (ATSAUKSMES)
+  ##########################################################################
+
+  - name: testimonials
+    label: Atsauksmes
+    type: file
+    path: content/testimonials.json
+
+    fields:
+      - name: testimonials
+        label: Atsauksmes
         type: list
         fields:
-          - name: id
-            label: ID / Identifikators
-            type: text
-          - name: href
-            label: Saite / Ceļš
-            type: text
+          - { name: id, label: ID, type: number }
+          - { name: author, label: Autors, type: text }
+          - { name: company, label: Uzņēmums, type: text }
           - name: translations
             label: Tulkojumi
             type: object
             fields:
               - name: lv
-                label: Latviešu
-                type: text
+                label: Latvian
+                type: object
+                fields:
+                  - { name: role, label: Loma, type: text }
+                  - { name: text, label: Teksts, type: textarea }
               - name: en
                 label: English
-                type: text
+                type: object
+                fields:
+                  - { name: role, label: Role, type: text }
+                  - { name: text, label: Text, type: textarea }
               - name: ru
-                label: Русский
-                type: text
+                label: Russian
+                type: object
+                fields:
+                  - { name: role, label: Роль, type: text }
+                  - { name: text, label: Текст, type: textarea }
 
-  - name: blog-posts
-    label: Bloga raksti
+  ##########################################################################
+  # SEO SETTINGS (SEO IESTATĪJUMI)
+  ##########################################################################
+
+  - name: seo
+    label: SEO iestatījumi
     type: file
-    path: content/blog-posts.json
+    path: content/seo.json
+
     fields:
-      - name: articles
-        label: Raksti
-        type: list
+      - { name: siteTitle, label: Vietnes galvenais virsraksts, type: text }
+      - name: translations
+        label: Tulkojumi
+        type: object
         fields:
-          - name: id
-            label: ID
-            type: number
-          - name: slug
-            label: Saites daļa (slug)
-            type: text
-          - name: image
-            label: Attēls (R2 URL vai vietējais ceļš)
-            type: image
-          - name: title
-            label: Virsraksts
-            type: text
-          - name: excerpt
-            label: Izvilkums / Īss apraksts
-            type: textarea
-          - name: content
-            label: Saturs (Rindkopu saraksts)
-            type: list
-            field: textarea
+          - name: lv
+            label: Latvian
+            type: object
+            fields:
+              - { name: title, label: Virsraksts, type: text }
+              - { name: description, label: Apraksts, type: textarea }
+              - { name: keywords, label: Atslēgvārdi, type: text }
+          - name: en
+            label: English
+            type: object
+            fields:
+              - { name: title, label: Title, type: text }
+              - { name: description, label: Description, type: textarea }
+              - { name: keywords, label: Keywords, type: text }
+          - name: ru
+            label: Russian
+            type: object
+            fields:
+              - { name: title, label: Заголовок, type: text }
+              - { name: description, label: Описание, type: textarea }
+              - { name: keywords, label: Ключевые слова, type: text }
+
+  ##########################################################################
+  # SITE SETTINGS (VIETNES IESTATĪJUMI)
+  ##########################################################################
+
+  - name: site-settings
+    label: Vietnes iestatījumi
+    type: file
+    path: content/site-settings.json
+
+    fields:
+      - { name: companyName, label: Uzņēmuma nosaukums, type: text }
+      - { name: regNo, label: Reģistrācijas numurs, type: text }
+      - { name: vatNo, label: PVN numurs, type: text }
+      - { name: logo, label: Logo attēls, type: image }
+      - { name: smallLogo, label: Mazais logo attēls, type: image }
+      - { name: facebookUrl, label: Facebook saite, type: text }
+      - { name: instagramUrl, label: Instagram saite, type: text }
+      - name: developer
+        label: Izstrādātājs
+        type: object
+        fields:
+          - { name: name, label: Vārds, type: text }
+          - { name: url, label: Saite, type: text }

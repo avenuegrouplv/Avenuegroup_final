@@ -4,7 +4,7 @@ import { ArrowLeft, FileText, Image as ImageIcon, Sparkles, MessageSquare, Share
 import ReactMarkdown from 'react-markdown';
 import { useLanguage } from '../LanguageContext';
 import { customPages } from '../data/pages';
-import articlesData from '../data/content/blog-posts.json';
+import { articles as allArticles } from '../data/articles';
 
 export const CustomDynamicPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -174,7 +174,7 @@ export const CustomDynamicPage: React.FC = () => {
 
   const renderBlogPostsBlock = (block: any, key: number) => {
     const count = block.count || 3;
-    const articles = (articlesData?.articles || []).slice(0, count);
+    const articles = (allArticles || []).slice(0, count);
 
     return (
       <div key={key} className="space-y-6 pt-4">

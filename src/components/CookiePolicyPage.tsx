@@ -2,12 +2,15 @@ import React from 'react';
 import { ArrowLeft, Cookie } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
+import cookiesData from '../data/content/cookies.json';
 
 export const CookiePolicyPage: React.FC = () => {
   const { t, language } = useLanguage();
   const navigate = useNavigate();
 
-  const sections = (t('cookies.sections') as any) || [];
+  const currentLang = (language === 'lv' || language === 'en' || language === 'ru') ? language : 'lv';
+  const data = cookiesData.translations[currentLang] || cookiesData.translations.lv;
+  const sections = data.sections || [];
 
   return (
     <div className="bg-[#ebebeb] min-h-screen pb-24 text-zinc-800 relative overflow-hidden">
@@ -25,11 +28,11 @@ export const CookiePolicyPage: React.FC = () => {
           <div className="flex items-center space-x-3 text-yellow-600 mb-4 h-12">
             <Cookie size={36} />
             <h1 className="text-2xl md:text-4xl font-black italic tracking-tighter text-zinc-950 uppercase leading-none">
-              {t('cookies.title')} <span className="text-yellow-600">{t('cookies.subtitle')}</span>
+              {data.title} <span className="text-yellow-600">{data.subtitle}</span>
             </h1>
           </div>
           <p className="text-zinc-400 text-xs italic font-semibold">
-            {t('cookies.lastUpdated')}
+            {data.lastUpdated}
           </p>
         </div>
 

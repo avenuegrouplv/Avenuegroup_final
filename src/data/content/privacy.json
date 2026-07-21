@@ -1,0 +1,73 @@
+{
+  "translations": {
+    "lv": {
+      "title": "Privātuma",
+      "subtitle": "politika",
+      "lastUpdated": "Pēdējo reizi atjaunots: 2025. gada maijs",
+      "sections": [
+        {
+          "title": "1. Ievads",
+          "content": "SIA \"Avenue Group\" apņemas aizsargāt un respektēt Jūsu privātumu. Šī privātuma politika skaidro, kā mēs apkopojam, izmantojam, uzglabājam un aizsargājam Jūsu personas datus saskaņā ar Vispārīgo datu aizsardzības regulu (GDPR) un Latvijas Republikas tiesību aktiem."
+        },
+        {
+          "title": "2. Datu pārzinis",
+          "content": "SIA \"Avenue Group\", Reģ. nr. 40203647938, Brīvības gatve 386 k-2-5A, Rīga, LV-1024. E-pasts: services@avenuegroup.lv"
+        },
+        {
+          "title": "3. Kādus personas datus mēs vācam",
+          "content": "Mēs varam apkopot kontaktinformāciju (vārds, e-pasts, tālrunis), tehnisko informāciju (IP adrese, pārlūka veids) un lietošanas datus."
+        },
+        {
+          "title": "4. Kā mēs izmantojam Jūsu datus",
+          "content": "Lai sniegtu pakalpojumus, sazinātos ar Jums, uzlabotu mājas lapu un izpildītu juridiskās saistības."
+        }
+      ]
+    },
+    "en": {
+      "title": "Privacy",
+      "subtitle": "Policy",
+      "lastUpdated": "Last updated: May 2025",
+      "sections": [
+        {
+          "title": "1. Introduction",
+          "content": "SIA \"Avenue Group\" is committed to protecting and respecting your privacy. This privacy policy explains how we collect, use, store, and protect your personal data in accordance with the General Data Protection Regulation (GDPR) and the laws of the Republic of Latvia."
+        },
+        {
+          "title": "2. Data Controller",
+          "content": "SIA \"Avenue Group\", Reg. No. 40203647938, Brīvības gatve 386 k-2-5A, Riga, LV-1024. Email: services@avenuegroup.lv"
+        },
+        {
+          "title": "3. What personal data we collect",
+          "content": "We may collect contact information (name, email, phone), technical information (IP address, browser type), and usage data."
+        },
+        {
+          "title": "4. How we use your data",
+          "content": "To provide services, communicate with you, improve the website, and fulfill legal obligations."
+        }
+      ]
+    },
+    "ru": {
+      "title": "Политика",
+      "subtitle": "конфиденциальности",
+      "lastUpdated": "Последнее обновление: май 2025 г.",
+      "sections": [
+        {
+          "title": "1. Введение",
+          "content": "SIA \"Avenue Group\" обязуется защищать и уважать вашу конфиденциальность. Настоящая политика конфиденциальности объясняет, как мы собираем, используем, храним и защищаем ваши персональные данные в соответствии с Общим регламентом по защите данных (GDPR) и законодательством Латвийской Республики."
+        },
+        {
+          "title": "2. Контролер данных",
+          "content": "SIA \"Avenue Group\", Рег. № 40203647938, Brīvības gatve 386 k-2-5A, Рига, LV-1024. Электронная почта: services@avenuegroup.lv"
+        },
+        {
+          "title": "3. Какие персональные данные мы собираем",
+          "content": "Мы можем собирать контактную информацию (имя, адрес электронной почты, телефон), техническую информацию (IP-адрес, тип браузера) и данные об использовании."
+        },
+        {
+          "title": "4. Как мы используем ваши данные",
+          "content": "Для предоставления услуг, связи с вами, улучшения веб-сайта и выполнения юридических обязательств."
+        }
+      ]
+    }
+  }
+}

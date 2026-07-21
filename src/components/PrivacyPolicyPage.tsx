@@ -2,12 +2,15 @@ import React from 'react';
 import { ArrowLeft, Shield } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useNavigate } from 'react-router-dom';
+import privacyData from '../data/content/privacy.json';
 
 export const PrivacyPolicyPage: React.FC = () => {
   const { t, language } = useLanguage();
   const navigate = useNavigate();
 
-  const sections = (t('privacy.sections') as any) || [];
+  const currentLang = (language === 'lv' || language === 'en' || language === 'ru') ? language : 'lv';
+  const data = privacyData.translations[currentLang] || privacyData.translations.lv;
+  const sections = data.sections || [];
 
   return (
     <div className="bg-[#ebebeb] min-h-screen pb-24 text-zinc-800 relative overflow-hidden">
@@ -25,11 +28,11 @@ export const PrivacyPolicyPage: React.FC = () => {
           <div className="flex items-center space-x-3 text-yellow-600 mb-4 h-12">
             <Shield size={36} />
             <h1 className="text-2xl md:text-4xl font-black italic tracking-tighter text-zinc-950 uppercase leading-none">
-              {t('privacy.title')} <span className="text-yellow-600">{t('privacy.subtitle')}</span>
+              {data.title} <span className="text-yellow-600">{data.subtitle}</span>
             </h1>
           </div>
           <p className="text-zinc-400 text-xs italic font-semibold">
-            {t('privacy.lastUpdated')}
+            {data.lastUpdated}
           </p>
         </div>
 
