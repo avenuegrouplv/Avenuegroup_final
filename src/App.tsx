@@ -23,6 +23,7 @@ const CheckoutPage = React.lazy(() => import('./components/CheckoutPage'));
 const TermsOfServicePage = React.lazy(() => import('./components/TermsOfServicePage'));
 const ContractTemplatesPage = React.lazy(() => import('./components/ContractTemplatesPage').then(module => ({ default: module.ContractTemplatesPage })));
 const CustomDynamicPage = React.lazy(() => import('./components/CustomDynamicPage').then(module => ({ default: module.CustomDynamicPage })));
+const AdminPage = React.lazy(() => import('./components/AdminPage'));
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -197,6 +198,25 @@ const AppContent: React.FC = () => {
       canonicalLink.setAttribute('href', `https://avenuegroup.lv${cleanPath || '/'}`);
     }
   }, [location.pathname, language]);
+
+  const isAdminPage = location.pathname.startsWith('/admin');
+
+  if (isAdminPage) {
+    return (
+      <div className="min-h-screen bg-white">
+        <React.Suspense fallback={
+          <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-50 text-zinc-950 font-sans p-6">
+            <div className="w-10 h-10 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+            <div className="font-bold tracking-widest text-xs uppercase text-zinc-500">Uzsāk Keystatic...</div>
+          </div>
+        }>
+          <Routes>
+            <Route path="/admin/*" element={<AdminPage />} />
+          </Routes>
+        </React.Suspense>
+      </div>
+    );
+  }
 
   return (
     <div id="top" className="min-h-screen selection:bg-yellow-200 selection:text-zinc-900 bg-[#ebebeb] text-zinc-900">
