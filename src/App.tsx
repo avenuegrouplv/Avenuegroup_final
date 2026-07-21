@@ -199,9 +199,14 @@ const AppContent: React.FC = () => {
     }
   }, [location.pathname, language]);
 
+  const isKeystaticPage = location.pathname.startsWith('/keystatic');
   const isAdminPage = location.pathname.startsWith('/admin');
 
   if (isAdminPage) {
+    return <Navigate to="/keystatic" replace />;
+  }
+
+  if (isKeystaticPage) {
     return (
       <div className="min-h-screen bg-white">
         <React.Suspense fallback={
@@ -211,7 +216,7 @@ const AppContent: React.FC = () => {
           </div>
         }>
           <Routes>
-            <Route path="/admin/*" element={<AdminPage />} />
+            <Route path="/keystatic/*" element={<AdminPage />} />
           </Routes>
         </React.Suspense>
       </div>
