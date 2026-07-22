@@ -23,7 +23,6 @@ const CheckoutPage = React.lazy(() => import('./components/CheckoutPage'));
 const TermsOfServicePage = React.lazy(() => import('./components/TermsOfServicePage'));
 const ContractTemplatesPage = React.lazy(() => import('./components/ContractTemplatesPage').then(module => ({ default: module.ContractTemplatesPage })));
 const CustomDynamicPage = React.lazy(() => import('./components/CustomDynamicPage').then(module => ({ default: module.CustomDynamicPage })));
-const AdminPage = React.lazy(() => import('./components/AdminPage'));
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -234,29 +233,6 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => {
-  const isKeystatic = window.location.pathname.startsWith('/keystatic');
-  const isAdmin = window.location.pathname.startsWith('/admin');
-
-  if (isAdmin) {
-    window.location.replace('/keystatic');
-    return null;
-  }
-
-  if (isKeystatic) {
-    return (
-      <div className="min-h-screen bg-white">
-        <React.Suspense fallback={
-          <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-50 text-zinc-950 font-sans p-6">
-            <div className="w-10 h-10 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-            <div className="font-bold tracking-widest text-xs uppercase text-zinc-500">Uzsāk Keystatic...</div>
-          </div>
-        }>
-          <AdminPage />
-        </React.Suspense>
-      </div>
-    );
-  }
-
   return (
     <LanguageProvider>
       <Router>

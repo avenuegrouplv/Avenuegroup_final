@@ -2,8 +2,6 @@ import express from "express";
 import path from "path";
 import fs from "fs";
 import dotenv from "dotenv";
-import { makeGenericAPIRouteHandler } from "@keystatic/core/api/generic";
-import keystaticConfig from "./keystatic.config";
 
 // Load environment variables from .env file if present
 dotenv.config();
@@ -12,14 +10,6 @@ dotenv.config();
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = "production";
 }
-
-// Create the Keystatic API route handler
-const keystaticApiHandler = makeGenericAPIRouteHandler({
-  config: keystaticConfig,
-  clientId: process.env.KEYSTATIC_GITHUB_CLIENT_ID,
-  clientSecret: process.env.KEYSTATIC_GITHUB_CLIENT_SECRET,
-  secret: process.env.KEYSTATIC_SECRET || "a-very-secure-random-secret-key-for-session-signing-12345",
-});
 
 async function startServer() {
   const app = express();
@@ -33,46 +23,6 @@ async function startServer() {
   // Health check API endpoint
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", env: process.env.NODE_ENV });
-  });
-
-  // Keystatic CMS API routes
-  app.all("/api/keystatic/*", async (req, res) => {
-    try {
-      const protocol = req.protocol;
-      const host = req.get("host");
-      const fullUrl = `${protocol}://${host}${req.originalUrl}`;
-
-      const init: RequestInit = {
-        method: req.method,
-        headers: req.headers as Record<string, string>,
-      };
-
-      if (req.method !== "GET" && req.method !== "HEAD") {
-        if (req.body) {
-          init.body = typeof req.body === "string" ? req.body : JSON.stringify(req.body);
-        }
-      }
-
-      const webReq = new Request(fullUrl, init);
-      const result = await keystaticApiHandler(webReq);
-
-      res.status(result.status);
-
-      if (result.headers) {
-        for (const [key, val] of result.headers as any) {
-          res.setHeader(key, val);
-        }
-      }
-
-      if (result.body) {
-        res.send(result.body);
-      } else {
-        res.end();
-      }
-    } catch (err) {
-      console.error("Keystatic API error:", err);
-      res.status(500).send("Internal Server Error");
-    }
   });
 
   // Vite middleware for development or serving assets in production
