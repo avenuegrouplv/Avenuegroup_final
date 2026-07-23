@@ -826,6 +826,6 @@ collections:
                 label: "Saturs (Rindkopas / Paragraphs)"
                 widget: list
                 fields:
-                  name: paragraph
-                  label: "Rindkopa / Paragraph"
-                  widget: text
+                  - name: paragraph
+                    label: "Rindkopa / Paragraph"
+                    widget: text
