@@ -784,4 +784,7 @@ collections:
               - name: content
                 label: "Saturs (Rindkopas / Paragraphs)"
                 widget: list
-                field: { name: paragraph, label: "Rindkopa / Paragraph", widget: text }
+                  fields:
+    - name: paragraph
+      label: "Rindkopa / Paragraph"
+      widget: text
