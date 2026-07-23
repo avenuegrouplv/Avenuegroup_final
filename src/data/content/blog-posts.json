@@ -334,10 +334,14 @@
     },
     {
       "id": 15,
-      "slug": "Bez attēla",
+      "slug": "jauns-ieraksts",
       "image": "/images/uploads/background1.png",
-      "title": "Jauns bloga ieraksts",
-      "excerpt": "Šeit teksts vēl sekos"
+      "title": "Te būs jauns bloga ieraksts",
+      "excerpt": "Šeit teksts vēl sekos",
+      "content": [
+        "Šajā gadijumā ir jāskatās ko darīt",
+        "Un tad jau redzēsim"
+      ]
     }
   ]
 }
