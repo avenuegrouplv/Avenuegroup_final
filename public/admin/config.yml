@@ -312,7 +312,8 @@ collections:
           - name: images
             label: "Attēli / Images"
             widget: list
-            field: { name: image, label: "Attēls", widget: image }
+            field:
+              - { name: image, label: "Attēls", widget: image }
 
           - name: translations
             label: "Tulkojumi / Translations"
