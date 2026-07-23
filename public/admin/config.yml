@@ -1,0 +1,477 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: simple
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+locale: "en"
+
+# Reusable YAML Anchors for Multilingual Objects ({ lv, en, ru, de })
+i18n_fields: &i18n_fields
+  - { name: lv, label: "Latviešu (LV)", widget: string, required: false }
+  - { name: en, label: "English (EN)", widget: string, required: false }
+  - { name: ru, label: "Русский (RU)", widget: string, required: false }
+  - { name: de, label: "Deutsch (DE)", widget: string, required: false }
+
+i18n_textarea_fields: &i18n_textarea_fields
+  - { name: lv, label: "Latviešu (LV)", widget: text, required: false }
+  - { name: en, label: "English (EN)", widget: text, required: false }
+  - { name: ru, label: "Русский (RU)", widget: text, required: false }
+  - { name: de, label: "Deutsch (DE)", widget: text, required: false }
+
+i18n_markdown_fields: &i18n_markdown_fields
+  - { name: lv, label: "Latviešu (LV)", widget: markdown, required: false }
+  - { name: en, label: "English (EN)", widget: markdown, required: false }
+  - { name: ru, label: "Русский (RU)", widget: markdown, required: false }
+  - { name: de, label: "Deutsch (DE)", widget: markdown, required: false }
+
+collections:
+  - name: "content"
+    label: "Satura Vadība / Content Management"
+    files:
+      # 1. Homepage
+      - name: "homepage"
+        label: "Sākumlapa / Homepage"
+        file: "src/data/content/homepage.json"
+        fields:
+          - name: hero
+            label: "Hero Sadaļa / Hero Section"
+            widget: object
+            fields:
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+              - { name: cta, label: "Poga (Galvenā)", widget: object, fields: *i18n_fields }
+              - { name: secondaryCta, label: "Poga (Sekundārā)", widget: object, fields: *i18n_fields }
+              - { name: image, label: "Attēls", widget: image, required: false }
+              - name: stats
+                label: "Statistika / Stats"
+                widget: list
+                fields:
+                  - { name: number, label: "Skaitlis", widget: string }
+                  - { name: label, label: "Nosaukums", widget: object, fields: *i18n_fields }
+
+          - name: statsSection
+            label: "Statistikas Sadaļa / Stats Section"
+            widget: object
+            fields:
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+              - name: items
+                label: "Elementi / Items"
+                widget: list
+                fields:
+                  - { name: number, label: "Skaitlis", widget: string }
+                  - { name: label, label: "Nosaukums", widget: object, fields: *i18n_fields }
+                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
+
+          - name: benefits
+            label: "Ieguvumi / Benefits"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+              - { name: cta, label: "Poga (Galvenā)", widget: object, fields: *i18n_fields }
+              - { name: secondaryCta, label: "Poga (Sekundārā)", widget: object, fields: *i18n_fields }
+              - name: features
+                label: "Funkcijas / Features"
+                widget: list
+                fields:
+                  - { name: icon, label: "Ikona", widget: string }
+                  - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
+
+          - name: servicesSection
+            label: "Pakalpojumu Sadaļa / Services Section"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+              - { name: cta, label: "Poga", widget: object, fields: *i18n_fields }
+
+          - name: documentsSection
+            label: "Dokumentu Sadaļa / Documents Section"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+              - { name: cta, label: "Poga", widget: object, fields: *i18n_fields }
+              - { name: viewAll, label: "Skatīt Visus", widget: object, fields: *i18n_fields }
+
+          - name: usefulInfoSection
+            label: "Noderīgā Informācija / Useful Info Section"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+              - { name: viewAll, label: "Skatīt Visus", widget: object, fields: *i18n_fields }
+              - { name: readMore, label: "Lasīt Vairāk", widget: object, fields: *i18n_fields }
+
+          - name: testimonialsSection
+            label: "Atsauksmju Sadaļa / Testimonials Section"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+
+          - name: ctaSection
+            label: "CTA Sadaļa / Call to Action Section"
+            widget: object
+            fields:
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+              - { name: primaryCta, label: "Galvenā Poga", widget: object, fields: *i18n_fields }
+              - { name: secondaryCta, label: "Sekundārā Poga", widget: object, fields: *i18n_fields }
+
+      # 2. About Us
+      - name: "about"
+        label: "Par Mums / About Us"
+        file: "src/data/content/about.json"
+        fields:
+          - name: hero
+            label: "Hero Sadaļa"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+              - { name: image, label: "Attēls", widget: image, required: false }
+
+          - name: mission
+            label: "Misija / Mission"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: text1, label: "Teksts 1", widget: object, fields: *i18n_textarea_fields }
+              - { name: text2, label: "Teksts 2", widget: object, fields: *i18n_textarea_fields }
+              - { name: text3, label: "Teksts 3", widget: object, fields: *i18n_textarea_fields }
+
+          - name: values
+            label: "Vērtības / Values"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - name: items
+                label: "Vērtību Saraksts"
+                widget: list
+                fields:
+                  - { name: icon, label: "Ikona", widget: string }
+                  - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
+
+          - name: team
+            label: "Komanda / Team"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+              - name: members
+                label: "Komandas Biedri"
+                widget: list
+                fields:
+                  - { name: name, label: "Vārds Uzvārds", widget: string }
+                  - { name: role, label: "Amats / Role", widget: object, fields: *i18n_fields }
+                  - { name: experience, label: "Pieredze", widget: object, fields: *i18n_fields }
+                  - { name: bio, label: "Biogrāfija", widget: object, fields: *i18n_textarea_fields }
+                  - { name: image, label: "Fotoattēls", widget: image, required: false }
+                  - { name: email, label: "E-pasts", widget: string, required: false }
+                  - { name: phone, label: "Tālrunis", widget: string, required: false }
+
+          - name: certifications
+            label: "Sertifikāti / Certifications"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - name: items
+                label: "Sertifikātu Saraksts"
+                widget: list
+                fields:
+                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
+                  - { name: issuer, label: "Izsniedzējs", widget: object, fields: *i18n_fields }
+                  - { name: year, label: "Gads", widget: string }
+                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
+
+      # 3. Services
+      - name: "services"
+        label: "Pakalpojumi / Services"
+        file: "src/data/content/services.json"
+        fields:
+          - name: hero
+            label: "Hero Sadaļa"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+
+          - name: categories
+            label: "Kategorijas / Categories"
+            widget: list
+            fields:
+              - { name: id, label: "ID", widget: string }
+              - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
+              - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
+              - { name: icon, label: "Ikona", widget: string }
+
+          - name: services
+            label: "Pakalpojumu Saraksts / Services List"
+            widget: list
+            fields:
+              - { name: id, label: "ID", widget: string }
+              - { name: categoryId, label: "Kategorijas ID", widget: string }
+              - { name: icon, label: "Ikona", widget: string }
+              - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
+              - { name: shortDescription, label: "Īss Apraksts", widget: object, fields: *i18n_textarea_fields }
+              - { name: fullDescription, label: "Pilns Apraksts", widget: object, fields: *i18n_markdown_fields }
+              - name: features
+                label: "Funkcijas / Features"
+                widget: list
+                field: { name: feature, label: "Iezīme", widget: object, fields: *i18n_fields }
+              - { name: targetAudience, label: "Mērķauditorija", widget: object, fields: *i18n_fields }
+              - name: process
+                label: "Process / Steps"
+                widget: list
+                fields:
+                  - { name: step, label: "Solis #", widget: number }
+                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
+                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
+              - name: pricing
+                label: "Cenas / Pricing"
+                widget: object
+                fields:
+                  - { name: model, label: "Modelis", widget: object, fields: *i18n_fields }
+                  - { name: startingFrom, label: "Sākot no", widget: string }
+                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
+              - name: deliverables
+                label: "Rezultāti / Deliverables"
+                widget: list
+                field: { name: deliverable, label: "Rezultāts", widget: object, fields: *i18n_fields }
+              - name: faq
+                label: "Biežākie Jautājumi / FAQ"
+                widget: list
+                fields:
+                  - { name: question, label: "Jautājums", widget: object, fields: *i18n_fields }
+                  - { name: answer, label: "Atbilde", widget: object, fields: *i18n_textarea_fields }
+
+      # 4. Contact
+      - name: "contact"
+        label: "Kontakti / Contact Page"
+        file: "src/data/content/contact.json"
+        fields:
+          - name: hero
+            label: "Hero Sadaļa"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+
+          - name: contactInfo
+            label: "Kontaktinformācija"
+            widget: object
+            fields:
+              - { name: title, label: "Sadaļas Virsraksts", widget: object, fields: *i18n_fields }
+              - name: address
+                label: "Adrese"
+                widget: object
+                fields:
+                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
+                  - { name: value, label: "Vērtība", widget: string }
+                  - { name: link, label: "Saite / Link", widget: string, required: false }
+              - name: phone
+                label: "Tālrunis"
+                widget: object
+                fields:
+                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
+                  - { name: value, label: "Vērtība", widget: string }
+                  - { name: link, label: "Saite / Link", widget: string, required: false }
+              - name: email
+                label: "E-pasts"
+                widget: object
+                fields:
+                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
+                  - { name: value, label: "Vērtība", widget: string }
+                  - { name: link, label: "Saite / Link", widget: string, required: false }
+              - name: workingHours
+                label: "Darba Laiks"
+                widget: object
+                fields:
+                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
+                  - { name: value, label: "Vērtība", widget: object, fields: *i18n_fields }
+
+          - name: form
+            label: "Kontaktforma / Contact Form Config"
+            widget: object
+            fields:
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+              - name: fields
+                label: "Formas Lauki / Form Fields Labels"
+                widget: object
+                fields:
+                  - name: name
+                    label: "Vārda lauks"
+                    widget: object
+                    fields:
+                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
+                      - { name: placeholder, label: "Aizstājējteksts", widget: object, fields: *i18n_fields }
+                  - name: email
+                    label: "E-pasta lauks"
+                    widget: object
+                    fields:
+                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
+                      - { name: placeholder, label: "Aizstājējteksts", widget: object, fields: *i18n_fields }
+                  - name: phone
+                    label: "Tālruņa lauks"
+                    widget: object
+                    fields:
+                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
+                      - { name: placeholder, label: "Aizstājējteksts", widget: object, fields: *i18n_fields }
+                  - name: subject
+                    label: "Temata lauks"
+                    widget: object
+                    fields:
+                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
+                      - { name: placeholder, label: "Aizstājējteksts", widget: object, fields: *i18n_fields }
+                  - name: message
+                    label: "Ziņas lauks"
+                    widget: object
+                    fields:
+                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
+                      - { name: placeholder, label: "Aizstājējteksts", widget: object, fields: *i18n_fields }
+                  - name: privacyConsent
+                    label: "Privātuma piekrišana"
+                    widget: object
+                    fields:
+                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
+              - { name: submitButton, label: "Iesniegšanas Poga", widget: object, fields: *i18n_fields }
+              - { name: successMessage, label: "Veiksmes Paziņojums", widget: object, fields: *i18n_fields }
+              - { name: errorMessage, label: "Kļūdas Paziņojums", widget: object, fields: *i18n_fields }
+
+          - name: map
+            label: "Karte / Map Settings"
+            widget: object
+            fields:
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: latitude, label: "Platuma grādi (Latitude)", widget: number, value_type: float }
+              - { name: longitude, label: "Garuma grādi (Longitude)", widget: number, value_type: float }
+              - { name: zoom, label: "Mērogs (Zoom)", widget: number, value_type: int }
+
+      # 5. FAQ
+      - name: "faq"
+        label: "Biežāk Uzdotie Jautājumi / FAQ"
+        file: "src/data/content/faq.json"
+        fields:
+          - name: hero
+            label: "Hero Sadaļa"
+            widget: object
+            fields:
+              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+
+          - name: categories
+            label: "Kategorijas / Categories"
+            widget: list
+            fields:
+              - { name: id, label: "ID", widget: string }
+              - { name: name, label: "Nosaukums", widget: object, fields: *i18n_fields }
+
+          - name: questions
+            label: "Jautājumi un Atbildes / Questions"
+            widget: list
+            fields:
+              - { name: id, label: "ID", widget: string }
+              - { name: categoryId, label: "Kategorijas ID", widget: string }
+              - { name: question, label: "Jautājums", widget: object, fields: *i18n_fields }
+              - { name: answer, label: "Atbilde", widget: object, fields: *i18n_textarea_fields }
+              - { name: popular, label: "Populārs / Featured", widget: boolean, default: false, required: false }
+
+          - name: stillHaveQuestions
+            label: "Vēl ir jautājumi? / Still Have Questions"
+            widget: object
+            fields:
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+              - { name: cta, label: "Poga / CTA", widget: object, fields: *i18n_fields }
+
+      # 6. Footer
+      - name: "footer"
+        label: "Kājene / Footer"
+        file: "src/data/content/footer.json"
+        fields:
+          - { name: companyDescription, label: "Uzņēmuma Apraksts", widget: object, fields: *i18n_textarea_fields }
+          - { name: quickLinksTitle, label: "Ātrās Saites Virsraksts", widget: object, fields: *i18n_fields }
+          - { name: servicesTitle, label: "Pakalpojumu Virsraksts", widget: object, fields: *i18n_fields }
+          - { name: contactTitle, label: "Kontaktu Virsraksts", widget: object, fields: *i18n_fields }
+          - { name: legalTitle, label: "Juridiskās Informācijas Virsraksts", widget: object, fields: *i18n_fields }
+          - { name: copyright, label: "Autortiesības", widget: object, fields: *i18n_fields }
+          - { name: privacyPolicy, label: "Privātuma Politika", widget: object, fields: *i18n_fields }
+          - { name: termsOfService, label: "Lietošanas Noteikumi", widget: object, fields: *i18n_fields }
+          - { name: cookiePolicy, label: "Sīkfailu Politika", widget: object, fields: *i18n_fields }
+
+      # 7. Site Settings
+      - name: "site-settings"
+        label: "Mājaslapas Iestatījumi / Site Settings"
+        file: "src/data/content/site-settings.json"
+        fields:
+          - { name: companyName, label: "Uzņēmuma Nosaukums", widget: string }
+          - { name: registrationNumber, label: "Reģistrācijas Numurs", widget: string }
+          - { name: vatNumber, label: "PVN Numurs", widget: string }
+          - { name: address, label: "Juridiskā Adrese", widget: string }
+          - { name: phone, label: "Tālrunis", widget: string }
+          - { name: email, label: "E-pasts", widget: string }
+          - { name: workingHours, label: "Darba Laiks", widget: object, fields: *i18n_fields }
+          - name: socialLinks
+            label: "Sociālo Tīklu Saites"
+            widget: object
+            fields:
+              - { name: facebook, label: "Facebook", widget: string, required: false }
+              - { name: linkedin, label: "LinkedIn", widget: string, required: false }
+              - { name: instagram, label: "Instagram", widget: string, required: false }
+
+      # 8. SEO
+      - name: "seo"
+        label: "SEO Iestatījumi / SEO Settings"
+        file: "src/data/content/seo.json"
+        fields:
+          - { name: defaultTitle, label: "Noklusējuma Virsraksts", widget: string }
+          - { name: titleTemplate, label: "Virsraksta Veidne (Template)", widget: string }
+          - { name: defaultDescription, label: "Noklusējuma Apraksts", widget: object, fields: *i18n_textarea_fields }
+          - { name: defaultKeywords, label: "Atslēgvārdi", widget: object, fields: *i18n_fields }
+          - { name: ogImage, label: "OpenGraph Attēls (Social Share)", widget: image, required: false }
+          - { name: siteUrl, label: "Mājaslapas URL", widget: string }
+
+      # 9. Blog Posts
+      - name: "blog-posts"
+        label: "Bloga Raksti / Blog Posts"
+        file: "src/data/content/blog-posts.json"
+        fields:
+          - name: articles
+            label: "Rakstu Saraksts / Articles List"
+            widget: list
+            fields:
+              - { name: id, label: "ID", widget: string }
+              - { name: slug, label: "Slug / URL saite", widget: string }
+              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
+              - { name: description, label: "Īss Apraksts", widget: object, fields: *i18n_textarea_fields }
+              - { name: content, label: "Raksta Saturs (Markdown)", widget: object, fields: *i18n_markdown_fields }
+              - { name: category, label: "Kategorija", widget: object, fields: *i18n_fields }
+              - { name: author, label: "Autors", widget: string }
+              - { name: date, label: "Datums (YYYY-MM-DD)", widget: string }
+              - { name: readTime, label: "Lasīšanas Laiks", widget: string }
+              - { name: image, label: "Raksta Attēls", widget: image, required: false }
+              - { name: featured, label: "Kāvenais Raksts (Featured)", widget: boolean, default: false }
+              - name: tags
+                label: "Tirkas / Tags"
+                widget: list
+                field: { name: tag, label: "Birkas Nosaukums", widget: object, fields: *i18n_fields }
