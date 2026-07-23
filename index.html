@@ -169,6 +169,8 @@
       ]
     }
     </script>
+        <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <!-- Meta Pixel Fallback -->
@@ -176,8 +178,22 @@
       src="https://www.facebook.com/tr?id=1229292339149371&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Fallback -->
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+<div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
+
+<!-- Netlify Identity token handling -->
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function(user) {
+      if (
+        window.location.hash.includes("invite_token") ||
+        window.location.hash.includes("recovery_token")
+      ) {
+        window.netlifyIdentity.open();
+      }
+    });
+  }
+</script>
   </body>
 </html>
 
