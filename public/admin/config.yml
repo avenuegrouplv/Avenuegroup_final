@@ -340,7 +340,10 @@ collections:
                       - name: points
                         label: "Punkts / Points"
                         widget: list
-                        field: { name: point, label: "Punkts", widget: text }
+                        field:
+                          name: point
+                          label: "Punkts"
+                          widget: text
                       - { name: outro, label: "Nobeigums", widget: text }
                       - { name: costTitle, label: "Izmaksu Virsraksts", widget: string }
                       - { name: costText, label: "Izmaksu Teksts", widget: text }
@@ -366,7 +369,10 @@ collections:
                       - name: points
                         label: "Points"
                         widget: list
-                        field: { name: point, label: "Point", widget: text }
+                        field:
+                          name: point
+                          label: "Point"
+                          widget: text
                       - { name: outro, label: "Outro", widget: text }
                       - { name: costTitle, label: "Cost Title", widget: string }
                       - { name: costText, label: "Cost Text", widget: text }
@@ -392,7 +398,10 @@ collections:
                       - name: points
                         label: "Пункты"
                         widget: list
-                        field: { name: point, label: "Пункт", widget: text }
+                        field:
+                          name: point
+                          label: "Пункт"
+                          widget: text
                       - { name: outro, label: "Заключение", widget: text }
                       - { name: costTitle, label: "Заголовок стоимости", widget: string }
                       - { name: costText, label: "Текст стоимости", widget: text }
@@ -418,7 +427,10 @@ collections:
                       - name: points
                         label: "Punkte"
                         widget: list
-                        field: { name: point, label: "Punkt", widget: text }
+                        field:
+                          name: point
+                          label: "Punkt"
+                          widget: text
                       - { name: outro, label: "Fazit", widget: text }
                       - { name: costTitle, label: "Kosten Titel", widget: string }
                       - { name: costText, label: "Kosten Text", widget: text }
@@ -568,7 +580,14 @@ collections:
                     widget: list
                     fields:
                       - { name: q, label: "Jautājums", widget: string }
-                      - { name: a, label: "Atbilde", widget: list, required: false }
+                      - name: a
+                        label: "Atbilde"
+                        widget: list
+                        required: false
+                        field:
+                          name: answer
+                          label: "Atbilde"
+                          widget: text
               - name: en
                 label: "English (EN)"
                 widget: object
@@ -583,7 +602,14 @@ collections:
                     widget: list
                     fields:
                       - { name: q, label: "Question", widget: string }
-                      - { name: a, label: "Answer", widget: list, required: false }
+                      - name: a
+                        label: "Answer"
+                        widget: list
+                        required: false
+                        field:
+                          name: answer
+                          label: "Answer text"
+                          widget: text
               - name: ru
                 label: "Русский (RU)"
                 widget: object
@@ -598,7 +624,14 @@ collections:
                     widget: list
                     fields:
                       - { name: q, label: "Вопрос", widget: string }
-                      - { name: a, label: "Ответ", widget: list, required: false }
+                      - name: a
+                        label: "Ответ"
+                        widget: list
+                        required: false
+                        field:
+                          name: answer
+                          label: "Текст ответа"
+                          widget: text
               - name: de
                 label: "Deutsch (DE)"
                 widget: object
@@ -613,8 +646,15 @@ collections:
                     widget: list
                     fields:
                       - { name: q, label: "Frage", widget: string }
-                      - { name: a, label: "Antwort", widget: list, required: false }
-
+                      - name: a
+                        label: "Antwort"
+                        widget: list
+                        required: false
+                        field:
+                          name: answer
+                          label: "Antworttext"
+                          widget: text
+                    
       # 6. Footer
       - name: "footer"
         label: "Kājene / Footer"
