@@ -7,25 +7,6 @@ media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 locale: "en"
 
-# Reusable YAML Anchors for Multilingual Objects ({ lv, en, ru, de })
-i18n_fields: &i18n_fields
-  - { name: lv, label: "Latviešu (LV)", widget: string, required: false }
-  - { name: en, label: "English (EN)", widget: string, required: false }
-  - { name: ru, label: "Русский (RU)", widget: string, required: false }
-  - { name: de, label: "Deutsch (DE)", widget: string, required: false }
-
-i18n_textarea_fields: &i18n_textarea_fields
-  - { name: lv, label: "Latviešu (LV)", widget: text, required: false }
-  - { name: en, label: "English (EN)", widget: text, required: false }
-  - { name: ru, label: "Русский (RU)", widget: text, required: false }
-  - { name: de, label: "Deutsch (DE)", widget: text, required: false }
-
-i18n_markdown_fields: &i18n_markdown_fields
-  - { name: lv, label: "Latviešu (LV)", widget: markdown, required: false }
-  - { name: en, label: "English (EN)", widget: markdown, required: false }
-  - { name: ru, label: "Русский (RU)", widget: markdown, required: false }
-  - { name: de, label: "Deutsch (DE)", widget: markdown, required: false }
-
 collections:
   - name: "content"
     label: "Satura Vadība / Content Management"
@@ -36,388 +17,693 @@ collections:
         file: "src/data/content/homepage.json"
         fields:
           - name: hero
-            label: "Hero Sadaļa / Hero Section"
+            label: "Hero Sadaļa"
             widget: object
             fields:
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-              - { name: cta, label: "Poga (Galvenā)", widget: object, fields: *i18n_fields }
-              - { name: secondaryCta, label: "Poga (Sekundārā)", widget: object, fields: *i18n_fields }
               - { name: image, label: "Attēls", widget: image, required: false }
-              - name: stats
-                label: "Statistika / Stats"
-                widget: list
+              - name: translations
+                label: "Tulkojumi / Translations"
+                widget: object
                 fields:
-                  - { name: number, label: "Skaitlis", widget: string }
-                  - { name: label, label: "Nosaukums", widget: object, fields: *i18n_fields }
-
-          - name: statsSection
-            label: "Statistikas Sadaļa / Stats Section"
-            widget: object
-            fields:
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-              - name: items
-                label: "Elementi / Items"
-                widget: list
-                fields:
-                  - { name: number, label: "Skaitlis", widget: string }
-                  - { name: label, label: "Nosaukums", widget: object, fields: *i18n_fields }
-                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
+                  - name: lv
+                    label: "Latviešu (LV)"
+                    widget: object
+                    required: false
+                    fields:
+                      - { name: title, label: "Virsraksts", widget: string }
+                      - { name: subtitle, label: "Apakšvirsraksts", widget: string }
+                      - { name: description, label: "Apraksts", widget: text }
+                      - { name: contactBtn, label: "Kontaktu poga", widget: string }
+                      - { name: servicesBtn, label: "Pakalpojumu poga", widget: string }
+                  - name: en
+                    label: "English (EN)"
+                    widget: object
+                    required: false
+                    fields:
+                      - { name: title, label: "Title", widget: string }
+                      - { name: subtitle, label: "Subtitle", widget: string }
+                      - { name: description, label: "Description", widget: text }
+                      - { name: contactBtn, label: "Contact Button", widget: string }
+                      - { name: servicesBtn, label: "Services Button", widget: string }
+                  - name: ru
+                    label: "Русский (RU)"
+                    widget: object
+                    required: false
+                    fields:
+                      - { name: title, label: "Заголовок", widget: string }
+                      - { name: subtitle, label: "Подзаголовок", widget: string }
+                      - { name: description, label: "Описание", widget: text }
+                      - { name: contactBtn, label: "Кнопка контактов", widget: string }
+                      - { name: servicesBtn, label: "Кнопка услуг", widget: string }
+                  - name: de
+                    label: "Deutsch (DE)"
+                    widget: object
+                    required: false
+                    fields:
+                      - { name: title, label: "Titel", widget: string }
+                      - { name: subtitle, label: "Untertitel", widget: string }
+                      - { name: description, label: "Beschreibung", widget: text }
+                      - { name: contactBtn, label: "Kontakt-Button", widget: string }
+                      - { name: servicesBtn, label: "Dienste-Button", widget: string }
 
           - name: benefits
             label: "Ieguvumi / Benefits"
             widget: object
             fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-              - { name: cta, label: "Poga (Galvenā)", widget: object, fields: *i18n_fields }
-              - { name: secondaryCta, label: "Poga (Sekundārā)", widget: object, fields: *i18n_fields }
-              - name: features
-                label: "Funkcijas / Features"
-                widget: list
+              - name: q1
+                label: "Jautājums 1 (Mērķauditorija)"
+                widget: object
                 fields:
-                  - { name: icon, label: "Ikona", widget: string }
-                  - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
+                  - name: translations
+                    label: "Tulkojumi"
+                    widget: object
+                    fields:
+                      - name: lv
+                        label: "Latviešu (LV)"
+                        widget: object
+                        required: false
+                        fields:
+                          - { name: title, label: "Virsraksts", widget: string }
+                          - { name: subtitle, label: "Apakšvirsraksts", widget: string }
+                          - name: items
+                            label: "Punkti / Items"
+                            widget: list
+                            fields:
+                              - { name: title, label: "Virsraksts", widget: string }
+                              - { name: desc, label: "Apraksts", widget: text }
+                      - name: en
+                        label: "English (EN)"
+                        widget: object
+                        required: false
+                        fields:
+                          - { name: title, label: "Title", widget: string }
+                          - { name: subtitle, label: "Subtitle", widget: string }
+                          - name: items
+                            label: "Items"
+                            widget: list
+                            fields:
+                              - { name: title, label: "Title", widget: string }
+                              - { name: desc, label: "Description", widget: text }
+                      - name: ru
+                        label: "Русский (RU)"
+                        widget: object
+                        required: false
+                        fields:
+                          - { name: title, label: "Заголовок", widget: string }
+                          - { name: subtitle, label: "Подзаголовок", widget: string }
+                          - name: items
+                            label: "Элементы"
+                            widget: list
+                            fields:
+                              - { name: title, label: "Заголовок", widget: string }
+                              - { name: desc, label: "Описание", widget: text }
+                      - name: de
+                        label: "Deutsch (DE)"
+                        widget: object
+                        required: false
+                        fields:
+                          - { name: title, label: "Titel", widget: string }
+                          - { name: subtitle, label: "Untertitel", widget: string }
+                          - name: items
+                            label: "Elemente"
+                            widget: list
+                            fields:
+                              - { name: title, label: "Titel", widget: string }
+                              - { name: desc, label: "Beschreibung", widget: text }
 
-          - name: servicesSection
-            label: "Pakalpojumu Sadaļa / Services Section"
-            widget: object
-            fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-              - { name: cta, label: "Poga", widget: object, fields: *i18n_fields }
-
-          - name: documentsSection
-            label: "Dokumentu Sadaļa / Documents Section"
-            widget: object
-            fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-              - { name: cta, label: "Poga", widget: object, fields: *i18n_fields }
-              - { name: viewAll, label: "Skatīt Visus", widget: object, fields: *i18n_fields }
-
-          - name: usefulInfoSection
-            label: "Noderīgā Informācija / Useful Info Section"
-            widget: object
-            fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-              - { name: viewAll, label: "Skatīt Visus", widget: object, fields: *i18n_fields }
-              - { name: readMore, label: "Lasīt Vairāk", widget: object, fields: *i18n_fields }
-
-          - name: testimonialsSection
-            label: "Atsauksmju Sadaļa / Testimonials Section"
-            widget: object
-            fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-
-          - name: ctaSection
-            label: "CTA Sadaļa / Call to Action Section"
-            widget: object
-            fields:
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-              - { name: primaryCta, label: "Galvenā Poga", widget: object, fields: *i18n_fields }
-              - { name: secondaryCta, label: "Sekundārā Poga", widget: object, fields: *i18n_fields }
+              - name: q2
+                label: "Jautājums 2 (Priekšrocības)"
+                widget: object
+                fields:
+                  - name: translations
+                    label: "Tulkojumi"
+                    widget: object
+                    fields:
+                      - name: lv
+                        label: "Latviešu (LV)"
+                        widget: object
+                        required: false
+                        fields:
+                          - { name: title, label: "Virsraksts", widget: string }
+                          - { name: subtitle, label: "Apakšvirsraksts", widget: string }
+                          - { name: suffix, label: "Sufikss 1", widget: string, required: false }
+                          - { name: suffix2, label: "Sufikss 2", widget: string, required: false }
+                          - { name: desc, label: "Apraksts", widget: text }
+                          - { name: listPrefix, label: "Saraksta prefikss", widget: string, required: false }
+                          - name: items
+                            label: "Punkti / Items"
+                            widget: list
+                            fields:
+                              - { name: title, label: "Virsraksts", widget: string }
+                              - { name: desc, label: "Apraksts", widget: text }
+                      - name: en
+                        label: "English (EN)"
+                        widget: object
+                        required: false
+                        fields:
+                          - { name: title, label: "Title", widget: string }
+                          - { name: subtitle, label: "Subtitle", widget: string }
+                          - { name: suffix, label: "Suffix 1", widget: string, required: false }
+                          - { name: suffix2, label: "Suffix 2", widget: string, required: false }
+                          - { name: desc, label: "Description", widget: text }
+                          - { name: listPrefix, label: "List Prefix", widget: string, required: false }
+                          - name: items
+                            label: "Items"
+                            widget: list
+                            fields:
+                              - { name: title, label: "Title", widget: string }
+                              - { name: desc, label: "Description", widget: text }
+                      - name: ru
+                        label: "Русский (RU)"
+                        widget: object
+                        required: false
+                        fields:
+                          - { name: title, label: "Заголовок", widget: string }
+                          - { name: subtitle, label: "Подзаголовок", widget: string }
+                          - { name: suffix, label: "Суффикс 1", widget: string, required: false }
+                          - { name: suffix2, label: "Суффикс 2", widget: string, required: false }
+                          - { name: desc, label: "Описание", widget: text }
+                          - { name: listPrefix, label: "Префикс списка", widget: string, required: false }
+                          - name: items
+                            label: "Элементы"
+                            widget: list
+                            fields:
+                              - { name: title, label: "Заголовок", widget: string }
+                              - { name: desc, label: "Описание", widget: text }
+                      - name: de
+                        label: "Deutsch (DE)"
+                        widget: object
+                        required: false
+                        fields:
+                          - { name: title, label: "Titel", widget: string }
+                          - { name: subtitle, label: "Untertitel", widget: string }
+                          - { name: suffix, label: "Suffix 1", widget: string, required: false }
+                          - { name: suffix2, label: "Suffix 2", widget: string, required: false }
+                          - { name: desc, label: "Beschreibung", widget: text }
+                          - { name: listPrefix, label: "Listenpräfix", widget: string, required: false }
+                          - name: items
+                            label: "Elemente"
+                            widget: list
+                            fields:
+                              - { name: title, label: "Titel", widget: string }
+                              - { name: desc, label: "Beschreibung", widget: text }
 
       # 2. About Us
       - name: "about"
         label: "Par Mums / About Us"
         file: "src/data/content/about.json"
         fields:
-          - name: hero
-            label: "Hero Sadaļa"
+          - name: images
+            label: "Attēli / Images"
             widget: object
             fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-              - { name: image, label: "Attēls", widget: image, required: false }
+              - { name: image1, label: "Attēls 1", widget: image, required: false }
+              - { name: image2, label: "Attēls 2", widget: image, required: false }
 
-          - name: mission
-            label: "Misija / Mission"
+          - name: translations
+            label: "Tulkojumi / Translations"
             widget: object
             fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: text1, label: "Teksts 1", widget: object, fields: *i18n_textarea_fields }
-              - { name: text2, label: "Teksts 2", widget: object, fields: *i18n_textarea_fields }
-              - { name: text3, label: "Teksts 3", widget: object, fields: *i18n_textarea_fields }
-
-          - name: values
-            label: "Vērtības / Values"
-            widget: object
-            fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - name: items
-                label: "Vērtību Saraksts"
-                widget: list
+              - name: lv
+                label: "Latviešu (LV)"
+                widget: object
+                required: false
                 fields:
-                  - { name: icon, label: "Ikona", widget: string }
-                  - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
-
-          - name: team
-            label: "Komanda / Team"
-            widget: object
-            fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-              - name: members
-                label: "Komandas Biedri"
-                widget: list
+                  - { name: backBtn, label: "Atpakaļ poga", widget: string }
+                  - { name: title, label: "Virsraksts", widget: string }
+                  - { name: subtitle, label: "Apakšvirsraksts", widget: string }
+                  - { name: highlight, label: "Izceltais teksts", widget: text }
+                  - { name: p1, label: "Otrstāvs 1. rindkopa", widget: text }
+                  - { name: p2, label: "Otrstāvs 2. rindkopa", widget: text }
+                  - { name: p3, label: "Otrstāvs 3. rindkopa", widget: text }
+                  - { name: p4, label: "Otrstāvs 4. rindkopa", widget: text }
+                  - { name: p5, label: "Otrstāvs 5. rindkopa", widget: text }
+                  - { name: imageTaglineLine1, label: "Attēla sauklis 1. rinda", widget: string }
+                  - { name: imageTaglineLine2, label: "Attēla sauklis 2. rinda", widget: string }
+                  - { name: image3TaglineLine1, label: "3. attēla sauklis 1. rinda", widget: string }
+                  - { name: image3TaglineLine2, label: "3. attēla sauklis 2. rinda", widget: string }
+                  - { name: image4TaglineLine1, label: "4. attēla sauklis 1. rinda", widget: string }
+                  - { name: image4TaglineLine2, label: "4. attēla sauklis 2. rinda", widget: string }
+              - name: en
+                label: "English (EN)"
+                widget: object
+                required: false
                 fields:
-                  - { name: name, label: "Vārds Uzvārds", widget: string }
-                  - { name: role, label: "Amats / Role", widget: object, fields: *i18n_fields }
-                  - { name: experience, label: "Pieredze", widget: object, fields: *i18n_fields }
-                  - { name: bio, label: "Biogrāfija", widget: object, fields: *i18n_textarea_fields }
-                  - { name: image, label: "Fotoattēls", widget: image, required: false }
-                  - { name: email, label: "E-pasts", widget: string, required: false }
-                  - { name: phone, label: "Tālrunis", widget: string, required: false }
-
-          - name: certifications
-            label: "Sertifikāti / Certifications"
-            widget: object
-            fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - name: items
-                label: "Sertifikātu Saraksts"
-                widget: list
+                  - { name: backBtn, label: "Back Button", widget: string }
+                  - { name: title, label: "Title", widget: string }
+                  - { name: subtitle, label: "Subtitle", widget: string }
+                  - { name: highlight, label: "Highlight Text", widget: text }
+                  - { name: p1, label: "Paragraph 1", widget: text }
+                  - { name: p2, label: "Paragraph 2", widget: text }
+                  - { name: p3, label: "Paragraph 3", widget: text }
+                  - { name: p4, label: "Paragraph 4", widget: text }
+                  - { name: p5, label: "Paragraph 5", widget: text }
+                  - { name: imageTaglineLine1, label: "Image Tagline Line 1", widget: string }
+                  - { name: imageTaglineLine2, label: "Image Tagline Line 2", widget: string }
+                  - { name: image3TaglineLine1, label: "Image 3 Tagline Line 1", widget: string }
+                  - { name: image3TaglineLine2, label: "Image 3 Tagline Line 2", widget: string }
+                  - { name: image4TaglineLine1, label: "Image 4 Tagline Line 1", widget: string }
+                  - { name: image4TaglineLine2, label: "Image 4 Tagline Line 2", widget: string }
+              - name: ru
+                label: "Русский (RU)"
+                widget: object
+                required: false
                 fields:
-                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
-                  - { name: issuer, label: "Izsniedzējs", widget: object, fields: *i18n_fields }
-                  - { name: year, label: "Gads", widget: string }
-                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
+                  - { name: backBtn, label: "Кнопка Назад", widget: string }
+                  - { name: title, label: "Заголовок", widget: string }
+                  - { name: subtitle, label: "Подзаголовок", widget: string }
+                  - { name: highlight, label: "Выделенный текст", widget: text }
+                  - { name: p1, label: "Абзац 1", widget: text }
+                  - { name: p2, label: "Абзац 2", widget: text }
+                  - { name: p3, label: "Абзац 3", widget: text }
+                  - { name: p4, label: "Абзац 4", widget: text }
+                  - { name: p5, label: "Абзац 5", widget: text }
+                  - { name: imageTaglineLine1, label: "Слоган к фото Стр 1", widget: string }
+                  - { name: imageTaglineLine2, label: "Слоган к фото Стр 2", widget: string }
+                  - { name: image3TaglineLine1, label: "Слоган 3 Стр 1", widget: string }
+                  - { name: image3TaglineLine2, label: "Слоган 3 Стр 2", widget: string }
+                  - { name: image4TaglineLine1, label: "Слоган 4 Стр 1", widget: string }
+                  - { name: image4TaglineLine2, label: "Слоган 4 Стр 2", widget: string }
+              - name: de
+                label: "Deutsch (DE)"
+                widget: object
+                required: false
+                fields:
+                  - { name: backBtn, label: "Zurück-Button", widget: string }
+                  - { name: title, label: "Titel", widget: string }
+                  - { name: subtitle, label: "Untertitel", widget: string }
+                  - { name: highlight, label: "Hervorgehobener Text", widget: text }
+                  - { name: p1, label: "Absatz 1", widget: text }
+                  - { name: p2, label: "Absatz 2", widget: text }
+                  - { name: p3, label: "Absatz 3", widget: text }
+                  - { name: p4, label: "Absatz 4", widget: text }
+                  - { name: p5, label: "Absatz 5", widget: text }
+                  - { name: imageTaglineLine1, label: "Bild Slogan Zeile 1", widget: string }
+                  - { name: imageTaglineLine2, label: "Bild Slogan Zeile 2", widget: string }
+                  - { name: image3TaglineLine1, label: "Bild 3 Slogan Zeile 1", widget: string }
+                  - { name: image3TaglineLine2, label: "Bild 3 Slogan Zeile 2", widget: string }
+                  - { name: image4TaglineLine1, label: "Bild 4 Slogan Zeile 1", widget: string }
+                  - { name: image4TaglineLine2, label: "Bild 4 Slogan Zeile 2", widget: string }
 
       # 3. Services
       - name: "services"
         label: "Pakalpojumi / Services"
         file: "src/data/content/services.json"
         fields:
-          - name: hero
-            label: "Hero Sadaļa"
+          - name: images
+            label: "Attēli / Images"
+            widget: list
+            field: { name: image, label: "Attēls", widget: image }
+
+          - name: translations
+            label: "Tulkojumi / Translations"
             widget: object
             fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-
-          - name: categories
-            label: "Kategorijas / Categories"
-            widget: list
-            fields:
-              - { name: id, label: "ID", widget: string }
-              - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
-              - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
-              - { name: icon, label: "Ikona", widget: string }
-
-          - name: services
-            label: "Pakalpojumu Saraksts / Services List"
-            widget: list
-            fields:
-              - { name: id, label: "ID", widget: string }
-              - { name: categoryId, label: "Kategorijas ID", widget: string }
-              - { name: icon, label: "Ikona", widget: string }
-              - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
-              - { name: shortDescription, label: "Īss Apraksts", widget: object, fields: *i18n_textarea_fields }
-              - { name: fullDescription, label: "Pilns Apraksts", widget: object, fields: *i18n_markdown_fields }
-              - name: features
-                label: "Funkcijas / Features"
-                widget: list
-                field: { name: feature, label: "Iezīme", widget: object, fields: *i18n_fields }
-              - { name: targetAudience, label: "Mērķauditorija", widget: object, fields: *i18n_fields }
-              - name: process
-                label: "Process / Steps"
-                widget: list
-                fields:
-                  - { name: step, label: "Solis #", widget: number }
-                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
-                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
-              - name: pricing
-                label: "Cenas / Pricing"
+              - name: lv
+                label: "Latviešu (LV)"
                 widget: object
+                required: false
                 fields:
-                  - { name: model, label: "Modelis", widget: object, fields: *i18n_fields }
-                  - { name: startingFrom, label: "Sākot no", widget: string }
-                  - { name: description, label: "Apraksts", widget: object, fields: *i18n_textarea_fields }
-              - name: deliverables
-                label: "Rezultāti / Deliverables"
-                widget: list
-                field: { name: deliverable, label: "Rezultāts", widget: object, fields: *i18n_fields }
-              - name: faq
-                label: "Biežākie Jautājumi / FAQ"
-                widget: list
+                  - { name: backBtn, label: "Atpakaļ poga", widget: string }
+                  - { name: title, label: "Virsraksts", widget: string }
+                  - { name: subtitle, label: "Apakšvirsraksts", widget: string }
+                  - { name: description, label: "Apraksts", widget: text }
+                  - { name: learnMore, label: "Uzzināt vairāk", widget: string }
+                  - { name: vatText, label: "PVN Teksts", widget: text }
+                  - name: items
+                    label: "Pakalpojumu Saraksts / Services Items"
+                    widget: list
+                    fields:
+                      - { name: id, label: "ID", widget: number, value_type: int }
+                      - { name: title, label: "Virsraksts", widget: string }
+                      - { name: desc, label: "Īss apraksts", widget: text }
+                      - { name: intro, label: "Ievads", widget: text }
+                      - name: points
+                        label: "Punkts / Points"
+                        widget: list
+                        field: { name: point, label: "Punkts", widget: text }
+                      - { name: outro, label: "Nobeigums", widget: text }
+                      - { name: costTitle, label: "Izmaksu Virsraksts", widget: string }
+                      - { name: costText, label: "Izmaksu Teksts", widget: text }
+              - name: en
+                label: "English (EN)"
+                widget: object
+                required: false
                 fields:
-                  - { name: question, label: "Jautājums", widget: object, fields: *i18n_fields }
-                  - { name: answer, label: "Atbilde", widget: object, fields: *i18n_textarea_fields }
+                  - { name: backBtn, label: "Back Button", widget: string }
+                  - { name: title, label: "Title", widget: string }
+                  - { name: subtitle, label: "Subtitle", widget: string }
+                  - { name: description, label: "Description", widget: text }
+                  - { name: learnMore, label: "Learn More", widget: string }
+                  - { name: vatText, label: "VAT Text", widget: text }
+                  - name: items
+                    label: "Services Items"
+                    widget: list
+                    fields:
+                      - { name: id, label: "ID", widget: number, value_type: int }
+                      - { name: title, label: "Title", widget: string }
+                      - { name: desc, label: "Short Description", widget: text }
+                      - { name: intro, label: "Intro", widget: text }
+                      - name: points
+                        label: "Points"
+                        widget: list
+                        field: { name: point, label: "Point", widget: text }
+                      - { name: outro, label: "Outro", widget: text }
+                      - { name: costTitle, label: "Cost Title", widget: string }
+                      - { name: costText, label: "Cost Text", widget: text }
+              - name: ru
+                label: "Русский (RU)"
+                widget: object
+                required: false
+                fields:
+                  - { name: backBtn, label: "Кнопка Назад", widget: string }
+                  - { name: title, label: "Заголовок", widget: string }
+                  - { name: subtitle, label: "Подзаголовок", widget: string }
+                  - { name: description, label: "Описание", widget: text }
+                  - { name: learnMore, label: "Узнать больше", widget: string }
+                  - { name: vatText, label: "Текст НДС", widget: text }
+                  - name: items
+                    label: "Элементы услуг"
+                    widget: list
+                    fields:
+                      - { name: id, label: "ID", widget: number, value_type: int }
+                      - { name: title, label: "Заголовок", widget: string }
+                      - { name: desc, label: "Краткое описание", widget: text }
+                      - { name: intro, label: "Введение", widget: text }
+                      - name: points
+                        label: "Пункты"
+                        widget: list
+                        field: { name: point, label: "Пункт", widget: text }
+                      - { name: outro, label: "Заключение", widget: text }
+                      - { name: costTitle, label: "Заголовок стоимости", widget: string }
+                      - { name: costText, label: "Текст стоимости", widget: text }
+              - name: de
+                label: "Deutsch (DE)"
+                widget: object
+                required: false
+                fields:
+                  - { name: backBtn, label: "Zurück-Button", widget: string }
+                  - { name: title, label: "Titel", widget: string }
+                  - { name: subtitle, label: "Untertitel", widget: string }
+                  - { name: description, label: "Beschreibung", widget: text }
+                  - { name: learnMore, label: "Mehr erfahren", widget: string }
+                  - { name: vatText, label: "MwSt. Text", widget: text }
+                  - name: items
+                    label: "Leistungselemente"
+                    widget: list
+                    fields:
+                      - { name: id, label: "ID", widget: number, value_type: int }
+                      - { name: title, label: "Titel", widget: string }
+                      - { name: desc, label: "Kurzbeschreibung", widget: text }
+                      - { name: intro, label: "Einleitung", widget: text }
+                      - name: points
+                        label: "Punkte"
+                        widget: list
+                        field: { name: point, label: "Punkt", widget: text }
+                      - { name: outro, label: "Fazit", widget: text }
+                      - { name: costTitle, label: "Kosten Titel", widget: string }
+                      - { name: costText, label: "Kosten Text", widget: text }
 
       # 4. Contact
       - name: "contact"
         label: "Kontakti / Contact Page"
         file: "src/data/content/contact.json"
         fields:
-          - name: hero
-            label: "Hero Sadaļa"
-            widget: object
-            fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
+          - { name: email, label: "E-pasts", widget: string }
+          - { name: phone, label: "Tālrunis", widget: string }
+          - { name: netlifyFormName, label: "Netlify Formas Nosaukums", widget: string }
 
-          - name: contactInfo
-            label: "Kontaktinformācija"
+          - name: translations
+            label: "Tulkojumi / Translations"
             widget: object
             fields:
-              - { name: title, label: "Sadaļas Virsraksts", widget: object, fields: *i18n_fields }
-              - name: address
-                label: "Adrese"
+              - name: lv
+                label: "Latviešu (LV)"
                 widget: object
+                required: false
                 fields:
-                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
-                  - { name: value, label: "Vērtība", widget: string }
-                  - { name: link, label: "Saite / Link", widget: string, required: false }
-              - name: phone
-                label: "Tālrunis"
+                  - { name: backBtn, label: "Atpakaļ poga", widget: string }
+                  - { name: title, label: "Virsraksts", widget: string }
+                  - { name: subtitle, label: "Apakšvirsraksts", widget: string }
+                  - { name: formTitle, label: "Formas Virsraksts", widget: string }
+                  - { name: formSubtitle, label: "Formas Apakšvirsraksts", widget: string }
+                  - { name: formBoxTitle, label: "Formas Rāmja Virsraksts", widget: string }
+                  - { name: labelName, label: "Vārda lauka etiķete", widget: string }
+                  - { name: labelCompany, label: "Uzņēmuma lauka etiķete", widget: string }
+                  - { name: labelEmail, label: "E-pasta lauka etiķete", widget: string }
+                  - { name: labelPhone, label: "Tālruņa lauka etiķete", widget: string }
+                  - { name: labelMessage, label: "Ziņas lauka etiķete", widget: string }
+                  - { name: consentText, label: "Piekrišanas teksts", widget: string }
+                  - { name: privacyLink, label: "Privātuma saites teksts", widget: string }
+                  - { name: submitBtn, label: "Iesniegšanas poga", widget: string }
+                  - { name: submitting, label: "Iesniegšanas procesa teksts", widget: string }
+                  - { name: successTitle, label: "Veiksmes virsraksts", widget: string }
+                  - { name: successMessage, label: "Veiksmes ziņojums", widget: text }
+                  - { name: newRequestBtn, label: "Jaunā pieteikuma poga", widget: string }
+                  - { name: infoTitle, label: "Informācijas virsraksts", widget: string }
+                  - { name: infoSubtitle, label: "Informācijas apakšvirsraksts", widget: string }
+                  - { name: callUs, label: "Zvaniet mums teksts", widget: string }
+                  - { name: writeUs, label: "Rakstiet mums teksts", widget: string }
+              - name: en
+                label: "English (EN)"
                 widget: object
+                required: false
                 fields:
-                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
-                  - { name: value, label: "Vērtība", widget: string }
-                  - { name: link, label: "Saite / Link", widget: string, required: false }
-              - name: email
-                label: "E-pasts"
+                  - { name: backBtn, label: "Back Button", widget: string }
+                  - { name: title, label: "Title", widget: string }
+                  - { name: subtitle, label: "Subtitle", widget: string }
+                  - { name: formTitle, label: "Form Title", widget: string }
+                  - { name: formSubtitle, label: "Form Subtitle", widget: string }
+                  - { name: formBoxTitle, label: "Form Box Title", widget: string }
+                  - { name: labelName, label: "Label Name", widget: string }
+                  - { name: labelCompany, label: "Label Company", widget: string }
+                  - { name: labelEmail, label: "Label Email", widget: string }
+                  - { name: labelPhone, label: "Label Phone", widget: string }
+                  - { name: labelMessage, label: "Label Message", widget: string }
+                  - { name: consentText, label: "Consent Text", widget: string }
+                  - { name: privacyLink, label: "Privacy Link Text", widget: string }
+                  - { name: submitBtn, label: "Submit Button", widget: string }
+                  - { name: submitting, label: "Submitting Text", widget: string }
+                  - { name: successTitle, label: "Success Title", widget: string }
+                  - { name: successMessage, label: "Success Message", widget: text }
+                  - { name: newRequestBtn, label: "New Request Button", widget: string }
+                  - { name: infoTitle, label: "Info Title", widget: string }
+                  - { name: infoSubtitle, label: "Info Subtitle", widget: string }
+                  - { name: callUs, label: "Call Us Text", widget: string }
+                  - { name: writeUs, label: "Write Us Text", widget: string }
+              - name: ru
+                label: "Русский (RU)"
                 widget: object
+                required: false
                 fields:
-                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
-                  - { name: value, label: "Vērtība", widget: string }
-                  - { name: link, label: "Saite / Link", widget: string, required: false }
-              - name: workingHours
-                label: "Darba Laiks"
+                  - { name: backBtn, label: "Кнопка Назад", widget: string }
+                  - { name: title, label: "Заголовок", widget: string }
+                  - { name: subtitle, label: "Подзаголовок", widget: string }
+                  - { name: formTitle, label: "Заголовок формы", widget: string }
+                  - { name: formSubtitle, label: "Подзаголовок формы", widget: string }
+                  - { name: formBoxTitle, label: "Заголовок блока формы", widget: string }
+                  - { name: labelName, label: "Метка имени", widget: string }
+                  - { name: labelCompany, label: "Метка компании", widget: string }
+                  - { name: labelEmail, label: "Метка email", widget: string }
+                  - { name: labelPhone, label: "Метка телефона", widget: string }
+                  - { name: labelMessage, label: "Метка сообщения", widget: string }
+                  - { name: consentText, label: "Текст согласия", widget: string }
+                  - { name: privacyLink, label: "Ссылка на политику", widget: string }
+                  - { name: submitBtn, label: "Кнопка отправки", widget: string }
+                  - { name: submitting, label: "Текст отправки", widget: string }
+                  - { name: successTitle, label: "Заголовок успеха", widget: string }
+                  - { name: successMessage, label: "Сообщение успеха", widget: text }
+                  - { name: newRequestBtn, label: "Кнопка нового запроса", widget: string }
+                  - { name: infoTitle, label: "Заголовок инфо", widget: string }
+                  - { name: infoSubtitle, label: "Подзаголовок инфо", widget: string }
+                  - { name: callUs, label: "Текст Звоните нам", widget: string }
+                  - { name: writeUs, label: "Текст Пишите нам", widget: string }
+              - name: de
+                label: "Deutsch (DE)"
                 widget: object
+                required: false
                 fields:
-                  - { name: title, label: "Nosaukums", widget: object, fields: *i18n_fields }
-                  - { name: value, label: "Vērtība", widget: object, fields: *i18n_fields }
-
-          - name: form
-            label: "Kontaktforma / Contact Form Config"
-            widget: object
-            fields:
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-              - name: fields
-                label: "Formas Lauki / Form Fields Labels"
-                widget: object
-                fields:
-                  - name: name
-                    label: "Vārda lauks"
-                    widget: object
-                    fields:
-                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
-                      - { name: placeholder, label: "Aizstājējteksts", widget: object, fields: *i18n_fields }
-                  - name: email
-                    label: "E-pasta lauks"
-                    widget: object
-                    fields:
-                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
-                      - { name: placeholder, label: "Aizstājējteksts", widget: object, fields: *i18n_fields }
-                  - name: phone
-                    label: "Tālruņa lauks"
-                    widget: object
-                    fields:
-                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
-                      - { name: placeholder, label: "Aizstājējteksts", widget: object, fields: *i18n_fields }
-                  - name: subject
-                    label: "Temata lauks"
-                    widget: object
-                    fields:
-                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
-                      - { name: placeholder, label: "Aizstājējteksts", widget: object, fields: *i18n_fields }
-                  - name: message
-                    label: "Ziņas lauks"
-                    widget: object
-                    fields:
-                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
-                      - { name: placeholder, label: "Aizstājējteksts", widget: object, fields: *i18n_fields }
-                  - name: privacyConsent
-                    label: "Privātuma piekrišana"
-                    widget: object
-                    fields:
-                      - { name: label, label: "Etiķete", widget: object, fields: *i18n_fields }
-              - { name: submitButton, label: "Iesniegšanas Poga", widget: object, fields: *i18n_fields }
-              - { name: successMessage, label: "Veiksmes Paziņojums", widget: object, fields: *i18n_fields }
-              - { name: errorMessage, label: "Kļūdas Paziņojums", widget: object, fields: *i18n_fields }
-
-          - name: map
-            label: "Karte / Map Settings"
-            widget: object
-            fields:
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: latitude, label: "Platuma grādi (Latitude)", widget: number, value_type: float }
-              - { name: longitude, label: "Garuma grādi (Longitude)", widget: number, value_type: float }
-              - { name: zoom, label: "Mērogs (Zoom)", widget: number, value_type: int }
+                  - { name: backBtn, label: "Zurück-Button", widget: string }
+                  - { name: title, label: "Titel", widget: string }
+                  - { name: subtitle, label: "Untertitel", widget: string }
+                  - { name: formTitle, label: "Formular Titel", widget: string }
+                  - { name: formSubtitle, label: "Formular Untertitel", widget: string }
+                  - { name: formBoxTitle, label: "Formular Box Titel", widget: string }
+                  - { name: labelName, label: "Label Name", widget: string }
+                  - { name: labelCompany, label: "Label Firma", widget: string }
+                  - { name: labelEmail, label: "Label E-Mail", widget: string }
+                  - { name: labelPhone, label: "Label Telefon", widget: string }
+                  - { name: labelMessage, label: "Label Nachricht", widget: string }
+                  - { name: consentText, label: "Zustimmungstext", widget: string }
+                  - { name: privacyLink, label: "Datenschutz Link Text", widget: string }
+                  - { name: submitBtn, label: "Senden-Button", widget: string }
+                  - { name: submitting, label: "Sende-Text", widget: string }
+                  - { name: successTitle, label: "Erfolg Titel", widget: string }
+                  - { name: successMessage, label: "Erfolgsnachricht", widget: text }
+                  - { name: newRequestBtn, label: "Neuer Antrag Button", widget: string }
+                  - { name: infoTitle, label: "Info Titel", widget: string }
+                  - { name: infoSubtitle, label: "Info Untertitel", widget: string }
+                  - { name: callUs, label: "Rufen Sie uns an Text", widget: string }
+                  - { name: writeUs, label: "Schreiben Sie uns Text", widget: string }
 
       # 5. FAQ
       - name: "faq"
         label: "Biežāk Uzdotie Jautājumi / FAQ"
         file: "src/data/content/faq.json"
         fields:
-          - name: hero
-            label: "Hero Sadaļa"
+          - name: translations
+            label: "Tulkojumi / Translations"
             widget: object
             fields:
-              - { name: badge, label: "Birkas / Badge", widget: object, fields: *i18n_fields }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-
-          - name: categories
-            label: "Kategorijas / Categories"
-            widget: list
-            fields:
-              - { name: id, label: "ID", widget: string }
-              - { name: name, label: "Nosaukums", widget: object, fields: *i18n_fields }
-
-          - name: questions
-            label: "Jautājumi un Atbildes / Questions"
-            widget: list
-            fields:
-              - { name: id, label: "ID", widget: string }
-              - { name: categoryId, label: "Kategorijas ID", widget: string }
-              - { name: question, label: "Jautājums", widget: object, fields: *i18n_fields }
-              - { name: answer, label: "Atbilde", widget: object, fields: *i18n_textarea_fields }
-              - { name: popular, label: "Populārs / Featured", widget: boolean, default: false, required: false }
-
-          - name: stillHaveQuestions
-            label: "Vēl ir jautājumi? / Still Have Questions"
-            widget: object
-            fields:
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: subtitle, label: "Apakšvirsraksts", widget: object, fields: *i18n_textarea_fields }
-              - { name: cta, label: "Poga / CTA", widget: object, fields: *i18n_fields }
+              - name: lv
+                label: "Latviešu (LV)"
+                widget: object
+                required: false
+                fields:
+                  - { name: backBtn, label: "Atpakaļ poga", widget: string }
+                  - { name: title, label: "Virsraksts", widget: string }
+                  - { name: subtitle, label: "Apakšvirsraksts", widget: string }
+                  - { name: viewAll, label: "Skatīt visas atbildes", widget: string }
+                  - name: items
+                    label: "Jautājumi / Items"
+                    widget: list
+                    fields:
+                      - { name: q, label: "Jautājums", widget: string }
+                      - { name: a, label: "Atbilde", widget: list, required: false }
+              - name: en
+                label: "English (EN)"
+                widget: object
+                required: false
+                fields:
+                  - { name: backBtn, label: "Back Button", widget: string }
+                  - { name: title, label: "Title", widget: string }
+                  - { name: subtitle, label: "Subtitle", widget: string }
+                  - { name: viewAll, label: "View All", widget: string }
+                  - name: items
+                    label: "Items"
+                    widget: list
+                    fields:
+                      - { name: q, label: "Question", widget: string }
+                      - { name: a, label: "Answer", widget: list, required: false }
+              - name: ru
+                label: "Русский (RU)"
+                widget: object
+                required: false
+                fields:
+                  - { name: backBtn, label: "Кнопка Назад", widget: string }
+                  - { name: title, label: "Заголовок", widget: string }
+                  - { name: subtitle, label: "Подзаголовок", widget: string }
+                  - { name: viewAll, label: "Смотреть все", widget: string }
+                  - name: items
+                    label: "Элементы"
+                    widget: list
+                    fields:
+                      - { name: q, label: "Вопрос", widget: string }
+                      - { name: a, label: "Ответ", widget: list, required: false }
+              - name: de
+                label: "Deutsch (DE)"
+                widget: object
+                required: false
+                fields:
+                  - { name: backBtn, label: "Zurück-Button", widget: string }
+                  - { name: title, label: "Titel", widget: string }
+                  - { name: subtitle, label: "Untertitel", widget: string }
+                  - { name: viewAll, label: "Alle anzeigen", widget: string }
+                  - name: items
+                    label: "Elemente"
+                    widget: list
+                    fields:
+                      - { name: q, label: "Frage", widget: string }
+                      - { name: a, label: "Antwort", widget: list, required: false }
 
       # 6. Footer
       - name: "footer"
         label: "Kājene / Footer"
         file: "src/data/content/footer.json"
         fields:
-          - { name: companyDescription, label: "Uzņēmuma Apraksts", widget: object, fields: *i18n_textarea_fields }
-          - { name: quickLinksTitle, label: "Ātrās Saites Virsraksts", widget: object, fields: *i18n_fields }
-          - { name: servicesTitle, label: "Pakalpojumu Virsraksts", widget: object, fields: *i18n_fields }
-          - { name: contactTitle, label: "Kontaktu Virsraksts", widget: object, fields: *i18n_fields }
-          - { name: legalTitle, label: "Juridiskās Informācijas Virsraksts", widget: object, fields: *i18n_fields }
-          - { name: copyright, label: "Autortiesības", widget: object, fields: *i18n_fields }
-          - { name: privacyPolicy, label: "Privātuma Politika", widget: object, fields: *i18n_fields }
-          - { name: termsOfService, label: "Lietošanas Noteikumi", widget: object, fields: *i18n_fields }
-          - { name: cookiePolicy, label: "Sīkfailu Politika", widget: object, fields: *i18n_fields }
+          - { name: logo, label: "Logotips", widget: image, required: false }
+          - { name: facebook, label: "Facebook Saite", widget: string, required: false }
+          - { name: instagram, label: "Instagram Saite", widget: string, required: false }
+
+          - name: developer
+            label: "Izstrādātājs / Developer"
+            widget: object
+            fields:
+              - { name: name, label: "Nosaukums", widget: string }
+              - { name: url, label: "URL saite", widget: string }
+
+          - name: company
+            label: "Uzņēmums / Company"
+            widget: object
+            fields:
+              - { name: name, label: "Nosaukums", widget: string }
+              - { name: regNo, label: "Reģistrācijas Numurs", widget: string }
+              - { name: pvnNo, label: "PVN Numurs", widget: string }
+              - { name: addressLine1, label: "Adrese Rinda 1", widget: string }
+              - { name: addressLine2, label: "Adrese Rinda 2", widget: string }
+              - { name: email, label: "E-pasts", widget: string }
+              - { name: phone, label: "Tālrunis", widget: string }
+
+          - name: translations
+            label: "Tulkojumi / Translations"
+            widget: object
+            fields:
+              - name: lv
+                label: "Latviešu (LV)"
+                widget: object
+                required: false
+                fields:
+                  - { name: aboutTitle, label: "Par mums virsraksts", widget: string }
+                  - { name: followTitle, label: "Sekojiet mums virsraksts", widget: string }
+                  - { name: contactTitle, label: "Kontaktinformācija virsraksts", widget: string }
+                  - { name: addressLabel, label: "Juridiskās adreses etiķete", widget: string }
+                  - { name: rights, label: "Autortiesību teksts", widget: string }
+                  - { name: privacy, label: "Privātuma politika teksts", widget: string }
+                  - { name: cookies, label: "Sīkdatņu politika teksts", widget: string }
+                  - { name: terms, label: "Lietošanas noteikumi teksts", widget: string }
+                  - { name: developerLabel, label: "Izstrādātāja etiķete", widget: string }
+              - name: en
+                label: "English (EN)"
+                widget: object
+                required: false
+                fields:
+                  - { name: aboutTitle, label: "About Us Title", widget: string }
+                  - { name: followTitle, label: "Follow Us Title", widget: string }
+                  - { name: contactTitle, label: "Contact Info Title", widget: string }
+                  - { name: addressLabel, label: "Address Label", widget: string }
+                  - { name: rights, label: "Rights Reserved Text", widget: string }
+                  - { name: privacy, label: "Privacy Policy Text", widget: string }
+                  - { name: cookies, label: "Cookie Policy Text", widget: string }
+                  - { name: terms, label: "Terms Text", widget: string }
+                  - { name: developerLabel, label: "Developer Label", widget: string }
+              - name: ru
+                label: "Русский (RU)"
+                widget: object
+                required: false
+                fields:
+                  - { name: aboutTitle, label: "Заголовок О нас", widget: string }
+                  - { name: followTitle, label: "Заголовок Подписывайтесь", widget: string }
+                  - { name: contactTitle, label: "Заголовок Контакты", widget: string }
+                  - { name: addressLabel, label: "Метка адреса", widget: string }
+                  - { name: rights, label: "Текст прав", widget: string }
+                  - { name: privacy, label: "Текст политики конфиденциальности", widget: string }
+                  - { name: cookies, label: "Текст cookies", widget: string }
+                  - { name: terms, label: "Текст правил", widget: string }
+                  - { name: developerLabel, label: "Метка разработчика", widget: string }
+              - name: de
+                label: "Deutsch (DE)"
+                widget: object
+                required: false
+                fields:
+                  - { name: aboutTitle, label: "Über uns Titel", widget: string }
+                  - { name: followTitle, label: "Folgen Sie uns Titel", widget: string }
+                  - { name: contactTitle, label: "Kontakt Info Titel", widget: string }
+                  - { name: addressLabel, label: "Adresse Label", widget: string }
+                  - { name: rights, label: "Rechte Text", widget: string }
+                  - { name: privacy, label: "Datenschutz Text", widget: string }
+                  - { name: cookies, label: "Cookie Text", widget: string }
+                  - { name: terms, label: "AGB Text", widget: string }
+                  - { name: developerLabel, label: "Entwickler Label", widget: string }
 
       # 7. Site Settings
       - name: "site-settings"
@@ -425,31 +711,62 @@ collections:
         file: "src/data/content/site-settings.json"
         fields:
           - { name: companyName, label: "Uzņēmuma Nosaukums", widget: string }
-          - { name: registrationNumber, label: "Reģistrācijas Numurs", widget: string }
-          - { name: vatNumber, label: "PVN Numurs", widget: string }
-          - { name: address, label: "Juridiskā Adrese", widget: string }
-          - { name: phone, label: "Tālrunis", widget: string }
-          - { name: email, label: "E-pasts", widget: string }
-          - { name: workingHours, label: "Darba Laiks", widget: object, fields: *i18n_fields }
-          - name: socialLinks
-            label: "Sociālo Tīklu Saites"
+          - { name: regNo, label: "Reģistrācijas Numurs", widget: string }
+          - { name: vatNo, label: "PVN Numurs", widget: string }
+          - { name: logo, label: "Lielais Logotips", widget: image, required: false }
+          - { name: smallLogo, label: "Mazais Logotips", widget: image, required: false }
+          - { name: facebookUrl, label: "Facebook URL", widget: string, required: false }
+          - { name: instagramUrl, label: "Instagram URL", widget: string, required: false }
+          - name: developer
+            label: "Izstrādātājs / Developer"
             widget: object
             fields:
-              - { name: facebook, label: "Facebook", widget: string, required: false }
-              - { name: linkedin, label: "LinkedIn", widget: string, required: false }
-              - { name: instagram, label: "Instagram", widget: string, required: false }
+              - { name: name, label: "Nosaukums", widget: string }
+              - { name: url, label: "URL saite", widget: string }
 
       # 8. SEO
       - name: "seo"
         label: "SEO Iestatījumi / SEO Settings"
         file: "src/data/content/seo.json"
         fields:
-          - { name: defaultTitle, label: "Noklusējuma Virsraksts", widget: string }
-          - { name: titleTemplate, label: "Virsraksta Veidne (Template)", widget: string }
-          - { name: defaultDescription, label: "Noklusējuma Apraksts", widget: object, fields: *i18n_textarea_fields }
-          - { name: defaultKeywords, label: "Atslēgvārdi", widget: object, fields: *i18n_fields }
-          - { name: ogImage, label: "OpenGraph Attēls (Social Share)", widget: image, required: false }
-          - { name: siteUrl, label: "Mājaslapas URL", widget: string }
+          - { name: siteTitle, label: "Saites galvenais virsraksts", widget: string }
+
+          - name: translations
+            label: "Tulkojumi / Translations"
+            widget: object
+            fields:
+              - name: lv
+                label: "Latviešu (LV)"
+                widget: object
+                required: false
+                fields:
+                  - { name: title, label: "Lapas virsraksts", widget: string }
+                  - { name: description, label: "Lapas apraksts", widget: text }
+                  - { name: keywords, label: "Atslēgvārdi", widget: string }
+              - name: en
+                label: "English (EN)"
+                widget: object
+                required: false
+                fields:
+                  - { name: title, label: "Page Title", widget: string }
+                  - { name: description, label: "Page Description", widget: text }
+                  - { name: keywords, label: "Keywords", widget: string }
+              - name: ru
+                label: "Русский (RU)"
+                widget: object
+                required: false
+                fields:
+                  - { name: title, label: "Заголовок страницы", widget: string }
+                  - { name: description, label: "Описание страницы", widget: text }
+                  - { name: keywords, label: "Ключевые слова", widget: string }
+              - name: de
+                label: "Deutsch (DE)"
+                widget: object
+                required: false
+                fields:
+                  - { name: title, label: "Seitentitel", widget: string }
+                  - { name: description, label: "Seitenbeschreibung", widget: text }
+                  - { name: keywords, label: "Schlüsselwörter", widget: string }
 
       # 9. Blog Posts
       - name: "blog-posts"
@@ -460,18 +777,12 @@ collections:
             label: "Rakstu Saraksts / Articles List"
             widget: list
             fields:
-              - { name: id, label: "ID", widget: string }
+              - { name: id, label: "ID", widget: number, value_type: int }
               - { name: slug, label: "Slug / URL saite", widget: string }
-              - { name: title, label: "Virsraksts", widget: object, fields: *i18n_fields }
-              - { name: description, label: "Īss Apraksts", widget: object, fields: *i18n_textarea_fields }
-              - { name: content, label: "Raksta Saturs (Markdown)", widget: object, fields: *i18n_markdown_fields }
-              - { name: category, label: "Kategorija", widget: object, fields: *i18n_fields }
-              - { name: author, label: "Autors", widget: string }
-              - { name: date, label: "Datums (YYYY-MM-DD)", widget: string }
-              - { name: readTime, label: "Lasīšanas Laiks", widget: string }
-              - { name: image, label: "Raksta Attēls", widget: image, required: false }
-              - { name: featured, label: "Kāvenais Raksts (Featured)", widget: boolean, default: false }
-              - name: tags
-                label: "Tirkas / Tags"
+              - { name: image, label: "Attēls", widget: image, required: false }
+              - { name: title, label: "Virsraksts", widget: string }
+              - { name: excerpt, label: "Īss Izvilkums", widget: text }
+              - name: content
+                label: "Saturs (Rindkopas / Paragraphs)"
                 widget: list
-                field: { name: tag, label: "Birkas Nosaukums", widget: object, fields: *i18n_fields }
+                field: { name: paragraph, label: "Rindkopa / Paragraph", widget: text }
