@@ -42,7 +42,7 @@ if (window.netlifyIdentity) {
 
  window.netlifyIdentity.on("init", user => {
   if (user) {
-    userInfo.textContent = "Logged in: " + user.email;
+    userInfo.textContent = "Lietotājs: " + user.email;
     userInfo.style.visibility = "visible";
   } else {
     userInfo.textContent = "";
@@ -51,7 +51,7 @@ if (window.netlifyIdentity) {
 });
 
 window.netlifyIdentity.on("login", user => {
-  userInfo.textContent = "Logged in: " + user.email;
+  userInfo.textContent = "Lietotājs: " + user.email;
   userInfo.style.visibility = "visible";
 });
 
