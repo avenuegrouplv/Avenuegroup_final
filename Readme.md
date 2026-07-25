@@ -9,71 +9,48 @@
 - Decap CMS
 - Netlify Identity
 
----
+## Decap CMS
 
-# Decap CMS Setup
-
-CMS atrodas:
+CMS location:
 
 /public/admin/
 
-Faili:
+Files:
 
 - index.html
 - config.yml
 
+## Netlify Identity
 
----
+Enable:
 
-# Netlify Identity
+Netlify Dashboard → Identity → Enable Identity
 
-Nepieciešams aktivizēt:
+Invite CMS users:
 
-Netlify Dashboard
-→ Identity
-→ Enable Identity
+Identity → Invite users
 
+## Git Gateway
 
-Invite users:
+Enable:
 
-Identity
-→ Invite users
+Netlify Dashboard → Identity → Services → Git Gateway → Enable
 
+## Local development
 
----
-
-# Git Gateway
-
-Netlify:
-
-Identity
-→ Services
-→ Git Gateway
-→ Enable
-
-
----
-
-# Local development
-
-Install:
+Install dependencies:
 
 npm install
 
-
-Run:
+Run development server:
 
 npm run dev
 
-
-Build:
+Build production version:
 
 npm run build
 
-
----
-
-# Deployment
+## Deployment
 
 Hosting:
 
@@ -86,3 +63,11 @@ npm run build
 Publish directory:
 
 dist
+
+## Notes
+
+- CMS content is managed through Decap CMS.
+- Website code is managed through GitHub.
+- Images can be uploaded through Decap CMS Media Library or use external image URLs.
+- After CMS changes are published, a Netlify deployment must be published for the changes to appear on the live website.
+- The CMS configuration is specific to each project and should reflect the actual website structure.
