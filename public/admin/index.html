@@ -1,217 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta charset="utf-8" />
+<title>Content Manager</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Netlify Identity -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-  <title>Content Manager</title>
-
-
-  <!-- Netlify Identity -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-
-  <style>
-
-    #user-bar {
-
-      position: fixed;
-      top: 12px;
-      right: 16px;
-      z-index: 99999;
-      display: none;
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-
-    }
-
-
-    #profile-button {
-
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1px solid #ddd;
-      background: #fff;
-      cursor: pointer;
-      font-size: 18px;
-
-    }
-
-
-    #profile-menu {
-
-      display: none;
-      position: absolute;
-      right: 0;
-      top: 45px;
-      width: 220px;
-      padding: 12px;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.15);
-
-    }
-
-
-    #profile-menu.active {
-
-      display: block;
-
-    }
-
-
-    #user-email {
-
-      display: block;
-      margin-bottom: 10px;
-      word-break: break-all;
-
-    }
-
-
-    #logout-btn {
-
-      cursor: pointer;
-      color: #0b5ed7;
-      text-decoration: underline;
-      background: none;
-      border: none;
-      padding: 0;
-      font-size: 13px;
-
-    }
-
-
-  </style>
-
+<style>
+#user-info {
+  position: fixed;
+  top: 18px;
+  right: 70px;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  color: #555;
+  background: #fff;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+</style>
 
 </head>
 
-
 <body>
 
-
-<div id="user-bar">
-
-
-  <button id="profile-button">
-
-    👤
-
-  </button>
-
-
-  <div id="profile-menu">
-
-
-    <span id="user-email"></span>
-
-
-    <button id="logout-btn">
-
-      Log out
-
-    </button>
-
-
-  </div>
-
-
-</div>
-
-
+<div id="user-info"></div>
 
 <!-- Decap CMS -->
 <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.15.1/dist/decap-cms.js"></script>
 
-
-
 <script>
-
 if (window.netlifyIdentity) {
 
-
-  const bar = document.getElementById("user-bar");
-
-  const email = document.getElementById("user-email");
-
-  const logout = document.getElementById("logout-btn");
-
-  const profileButton = document.getElementById("profile-button");
-
-  const menu = document.getElementById("profile-menu");
-
-
+  const userInfo = document.getElementById("user-info");
 
   window.netlifyIdentity.on("init", user => {
-
     if (user) {
-
-      email.textContent = "Logged in: " + user.email;
-
-      bar.style.display = "block";
-
+      userInfo.textContent = "Logged in: " + user.email;
     }
-
   });
-
-
 
   window.netlifyIdentity.on("login", user => {
-
-    email.textContent = "Logged in: " + user.email;
-
-    bar.style.display = "block";
-
+    userInfo.textContent = "Logged in: " + user.email;
   });
-
-
-
-  profileButton.onclick = () => {
-
-    menu.classList.toggle("active");
-
-  };
-
-
-
-  logout.onclick = () => {
-
-    window.netlifyIdentity.logout();
-
-  };
-
-
-
-  window.netlifyIdentity.on("logout", () => {
-
-    window.location.href = "/admin/";
-
-  });
-
-
-
-  document.addEventListener("click", event => {
-
-    if (!bar.contains(event.target)) {
-
-      menu.classList.remove("active");
-
-    }
-
-  });
-
 
 }
-
-
 </script>
 
-
 </body>
-
 </html>
