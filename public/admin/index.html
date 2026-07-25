@@ -11,7 +11,6 @@
 
 <style>
 #user-info {
-  display: none;
   position: fixed;
   top: 18px;
   right: 200px;
@@ -39,21 +38,28 @@
 if (window.netlifyIdentity) {
 
   const userInfo = document.getElementById("user-info");
+  userInfo.style.visibility = "hidden";
 
-  window.netlifyIdentity.on("init", user => {
-    if (user) {
-      userInfo.textContent = "Logged in: " + user.email;
-    }
-  });
-
-  window.netlifyIdentity.on("login", user => {
+ window.netlifyIdentity.on("init", user => {
+  if (user) {
     userInfo.textContent = "Logged in: " + user.email;
-  });
-
-  window.netlifyIdentity.on("logout", () => {
+    userInfo.style.visibility = "visible";
+  } else {
     userInfo.textContent = "";
-    window.location.reload();
-  });
+    userInfo.style.visibility = "hidden";
+  }
+});
+
+window.netlifyIdentity.on("login", user => {
+  userInfo.textContent = "Logged in: " + user.email;
+  userInfo.style.visibility = "visible";
+});
+
+ window.netlifyIdentity.on("logout", () => {
+   userInfo.textContent = "";
+   userInfo.style.visibility = "hidden";
+   window.location.reload();
+ });
 
 }
 </script>
