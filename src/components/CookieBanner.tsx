@@ -11,15 +11,26 @@ export const CookieBanner: React.FC = () => {
 
   useEffect(() => {
     const consent = localStorage.getItem('avenue_group_cookies_accepted_v2');
+    const dismissedSession = sessionStorage.getItem('avenue_group_cookies_dismissed');
+    const seenSession = sessionStorage.getItem('avenue_group_cookies_seen');
     const isHome = location.pathname === '/' || location.pathname === '/Sakums';
     
-    // Only show if consent not given AND we are on the home page
-    if (!consent && isHome) {
+    // Only show if consent not given, not dismissed, not already shown in session, and on home page
+    if (!consent && !dismissedSession && !seenSession && isHome) {
       setIsRendered(true);
-      const timer = setTimeout(() => setIsVisible(true), 300);
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+        sessionStorage.setItem('avenue_group_cookies_seen', 'true');
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [location.pathname]);
+
+  const handleClose = () => {
+    sessionStorage.setItem('avenue_group_cookies_dismissed', 'true');
+    setIsVisible(false);
+    setTimeout(() => setIsRendered(false), 1000);
+  };
 
   const handleAccept = () => {
     localStorage.setItem('avenue_group_cookies_accepted_v2', 'true');
@@ -39,24 +50,24 @@ export const CookieBanner: React.FC = () => {
     <div 
       role="region" 
       aria-label="Sīkdatņu paziņojums"
-      className={`fixed bottom-0 left-0 right-0 z-[100] p-3 md:p-6 transition-all duration-1000 ease-in-out transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+      className={`fixed bottom-0 left-0 right-0 z-[100] p-2 md:p-4 transition-all duration-1000 ease-in-out transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
     >
-      <div className="container mx-auto max-w-[1080px]">
-        <div className="bg-zinc-100/98 backdrop-blur-xl border border-zinc-250 p-6 md:p-8 shadow-2xl flex flex-col md:flex-row items-start justify-between gap-6 md:gap-10 relative overflow-hidden">
+      <div className="container mx-auto max-w-[860px]">
+        <div className="bg-zinc-100/98 backdrop-blur-xl border border-zinc-250 p-4 md:p-5 shadow-2xl flex flex-col md:flex-row items-start justify-between gap-4 md:gap-6 relative overflow-hidden">
           {/* Akcenta līnija */}
           <div className="absolute top-0 left-0 w-1 h-full bg-[#D4AF37]"></div>
           
           <button 
-            onClick={() => setIsVisible(false)}
-            className="text-zinc-500 hover:text-zinc-950 transition-colors absolute top-4 right-4 md:top-6 md:right-6 cursor-pointer"
+            onClick={handleClose}
+            className="text-zinc-500 hover:text-zinc-950 transition-colors absolute top-3 right-3 md:top-4 md:right-4 cursor-pointer"
             aria-label="Aizvērt"
           >
-            <X size={20} />
+            <X size={18} />
           </button>
 
-          <div className="flex-1 pr-6 md:pr-12">
-            <h4 className="text-zinc-950 font-bold italic tracking-wide text-lg md:text-xl mb-4">{t('cookieBanner.title')}</h4>
-            <p className="text-zinc-650 text-xs md:text-sm leading-relaxed font-semibold">
+          <div className="flex-1 pr-6 md:pr-8">
+            <h4 className="text-zinc-950 font-bold italic tracking-wide text-base md:text-lg mb-2">{t('cookieBanner.title')}</h4>
+            <p className="text-zinc-650 text-xs leading-relaxed font-semibold">
               {t('cookieBanner.description')} 
               {t('cookieBanner.policyLink') && (
                 <Link 
@@ -69,16 +80,16 @@ export const CookieBanner: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex flex-col space-y-2 w-full md:w-64 shrink-0 mt-4 md:mt-8 md:mr-8">
+          <div className="flex flex-col space-y-2 w-full md:w-56 shrink-0 mt-3 md:mt-1 md:mr-6">
             <button 
               onClick={handleAccept}
-              className="w-full bg-zinc-900 border border-zinc-900 text-white px-6 py-3 font-semibold tracking-wide text-sm hover:bg-[#D4AF37] hover:border-[#D4AF37] hover:text-black transition-colors cursor-pointer"
+              className="w-full bg-zinc-900 border border-zinc-900 text-white px-4 py-2.5 font-semibold tracking-wide text-xs md:text-sm hover:bg-[#D4AF37] hover:border-[#D4AF37] hover:text-black transition-colors cursor-pointer"
             >
               {t('cookieBanner.acceptBtn')}
             </button>
             <button 
               onClick={handleReject}
-              className="w-full bg-transparent border border-zinc-300 text-zinc-650 px-6 py-3 font-semibold tracking-wide text-sm hover:bg-zinc-200 hover:text-zinc-950 transition-colors cursor-pointer"
+              className="w-full bg-transparent border border-zinc-300 text-zinc-650 px-4 py-2 font-semibold tracking-wide text-xs md:text-sm hover:bg-zinc-200 hover:text-zinc-950 transition-colors cursor-pointer"
             >
               {t('cookieBanner.rejectBtn')}
             </button>
