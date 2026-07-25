@@ -49,6 +49,11 @@ if (window.netlifyIdentity) {
     userInfo.textContent = "Logged in: " + user.email;
   });
 
+  window.netlifyIdentity.on("logout", () => {
+    userInfo.textContent = "";
+    window.location.reload();
+  });
+
 }
 </script>
 
