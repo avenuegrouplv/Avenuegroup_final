@@ -18,11 +18,11 @@
     "footer": {
       "aboutTitle": "Par Mums",
       "followTitle": "Seko mums",
-      "contactTitle": "Kontakinformācija",
+      "contactTitle": "Kontaktinformācija",
       "addressLabel": "Juridiskā adrese:",
       "rights": "Visas tiesības aizsargātas",
       "privacy": "Privātuma politika",
-      "cookies": "Sīkdatņu politika."
+      "cookies": "Sīkdatņu politika"
     },
     "about": {
       "backBtn": "Atpakaļ uz sākumu",
@@ -377,38 +377,22 @@
     "privacy": {
       "title": "Privātuma",
       "subtitle": "politika",
-      "lastUpdated": "Pēdējo reizi atjaunots: 2025. gada maijs",
+      "lastUpdated": "",
       "sections": [
         {
-          "title": "1. Ievads",
-          "content": "SIA \"Avenue Group\" apņemas aizsargāt un respektēt Jūsu privātumu. Šī privātuma politika skaidro, kā mēs apkopojam, izmantojam, uzglabājam un aizsargājam Jūsu personas datus saskaņā ar Vispārīgo datu aizsardzības regulu (GDPR) un Latvijas Republikas tiesību aktiem."
-        },
-        {
-          "title": "2. Datu pārzinis",
-          "content": "SIA \"Avenue Group\", Reģ. nr. 40203647938, Brīvības gatve 386 k-2-5A, Rīga, LV-1024. E-pasts: services@avenuegroup.lv"
-        },
-        {
-          "title": "3. Kādus personas datus mēs vācam",
-          "content": "Mēs varam apkopot kontaktinformāciju (vārds, e-pasts, tālrunis), tehnisko informāciju (IP adrese, pārlūka veids) un lietošanas datus."
-        },
-        {
-          "title": "4. Kā mēs izmantojam Jūsu datus",
-          "content": "Lai sniegtu pakalpojumus, sazinātos ar Jums, uzlabotu mājas lapu un izpildītu juridiskās saistības."
+          "title": "",
+          "content": "Informācija sekos"
         }
       ]
     },
     "cookies": {
       "title": "Sīkdatņu",
       "subtitle": "politika",
-      "lastUpdated": "Pēdējo reizi atjaunots: 2025. gada maijs",
+      "lastUpdated": "",
       "sections": [
         {
-          "title": "1. Kas ir sīkdatnes?",
-          "content": "Sīkdatnes ir mazi teksta faili, ko tīmekļa vietne saglabā Jūsu ierīcē. Tās ļauj vietnei atcerēties Jūsu iestatījumus un darbības."
-        },
-        {
-          "title": "2. Kāpēc mēs izmantojam sīkdatnes?",
-          "content": "Funkcionalitātes nodrošināšanai, lietošanas pieredzes uzlabošanai un analītikai."
+          "title": "",
+          "content": "Informācija sekos"
         }
       ]
     }
@@ -792,38 +776,22 @@
     "privacy": {
       "title": "Privacy",
       "subtitle": "Policy",
-      "lastUpdated": "Last updated: May 2025",
+      "lastUpdated": "",
       "sections": [
         {
-          "title": "1. Introduction",
-          "content": "SIA \"Avenue Group\" is committed to protecting and respecting your privacy. This privacy policy explains how we collect, use, store, and protect your personal data in accordance with the General Data Protection Regulation (GDPR) and the laws of the Republic of Latvia."
-        },
-        {
-          "title": "2. Data Controller",
-          "content": "SIA \"Avenue Group\", Reg. No. 40203647938, Brīvības gatve 386 k-2-5A, Riga, LV-1024. Email: services@avenuegroup.lv"
-        },
-        {
-          "title": "3. What personal data we collect",
-          "content": "We may collect contact information (name, email, phone), technical information (IP address, browser type), and usage data."
-        },
-        {
-          "title": "4. How we use your data",
-          "content": "To provide services, communicate with you, improve the website, and fulfill legal obligations."
+          "title": "",
+          "content": "Informācija sekos"
         }
       ]
     },
     "cookies": {
       "title": "Cookie",
       "subtitle": "Policy",
-      "lastUpdated": "Last updated: May 2025",
+      "lastUpdated": "",
       "sections": [
         {
-          "title": "1. What are cookies?",
-          "content": "Cookies are small text files that a website stores on your device. They allow the website to remember your settings and actions."
-        },
-        {
-          "title": "2. Why do we use cookies?",
-          "content": "To ensure functionality, improve user experience, and for analytics."
+          "title": "",
+          "content": "Informācija sekos"
         }
       ]
     }
@@ -1207,38 +1175,22 @@
     "privacy": {
       "title": "Политика",
       "subtitle": "конфиденциальности",
-      "lastUpdated": "Последнее обновление: май 2025 г.",
+      "lastUpdated": "",
       "sections": [
         {
-          "title": "1. Введение",
-          "content": "SIA \"Avenue Group\" обязуется защищать и уважать вашу конфиденциальность. Настоящая политика конфиденциальности объясняет, как мы собираем, используем, храним и защищаем ваши персональные данные в соответствии с Общим регламентом по защите данных (GDPR) и законодательством Латвийской Республики."
-        },
-        {
-          "title": "2. Контролер данных",
-          "content": "SIA \"Avenue Group\", Рег. № 40203647938, Brīvības gatve 386 k-2-5A, Рига, LV-1024. Электронная почта: services@avenuegroup.lv"
-        },
-        {
-          "title": "3. Какие персональные данные мы собираем",
-          "content": "Мы можем собирать контактную информацию (имя, адрес электронной почты, телефон), техническую информацию (IP-адрес, тип браузера) и данные об использовании."
-        },
-        {
-          "title": "4. Как мы используем ваши данные",
-          "content": "Для предоставления услуг, связи с вами, улучшения веб-сайта и выполнения юридических обязательств."
+          "title": "",
+          "content": "Informācija sekos"
         }
       ]
     },
     "cookies": {
       "title": "Политика",
       "subtitle": "использования файлов cookie",
-      "lastUpdated": "Последнее обновление: май 2025 г.",
+      "lastUpdated": "",
       "sections": [
         {
-          "title": "1. Что такое файлы cookie?",
-          "content": "Файлы cookie — это небольшие текстовые файлы, которые веб-сайт сохраняет на вашем устройстве. Они позволяют сайту запоминать ваши настройки и действия."
-        },
-        {
-          "title": "2. Почему мы используем файлы cookie?",
-          "content": "Для обеспечения функциональности, улучшения пользовательского опыта и аналитики."
+          "title": "",
+          "content": "Informācija sekos"
         }
       ]
     }

@@ -27,6 +27,14 @@ export const Hero: React.FC = () => {
       {/* Light Gradient Overlay to ensure header readability */}
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-transparent to-black/20" />
 
+      {/* In-development notice at bottom left of hero image */}
+      <div className="absolute bottom-5 left-5 md:bottom-8 md:left-10 z-30 pointer-events-none">
+        <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-yellow-400 text-black font-black text-xs uppercase tracking-wider shadow-2xl border-2 border-yellow-300">
+          <span className="w-2 h-2 rounded-full bg-black animate-pulse"></span>
+          <span>Mājaslapa ir izstrādes stadijā</span>
+        </div>
+      </div>
+
       <div className="container mx-auto px-6 relative z-20 pb-12 md:pb-20">
         {/* Localized dark area for better text contrast */}
         <div className="max-w-4xl mx-auto text-center bg-black/40 backdrop-blur-[2px] p-6 md:p-10 border border-white/5 shadow-2xl">

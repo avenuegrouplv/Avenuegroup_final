@@ -28,17 +28,21 @@ export const PrivacyPolicyPage: React.FC = () => {
               {t('privacy.title')} <span className="text-yellow-600">{t('privacy.subtitle')}</span>
             </h1>
           </div>
-          <p className="text-zinc-400 text-xs italic font-semibold">
-            {t('privacy.lastUpdated')}
-          </p>
+          {t('privacy.lastUpdated') && (
+            <p className="text-zinc-400 text-xs italic font-semibold">
+              {t('privacy.lastUpdated')}
+            </p>
+          )}
         </div>
 
         <div className="space-y-6 bg-white p-6 md:p-10 border border-zinc-200 shadow-sm">
           {Array.isArray(sections) && sections.map((section: any, index: number) => (
             <section key={index} className="space-y-3 pb-6 border-b border-zinc-100 last:border-none last:pb-0">
-              <h2 className="text-base md:text-lg font-black italic text-zinc-950 uppercase border-l-4 border-yellow-500 pl-4">
-                {section.title}
-              </h2>
+              {section.title && (
+                <h2 className="text-base md:text-lg font-black italic text-zinc-950 uppercase border-l-4 border-yellow-500 pl-4">
+                  {section.title}
+                </h2>
+              )}
               <p className="text-zinc-650 text-sm md:text-base leading-relaxed italic">{section.content}</p>
             </section>
           ))}

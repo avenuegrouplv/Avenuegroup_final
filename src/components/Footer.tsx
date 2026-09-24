@@ -66,50 +66,44 @@ export const Footer: React.FC = () => {
           <div className="lg:pl-10">
             <h4 className="text-white font-black italic tracking-tighter text-sm uppercase mb-6 border-l-2 border-yellow-400 pl-4">{content.followTitle}</h4>
             <div className="flex space-x-4">
-              <a 
-                href={footerData.facebook} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-yellow-400 hover:text-black hover:border-yellow-400 transition-all"
+              <div 
+                className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center text-gray-400"
                 aria-label="Facebook Profile"
               >
                 <Facebook size={20} />
-              </a>
-              <a 
-                href={footerData.instagram} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-yellow-400 hover:text-black hover:border-yellow-400 transition-all"
+              </div>
+              <div 
+                className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center text-gray-400"
                 aria-label="Instagram Profile"
               >
                 <Instagram size={20} />
-              </a>
+              </div>
             </div>
           </div>
 
           {/* Contact Details Column */}
           <div>
             <h4 className="text-white font-black italic tracking-tighter text-sm uppercase mb-6 border-l-2 border-yellow-400 pl-4">{content.contactTitle}</h4>
-            <div className="flex flex-col">
-              <div className="text-xs text-gray-300 font-bold italic mb-0.5">{footerData.company.name}</div>
-              <div className="text-[9px] text-gray-500 tracking-tighter font-bold mb-0.5">Reģ.Nr. {footerData.company.regNo}</div>
-              <div className="text-[9px] text-gray-500 tracking-tighter font-bold mb-2">PVN Nr. {footerData.company.pvnNo}</div>
-              <div className="text-[10px] text-gray-400 font-bold mb-0.5">{content.addressLabel}</div>
-              <div className="text-[10px] text-gray-500 font-bold mb-0.5">{footerData.company.addressLine1}</div>
-              <div className="text-[10px] text-gray-500 font-bold mb-6">{footerData.company.addressLine2}</div>
-              <div className="space-y-2">
-                <a href={`mailto:${footerData.company.email}`} className="block text-xs text-yellow-500 hover:text-white transition-colors font-black italic underline underline-offset-4">{footerData.company.email}</a>
-                <a href={`tel:${footerData.company.phone.replace(/\s+/g, '')}`} className="block text-xs text-white hover:text-yellow-400 transition-colors font-black italic">{footerData.company.phone}</a>
-              </div>
+            <div className="text-xs text-gray-400 space-y-2 mb-6">
+              <div className="font-bold text-gray-300">{footerData.company.name}</div>
+              <div className="text-[11px] text-gray-500">Reģ. Nr. {footerData.company.regNo}</div>
+              <div className="text-[11px] text-gray-500">PVN Nr. {footerData.company.pvnNo}</div>
+              <div className="pt-2 text-[11px] text-gray-400">{content.addressLabel}</div>
+              <div>{footerData.company.addressLine1}</div>
+              <div>{footerData.company.addressLine2}</div>
+            </div>
+            <div className="space-y-2">
+              <a href={`mailto:${footerData.company.email}`} className="block text-xs text-yellow-500 hover:text-white transition-colors font-black italic underline underline-offset-4">{footerData.company.email}</a>
+              <a href={`tel:${footerData.company.phone.replace(/\s+/g, '')}`} className="block text-xs text-white hover:text-yellow-400 transition-colors font-black italic">{footerData.company.phone}</a>
             </div>
           </div>
         </div>
 
-        <div className="pt-5 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 tracking-wide font-bold font-sans relative">
-          <div className="text-center md:text-left leading-relaxed mb-4 md:mb-0 md:whitespace-nowrap shrink-0">
+        <div className="pt-5 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 tracking-wide font-bold font-sans gap-y-4">
+          <div className="text-center md:text-left leading-relaxed md:whitespace-nowrap shrink-0">
             <div>2025 &copy; {content.rights} | {footerData.company.name}</div>
           </div>
-          <div className="flex space-x-4 md:space-x-6 flex-wrap justify-center md:absolute md:left-1/2 md:-translate-x-1/2 gap-y-2">
+          <div className="flex space-x-4 md:space-x-6 flex-wrap justify-center gap-y-2">
             <Link 
               to="/privatums"
               className="hover:text-yellow-500 transition-colors whitespace-nowrap"
@@ -133,7 +127,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Developer Section (Desktop: right bottom corner, Mobile: bottom center) */}
-          <div className="flex items-center space-x-1.5 mt-6 md:mt-0 z-10">
+          <div className="flex items-center space-x-1.5 z-10 shrink-0">
             <span className="text-gray-500 text-xs font-bold italic">{content.developerLabel}</span>
             <a 
               href={footerData.developer.url} 

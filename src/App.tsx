@@ -113,13 +113,13 @@ const AppContent: React.FC = () => {
     } else if (path.startsWith('/kontakti')) {
       if (language === 'lv') {
         title = 'Kontakti un pieteikumi | Avenue Group';
-        description = 'Sazinieties ar Avenue Group ekspertiem. Tālrunis +371 26 739 899, e-pasts services@avenuegroup.lv, Brīvības gatve 386 k-2-5A.';
+        description = 'Sazinieties ar Avenue Group ekspertiem. Tālrunis +371 26 841 758, e-pasts services@avenuegroup.lv, Brīvības gatve 386 k-2-5A.';
       } else if (language === 'ru') {
         title = 'Контакты | Avenue Group';
-        description = 'Свяжитесь со специалистами Avenue Group. Телефон +371 26 739 899, эл. почта services@avenuegroup.lv. Ждем ваших заявок!';
+        description = 'Свяжитесь со специалистами Avenue Group. Телефон +371 26 841 758, эл. почта services@avenuegroup.lv. Ждем ваших заявок!';
       } else {
         title = 'Contacts and Requests | Avenue Group';
-        description = 'Contact Avenue Group property experts. Mobile +371 26 739 899, email services@avenuegroup.lv, Brivibas gatve 386.';
+        description = 'Contact Avenue Group property experts. Mobile +371 26 841 758, email services@avenuegroup.lv, Brivibas gatve 386.';
       }
     } else if (path.startsWith('/privatums')) {
       if (language === 'lv') {
